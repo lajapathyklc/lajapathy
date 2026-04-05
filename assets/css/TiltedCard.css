@@ -1,0 +1,103 @@
+.tilted-card-container {
+    /* Main container for flexibility, similar to figure */
+    position: relative;
+    perspective: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px; /* Adjust spacing as needed */
+    height: var(--container-height, 300px);
+    width: var(--container-width, 300px);
+}
+
+.tilted-card-figure {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.tilted-card-mobile-alert {
+    position: absolute;
+    top: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .tilted-card-mobile-alert {
+        display: var(--show-mobile-warning, block); /* Use CSS variable to control visibility */
+    }
+    .tilted-card-caption {
+        display: none;
+    }
+}
+
+.tilted-card-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* Use CSS Custom Properties for transform */
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--scale, 1));
+    /* Add transition for smooth animation */
+    transition: transform 0.25s ease-out; /* Adjust timing/easing to your preference */
+
+    width: var(--image-width, 300px);
+    height: var(--image-height, 300px);
+}
+
+.tilted-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Inherit from inner */
+    height: 100%; /* Inherit from inner */
+    object-fit: cover;
+    border-radius: 15px;
+    transform: translateZ(0);
+    opacity: 0.9;
+    filter: brightness(0.85);
+}
+
+.tilted-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transform: translateZ(30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4); /* Example overlay style */
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.tilted-card-caption {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 4px 10px;
+    font-size: 10px;
+    color: #2d2d2d;
+    opacity: var(--opacity, 0); /* Control opacity with variable */
+    z-index: 3;
+    will-change: transform, opacity;
+    /* Add transition for smooth opacity */
+    transition: opacity 0.2s ease-out;
+    /* Use CSS Custom Properties for position and rotation */
+    transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rfig, 0deg));
+    white-space: nowrap;
+}
+
+.img-box-padding {
+    padding: 20px;
+}

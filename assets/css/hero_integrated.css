@@ -1,0 +1,1002 @@
+/* Integrated Hero Section Styles */
+.tmp-banner-one-area.moody-hero {
+    background-color: #000000 !important;
+    background-image: url('../../lajapathy-hero.png') !important;
+    background-size: cover !important;
+    background-position: center 25% !important;
+    background-attachment: fixed;
+    position: relative;
+    padding-top: 200px !important;
+    padding-bottom: 150px !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.tmp-banner-one-area.moody-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+}
+
+.tmp-banner-one-area.moody-hero .container {
+    position: relative;
+    z-index: 5;
+}
+
+/* Premium Typography for Integrated Hero */
+.moody-hero-badge {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #FF9800;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-family: 'Inter', sans-serif;
+}
+
+.moody-hero-headline {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -1.5px;
+    text-shadow:
+        0px 2px 12px rgba(0, 0, 0, 0.6),
+        0px 0px 40px rgba(255, 152, 0, 0.06);
+    animation: headline-glow 7s ease-in-out infinite;
+}
+
+.moody-hero-subtext {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin-bottom: 45px;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+}
+
+.moody-cta-btn {
+    display: inline-block;
+    background: #ffffff;
+    color: #000000;
+    padding: 20px 48px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.moody-cta-btn:hover {
+    transform: translateY(-5px);
+    background: #FF9800;
+    color: #000000;
+    box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4);
+}
+
+/* Social Links Group */
+.moody-social-sidebar {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+}
+
+.moody-social-sidebar a {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.moody-social-sidebar a:hover {
+    color: #ffffff;
+}
+
+/* Global Hero Text Capitalization */
+.tmp-banner-one-area.moody-hero .moody-hero-headline,
+.tmp-banner-one-area.moody-hero .inner .title,
+.tmp-banner-one-area.moody-hero .driven-by,
+.tmp-banner-one-area.moody-hero .cd-headline.clip .cd-words-wrapper b,
+.tmp-banner-one-area.moody-hero .tmp-btn .btn-text {
+    text-transform: uppercase !important;
+}
+
+/* Response */
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero {
+        padding-top: 60px !important;
+        text-align: center !important;
+        /* Center alignment for badge/text on mobile */
+    }
+
+    /* Pull the container up a bit more organically on mobile */
+    .tmp-banner-one-area.moody-hero>.container {
+        bottom: auto !important;
+    }
+
+    /* Shrink the huge headline on mobile dramatically to fit the large amount of text */
+    .moody-hero-headline {
+        font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+    }
+
+    /* Fix the badge text wrapper so the long text can wrap and doesn't push the button off screen */
+    .tmp-banner-one-area.moody-hero .btn-text {
+        font-size: 1.2rem !important;
+        white-space: normal !important;
+        display: inline-flex !important;
+        flex-wrap: wrap;
+    }
+
+    .tmp-banner-one-area.moody-hero .btn-text span {
+        font-size: 1.2rem !important;
+    }
+
+    /* Force the right column to align center on mobile instead of stacking awkwardly on the right */
+    .tmp-banner-one-area.moody-hero .col-12.col-lg-5 .inner,
+    .tmp-banner-one-area.moody-hero .col-lg-5 .inner {
+        align-items: center !important;
+        text-align: center !important;
+        margin-top: 10px;
+    }
+
+    .moody-hero-subtext {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .moody-social-sidebar {
+        display: none;
+    }
+}
+
+/* ---------- Fog ---------- */
+/* Ensure container content and text stays above the fog */
+.tmp-banner-one-area.moody-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.tmp-banner-one-area.moody-hero {
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 0;
+    /* next section will scroll on top */
+}
+
+/* All sections after the hero get solid black background so they cover the sticky hero */
+.tmp-banner-one-area.moody-hero~*,
+.tmp-banner-one-area.moody-hero~section,
+.tmp-banner-one-area.moody-hero~div {
+    position: relative;
+    z-index: 1;
+    background-color: #000 !important;
+}
+
+/* Ensure body itself is solid black so no gaps between sections bleed */
+html,
+body {
+    background: #000 !important;
+}
+
+/* Anchor hero text content to the bottom of the viewport */
+.tmp-banner-one-area.moody-hero>.container {
+    position: absolute !important;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.fogwrapper {
+    height: 70%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    -webkit-filter: blur(30px) grayscale(1);
+    filter: blur(30px) grayscale(1);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Extract portrait image above the fog */
+.tmp-banner-one-area.moody-hero {
+    background-image: none !important;
+}
+
+.hero-static-portrait {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 75vh;
+    max-height: 1350px;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    z-index: 2;
+    pointer-events: none;
+
+    /* Start invisible so the fade-in is clearly visible */
+    opacity: 0;
+
+    /* Slow fade-in entrance, then hand off to the continuous float */
+    transform-origin: bottom center;
+    animation:
+        portrait-entrance 3.5s ease-in-out 0.2s forwards,
+        portrait-float 6s ease-in-out 3.7s infinite;
+
+    /* Warm ambient glow */
+    filter: drop-shadow(0 40px 80px rgba(255, 152, 0, 0.18));
+}
+
+/* Background Name Stylings */
+.hero-bg-name {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    font-size: 5vw;
+    font-weight: 900;
+    white-space: nowrap;
+    text-align: center;
+    -webkit-text-stroke: 1.5px #FF9800 !important;
+    color: transparent !important;
+    animation: up-down-2 0.9s infinite alternate;
+    z-index: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    user-select: none;
+}
+
+.outline-name {
+    display: contents;
+    /* Effectively remove the span without deleting it from HTML yet if preferred */
+}
+
+@media (max-width: 991px) {
+    .hero-bg-name {
+        font-size: 14vw;
+        top: 35%;
+        opacity: 0.3;
+        /* A bit more visible on mobile background */
+    }
+}
+
+#foglayer_01,
+#foglayer_02,
+#foglayer_03 {
+    height: 100%;
+    position: absolute;
+    width: 200%;
+}
+
+#foglayer_01 .image01,
+#foglayer_01 .image02,
+#foglayer_02 .image01,
+#foglayer_02 .image02,
+#foglayer_03 .image01,
+#foglayer_03 .image02 {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+
+#foglayer_01 {
+    -webkit-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
+    -moz-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
+    animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
+}
+
+#foglayer_02,
+#foglayer_03 {
+    -webkit-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
+    -moz-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
+    animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
+}
+
+/* ---------- Moving Fog ---------- */
+#foglayer_01 .image01,
+#foglayer_01 .image02 {
+    background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png") center center/cover no-repeat transparent;
+}
+
+#foglayer_02 .image01,
+#foglayer_02 .image02,
+#foglayer_03 .image01,
+#foglayer_03 .image02 {
+    background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png") center center/cover no-repeat transparent;
+}
+
+/* ---------- Keyframe Layer 1 ---------- */
+@-webkit-keyframes foglayer_01_opacity {
+    0% {
+        opacity: .1;
+    }
+
+    22% {
+        opacity: .5;
+    }
+
+    40% {
+        opacity: .28;
+    }
+
+    58% {
+        opacity: .4;
+    }
+
+    80% {
+        opacity: .16;
+    }
+
+    100% {
+        opacity: .1;
+    }
+}
+
+@-moz-keyframes foglayer_01_opacity {
+    0% {
+        opacity: .1;
+    }
+
+    22% {
+        opacity: .5;
+    }
+
+    40% {
+        opacity: .28;
+    }
+
+    58% {
+        opacity: .4;
+    }
+
+    80% {
+        opacity: .16;
+    }
+
+    100% {
+        opacity: .1;
+    }
+}
+
+@-o-keyframes foglayer_01_opacity {
+    0% {
+        opacity: .1;
+    }
+
+    22% {
+        opacity: .5;
+    }
+
+    40% {
+        opacity: .28;
+    }
+
+    58% {
+        opacity: .4;
+    }
+
+    80% {
+        opacity: .16;
+    }
+
+    100% {
+        opacity: .1;
+    }
+}
+
+@keyframes foglayer_01_opacity {
+    0% {
+        opacity: .1;
+    }
+
+    22% {
+        opacity: .5;
+    }
+
+    40% {
+        opacity: .28;
+    }
+
+    58% {
+        opacity: .4;
+    }
+
+    80% {
+        opacity: .16;
+    }
+
+    100% {
+        opacity: .1;
+    }
+}
+
+/* ---------- Keyframe Layer 2 ---------- */
+@-webkit-keyframes foglayer_02_opacity {
+    0% {
+        opacity: .5;
+    }
+
+    25% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .5;
+    }
+}
+
+@-moz-keyframes foglayer_02_opacity {
+    0% {
+        opacity: .5;
+    }
+
+    25% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .5;
+    }
+}
+
+@-o-keyframes foglayer_02_opacity {
+    0% {
+        opacity: .5;
+    }
+
+    25% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .5;
+    }
+}
+
+@keyframes foglayer_02_opacity {
+    0% {
+        opacity: .5;
+    }
+
+    25% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .5;
+    }
+}
+
+/* ---------- Keyframe Layer 3 ---------- */
+@-webkit-keyframes foglayer_03_opacity {
+    0% {
+        opacity: .8
+    }
+
+    27% {
+        opacity: .2;
+    }
+
+    52% {
+        opacity: .6;
+    }
+
+    68% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .8;
+    }
+}
+
+@-moz-keyframes foglayer_03_opacity {
+    0% {
+        opacity: .8
+    }
+
+    27% {
+        opacity: .2;
+    }
+
+    52% {
+        opacity: .6;
+    }
+
+    68% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .8;
+    }
+}
+
+@-o-keyframes foglayer_03_opacity {
+    0% {
+        opacity: .8
+    }
+
+    27% {
+        opacity: .2;
+    }
+
+    52% {
+        opacity: .6;
+    }
+
+    68% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .8;
+    }
+}
+
+@keyframes foglayer_03_opacity {
+    0% {
+        opacity: .8;
+    }
+
+    27% {
+        opacity: .2;
+    }
+
+    52% {
+        opacity: .6;
+    }
+
+    68% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .8;
+    }
+}
+
+/* ---------- Keyframe moveMe ---------- */
+@-webkit-keyframes foglayer_moveme {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@-moz-keyframes foglayer_moveme {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@-o-keyframes foglayer_moveme {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes foglayer_moveme {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 767px) {
+
+    #foglayer_01 .image01,
+    #foglayer_01 .image02,
+    #foglayer_02 .image01,
+    #foglayer_02 .image02,
+    #foglayer_03 .image01,
+    #foglayer_03 .image02 {
+        width: 100%;
+    }
+}
+
+/* Ensure mobile overrides happen VERY LAST in the file to beat standard rules */
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        height: 100svh !important;
+        /* Fallback to small viewport height to ignore Safari UI bars */
+        min-height: 100svh !important;
+        height: 100dvh !important;
+        /* Fallback to dynamic viewport height */
+        min-height: 100dvh !important;
+        align-items: flex-end !important;
+        /* Push container to the bottom of the viewport */
+        padding-bottom: 50px !important;
+        /* Aligned CTA to 50px from bottom */
+    }
+
+    /* NEUTRALIZE style.css absolute positioning and width constraints */
+    .banner-one-main-wrapper,
+    .banner-one-main-wrapper .inner {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        text-align: center !important;
+    }
+
+    /* Force the row and column to allow the full h1 height */
+    .banner-one-main-wrapper .row,
+    .banner-one-main-wrapper .col-12 {
+        height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+        /* Stack columns naturally on mobile */
+    }
+
+    .tmp-banner-one-area.moody-hero>.container {
+        /* Ensure the container itself doesn't clip and obeys the parent padding */
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 15px !important;
+        /* Centered padding */
+        overflow: visible !important;
+    }
+
+    /* Boosted specificity and layout-saving overrides */
+    .tmp-banner-one-area.moody-hero .moody-hero-headline {
+        font-size: clamp(1.4rem, 5vw, 2.2rem) !important;
+        /* Slightly smaller to fit everything */
+        text-transform: uppercase !important;
+        /* Capitalized as requested */
+        z-index: 99 !important;
+        position: relative !important;
+        display: block !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        line-height: 1.2 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .cd-headline.clip .cd-words-wrapper {
+        /* Removed width: auto and overflow: visible to allow 'clip' animation to function */
+        display: inline-block !important;
+        visibility: visible !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .driven-by {
+        opacity: 1 !important;
+        display: block !important;
+        margin-top: 30px !important;
+        /* Increased margin for requested line break */
+        margin-bottom: 2px !important;
+        visibility: visible !important;
+        color: #fff !important;
+        /* Ensure it's not inheriting weird colors */
+    }
+
+    .tmp-banner-one-area.moody-hero .header-caption {
+        display: block !important;
+        z-index: 100 !important;
+        visibility: visible !important;
+    }
+
+    /* Preserve required fragments for animation but let JS handle visibility */
+    .tmp-banner-one-area.moody-hero .cd-headline.clip .cd-words-wrapper b {
+        visibility: inherit;
+        /* Dummy property to avoid empty ruleset lint while preserving structure */
+    }
+
+    .tmp-banner-one-area.moody-hero .cd-headline.clip .cd-words-wrapper b.is-visible {
+        display: inline-block !important;
+        color: #FF9800 !important;
+        /* Solid Theme orange */
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+    }
+
+    /* Smaller CTA for mobile */
+    .tmp-banner-one-area.moody-hero .moody-cta-btn {
+        padding: 14px 36px !important;
+        font-size: 1.1rem !important;
+    }
+
+    .tmp-banner-one-area.moody-hero>.container {
+        /* Remove absolute positioning so the height flexes naturally and doesn't get clipped off the top of the screen */
+        position: relative !important;
+        bottom: auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Mouse Scroll Animation */
+#mouse-scroll {
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 50%;
+    bottom: 30px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    opacity: 0.5;
+    z-index: 9999;
+}
+
+#mouse-scroll span {
+    display: block;
+    width: 5px;
+    height: 5px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    margin: 0 0 3px 5px;
+}
+
+#mouse-scroll .mouse {
+    height: 21px;
+    width: 14px;
+    border-radius: 10px;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    border: 2px solid #ffffff;
+    margin-bottom: 5px;
+}
+
+#mouse-scroll .down-arrow-1 {
+    margin-top: 6px;
+}
+
+#mouse-scroll .down-arrow-1,
+#mouse-scroll .down-arrow-2,
+#mouse-scroll .down-arrow-3 {
+    -webkit-animation: mouse-scroll 1s infinite;
+    -moz-animation: mouse-scroll 1s infinite;
+    animation: mouse-scroll 1s infinite;
+}
+
+#mouse-scroll .down-arrow-1 {
+    -webkit-animation-delay: .1s;
+    -moz-animation-delay: .1s;
+    animation-delay: .1s;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+#mouse-scroll .down-arrow-2 {
+    -webkit-animation-delay: .2s;
+    -moz-animation-delay: .2s;
+    animation-delay: .2s;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+#mouse-scroll .down-arrow-3 {
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s;
+    animation-delay: .3s;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+#mouse-scroll .mouse-in {
+    height: 5px;
+    width: 2px;
+    display: block;
+    margin: 5px auto;
+    background: #ffffff;
+    position: relative;
+    -webkit-animation: animated-mouse 1.2s ease infinite;
+    -moz-animation: animated-mouse 1.2s ease infinite;
+    animation: animated-mouse 1.2s ease infinite;
+}
+
+@-webkit-keyframes animated-mouse {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(6px);
+        -ms-transform: translateY(6px);
+        transform: translateY(6px);
+    }
+}
+
+@keyframes animated-mouse {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(6px);
+        -ms-transform: translateY(6px);
+        transform: translateY(6px);
+    }
+}
+
+@-webkit-keyframes mouse-scroll {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes mouse-scroll {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Hide mouse scroll on mobile if it overlaps with CTA */
+@media (max-width: 768px) {
+    #mouse-scroll {
+        display: none;
+        /* Hide on small screens to avoid clutter with the floating CTA */
+    }
+}
+
+/* ============================================================
+   Hero Portrait Animations
+   ============================================================ */
+
+/* 1. Entrance — smooth fade-in only */
+@keyframes portrait-entrance {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+
+/* 2. Floating idle — gentle continuous vertical bob */
+@keyframes portrait-float {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-12px);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+}
+
+/* 3. Headline breathing glow — opacity 6% → 10%, 7s loop */
+@keyframes headline-glow {
+
+    0%,
+    100% {
+        text-shadow:
+            0px 2px 12px rgba(0, 0, 0, 0.6),
+            0px 0px 40px rgba(255, 152, 0, 0.06);
+    }
+
+    50% {
+        text-shadow:
+            0px 2px 12px rgba(0, 0, 0, 0.6),
+            0px 0px 55px rgba(255, 152, 0, 0.10);
+    }
+}

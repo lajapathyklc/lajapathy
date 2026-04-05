@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Product Design Leader with 18+ years experience designing enterprise and data-intensive platforms. Specializing in simplifying complex workflows, building scalable UX systems, and delivering high-impact product experiences across fintech, ecommerce, and SaaS.">
+    <meta name="keywords"
+        content="Product Design Leader, UX Leader, Enterprise UX, Design Systems, Fintech UX, SaaS UX, UX Strategy, Interaction Design, UX Manager, UX Director">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg">
+    <title>Lajapathy | Product Design Leader | Enterprise UX, Systems & Scalable Platforms</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lajapathy | Product Design Leader | Enterprise UX & Scalable Systems">
+    <meta property="og:description"
+        content="Product Design Leader with 18+ years experience designing enterprise and data-intensive platforms. Specializing in simplifying complex workflows, building scalable UX systems, and delivering measurable product impact across fintech, ecommerce, and SaaS.">
+    <meta property="og:url" content="https://www.lajapathy.com/">
+    <meta property="og:site_name" content="Lajapathy">
+    <meta property="og:image" content="https://www.lajapathy.com/assets/thumbnail.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <!-- Bootstrap min css -->
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.css">
+    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<script>
+    // filepath: /Volumes/WORK DATA /LP/LP Tech Pvt Ltd/Website/09 Aug/18 Sept/index.html
+    // ...existing code...
+    document.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || window.pageYOffset;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var scrollPercent = docHeight > 0 ? (scrollTop / docHeight) : 0;
+        // 87% (bottom) when at top, 0% (top) when at bottom
+        var translateY = 87 - (87 * scrollPercent);
+        var water = document.querySelectorAll('.scrollToTop .water');
+        water.forEach(function (w) {
+            w.style.transform = 'translate(0px, ' + translateY + '%)';
+        });
+    });
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lajapathy",
+        "url": "https://lajapathy.com",
+        "sameAs": [
+                    "https://www.linkedin.com/in/lajapathyk/"
+                    ],
+        "jobTitle": "Lead Product Designer",
+        "worksFor": {
+        "@type": "Individual",
+            "name": "Lajapathy"
+    },
+        "knowsAbout": ["Lead Product Designer", "Senior Product Design", "UX Design", "UI Design", "Figma", "Fintech UX", "Healthcare Design"]
+    }
+</script>
+<script src='https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js'></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.querySelector(".humberger_menu_active");
+        const menuIcon = document.getElementById("menuBtn");
+        const mobileMenu = document.querySelector(".tmp-popup-mobile-menu");
+        const closeBtn = document.querySelector(".close-button");
+        const menuLinks = document.querySelectorAll(".tmp-popup-mobile-menu a");
+
+        function openMenu() {
+            if (mobileMenu) mobileMenu.classList.add("active");
+            if (menuIcon) {
+                menuIcon.classList.add("active");
+                menuIcon.classList.remove("fa-bars");
+                menuIcon.classList.add("fa-xmark");
+            }
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            if (mobileMenu) mobileMenu.classList.remove("active");
+            if (menuIcon) {
+                menuIcon.classList.remove("active");
+                menuIcon.classList.remove("fa-xmark");
+                menuIcon.classList.add("fa-bars");
+            }
+            document.body.style.overflow = "";
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openMenu);
+        if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener("click", closeMenu);
+        });
+    });
+</script>
+
+<!-- Add this CSS in a <style> tag in your <head> section -->
+<style>
+    /* Desktop Dropdown Styles */
+    .case-dropdown {
+        position: relative;
+    }
+
+    .case-dropdown>.dropdown-toggle {
+        display: block !important;
+        text-align: center !important;
+        padding-left: 35px !important;
+        padding-right: 35px !important;
+        position: relative;
+    }
+
+    .case-dropdown>.dropdown-menu {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background: #FF9800;
+        /* yellow */
+        min-width: 320px;
+        z-index: 1000;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        padding: 0;
+    }
+
+    .case-dropdown:hover>.dropdown-menu,
+    .case-dropdown:focus-within>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu li {
+        position: relative;
+    }
+
+    .dropdown-menu a {
+        color: #222;
+        padding: 10px 20px;
+        display: block;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+
+    .dropdown-menu a:hover {
+        background: #000000;
+        color: #000;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        left: 100%;
+        top: 0;
+        display: none;
+        position: absolute;
+        background: #FF9800;
+        /* yellow */
+        border-radius: 0 8px 8px 8px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu,
+    .dropdown-submenu:focus-within>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-toggle:after {
+        content: "\f054";
+        font-family: "Font Awesome 6 Pro";
+        font-weight: 900;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        font-size: 1.2rem;
+    }
+
+    /* Mobile Dropdown Styles */
+    @media (max-width: 1200px) {
+        .tmp-mainmenu .case-dropdown .dropdown-menu {
+            position: static;
+            background: #FF9800;
+            /* yellow */
+            box-shadow: none;
+            border-radius: 0;
+            min-width: 100%;
+            display: none;
+        }
+
+        .tmp-mainmenu .case-dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        .tmp-mainmenu .dropdown-submenu .dropdown-menu {
+            position: static;
+            left: 0;
+            top: 0;
+            display: none;
+            background: #FF9800;
+            /* yellow */
+        }
+
+        .tmp-mainmenu .dropdown-submenu.open .dropdown-menu {
+            display: block;
+        }
+
+        .tmp-mainmenu .dropdown-toggle:after {
+            float: right;
+        }
+
+        .tmp-mainmenu .dropdown-menu a {
+            color: #222;
+        }
+
+        .tmp-mainmenu .dropdown-menu a:hover {
+            background: #ffe066;
+            color: #000;
+        }
+    }
+</style>
+
+<!-- Add this script before </body> to initialize the Swiper slider for logos -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper('.logo-swiper', {
+                slidesPerView: 5,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.logo-swiper .swiper-button-next',
+                    prevEl: '.logo-swiper .swiper-button-prev',
+                },
+                breakpoints: {
+                    1200: { slidesPerView: 5 },
+                    992: { slidesPerView: 4 },
+                    768: { slidesPerView: 3 },
+                    576: { slidesPerView: 2 },
+                    0: { slidesPerView: 1 }
+                }
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Odometer counter for all elements with class 'odometer'
+        if (typeof Odometer !== 'undefined') {
+            document.querySelectorAll('.odometer').forEach(function (el) {
+                var count = el.getAttribute('data-count');
+                el.innerHTML = '00'; // Start from 00
+                setTimeout(function () {
+                    el.innerHTML = count;
+                }, 500); // Delay for animation
+            });
+        }
+    });
+</script>
+<!-- ...existing code... -->
+<style>
+    /* ...existing styles... */
+    .tmp-header-area-start {
+        margin-top: 0px;
+    }
+</style>
+<!-- ...existing code... -->
+
+<body>
+
+    <!-- tpm-header-area start -->
+    <header class="tmp-header-area-start header-one header--sticky header--transparent">
+        <!-- header mid area start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy">
+                                <img class="logo-white" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy">
+                            </a>
+                        </div>
+                        <div class="tmp-mainmenu-nav d-none d-xl-block">
+                            <nav class="navbar-example2 onepagenav">
+                                <ul class="tmp-mainmenu nav nav-pills">
+                                    <li class="nav-item"><a class="smoth-animation" href="index.html">Home</a></li>
+                                    <li class="nav-item"><a class="smoth-animation" href="about.html">About</a></li>
+                                    <!-- Desktop Menu Dropdown -->
+                                    <li class="current case-dropdown">
+                                        <a class="smoth-animation dropdown-toggle" href="Casestudies.html"
+                                            tabindex="0">Portfolio</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Fintech</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="ewallet.html">E-Wallet</a></li>
+                                                    <li><a class="dropdown-item" href="zappay.html">ZapPay</a></li>
+                                                    <li><a class="dropdown-item" href="unipay.html">UniPay</a></li>
+                                                    <li><a class="dropdown-item" href="smartfin.html">SmartFin</a></li>
+                                                    <li><a class="dropdown-item" href="coverride.html">CoverRide</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Enterprise & Platform
+                                                    Products</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="norton.html">Norton Security</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="homenest.html">HomeNest</a></li>
+                                                    <li><a class="dropdown-item" href="zmeet.html">Z-Meet</a></li>
+                                                    <li><a class="dropdown-item" href="eater.html">Eater</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">SaaS</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="fluxcrm.html">FluxCRM</a></li>
+                                                    <li><a class="dropdown-item" href="taskee.html">Taskee</a></li>
+                                                    <li><a class="dropdown-item" href="staffee.html">Staffee</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">E-Commerce</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="amazon.html">Amazon</a></li>
+                                                    <li><a class="dropdown-item" href="eddiebauer.html">Eddie Bauer</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="lider.html">Lider</a></li>
+                                                    <li><a class="dropdown-item" href="slurrpfarm.html">Slurrp Farm</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="gocart.html">GoCart</a></li>
+                                                    <li><a class="dropdown-item" href="dailymart.html">DailyMart</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="quickcart.html">Quickcart</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Healthcare</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="mydoc.html">MyDoc</a></li>
+                                                    <li><a class="dropdown-item" href="dronline.html">DrOnline</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="nav-item"><a class="smoth-animation" href="contact.html">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="tmp-header-right">
+                            <div class="social-share-wrapper d-none d-md-block">
+                                <div class="social-link">
+                                    <a href="https://www.linkedin.com/in/lajapathyk/" target="_blank" rel="noopener"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="tmp-side-collups-area d-block d-xl-none">
+                                <button class="hamberger-menu humberger_menu_active"><i id="menuBtn"
+                                        class="fa-light fa-bars humberger-menu"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header mid area end -->
+    </header>
+
+
+    <!-- Start Popup Mobile Menu  -->
+    <div class="d-block d-xl-none">
+        <div class="tmp-popup-mobile-menu">
+            <div class="inner">
+                <div class="header-top">
+                    <div class="logo">
+                        <a href="index.html" class="logo-area">
+                            <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="logo">
+                            <img class="logo-white" src="assets/images/logo/white-logo-reeni.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="close-menu">
+                        <button class="close-button tmp-round-action-btn">
+                            <i class="fa-sharp fa-light fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <ul class="tmp-mainmenu onepagenav-click">
+                    <li><a class="smoth-animation" href="index.html">Home</a></li>
+                    <li><a class="smoth-animation" href="about.html">About</a></li>
+                    <li><a class="smoth-animation" href="Casestudies.html">Portfolio</a></li>
+                    <li><a class="smoth-animation" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Popup Mobile Menu  -->
+
+    <div class="container mt--50">
+        <div class="row">
+            <div class="col-12 inner_banner_bg tmp-scroll-trigger tmp-fade-in animation-order-1"
+                style="margin-top: 150px;">
+                <img class="tmp-scroll-trigger tmp-fade-in animation-order-1" src="Casestudies/Fluxcrm.png"
+                    alt="Eater Project" />
+            </div>
+            <div class="project-details-swiper-btn" style="display: flex; justify-content: space-between;">
+                <a href="dronline.html" class="project-swiper-button-prev" style="display: flex; align-items: center;">
+                    <span><i class="fa-solid fa-arrow-left"></i></span>
+                    <span style="margin-left: 10px;">Previous</span>
+                </a>
+                <a href="taskee.html" class="project-swiper-button-next" style="display: flex; align-items: center;">
+                    <span style="margin-right: 10px;">Next</span>
+                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+                    <!-- Tpm Get In touch start -->
+                <section class="get-in-touch-area tmp-section-gapTop" id="contacts">
+                    <div class="container">
+                        <div class="contact-get-in-touch-wrap">
+                            <div class="get-in-touch-wrapper position-relative overflow-hidden">
+                                <div class="row g-5 align-items-center">
+                                    <div class="col-lg-5">
+                                        <div class="section-head text-align-left">
+                                            <div
+                                                class="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                                                <span class="subtitle theme-gradient">GET IN TOUCH</span><br><br>
+                                            </div>
+                                            <h2
+                                                class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">
+                                                Let’s Build Products That Deliver Measurable Impact</h2><br>
+                                            <p class="description tmp-scroll-trigger tmp-fade-in animation-order-3">
+                                                I partner with product and engineering teams to turn complex
+                                                problems
+                                                into scalable, outcome-driven products. <br><br> Let’s connect.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="contact-inner">
+                                            <div class="contact-form">
+                                                <div id="form-messages" class="error"></div>
+                                                <form class="tmp-dynamic-form" id="contact-form" method="POST"
+                                                    action="mailer.php">
+                                                    <div class="contact-form-wrapper row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input class="input-field" name="name" id="contact-name"
+                                                                    placeholder="Your Name" type="text" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input class="input-field" id="contact-phone"
+                                                                    placeholder="Phone Number" type="number" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input class="input-field" id="contact-email"
+                                                                    name="email" placeholder="Your Email" type="email"
+                                                                    required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input class="input-field" type="text" id="subject"
+                                                                    name="subject" placeholder="Subject">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <textarea class="input-field" placeholder="Your Message"
+                                                                    name="message" id="contact-message"
+                                                                    required></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12">
+                                                            <div class="tmp-button-here">
+                                                                <button
+                                                                    class="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon">
+                                                                    <span class="icon-reverse-wrapper">
+                                                                        <span class="btn-text">Discuss Your
+                                                                            Product</span>
+                                                                        <span class="btn-hack"></span>
+                                                                        <img src="assets/images/button/btg-bg.svg"
+                                                                            alt="" class="btn-bg">
+                                                                        <img src="assets/images/button/btg-bg-2.svg"
+                                                                            alt="" class="btn-bg-hover">
+                                                                        <span class="btn-icon"><i
+                                                                                class="ffa-sharp fa-regular fa-arrow-right"></i></span>
+                                                                        <span class="btn-icon"><i
+                                                                                class="ffa-sharp fa-regular fa-arrow-right"></i></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div id="mail-success-popup"
+                                                    style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);">
+                                                    <div
+                                                        style="background:#272727; padding:2rem 2.5rem; border-radius:10px; max-width:350px; margin:10% auto; box-shadow:0 2px 16px rgba(0,0,0,0.2); text-align:center; position:relative;">
+                                                        <span
+                                                            style="font-size:4rem; color:#FF9800; display:block; margin-bottom:1rem;">&#10003;</span>
+                                                        <div style="font-size:2rem; margin-bottom:2rem;">Message
+                                                            sent
+                                                            successfully!</div>
+                                                        <button
+                                                            onclick="document.getElementById('mail-success-popup').style.display='none'"
+                                                            style="background:#FF9800; color:#fff; border:none; border-radius:5px; padding:0.5rem 1.5rem; font-size:2rem; cursor:pointer;">OK</button>
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    document.getElementById('contact-form').addEventListener('submit', function (e) {
+                                                        e.preventDefault();
+                                                        // Optionally, send the form via AJAX here if you don't want a page reload.
+                                                        // For demo, just show popup and reset form.
+                                                        document.getElementById('mail-success-popup').style.display = 'block';
+                                                        this.reset();
+                                                    });
+                                                </script>
+                                                <script>
+                                                    document.getElementById('contact-form').addEventListener('submit', function (e) {
+                                                        // Allow form to submit (for server processing), then clear fields
+                                                        setTimeout(function () {
+                                                            document.getElementById('contact-form').reset();
+                                                        }, 100);
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Tpm Get In touch End -->
+    </div>
+    </div>
+    <br>
+    <br>
+
+
+            <!-- Start Footer Area  -->
+        <div class="footer-stars-animation-wrapper-footer">
+            <!-- Start Footer Area  -->
+            <footer class="footer-area footer-style-one-wrapper bg-color-footer bg_images tmp-section-gap">
+                <div class="separator-animated-border border-top-footer animated-true"></div>
+                <div class="separator-animated-border animated-true"></div>
+                <div class="container">
+                    <div class="footer-main footer-style-one">
+                        <div class="row g-5">
+                            <div class="col-lg-5 col-md-6">
+                                <div class="single-footer-wrapper border-right mr--20">
+                                    <div class="logo">
+                                        <a href="index.html">
+                                            <img src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy"
+                                                style="width: 90px; height: auto; max-width: 100%;">
+                                        </a>
+                                    </div><br>
+                                    <p class="description" style="font-size: 2rem; line-height: 1.8;">I drive
+                                        clarity,
+                                        alignment, and measurable product outcomes</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer-wrapper quick-link-wrap">
+                                    <h5 class="ft-title">What I Do</h5>
+                                    <p>– Product Strategy & Direction</p>
+                                    <p>– UX & Design Leadership</p>
+                                    <p>– Scalable Design Systems</p>
+                                    <p>– Outcome-Driven Product Design</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="single-footer-wrapper contact-wrap">
+                                    <h5 class="ft-title">Contact </h5>
+                                    <ul class="ft-link tmp-link-animation">
+                                        <li> <span class="ft-icon"><i class="fa-solid fa-envelope"></i></span>
+                                            <a
+                                                href="mailto:lajapathykodiraman@gmail.com">lajapathykodiraman@gmail.com</a>
+                                        </li>
+                                        <li><span class="ft-icon"><i class="fa-solid fa-location-dot"></i></span>
+                                            <a href="https://www.google.com/maps/search/?api=1&query=Madurai,Tamilnadu,India"
+                                                target="_blank" rel="noopener">India</a>
+                                        </li>
+                                        <li><span class="ft-icon"><i class="fa-solid fa-earth"></i></span>Open to
+                                            roles
+                                            globally (India, Dubai, South Africa, USA)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <div class="copyright-area-one">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-wrapper">
+                                <p class="copy-right-para tmp-link-animation"> © Lajapathy | LP
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> | All Rights Reserved
+                                </p>
+                                <ul class="tmp-link-animation">
+                                    <li><a href="terms.html">Terms & Conditions</a></li>
+                                    <li><a href="privacy.html">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Area  -->
+        <!-- ready chatting option via email -->
+        <!-- ready chatting option via email end -->
+        <!-- ready chatting option via email end -->
+        <!-- progress area start -->
+        <div class="scrollToTop" style="display: block;">
+            <div class="arrowUp">
+                <i class="fa-light fa-arrow-up"></i>
+            </div>
+            <div class="water" style="transform: translate(0px, 87%);">
+                <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
+                    <use xlink:href="#wave"></use>
+                </svg>
+                <svg viewBox="0 0 560 20" class="water_wave water_wave_front">
+                    <use xlink:href="#wave"></use>
+                </svg>
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 560 20" style="display: none;">
+                    <symbol id="wave">
+                        <path
+                            d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"
+                            fill="#fff"></path>
+                        <path
+                            d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z"
+                            fill="#fff"></path>
+                        <path
+                            d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z"
+                            fill="#fff"></path>
+                        <path
+                            d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"
+                            fill="#fff"></path>
+                    </symbol>
+                </svg>
+
+            </div>
+        </div>
+        <!-- progress area end -->
+    </div>
+
+    <script src="assets/js/vendor/modernizer.js"></script>
+    <script src="assets/js/vendor/jquery.js"></script>
+    <script src="assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="assets/js/vendor/waypoints.min.js"></script>
+
+    <script src="assets/js/plugins/odometer.js"></script>
+    <script src="assets/js/vendor/appear.js"></script>
+
+
+    <script src="assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script src="assets/js/vendor/tilt.js"></script>
+    <script src="assets/js/plugins/swiper.js"></script>
+
+    <script src="assets/js/plugins/gsap.js"></script>
+    <script src="assets/js/plugins/splittext.js"></script>
+    <script src="assets/js/plugins/scrolltigger.js"></script>
+    <script src="assets/js/plugins/scrolltoplugins.js"></script>
+    <script src="assets/js/plugins/smoothscroll.js"></script>
+    <script src="assets/js/vendor/twinmax.js"></script>
+    <!-- bootstrap Js-->
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/waw.js"></script>
+    <script src="assets/js/vendor/intro-video.js"></script>
+    <script src="assets/js/plugins/isotop.js"></script>
+    <script src="assets/js/plugins/animation.js"></script>
+    <script src="assets/js/plugins/contact.form.js"></script>
+    <script src="assets/js/vendor/backtop.js"></script>
+    <script src="assets/js/plugins/text-type.js"></script>
+    <!-- custom Js -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
