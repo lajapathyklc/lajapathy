@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 554 532">
+  <!-- Generator: Adobe Illustrator 29.7.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 8)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#radial-gradient);
+      }
+
+      .st1 {
+        opacity: .5;
+      }
+
+      .st2 {
+        fill: url(#radial-gradient1);
+      }
+
+      .st3 {
+        fill: url(#radial-gradient3);
+      }
+
+      .st4 {
+        fill: url(#radial-gradient2);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="-19.63" cy="686.23" fx="-19.63" fy="686.23" r="1" gradientTransform="translate(-62511.96 7881.36) rotate(90) scale(394.03 -91.5)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb443"/>
+      <stop offset="1" stop-color="#ffb443" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient1" cx="-19.52" cy="681.25" fx="-19.52" fy="681.25" r="1" gradientTransform="translate(-6961.91 6113.12) rotate(90) scale(303.4 -10.68)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb443"/>
+      <stop offset="1" stop-color="#ffb443" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient2" cx="-19.41" cy="677.3" fx="-19.41" fy="677.3" r="1" gradientTransform="translate(-3386.08 5033.59) rotate(90) scale(251.78 -5.38)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb443"/>
+      <stop offset="1" stop-color="#ffb443" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient3" cx="-19.45" cy="673.63" fx="-19.45" fy="673.63" r="1" gradientTransform="translate(-3285.01 5077.5) rotate(90) scale(251.78 -5.38)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb443"/>
+      <stop offset="1" stop-color="#ffb443" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g class="st1">
+    <ellipse class="st0" cx="276.9" cy="145.01" rx="91.5" ry="394.03" transform="translate(-35.41 157.88) rotate(-30)"/>
+  </g>
+  <ellipse class="st2" cx="311.28" cy="189.38" rx="10.68" ry="303.4" transform="translate(-52.98 181.01) rotate(-30)"/>
+  <ellipse class="st4" cx="259.87" cy="145.58" rx="5.38" ry="251.78" transform="translate(-37.69 131.99) rotate(-26.64)"/>
+  <ellipse class="st3" cx="341.19" cy="181" rx="5.38" ry="251.78" transform="translate(-42.49 225.31) rotate(-34.53)"/>
+</svg>

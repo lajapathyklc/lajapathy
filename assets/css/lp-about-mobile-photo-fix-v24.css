@@ -1,0 +1,60 @@
+/* About page — responsive portrait restoration (V24) */
+@media (max-width: 991px) {
+  .tmp-banner-one-area#home .banner-right-content {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    position: relative !important;
+    z-index: 3 !important;
+  }
+
+  .tmp-banner-one-area#home .banner-right-content > div {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  .tmp-banner-one-area#home .banner-right-content img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: min(78vw, 420px) !important;
+    max-height: 58vh !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    object-fit: contain !important;
+  }
+
+  .tmp-banner-one-area#home .row {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .tmp-banner-one-area#home .row > .col-lg-5 {
+    order: 1 !important;
+    width: 100% !important;
+  }
+
+  .tmp-banner-one-area#home .row > .col-lg-7 {
+    order: 2 !important;
+    width: 100% !important;
+  }
+
+  .tmp-banner-one-area#home .banner-right-content .banner-big-text-2 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .tmp-banner-one-area#home .banner-right-content img {
+    max-width: min(82vw, 330px) !important;
+    max-height: 48vh !important;
+  }
+}

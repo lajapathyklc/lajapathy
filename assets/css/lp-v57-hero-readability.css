@@ -1,0 +1,109 @@
+/* V57 — HERO READABILITY PASS
+   Larger 20 YRS metadata + larger proof copy.
+   Approved composition otherwise unchanged.
+*/
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+    box-sizing: border-box !important;
+    border-radius: 38px !important;
+}
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+    font-size: clamp(1.08rem, 1.25vw, 1.30rem) !important;
+    line-height: 1.25 !important;
+    font-weight: 500 !important;
+    letter-spacing: .015em !important;
+    white-space: nowrap !important;
+}
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+    font-size: clamp(1.28rem, 1.45vw, 1.52rem) !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: .02em !important;
+    margin-right: 12px !important;
+}
+.tmp-banner-one-area.moody-hero .lp-v50-proof {
+    color: rgba(255,255,255,.96) !important;
+    font-size: clamp(1.08rem, 1.22vw, 1.24rem) !important;
+    line-height: 1.55 !important;
+    font-weight: 500 !important;
+    letter-spacing: .008em !important;
+    text-align: left !important;
+    text-shadow: 0 1px 12px rgba(0,0,0,.65) !important;
+}
+@media (min-width:1200px) {
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width: 680px !important;
+        max-width: 680px !important;
+        min-height: 70px !important;
+        padding: 14px 27px !important;
+        margin-bottom: 27px !important;
+    }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text { font-size:1.24rem !important; }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span { font-size:1.48rem !important; }
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width:525px !important;
+        max-width:525px !important;
+        margin-top:26px !important;
+        padding-left:20px !important;
+        border-left:3px solid #FF9800 !important;
+        font-size:1.16rem !important;
+        line-height:1.55 !important;
+    }
+}
+@media (min-width:992px) and (max-width:1199px) {
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width:620px !important;
+        max-width:620px !important;
+        min-height:68px !important;
+        padding:13px 23px !important;
+    }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text { font-size:1.18rem !important; }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span { font-size:1.40rem !important; }
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width:475px !important;
+        max-width:475px !important;
+        padding-left:19px !important;
+        border-left:3px solid #FF9800 !important;
+        font-size:1.12rem !important;
+        line-height:1.55 !important;
+    }
+}
+@media (max-width:991px) {
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width:min(100%,600px) !important;
+        max-width:600px !important;
+        min-height:64px !important;
+        padding:11px 18px !important;
+    }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+        font-size:1.14rem !important;
+        line-height:1.3 !important;
+        white-space:normal !important;
+    }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+        font-size:1.32rem !important;
+        margin-right:9px !important;
+    }
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width:min(100%,450px) !important;
+        max-width:450px !important;
+        padding-left:17px !important;
+        border-left:3px solid #FF9800 !important;
+        font-size:1.10rem !important;
+        line-height:1.58 !important;
+    }
+}
+@media (max-width:575px) {
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        min-height:62px !important;
+        padding:10px 14px !important;
+    }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text { font-size:1.04rem !important; }
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span { font-size:1.20rem !important; }
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width:min(100%,380px) !important;
+        max-width:380px !important;
+        padding-left:15px !important;
+        font-size:1.06rem !important;
+        line-height:1.58 !important;
+    }
+}

@@ -1,0 +1,76 @@
+/* V45 — Hero composition fine-tuning
+   Reference-led: smaller portrait, more right-side breathing room,
+   darker environment, and a soft bottom blend into the terrain. */
+.tmp-banner-one-area.moody-hero .hero-static-portrait {
+    z-index: 3;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom,
+        #000 0%,
+        #000 72%,
+        rgba(0,0,0,.94) 82%,
+        rgba(0,0,0,.55) 93%,
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        #000 0%,
+        #000 72%,
+        rgba(0,0,0,.94) 82%,
+        rgba(0,0,0,.55) 93%,
+        transparent 100%);
+    filter: brightness(.94) contrast(1.03);
+}
+
+/* Stronger cinematic grade: keep the left copy area dark while preserving
+   the warm planet/sunrise on the right. */
+.tmp-banner-one-area.moody-hero::before {
+    z-index: 1;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.82) 0%,
+            rgba(0,0,0,.64) 27%,
+            rgba(0,0,0,.28) 52%,
+            rgba(0,0,0,.22) 100%),
+        linear-gradient(180deg,
+            rgba(0,0,0,.28) 0%,
+            rgba(0,0,0,.18) 52%,
+            rgba(0,0,0,.82) 100%) !important;
+}
+
+@media (min-width: 1200px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 66% !important;
+        height: 72vh !important;
+        max-height: none !important;
+        bottom: -1vh !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 65% !important;
+        height: 70vh !important;
+        bottom: -1vh !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero::before {
+        background:
+            linear-gradient(90deg,
+                rgba(0,0,0,.74) 0%,
+                rgba(0,0,0,.42) 58%,
+                rgba(0,0,0,.26) 100%),
+            linear-gradient(180deg,
+                rgba(0,0,0,.22) 0%,
+                rgba(0,0,0,.16) 50%,
+                rgba(0,0,0,.78) 100%) !important;
+    }
+
+    /* Keep the portrait secondary on small screens so copy remains readable. */
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 78% !important;
+        height: 48vh !important;
+        max-height: 620px !important;
+        bottom: -2vh !important;
+        opacity: .82;
+    }
+}

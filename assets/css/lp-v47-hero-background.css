@@ -1,0 +1,53 @@
+/* V47 — Dark clean cinematic hero background
+   Replaces the previous space background with the cleaner, darker
+   composition while preserving all live HTML content and portrait layers. */
+.tmp-banner-one-area.moody-hero .hero-space-background {
+    background-image: url('../images/bg/hero-space-background.png') !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+
+/* Keep the left copy zone deliberately quiet and the overall scene dark. */
+.tmp-banner-one-area.moody-hero::before {
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.88) 0%,
+            rgba(0,0,0,.72) 30%,
+            rgba(0,0,0,.34) 57%,
+            rgba(0,0,0,.24) 100%),
+        linear-gradient(180deg,
+            rgba(0,0,0,.34) 0%,
+            rgba(0,0,0,.16) 52%,
+            rgba(0,0,0,.86) 100%) !important;
+}
+
+@media (min-width: 1200px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: center center !important;
+    }
+}
+
+@media (max-width: 1199px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: 58% center !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: 61% center !important;
+    }
+
+    .tmp-banner-one-area.moody-hero::before {
+        background:
+            linear-gradient(90deg,
+                rgba(0,0,0,.82) 0%,
+                rgba(0,0,0,.60) 54%,
+                rgba(0,0,0,.38) 100%),
+            linear-gradient(180deg,
+                rgba(0,0,0,.30) 0%,
+                rgba(0,0,0,.18) 48%,
+                rgba(0,0,0,.82) 100%) !important;
+    }
+}
