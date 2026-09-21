@@ -1,0 +1,12 @@
+/* V55 — Portfolio is a direct navigation link; desktop submenu removed */
+.tmp-mainmenu .case-dropdown > .dropdown-menu {
+    display: none !important;
+}
+
+.tmp-mainmenu .case-dropdown {
+    position: relative;
+}
+
+.tmp-mainmenu a[href="Casestudies.html"] {
+    cursor: pointer;
+}

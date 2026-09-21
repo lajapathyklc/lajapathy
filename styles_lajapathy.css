@@ -1,0 +1,225 @@
+:root {
+    --bg-color: #0c0908;
+    --text-white: #ffffff;
+    --accent-orange: #ff5c00;
+    --font-primary: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    font-family: var(--font-primary);
+    overflow: hidden;
+}
+
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 60px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(12, 9, 8, 0.6) 50%, rgba(12, 9, 8, 0.9) 100%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.menu-btn span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hamburger span {
+    width: 16px;
+    height: 1.5px;
+    background: white;
+}
+
+.content {
+    position: relative;
+    z-index: 5;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 92, 0, 0.3);
+    color: var(--accent-orange);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    background: var(--accent-orange);
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.headline {
+    font-size: 5.5rem;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    max-width: 800px;
+}
+
+.social-links {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: white;
+}
+
+footer {
+    position: relative;
+    z-index: 5;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.subtext {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+.cta-btn {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+/* Response for small screens */
+@media (max-width: 1024px) {
+    .headline {
+        font-size: 4rem;
+    }
+    .hero {
+        padding: 30px;
+    }
+    .social-links {
+        display: none;
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        padding: 20px;
+    }
+    .headline {
+        font-size: 3rem;
+    }
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+}

@@ -1,0 +1,108 @@
+/* LP responsive navigation / dropdown stability fix */
+
+.header-one .header-content,
+.header-one .header-content > .col-lg-12,
+.header-one .header-content .tmp-mainmenu-nav,
+.header-one .header-content .tmp-header-right {
+  min-width: 0;
+}
+
+/* Keep the desktop navigation from squeezing into the logo/social control. */
+.header-one .tmp-mainmenu-nav {
+  flex: 0 1 auto;
+  margin-left: auto;
+  margin-right: clamp(14px, 3vw, 50px);
+}
+
+.tmp-mainmenu-nav .tmp-mainmenu {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.tmp-mainmenu-nav .tmp-mainmenu > li {
+  flex: 0 0 auto;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.tmp-mainmenu-nav .tmp-mainmenu > li > a {
+  padding-left: clamp(8px, 0.75vw, 12px) !important;
+  padding-right: clamp(8px, 0.75vw, 12px) !important;
+}
+
+/* The custom Portfolio menu must stay inside the viewport. */
+.case-dropdown {
+  position: relative !important;
+}
+
+.case-dropdown > .dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+  width: min(320px, calc(100vw - 32px)) !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 32px) !important;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.case-dropdown > .dropdown-menu > li > a {
+  font-size: clamp(14px, 1.1vw, 16px) !important;
+  line-height: 1.35;
+  padding: 12px 38px 12px 18px !important;
+  white-space: normal;
+}
+
+.case-dropdown > .dropdown-menu > li {
+  position: relative;
+}
+
+/* Nested menus open toward the available side instead of falling off-screen. */
+.case-dropdown > .dropdown-menu > .dropdown-submenu > .dropdown-menu {
+  left: auto !important;
+  right: 100% !important;
+  top: 0 !important;
+  width: min(280px, calc(100vw - 32px)) !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 32px) !important;
+  margin-right: 1px;
+}
+
+.case-dropdown > .dropdown-menu > .dropdown-submenu > .dropdown-menu a {
+  font-size: 14px !important;
+  line-height: 1.35;
+  white-space: normal;
+  padding: 10px 18px !important;
+}
+
+@media only screen and (max-width: 1399px) and (min-width: 1200px) {
+  .header-one .tmp-mainmenu-nav {
+    margin-right: 14px;
+  }
+
+  .tmp-mainmenu-nav .tmp-mainmenu > li {
+    margin-left: 1px;
+    margin-right: 1px;
+  }
+
+  .tmp-mainmenu-nav .tmp-mainmenu > li > a {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-size: 15px;
+  }
+
+  .case-dropdown > .dropdown-menu {
+    width: min(300px, calc(100vw - 28px)) !important;
+  }
+}
+
+/* At tablet widths use the existing hamburger/mobile panel before the desktop
+   navigation becomes cramped. */
+@media only screen and (max-width: 1199px) {
+  .header-one .tmp-mainmenu-nav {
+    display: none !important;
+  }
+
+  .header-one .tmp-side-collups-area {
+    display: block !important;
+  }
+}

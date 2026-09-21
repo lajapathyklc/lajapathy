@@ -1,0 +1,207 @@
+/* =========================================================
+   V56 — FINAL HERO POLISH
+   Focus:
+   1. Lift left editorial content
+   2. Increase 20 YRS metadata prominence
+   3. Increase proof readability
+   4. Strengthen copy-side background grade
+   5. Slightly enlarge + right-shift portrait
+   6. Improve CTA relationship to rotating word
+   ========================================================= */
+
+/* Quiet the image specifically behind the editorial copy.
+   The planet remains visible and bright on the right. */
+.tmp-banner-one-area.moody-hero::before {
+    z-index: 1 !important;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.96) 0%,
+            rgba(0,0,0,.88) 24%,
+            rgba(0,0,0,.66) 43%,
+            rgba(0,0,0,.30) 61%,
+            rgba(0,0,0,.12) 100%),
+        linear-gradient(180deg,
+            rgba(0,0,0,.22) 0%,
+            rgba(0,0,0,.10) 52%,
+            rgba(0,0,0,.92) 100%) !important;
+}
+
+/* ---------------- Desktop ---------------- */
+@media (min-width: 1200px) {
+
+    /* Move the complete editorial stack upward. */
+    .tmp-banner-one-area.moody-hero .banner-one-main-wrapper .inner {
+        transform: translateY(-108px) !important;
+    }
+
+    /* 20 YRS pill — larger but still restrained. */
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width: 650px !important;
+        max-width: 650px !important;
+        min-height: 58px !important;
+        padding: 12px 23px !important;
+        margin-bottom: 25px !important;
+        border-radius: 36px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+        font-size: 1.06rem !important;
+        line-height: 1.2 !important;
+        letter-spacing: .018em !important;
+        white-space: nowrap !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+        font-size: 1.28rem !important;
+        font-weight: 700 !important;
+        margin-right: 10px !important;
+    }
+
+    /* Main headline: strong, compact editorial rhythm. */
+    .tmp-banner-one-area.moody-hero .moody-hero-headline {
+        line-height: 1.005 !important;
+        letter-spacing: -1.8px !important;
+    }
+
+    /* Slightly tighter transition into BUILDING FOR. */
+    .tmp-banner-one-area.moody-hero .moody-hero-headline .driven-by {
+        margin-top: 14px !important;
+    }
+
+    /* CTA should sit close enough to the rotating word to read as one unit. */
+    .tmp-banner-one-area.moody-hero .button-area {
+        margin-top: 20px !important;
+    }
+
+    /* Proof: clearly readable at normal desktop viewing distance.
+       Width forces natural wrapping instead of shrinking the type. */
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width: 510px !important;
+        max-width: 510px !important;
+        margin-top: 25px !important;
+        padding-left: 19px !important;
+        border-left: 2px solid #FF9800 !important;
+        font-size: 1.00rem !important;
+        line-height: 1.52 !important;
+        font-weight: 500 !important;
+        letter-spacing: .006em !important;
+        color: rgba(255,255,255,.94) !important;
+        text-align: left !important;
+    }
+
+    /* Portrait: a little larger and further right, without invading copy. */
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 70% !important;
+        height: 75vh !important;
+        bottom: -1.5vh !important;
+        filter: brightness(.94) contrast(1.05) saturate(.98) !important;
+    }
+}
+
+/* ---------------- Laptop / smaller desktop ---------------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .tmp-banner-one-area.moody-hero .banner-one-main-wrapper .inner {
+        transform: translateY(-72px) !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width: 600px !important;
+        max-width: 600px !important;
+        min-height: 56px !important;
+        padding: 11px 20px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+        font-size: 1rem !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+        font-size: 1.22rem !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .button-area {
+        margin-top: 19px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width: 460px !important;
+        max-width: 460px !important;
+        font-size: .96rem !important;
+        line-height: 1.52 !important;
+        padding-left: 18px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 68.5% !important;
+        height: 71vh !important;
+        bottom: -1vh !important;
+    }
+}
+
+/* ---------------- Mobile ---------------- */
+@media (max-width: 991px) {
+
+    /* Keep mobile content comfortable rather than applying the desktop lift. */
+    .tmp-banner-one-area.moody-hero .banner-one-main-wrapper .inner {
+        transform: translateY(-12px) !important;
+    }
+
+    .tmp-banner-one-area.moody-hero::before {
+        background:
+            linear-gradient(90deg,
+                rgba(0,0,0,.93) 0%,
+                rgba(0,0,0,.72) 58%,
+                rgba(0,0,0,.30) 100%),
+            linear-gradient(180deg,
+                rgba(0,0,0,.24) 0%,
+                rgba(0,0,0,.10) 48%,
+                rgba(0,0,0,.90) 100%) !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width: min(100%, 560px) !important;
+        max-width: 560px !important;
+        min-height: 54px !important;
+        padding: 10px 17px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+        font-size: 1rem !important;
+        line-height: 1.28 !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+        font-size: 1.18rem !important;
+        font-weight: 700 !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .button-area {
+        margin-top: 18px !important;
+    }
+
+    /* If proof is enabled at a tablet breakpoint, keep it readable. */
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width: min(100%, 420px) !important;
+        max-width: 420px !important;
+        font-size: 1rem !important;
+        line-height: 1.52 !important;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+        width: 100% !important;
+        min-height: 52px !important;
+        padding: 9px 14px !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+        font-size: .92rem !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+        font-size: 1.08rem !important;
+    }
+}

@@ -1,0 +1,155 @@
+/* V48 — clean standalone space background + hero separation
+   Uses the supplied background WITHOUT any baked-in portrait/UI.
+   Keeps the live portrait separate and protects the editorial copy zone. */
+.tmp-banner-one-area.moody-hero .hero-space-background {
+    background-image: none !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    object-fit: cover;
+    object-position: center top;
+    bottom: -20px;
+    height: calc(100% + 20px);
+}
+
+.tmp-banner-one-area.moody-hero .hero-space-background--reverse {
+    visibility: hidden;
+}
+
+.tmp-banner-one-area.moody-hero .hero-asteroids {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.tmp-banner-one-area.moody-hero .hero-asteroid {
+    position: absolute;
+    display: block;
+    width: 72px;
+    aspect-ratio: 1;
+    border-radius: 46% 54% 52% 48%;
+    opacity: .72;
+    background:
+        radial-gradient(circle at 31% 28%, rgba(255,218,165,.7) 0 2%, transparent 3%),
+        radial-gradient(circle at 66% 62%, rgba(35,17,8,.65) 0 7%, transparent 8%),
+        radial-gradient(circle at 42% 72%, rgba(41,18,7,.52) 0 4%, transparent 5%),
+        radial-gradient(circle at 35% 25%, #b87436 0, #5b2c14 42%, #170b07 76%, #060303 100%);
+    box-shadow: inset -12px -10px 18px rgba(0,0,0,.65), inset 8px 7px 12px rgba(255,194,112,.2), 0 0 22px rgba(255,135,45,.18);
+    filter: saturate(.8);
+    will-change: transform;
+}
+
+.tmp-banner-one-area.moody-hero .hero-asteroid--one {
+    top: 20%;
+    left: 55%;
+    animation: hero-asteroid-drift-one 18s ease-in-out infinite alternate;
+}
+
+.tmp-banner-one-area.moody-hero .hero-asteroid--two {
+    top: 38%;
+    left: 76%;
+    width: 38px;
+    opacity: .58;
+    animation: hero-asteroid-drift-two 13s ease-in-out infinite alternate-reverse;
+}
+
+.tmp-banner-one-area.moody-hero .hero-asteroid--three {
+    top: 63%;
+    left: 43%;
+    width: 24px;
+    opacity: .46;
+    animation: hero-asteroid-drift-three 10s ease-in-out infinite alternate;
+}
+
+@keyframes hero-asteroid-drift-one {
+    from { transform: translate3d(-22vw, 10vh, 0) rotate(-18deg); }
+    to { transform: translate3d(12vw, -7vh, 0) rotate(32deg); }
+}
+
+@keyframes hero-asteroid-drift-two {
+    from { transform: translate3d(12vw, -5vh, 0) rotate(12deg); }
+    to { transform: translate3d(-18vw, 13vh, 0) rotate(-34deg); }
+}
+
+@keyframes hero-asteroid-drift-three {
+    from { transform: translate3d(-10vw, -4vh, 0) rotate(22deg); }
+    to { transform: translate3d(20vw, 8vh, 0) rotate(68deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tmp-banner-one-area.moody-hero .hero-asteroid {
+        animation: none;
+    }
+}
+
+/* Dark cinematic grade: quieter left copy area, controlled planet highlights. */
+.tmp-banner-one-area.moody-hero::before {
+    z-index: 1 !important;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.88) 0%,
+            rgba(0,0,0,.76) 30%,
+            rgba(0,0,0,.42) 54%,
+            rgba(0,0,0,.22) 100%),
+        linear-gradient(180deg,
+            rgba(0,0,0,.30) 0%,
+            rgba(0,0,0,.18) 50%,
+            rgba(0,0,0,.78) 100%) !important;
+    pointer-events: none;
+}
+
+.tmp-banner-one-area.moody-hero .fogwrapper { z-index: 2 !important; }
+.tmp-banner-one-area.moody-hero .hero-static-portrait { z-index: 3 !important; }
+.tmp-banner-one-area.moody-hero > .container { position: relative; z-index: 5 !important; }
+.tmp-banner-one-area.moody-hero #mouse-scroll { z-index: 6 !important; }
+
+@media (min-width: 1200px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: center center !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 68% !important;
+        height: 67vh !important;
+        max-height: none !important;
+        bottom: -1vh !important;
+        filter: brightness(.94) contrast(1.04) !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: center center !important;
+    }
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 67% !important;
+        height: 64vh !important;
+        bottom: -1vh !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero .hero-space-background {
+        background-position: 58% center !important;
+    }
+    .tmp-banner-one-area.moody-hero::before {
+        background:
+            linear-gradient(90deg,
+                rgba(0,0,0,.84) 0%,
+                rgba(0,0,0,.68) 55%,
+                rgba(0,0,0,.40) 100%),
+            linear-gradient(180deg,
+                rgba(0,0,0,.28) 0%,
+                rgba(0,0,0,.18) 48%,
+                rgba(0,0,0,.84) 100%) !important;
+    }
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 82% !important;
+        height: 43vh !important;
+        max-height: 560px !important;
+        bottom: -1vh !important;
+        opacity: .76 !important;
+    }
+}

@@ -1,0 +1,315 @@
+/* LP V29 — OPTION 2 FOOTER
+   Visual reference: bold CTA over cinematic planet / sunrise panorama.
+*/
+.inner_banner_bg .project-close-button{display:flex;align-items:center;gap:8px;width:max-content;margin:0 0 18px auto;padding:9px 14px;border:1px solid rgba(255,152,0,.8);border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none}
+.inner_banner_bg .project-close-button span{color:#ff9800;font-size:18px;line-height:.7}
+.inner_banner_bg .project-close-button:hover{background:#ff9800;color:#070707!important}
+.inner_banner_bg .project-close-button:hover span{color:#070707}
+.lp-footer-v28-shell{position:relative;overflow:hidden;background:var(--color-page);color:#fff;border-top:0}
+.lp-footer-v28{position:relative;isolation:isolate;padding:0 0 18px;background:var(--color-page)}
+.lp-footer-v28__visual{position:absolute;inset:0;z-index:-2;background:var(--color-page)}
+.lp-footer-v28__visual>*{display:none}
+.lp-footer-v28__inner{position:relative;z-index:2}
+
+/* Cinematic hero image — this is the actual Option 2 artwork. */
+.lp-footer-v28__hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);min-height:max(360px,33.333333vw);display:flex;align-items:center;justify-content:space-between;gap:55px;padding:64px 0 58px;border-bottom:1px solid rgba(255,255,255,.14);overflow:hidden}
+.lp-footer-v28__hero:before{content:"";position:absolute;z-index:-1;inset:0;background-image:linear-gradient(90deg,rgba(0,0,0,.13) 0%,rgba(0,0,0,.04) 55%,rgba(0,0,0,.12) 100%),url('../images/bg/footerbg.png');background-size:100% auto;background-position:center top;background-repeat:no-repeat;transform:none}
+.lp-footer-v28__hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,transparent 42%,rgba(0,0,0,.28) 100%);pointer-events:none}
+.lp-footer-v28__hero-copy{max-width:760px;position:relative;z-index:1}
+.lp-footer-v28__eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:#ff9800;font-size:10px;line-height:1;letter-spacing:4px;font-weight:700;text-transform:uppercase}
+.lp-footer-v28__eyebrow span{display:block;width:32px;height:2px;background:#ff9800;box-shadow:0 0 12px rgba(255,152,0,.35)}
+.lp-footer-v28__title{margin:0;font-size:clamp(58px,6.2vw,96px);line-height:.89;letter-spacing:-4.5px;font-weight:800;text-transform:uppercase;text-shadow:0 3px 20px rgba(0,0,0,.3)}
+.lp-footer-v28__title em{font-style:normal;color:#ff9800}
+.lp-footer-v28__sub{margin:22px 0 0;color:rgba(255,255,255,.78);font-size:16px;line-height:1.5;letter-spacing:.9px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.lp-footer-v28__button{position:relative;z-index:1;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:20px;min-width:215px;padding:17px 23px;border-radius:999px;border:1px solid #ff9800;background:#ff9800;color:#070707!important;font-size:10px;font-weight:800;letter-spacing:1.35px;text-transform:uppercase;box-shadow:0 12px 38px rgba(0,0,0,.28),0 10px 35px rgba(255,152,0,.12);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.lp-footer-v28__button i{font-size:14px;transition:transform .25s ease}
+.lp-footer-v28__button:hover{transform:translateY(-3px);background:#ffab22;box-shadow:0 18px 48px rgba(0,0,0,.32),0 18px 45px rgba(255,152,0,.22)}
+.lp-footer-v28__button:hover i{transform:translateX(5px)}
+
+/* Solid black information bar, matching the Option 2 reference. */
+.lp-footer-v28__navrow{position:relative;display:grid;grid-template-columns:1.2fr 2.2fr auto;align-items:center;gap:38px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.13);background:var(--color-page)}
+.lp-footer-v28__identity-name{font-size:12px;letter-spacing:3px;font-weight:800;text-transform:uppercase}
+.lp-footer-v28__identity-role{margin-top:4px;color:#fff;font-size:9px;letter-spacing:1.7px;text-transform:uppercase}
+.lp-footer-v28__navrow nav{display:flex;justify-content:center;align-items:center;gap:42px}
+.lp-footer-v28__navrow nav a{color:rgba(255,255,255,.82)!important;font-size:12px;letter-spacing:.7px;transition:color .2s ease}
+.lp-footer-v28__navrow nav a:hover{color:#ff9800!important}
+.lp-footer-v28__linkedin{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:9px 13px;border:1px solid rgba(255,152,0,.72);border-radius:6px;color:#ff9800!important;font-size:10px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:background .2s ease,color .2s ease}
+.lp-footer-v28__linkedin:hover{background:#ff9800;color:#050505!important}
+.lp-footer-v28__linkedin i{font-size:13px}
+.lp-footer-v28__bottom{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:30px;padding-top:17px;background:var(--color-page)}
+.lp-footer-v28__copyright{color:rgba(255,255,255,.45);font-size:9px;letter-spacing:.5px}
+.lp-footer-v28__bottom ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.lp-footer-v28__bottom ul a{color:rgba(255,255,255,.48)!important;font-size:9px;letter-spacing:.5px}
+.lp-footer-v28__bottom ul a:hover{color:#ff9800!important}
+.lp-footer-v28__back{display:inline-flex;align-items:center;gap:8px;color:#ff9800!important;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;white-space:nowrap}
+.lp-footer-v28__back span{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border:1px solid rgba(255,152,0,.6);border-radius:50%}
+.lp-footer-v28__back i{font-size:10px}
+
+@media (max-width:991px){
+ .lp-footer-v28__hero{min-height:max(360px,33.333333vw);padding:58px 0 52px;gap:35px}
+ .lp-footer-v28__hero:before{background-position:center top}
+ .lp-footer-v28__title{font-size:clamp(52px,8vw,82px)}
+ .lp-footer-v28__button{min-width:195px}
+ .lp-footer-v28__navrow{grid-template-columns:1fr auto;gap:24px}
+ .lp-footer-v28__navrow nav{grid-column:1/-1;grid-row:2;justify-content:flex-start;gap:30px}
+ .lp-footer-v28__linkedin{grid-column:2;grid-row:1}
+}
+
+@media (max-width:767px){
+ .lp-footer-v28{padding-bottom:15px}
+ .lp-footer-v28__hero{display:block;min-height:0;padding:52px 0 38px}
+ .lp-footer-v28__hero:before{background-position:center top;background-size:100% auto;transform:none}
+ .lp-footer-v28__hero:after{background:linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.10) 40%,rgba(0,0,0,.48) 100%)}
+ .lp-footer-v28__eyebrow{font-size:9px;letter-spacing:3px;margin-bottom:17px}
+ .lp-footer-v28__eyebrow span{width:26px}
+ .lp-footer-v28__title{font-size:clamp(43px,12.6vw,62px);line-height:.91;letter-spacing:-2.7px}
+ .lp-footer-v28__sub{margin-top:19px;font-size:14px;line-height:1.5;letter-spacing:.6px;max-width:315px}
+ .lp-footer-v28__button{margin-top:26px;min-width:0;width:auto;padding:15px 20px;font-size:9px;letter-spacing:1.1px;gap:14px}
+ .lp-footer-v28__navrow{grid-template-columns:1fr auto;gap:19px;padding:19px 0;background:var(--color-page)}
+ .lp-footer-v28__identity-name{font-size:11px;letter-spacing:2.5px}
+ .lp-footer-v28__identity-role{font-size:8px;letter-spacing:1.2px}
+ .lp-footer-v28__navrow nav{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(2,1fr);gap:13px 24px;padding-top:4px}
+ .lp-footer-v28__navrow nav a{font-size:12px}
+ .lp-footer-v28__linkedin{grid-column:2;grid-row:1;padding:8px 11px;font-size:9px}
+ .lp-footer-v28__bottom{grid-template-columns:1fr auto;gap:15px;padding-top:16px;background:var(--color-page)}
+ .lp-footer-v28__copyright{grid-column:1/-1;font-size:8px}
+ .lp-footer-v28__bottom ul{gap:14px;grid-column:1}
+ .lp-footer-v28__bottom ul a{font-size:8px}
+ .lp-footer-v28__back{grid-column:2;grid-row:2;font-size:8px}
+ .lp-footer-v28__back span{width:24px;height:24px}
+}
+
+
+/* V30 — full-bleed cinematic footer hero. The artwork reaches the viewport edges; content keeps the site's grid alignment. */
+.lp-footer-v28__hero-copy{width:min(760px,100%);margin-left:max(0px,calc((100% - 1170px)/2));}
+.lp-footer-v28__button{margin-right:max(0px,calc((100% - 1170px)/2));}
+@media (max-width:1199px){.lp-footer-v28__hero-copy{margin-left:30px}.lp-footer-v28__button{margin-right:30px}}
+@media (max-width:767px){
+ .lp-footer-v28__hero{width:100vw;margin-left:calc(50% - 50vw);}
+ .lp-footer-v28__hero-copy{width:auto;margin-left:0}
+ .lp-footer-v28__button{margin-right:0}
+}
+
+/* V31 — improve legal/footer readability */
+.lp-footer-v28__copyright{font-size:12px;line-height:1.5;letter-spacing:.35px;color:rgba(255,255,255,.62)}
+.lp-footer-v28__bottom ul a{font-size:12px;line-height:1.5;letter-spacing:.35px;color:rgba(255,255,255,.62)!important}
+.lp-footer-v28__back{font-size:11px;line-height:1.5;letter-spacing:1px}
+@media (max-width:767px){
+ .lp-footer-v28__copyright{font-size:10px;line-height:1.5}
+ .lp-footer-v28__bottom ul{gap:16px}
+ .lp-footer-v28__bottom ul a{font-size:10px;line-height:1.5}
+ .lp-footer-v28__back{font-size:9px}
+}
+
+/* V33 — restore the site's container grid for the information/legal bars.
+   The V32 viewport-based padding was being added on top of the Bootstrap
+   container gutter, causing the footer content to drift far to the right. */
+.lp-footer-v28__navrow,
+.lp-footer-v28__bottom{
+    padding-left:0;
+    padding-right:0;
+}
+.lp-footer-v28__back{
+    border:0;
+    background:transparent;
+    padding:0;
+    margin:0;
+    cursor:pointer;
+    font-family:inherit;
+    appearance:none;
+    -webkit-appearance:none;
+}
+@media (max-width:767px){
+    .lp-footer-v28__hero-copy{
+        margin-left:0;
+        width:auto;
+    }
+    .lp-footer-v28__button{
+        margin-left:0;
+        margin-right:0;
+    }
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:0;
+        padding-right:0;
+    }
+}
+
+/* Keep the three footer layers on one shared content axis. */
+.lp-footer-v28__navrow,
+.lp-footer-v28__bottom{
+    width:100%;
+    box-sizing:border-box;
+}
+
+
+/* V34 — align footer information exactly with the CTA headline and increase readability. */
+.lp-footer-v28__hero-copy{
+    margin-left:max(0px,calc((100% - 1170px)/2));
+}
+.lp-footer-v28__navrow,
+.lp-footer-v28__bottom{
+    width:100%;
+}
+.lp-footer-v28__identity-name{
+    font-size:16px;
+    line-height:1.15;
+    letter-spacing:2.6px;
+}
+.lp-footer-v28__identity-role{
+    margin-top:6px;
+    font-size:11px;
+    letter-spacing:1.8px;
+}
+.lp-footer-v28__navrow nav a{
+    font-size:14px;
+}
+.lp-footer-v28__linkedin{
+    font-size:11px;
+    padding:10px 14px;
+}
+.lp-footer-v28__bottom{
+    padding-top:20px;
+}
+.lp-footer-v28__copyright,
+.lp-footer-v28__bottom ul a{
+    font-size:13px;
+    line-height:1.5;
+}
+.lp-footer-v28__back{
+    font-size:11px;
+}
+
+@media (max-width:1199px){
+    .lp-footer-v28__hero-copy{margin-left:30px;}
+}
+@media (max-width:767px){
+    .lp-footer-v28__hero-copy{margin-left:0;}
+    .lp-footer-v28__identity-name{font-size:14px;letter-spacing:2.2px;}
+    .lp-footer-v28__identity-role{font-size:10px;letter-spacing:1.4px;}
+    .lp-footer-v28__navrow nav a{font-size:13px;}
+    .lp-footer-v28__linkedin{font-size:10px;padding:9px 12px;}
+    .lp-footer-v28__copyright,
+    .lp-footer-v28__bottom ul a{font-size:11px;}
+    .lp-footer-v28__back{font-size:9px;}
+}
+
+@media (min-width:1200px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:max(0px,calc((100vw - 1170px)/2));
+        padding-right:max(0px,calc((100vw - 1170px)/2));
+    }
+}
+@media (min-width:992px) and (max-width:1199px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:30px;
+        padding-right:30px;
+    }
+}
+
+/* V35 — final shared-axis correction.
+   The cinematic hero breaks out to the viewport, while the lower footer rows
+   remain inside the site's container. Use only the small container gutter
+   needed to place those rows on the exact same visual axis as the CTA copy. */
+@media (min-width:1200px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:38px !important;
+        padding-right:38px !important;
+    }
+}
+@media (min-width:992px) and (max-width:1199px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:30px !important;
+        padding-right:30px !important;
+    }
+}
+@media (max-width:767px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        padding-left:0 !important;
+        padding-right:0 !important;
+    }
+}
+
+/* V38 — mobile footer alignment.
+   The Bootstrap .container adds 15px side gutters, while the cinematic hero
+   intentionally runs edge-to-edge. Remove that gutter from the lower rows so
+   the identity, navigation and legal content share the same left/right axis
+   as the hero copy on small screens. */
+@media (max-width:767px){
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        width:calc(100% + 30px);
+        margin-left:-15px;
+        margin-right:-15px;
+        padding-left:15px !important;
+        padding-right:15px !important;
+        box-sizing:border-box;
+    }
+
+    .lp-footer-v28__navrow{
+        gap:19px;
+    }
+
+    .lp-footer-v28__bottom{
+        gap:15px;
+    }
+}
+
+/* V39 — responsive content-axis correction.
+   On narrow screens the page content sits inside a centered editorial column;
+   the footer copy was incorrectly flush against the Bootstrap gutter. Keep the
+   cinematic artwork full-width, but place every footer content row on the same
+   inset axis used by the page's editorial content. */
+@media (max-width:767px){
+    .lp-footer-v28__hero-copy,
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        margin-left:clamp(32px,12vw,78px) !important;
+        margin-right:clamp(32px,12vw,78px) !important;
+    }
+
+    .lp-footer-v28__hero-copy{
+        width:auto !important;
+    }
+
+    .lp-footer-v28__button{
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        width:auto !important;
+        padding-left:0 !important;
+        padding-right:0 !important;
+    }
+}
+
+@media (max-width:420px){
+    .lp-footer-v28__hero-copy,
+    .lp-footer-v28__navrow,
+    .lp-footer-v28__bottom{
+        margin-left:24px !important;
+        margin-right:24px !important;
+    }
+}
+
+/* V40 — mobile CTA shares the exact same editorial left axis as the footer headline.
+   The CTA is a direct child of the full-bleed hero, so it must receive the same
+   inset explicitly rather than inheriting the hero-copy margin. */
+@media (max-width:767px){
+    .lp-footer-v28__button{
+        margin-left:clamp(32px,12vw,78px) !important;
+        margin-right:0 !important;
+    }
+}
+@media (max-width:420px){
+    .lp-footer-v28__button{
+        margin-left:24px !important;
+    }
+}

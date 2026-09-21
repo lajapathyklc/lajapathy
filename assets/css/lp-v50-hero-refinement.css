@@ -1,0 +1,129 @@
+/* V50 — editorial hero refinement
+   Based on the approved V49 composition:
+   - modestly larger headline for stronger hierarchy
+   - compact seniority badge
+   - proof moved into the left editorial column
+   - more breathing room before BUILDING FOR
+   - portrait shifted right and slightly reduced
+   - atmospheric bottom blend for the portrait
+   - darker copy-side grade
+*/
+
+/* Keep the cinematic background quiet enough for live typography. */
+.tmp-banner-one-area.moody-hero::before {
+    z-index: 1 !important;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.92) 0%,
+            rgba(0,0,0,.78) 30%,
+            rgba(0,0,0,.38) 56%,
+            rgba(0,0,0,.20) 100%),
+        linear-gradient(180deg,
+            rgba(0,0,0,.28) 0%,
+            rgba(0,0,0,.12) 48%,
+            rgba(0,0,0,.88) 100%) !important;
+}
+
+/* Compact, premium metadata pill. */
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon {
+    max-width: 510px !important;
+    margin-bottom: 26px !important;
+    padding: 8px 16px !important;
+}
+
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: .02em !important;
+    white-space: nowrap !important;
+}
+
+.tmp-banner-one-area.moody-hero .tmp-btn.download-icon .btn-text > span {
+    font-size: 1.12rem !important;
+    margin-right: 7px !important;
+    letter-spacing: .02em !important;
+}
+
+/* Main statement: increase hierarchy without changing its editorial line breaks. */
+@media (min-width: 992px) {
+    .tmp-banner-one-area.moody-hero .moody-hero-headline {
+        font-size: clamp(3.9rem, 5.25vw, 5.5rem) !important;
+        line-height: 1.06 !important;
+        letter-spacing: -1.8px !important;
+    }
+
+    /* More deliberate separation before BUILDING FOR. */
+    .tmp-banner-one-area.moody-hero .moody-hero-headline .driven-by {
+        margin-top: 18px !important;
+    }
+
+    /* Proof belongs to the same editorial column as the CTA. */
+    .tmp-banner-one-area.moody-hero .lp-v50-proof {
+        width: 520px !important;
+        max-width: 100% !important;
+        margin: 22px 0 0 0 !important;
+        padding-left: 18px !important;
+        border-left: 2px solid #FF9800 !important;
+        color: rgba(255,255,255,.72) !important;
+        font-size: 1rem !important;
+        line-height: 1.55 !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        text-align: left !important;
+    }
+
+    /* The proof is now inside the left column; keep the Bootstrap spacer inert. */
+    .tmp-banner-one-area.moody-hero .lp-v50-proof-spacer {
+        pointer-events: none !important;
+    }
+
+    /* Slightly smaller, further-right portrait. */
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 70% !important;
+        height: 63vh !important;
+        max-height: none !important;
+        bottom: -1vh !important;
+        filter: brightness(.92) contrast(1.04) saturate(.96) !important;
+        -webkit-mask-image: linear-gradient(to bottom,
+            #000 0%,
+            #000 68%,
+            rgba(0,0,0,.98) 78%,
+            rgba(0,0,0,.72) 88%,
+            rgba(0,0,0,.28) 96%,
+            transparent 100%) !important;
+        mask-image: linear-gradient(to bottom,
+            #000 0%,
+            #000 68%,
+            rgba(0,0,0,.98) 78%,
+            rgba(0,0,0,.72) 88%,
+            rgba(0,0,0,.28) 96%,
+            transparent 100%) !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 69% !important;
+        height: 60vh !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero::before {
+        background:
+            linear-gradient(90deg,
+                rgba(0,0,0,.86) 0%,
+                rgba(0,0,0,.68) 58%,
+                rgba(0,0,0,.42) 100%),
+            linear-gradient(180deg,
+                rgba(0,0,0,.28) 0%,
+                rgba(0,0,0,.18) 48%,
+                rgba(0,0,0,.86) 100%) !important;
+    }
+
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 82% !important;
+        height: 43vh !important;
+        bottom: -1vh !important;
+    }
+}

@@ -1,0 +1,36 @@
+/* =========================================================
+   V59 — RESPONSIVE PORTRAIT CENTERING
+   Mobile/tablet only. Desktop portrait is untouched.
+   ========================================================= */
+
+@media (max-width: 991px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        /* Center the portrait against the actual hero viewport. */
+        left: 50% !important;
+        height: 72vh !important;
+        max-height: 900px !important;
+        width: auto !important;
+        bottom: -1vh !important;
+        object-position: bottom center !important;
+        z-index: 3 !important;
+    }
+}
+
+/* Phones: make the portrait noticeably larger while keeping its center on
+   the screen. The existing portrait animation already uses translateX(-50%),
+   so left:50% gives a true visual center without changing the animation. */
+@media (max-width: 575px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        left: 50% !important;
+        height: 76vh !important;
+        max-height: 900px !important;
+        bottom: -1vh !important;
+    }
+}
+
+/* Very narrow phones: prevent the portrait from becoming excessively tall. */
+@media (max-width: 380px) {
+    .tmp-banner-one-area.moody-hero .hero-static-portrait {
+        height: 73vh !important;
+    }
+}

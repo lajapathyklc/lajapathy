@@ -1,0 +1,38 @@
+/* V54 — LP orange theme for rotating BUILDING FOR words */
+.tmp-banner-one-area.moody-hero .typewriter,
+.tmp-banner-one-area.moody-hero .typewriter-text,
+.tmp-banner-one-area.moody-hero .typing-text,
+.tmp-banner-one-area.moody-hero .typed-text,
+.tmp-banner-one-area.moody-hero .rotating-word,
+.tmp-banner-one-area.moody-hero .hero-rotating-word,
+.tmp-banner-one-area.moody-hero .word,
+.tmp-banner-one-area.moody-hero .highlight,
+.tmp-banner-one-area.moody-hero .hero-highlight,
+.tmp-banner-one-area.moody-hero .text-orange,
+.tmp-banner-one-area.moody-hero .tmp-banner-one-content .orange-text {
+    color: #FF9800 !important;
+    -webkit-text-fill-color: #FF9800 !important;
+}
+
+.tmp-banner-one-area.moody-hero .hero-title .orange,
+.tmp-banner-one-area.moody-hero .hero-title .highlight,
+.tmp-banner-one-area.moody-hero .hero-title .word,
+.tmp-banner-one-area.moody-hero h1 .orange,
+.tmp-banner-one-area.moody-hero h1 .highlight {
+    color: #FF9800 !important;
+    -webkit-text-fill-color: #FF9800 !important;
+}
+
+
+/* Exact existing markup: .cd-words-wrapper > b.theme-gradient */
+.tmp-banner-one-area.moody-hero .cd-words-wrapper > b.theme-gradient,
+.tmp-banner-one-area.moody-hero .cd-words-wrapper > b.is-visible.theme-gradient,
+.tmp-banner-one-area.moody-hero .cd-words-wrapper > b.is-hidden.theme-gradient {
+    color: #FF9800 !important;
+    background: none !important;
+    background-image: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FF9800 !important;
+    text-shadow: none !important;
+}
