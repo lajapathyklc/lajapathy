@@ -1211,3 +1211,9 @@ body {
     transform: translate3d(0, var(--impact-parallax-y), 0);
     will-change: transform;
 }
+
+/* Keep the solid section backdrop connected to the moving mountain and copy. */
+.impact-scene::after {
+    transform: translate3d(0, var(--impact-parallax-y), 0);
+    will-change: transform;
+}
