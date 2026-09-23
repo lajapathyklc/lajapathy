@@ -588,11 +588,18 @@
     border-radius: 0;
     background: transparent;
     backdrop-filter: none;
-    isolation: auto;
+    isolation: isolate;
 }
 
-#service .eb-layers {
-    display: none;
+/* Keep the original electric hover flash above the adjoining capability cells. */
+#service .electric-border:hover {
+    z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #service .eb-stroke {
+        filter: none !important;
+    }
 }
 
 #service .eb-content,
