@@ -307,6 +307,7 @@
 }
 
 .testimonial.lp-cinematic-scene .testimonial-card {
+    padding: 32px 34px 34px;
     border: 1px solid rgba(255, 255, 255, .11);
     border-radius: 22px;
     background: linear-gradient(145deg, rgba(255, 255, 255, .07), rgba(10, 12, 18, .92) 72%);
@@ -354,6 +355,10 @@
     .counter-area .year-of-expariance-wrapper,
     .counter-area .counter-card {
         border-radius: 18px;
+    }
+
+    .testimonial.lp-cinematic-scene .testimonial-card {
+        padding: 24px 22px 28px;
     }
 
     .education-experience#problem-spaces .my-skill-card {
