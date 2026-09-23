@@ -36,7 +36,7 @@
 .lp-footer-v28__linkedin{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:9px 13px;border:1px solid rgba(255,152,0,.72);border-radius:6px;color:#ff9800!important;font-size:10px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:background .2s ease,color .2s ease}
 .lp-footer-v28__linkedin:hover{background:#ff9800;color:#050505!important}
 .lp-footer-v28__linkedin i{font-size:13px}
-.lp-footer-v28__bottom{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:30px;padding-top:17px;background:var(--color-page)}
+.lp-footer-v28__bottom{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;padding-top:17px;background:var(--color-page)}
 .lp-footer-v28__copyright{color:rgba(255,255,255,.45);font-size:9px;letter-spacing:.5px}
 .lp-footer-v28__bottom ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
 .lp-footer-v28__bottom ul a{color:rgba(255,255,255,.48)!important;font-size:9px;letter-spacing:.5px}
