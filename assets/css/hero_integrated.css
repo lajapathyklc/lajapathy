@@ -187,11 +187,18 @@
 
 .tmp-banner-one-area.moody-hero {
     overflow: hidden;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    z-index: 0;
+    position: sticky !important;
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 0 !important;
     /* next section will scroll on top */
+}
+
+/* Keep the horizontal crop without making the document a scroll container.
+   That lets the pinned hero remain viewport-sticky on desktop and mobile. */
+html,
+body {
+    overflow-x: clip;
 }
 
 /* All sections after the hero get solid black background so they cover the sticky hero */

@@ -1966,34 +1966,6 @@
             })();
         </script>
 
-        <!-- Parallax scroll effect -->
-        <script>
-            (function () {
-                var hero = document.querySelector('.moody-hero');
-                var portrait = document.querySelector('.hero-static-portrait');
-                var heroContainer = document.querySelector('.moody-hero > .container');
-
-                if (!hero || !portrait) return;
-
-                function applyParallax() {
-                    var scrollY = window.scrollY;
-                    var heroH = hero.offsetHeight;
-
-                    if (scrollY <= heroH) {
-                        // Portrait remains fixed, only container fades out
-
-                        // Subtle fade on hero text content as you scroll away
-                        if (heroContainer) {
-                            var opacity = Math.max(0, 1 - (scrollY / heroH) * 1.5);
-                            heroContainer.style.opacity = opacity;
-                        }
-                    }
-                }
-
-                window.addEventListener('scroll', applyParallax, { passive: true });
-            })();
-        </script>
-
         <!-- Mountain backdrop drifts over the sticky hero as this section enters. -->
         <script>
             (function () {
@@ -2014,7 +1986,9 @@
                         var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                         var landscapeHeight = impactScene.clientWidth * 0.177734375;
                         var progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / viewportHeight));
-                        var offset = reducedMotion.matches ? 0 : -landscapeHeight * 0.36 * progress;
+                        // Let the landscape travel ahead of the section copy so
+                        // it crosses the stationary hero before the content follows.
+                        var offset = reducedMotion.matches ? 0 : -landscapeHeight * 1.75 * progress;
 
                         impactScene.style.setProperty('--impact-parallax-y', offset.toFixed(1) + 'px');
                     });
