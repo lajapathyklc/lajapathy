@@ -65,6 +65,16 @@
             letter-spacing: 4px;
         }
 
+        /* On desktop the header logo sits at y 30-120 and this kicker started at
+           y 107, so the logo's descender overlapped the orange rule. Clear it.
+           Only desktop needs this: on narrow viewports the hero copy starts well
+           below the header. */
+        @media (min-width: 1200px) {
+            .home-hero-kicker {
+                margin-top: 28px;
+            }
+        }
+
         .home-hero-kicker::before {
             content: "";
             display: inline-block;
@@ -117,6 +127,7 @@
             }
         }
     </style>
+<link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
 </head>
 <script>
     // ...existing code...
@@ -423,7 +434,7 @@
     <div class="tmp-banner-one-area add-pattern moody-hero" id="home">
 
         <!-- Cinematic Space Background (behind smoke/fog) -->
-        <video class="hero-space-background" data-hero-video="forward" autoplay muted playsinline aria-hidden="true" preload="auto">
+        <video class="hero-space-background" data-hero-video="forward" autoplay muted playsinline aria-hidden="true" preload="auto" poster="assets/images/bg/hero-space-background.webp">
             <source src="assets/images/bg/BGVid-clean.mp4" type="video/mp4">
         </video>
         <video class="hero-space-background hero-space-background--reverse" data-hero-video="reverse" muted playsinline aria-hidden="true" preload="metadata">
@@ -2048,6 +2059,7 @@
 
     <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
     <script src="assets/js/lp-footer-backtop.js?v=35" defer></script>
+<script src="assets/js/lp-reduced-motion.js" defer></script>
 </body>
 
 </html>

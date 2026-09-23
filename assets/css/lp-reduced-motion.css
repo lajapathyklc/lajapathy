@@ -1,0 +1,101 @@
+/* Honour prefers-reduced-motion.
+   Loaded last so it wins over the vendor and lp-v* stylesheets.
+
+   The .tmp-scroll-trigger reveal system already respects the preference (its
+   animations live inside a no-preference query), so this file covers what was
+   left moving: decorative loops, the 3D card tilt, hover translations and the
+   autoplaying hero video.
+
+   Content is never hidden here. Anything that animates itself into view is
+   pinned to its final, visible state instead of being stopped mid-transition. */
+
+@media (prefers-reduced-motion: reduce) {
+
+    /* Stop decorative loops and one-shot entrances, but keep the element visible. */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
+        transition-duration: 1ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    /* Reveal-on-scroll content must end up visible, never stuck at opacity 0.01. */
+    .tmp-scroll-trigger,
+    .tmp-scroll-trigger.tmp-fade-in,
+    .tmp-scroll-trigger.tmp-zoom-in,
+    .tmp-scroll-trigger.zoom_out,
+    .tmp-scroll-trigger.slide_in,
+    .animated,
+    [class*="animation-order"] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+
+    /* 3D tilt on the portfolio cards: keep the card, drop the motion. */
+    .tilted-card-inner,
+    .tilted-card-figure,
+    .tilted-card-img {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Parallax and drifting background layers sit still.
+       Note: transform is deliberately NOT reset here. These elements use
+       transform for placement, not just for motion - clearing it on the hero
+       portrait shifted it 252px off its mark. Stopping the animation is enough. */
+    .impact-scene,
+    .animate--ambient > img,
+    .animate--ambient > svg,
+    .tmp-banner-one-area.moody-hero .hero-asteroid,
+    .tmp-banner-one-area.moody-hero .hero-asteroids,
+    .footer-stars-animation-wrapper-footer {
+        animation: none !important;
+        transition: none !important;
+        background-attachment: scroll !important;
+    }
+
+    /* The hero portrait is a special case. Its entrance animation is also what
+       positions it - the keyframes carry the translateX(-50%) that centres it -
+       and it starts at opacity 0. Cancelling the animation therefore shifted it
+       252px and left it invisible. Instead, let it finish in 1ms (from the
+       universal rule above) and hold its final frame. */
+    .hero-static-portrait {
+        animation-fill-mode: forwards !important;
+        opacity: 1 !important;
+    }
+
+    /* The hero video is decorative; show the poster frame instead of looping it.
+       lp-reduced-motion.js also calls pause() so no bytes keep streaming. */
+    video.hero-space-background {
+        display: none !important;
+    }
+
+    /* !important is required here: hero_integrated.css sets background-image:none
+       !important on this selector twice. The cinematic grade is painted by the
+       ::before overlay, so it still tints this image exactly as it tints the
+       video it replaces. */
+    .tmp-banner-one-area.moody-hero {
+        background-image: url('../images/bg/hero-space-background.webp') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-color: #000 !important;
+    }
+
+    /* Hover lifts and underline sweeps: keep the state change, lose the travel. */
+    .tmp-hover-link:hover,
+    .tmponhover:hover,
+    .counter-card:hover,
+    .latest-portfolio-card:hover {
+        transform: none !important;
+    }
+}

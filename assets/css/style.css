@@ -160,7 +160,16 @@ html {
   margin: 0;
   padding: 0;
   font-size: 10px;
-  scroll-behavior: smooth;
+}
+
+/* Smooth scrolling only for visitors who have not asked for less motion.
+   This was previously unconditional here, while the rule further down set
+   scroll-behavior:auto inside a no-preference query - inverting the intent,
+   so reduced-motion users got smooth scrolling and everyone else did not. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 ::selection {
@@ -8029,13 +8038,11 @@ textarea:-ms-input-placeholder {
 }
 
 /*------------------------
-    Header Sticky 
+    Header Sticky
 --------------------------*/
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: auto;
-  }
-}
+/* The no-preference block that set scroll-behavior:auto here was removed:
+   it cancelled smooth scrolling for exactly the visitors who can accept it.
+   Smooth scrolling is now declared once, correctly, near the top of this file. */
 
 .background--1 {
   background: var(--background-color-1);
@@ -35240,12 +35247,18 @@ img {
    TRUE FULLSCREEN MOBILE MENU (EDGE-TO-EDGE)
 ========================================= */
 
+/* min-height, not height: height:100% here capped <html> to the viewport and
+   made <body> the scroll container, so window.scrollY stayed 0 and no window
+   scroll event ever fired. That silently killed every scroll-linked animation
+   on the site (hero parallax, copy fade, impact-scene parallax, back-to-top
+   fill). The fullscreen menus below are position:fixed with 100vh/100dvh, so
+   they never needed a fixed height on the document. */
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 .tmp-popup-mobile-menu {
