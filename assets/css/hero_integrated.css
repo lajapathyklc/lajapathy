@@ -187,21 +187,33 @@
 
 .tmp-banner-one-area.moody-hero {
     overflow: hidden;
-    position: sticky !important;
+    position: fixed !important;
     top: 0 !important;
+    right: 0;
+    left: 0;
+    width: 100%;
     height: 100vh !important;
     z-index: 0 !important;
-    /* next section will scroll on top */
+    /* The transparent spacer below preserves the hero's place in document flow. */
 }
 
-/* Keep the horizontal crop without making the document a scroll container.
-   That lets the pinned hero remain viewport-sticky on desktop and mobile. */
+.tmp-banner-one-area.moody-hero + .hero-scroll-spacer {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    background: transparent !important;
+    pointer-events: none;
+}
+
+/* Keep the horizontal crop without making the document a scroll container. */
 html,
 body {
     overflow-x: clip;
 }
 
-/* All sections after the hero get solid black background so they cover the sticky hero */
+/* All sections after the hero get solid black backgrounds so they cover its pinned layer. */
 .tmp-banner-one-area.moody-hero~*,
 .tmp-banner-one-area.moody-hero~section,
 .tmp-banner-one-area.moody-hero~div {
