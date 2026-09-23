@@ -473,17 +473,37 @@
 }
 
 #impact .counter-card {
+    --metric-inset: clamp(16px, 2.1vw, 30px);
     min-height: 172px;
-    padding: 24px clamp(16px, 2.1vw, 30px);
-    border-bottom: 1px solid rgba(255, 255, 255, .14) !important;
+    margin: 0;
+    padding: 24px var(--metric-inset);
+}
+
+#impact .counter-card::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, .14);
+    content: none;
+    pointer-events: none;
+}
+
+#impact .counter-area-right-content .col-lg-6:nth-child(-n + 2) .counter-card::after {
+    content: "";
 }
 
 #impact .counter-area-right-content .col-lg-6:nth-child(odd) .counter-card {
     border-right: 1px solid rgba(255, 255, 255, .14) !important;
 }
 
-#impact .counter-area-right-content .col-lg-6:nth-last-child(-n + 2) .counter-card {
-    border-bottom: 0 !important;
+#impact .counter-area-right-content .col-lg-6:nth-child(odd) .counter-card::after {
+    left: var(--metric-inset);
+}
+
+#impact .counter-area-right-content .col-lg-6:nth-child(even) .counter-card::after {
+    right: var(--metric-inset);
 }
 
 #impact .counter-title {
@@ -859,8 +879,13 @@
         border-right: 0 !important;
     }
 
-    #impact .counter-area-right-content .col-lg-6:nth-last-child(2) .counter-card {
-        border-bottom: 1px solid rgba(255, 255, 255, .14) !important;
+    #impact .counter-area-right-content .col-lg-6:nth-child(n) .counter-card::after {
+        right: var(--metric-inset);
+        left: var(--metric-inset);
+    }
+
+    #impact .counter-area-right-content .col-lg-6:nth-child(3) .counter-card::after {
+        content: "";
     }
 
     #service #card-container > div {
