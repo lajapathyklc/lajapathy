@@ -2011,10 +2011,10 @@
                         framePending = false;
 
                         var rect = impactScene.getBoundingClientRect();
-                        var maxShift = window.innerWidth * 0.025;
-                        var offset = reducedMotion.matches
-                            ? 0
-                            : Math.max(-maxShift, Math.min(maxShift, rect.top * 0.07));
+                        var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                        var landscapeHeight = impactScene.clientWidth * 0.177734375;
+                        var progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / viewportHeight));
+                        var offset = reducedMotion.matches ? 0 : -landscapeHeight * 0.36 * progress;
 
                         impactScene.style.setProperty('--impact-parallax-y', offset.toFixed(1) + 'px');
                     });

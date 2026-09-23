@@ -1164,17 +1164,19 @@ body {
 .impact-scene {
     --impact-parallax-y: 0px;
     isolation: isolate;
+    background-color: #000 !important;
     background-image: none !important;
 }
 
 .impact-scene::before {
     content: "";
     position: absolute;
-    top: -2.5vw;
+    top: 0;
     right: 0;
     left: 0;
-    height: calc(100% + 2.5vw);
+    height: 100%;
     z-index: 0;
+    background-color: #000;
     background-image: url('../images/bg/impactbg.webp');
     background-position: center top;
     background-repeat: no-repeat;
