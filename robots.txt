@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Utility and template pages that should not be indexed
+Disallow: /404.html
+Disallow: /pagenotfound.html
+Disallow: /button.html
+Disallow: /titlecard.html
+Disallow: /electriccard.html
+
+Sitemap: https://www.lajapathy.com/sitemap.xml

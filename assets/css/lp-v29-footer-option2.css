@@ -13,7 +13,7 @@
 
 /* Cinematic hero image — this is the actual Option 2 artwork. */
 .lp-footer-v28__hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);min-height:max(360px,33.333333vw);display:flex;align-items:center;justify-content:space-between;gap:55px;padding:64px 0 58px;border-bottom:1px solid rgba(255,255,255,.14);overflow:hidden}
-.lp-footer-v28__hero:before{content:"";position:absolute;z-index:-1;inset:0;background-image:linear-gradient(90deg,rgba(0,0,0,.13) 0%,rgba(0,0,0,.04) 55%,rgba(0,0,0,.12) 100%),url('../images/bg/footerbg.png');background-size:100% auto;background-position:center top;background-repeat:no-repeat;transform:none}
+.lp-footer-v28__hero:before{content:"";position:absolute;z-index:-1;inset:0;background-image:linear-gradient(90deg,rgba(0,0,0,.13) 0%,rgba(0,0,0,.04) 55%,rgba(0,0,0,.12) 100%),url('../images/bg/footerbg.webp');background-size:100% auto;background-position:center top;background-repeat:no-repeat;transform:none}
 .lp-footer-v28__hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,transparent 42%,rgba(0,0,0,.28) 100%);pointer-events:none}
 .lp-footer-v28__hero-copy{max-width:760px;position:relative;z-index:1}
 .lp-footer-v28__eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:#ff9800;font-size:10px;line-height:1;letter-spacing:4px;font-weight:700;text-transform:uppercase}

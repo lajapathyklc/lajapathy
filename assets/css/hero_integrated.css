@@ -1,7 +1,7 @@
 /* Integrated Hero Section Styles */
 .tmp-banner-one-area.moody-hero {
     background-color: #000000 !important;
-    background-image: url('../../lajapathy-hero.png') !important;
+    background-image: url('../../lajapathy-hero.webp') !important;
     background-size: cover !important;
     background-position: center 25% !important;
     background-attachment: fixed;
@@ -207,7 +207,7 @@
 .tmp-banner-one-area.moody-hero~section.impact-scene,
 .impact-scene {
     background-color: transparent !important;
-    background-image: url('../../assets/images/bg/impactbg.png') !important;
+    background-image: url('../images/bg/impactbg.webp') !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
     background-size: 100vw auto !important;
@@ -1058,7 +1058,7 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/bg/hero-space-background.png');
+    background-image: url('../images/bg/hero-space-background.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

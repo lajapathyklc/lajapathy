@@ -22,6 +22,10 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/jpeg">
     <!-- Bootstrap min css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="lajapathy-hero-new.avif" type="image/avif" fetchpriority="high">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
     <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
     <link rel="stylesheet" href="assets/css/plugins/swiper.css">
     <link rel="stylesheet" href="assets/css/plugins/odometer.css">
@@ -32,15 +36,7 @@
     <link rel="stylesheet" href="assets/css/carstyle.css">
     <link rel="stylesheet" href="assets/css/TiltedCard.css">
     <!-- Bootstrap min css -->
-    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper.css">
-    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
-    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
     <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/carstyle.css">
-    <link rel="stylesheet" href="assets/css/TiltedCard.css">
     <link rel="stylesheet" href="assets/css/hero_integrated.css">
     <link rel="stylesheet" href="assets/css/lp-v45-hero-finetune.css">
     <link rel="stylesheet" href="assets/css/lp-v47-hero-background.css">
@@ -123,7 +119,6 @@
     </style>
 </head>
 <script>
-    // filepath: /Volumes/WORK DATA /LP/LP Tech Pvt Ltd/Website/09 Aug/18 Sept/index.html
     // ...existing code...
     document.addEventListener('scroll', function () {
         var scrollTop = window.scrollY || window.pageYOffset;
@@ -168,7 +163,7 @@
         "knowsAbout": ["Lead Product Designer", "Senior Product Design", "UX Design", "UI Design", "Figma", "Fintech UX", "Healthcare Design"]
     }
 </script>
-<script src='https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js'></script>
+<script src='https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js' defer></script>
 <!-- Add this CSS in a <style> tag in your <head> section -->
 <style>
     /* Desktop Dropdown Styles */
@@ -349,8 +344,8 @@
                     <div class="header-content">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy">
-                                <img class="logo-white" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy">
+                                <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy" width="90" height="90">
+                                <img class="logo-white" src="assets/images/logo/white-logo-reeni.png" alt="Lajapathy" width="90" height="90">
                             </a>
                         </div>
                         <div class="tmp-mainmenu-nav d-none d-xl-block">
@@ -393,7 +388,7 @@
 <div class="lp-menu-backdrop"></div>
 <div aria-label="Navigation" aria-modal="true" class="lp-menu-panel" role="dialog">
 <header class="lp-menu-header">
-<a aria-label="Lajapathy home" class="lp-menu-logo" href="index.html"><img alt="LP" src="assets/images/logo/white-logo-reeni.png"/></a>
+<a aria-label="Lajapathy home" class="lp-menu-logo" href="index.html"><img alt="LP" src="assets/images/logo/white-logo-reeni.png" width="90" height="90" /></a>
 <button aria-label="Close navigation" class="lp-menu-close" type="button"><span></span><span></span></button>
 </header>
 <div class="lp-menu-body">
@@ -431,7 +426,7 @@
         <video class="hero-space-background" data-hero-video="forward" autoplay muted playsinline aria-hidden="true" preload="auto">
             <source src="assets/images/bg/BGVid-clean.mp4" type="video/mp4">
         </video>
-        <video class="hero-space-background hero-space-background--reverse" data-hero-video="reverse" muted playsinline aria-hidden="true" preload="auto">
+        <video class="hero-space-background hero-space-background--reverse" data-hero-video="reverse" muted playsinline aria-hidden="true" preload="metadata">
             <source src="assets/images/bg/BGVid-reverse-clean.mp4" type="video/mp4">
         </video>
         <div class="hero-asteroids" aria-hidden="true">
@@ -441,7 +436,7 @@
         </div>
 
         <!-- Static Portrait Image (z-index 2) -->
-        <img src="lajapathy-hero-new.png" class="hero-static-portrait" alt="Lajapathy Portrait">
+        <picture><source srcset="lajapathy-hero-new.avif" type="image/avif"><source srcset="lajapathy-hero-new.webp" type="image/webp"><img src="lajapathy-hero-new.png" class="hero-static-portrait" alt="Lajapathy Portrait" fetchpriority="high" decoding="async" width="1084" height="1451"></picture>
 
         <!-- New Fog Layers (z-index 0) -->
         <div class="fogwrapper">
@@ -509,7 +504,7 @@
     </div>
 
     <section class="education-experience impact-scene tmp-section-gapTop"
-        style="padding-top: 100px; position: relative; z-index: 1; background-color: transparent; background-image: url('assets/images/bg/impactbg.png'); background-position: center top; background-repeat: no-repeat; background-size: 100vw auto; background-attachment: scroll;">
+        style="padding-top: 100px; position: relative; z-index: 1; background-color: transparent; background-image: url('assets/images/bg/impactbg.webp'); background-position: center top; background-repeat: no-repeat; background-size: 100vw auto; background-attachment: scroll;">
         <div class="container" style="margin-top: calc(17.7734375vw - 102px);">
             <div class="section-head mb--50">
                 <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
@@ -537,58 +532,58 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/Americanexpress.svg" alt="" />
+                            <img src="assets/images/our-supported-company/Americanexpress.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/db.svg" alt="" />
+                            <img src="assets/images/our-supported-company/db.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/ddf.svg" alt="" />
+                            <img src="assets/images/our-supported-company/ddf.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/johnlewis.svg" alt="" />
+                            <img src="assets/images/our-supported-company/johnlewis.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/Eddie.svg" alt="" />
+                            <img src="assets/images/our-supported-company/Eddie.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/lider.svg" alt="" />
+                            <img src="assets/images/our-supported-company/lider.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/MK.svg" alt="" />
+                            <img src="assets/images/our-supported-company/MK.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/morrison.svg" alt="" />
+                            <img src="assets/images/our-supported-company/morrison.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/woolworths.svg" alt="" />
+                            <img src="assets/images/our-supported-company/woolworths.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
 
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/ms.svg" alt="" />
+                            <img src="assets/images/our-supported-company/ms.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="support-company-logo">
-                            <img src="assets/images/our-supported-company/nedbank.svg" alt="" />
+                            <img src="assets/images/our-supported-company/nedbank.svg" alt="" loading="lazy" decoding="async" width="120" height="58" />
                         </div>
                     </div>
                 </div>
@@ -898,7 +893,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="ewallet.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/E-wallet1.png"
+                                                            data-image-src="assets/images/latest-portfolio/E-wallet1.webp"
                                                             data-alt-text="E-Wallet Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -936,7 +931,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="zappay.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/zappay1.png"
+                                                            data-image-src="assets/images/latest-portfolio/zappay1.webp"
                                                             data-alt-text="ZapPay Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -975,7 +970,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="unipay.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Unipay1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Unipay1.webp"
                                                             data-alt-text="UniPay Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1016,7 +1011,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="smartfin.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Smartfin1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Smartfin1.webp"
                                                             data-alt-text="SmartFin Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1054,7 +1049,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="coverride.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Coverride1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Coverride1.webp"
                                                             data-alt-text="CoverRide Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1099,7 +1094,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="norton.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/norton1.png"
+                                                            data-image-src="assets/images/latest-portfolio/norton1.webp"
                                                             data-alt-text="Norton Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1139,7 +1134,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="homenest.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Homenest1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Homenest1.webp"
                                                             data-alt-text="Homenest Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1177,7 +1172,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="zmeet.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Zmeet1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Zmeet1.webp"
                                                             data-alt-text="Z-Meet Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1217,7 +1212,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="eater.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Eater1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Eater1.webp"
                                                             data-alt-text="Eater Thumbnail" data-container-height="100%"
                                                             data-container-width="100%" data-rotate-amplitude="12"
                                                             data-scale-on-hover="1" data-show-mobile-warning="false"
@@ -1259,7 +1254,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="fluxcrm.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Fluxcrm1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Fluxcrm1.webp"
                                                             data-alt-text="FluxCRM Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1297,7 +1292,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="taskee.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Taskee1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Taskee1.webp"
                                                             data-alt-text="Taskee Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1335,7 +1330,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="staffee.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Staffee1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Staffee1.webp"
                                                             data-alt-text="Staffee Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1379,7 +1374,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="amazon.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Amazon1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Amazon1.webp"
                                                             data-alt-text="Amazon Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1417,7 +1412,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="eddiebauer.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/eddiebauer1.jpg"
+                                                            data-image-src="assets/images/latest-portfolio/eddiebauer1.webp"
                                                             data-alt-text="Eddiebauer Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1455,7 +1450,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="lider.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/lider1.jpg"
+                                                            data-image-src="assets/images/latest-portfolio/lider1.webp"
                                                             data-alt-text="Lider Thumbnail" data-container-height="100%"
                                                             data-container-width="100%" data-rotate-amplitude="12"
                                                             data-scale-on-hover="1" data-show-mobile-warning="false"
@@ -1493,7 +1488,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="slurrpfarm.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/slurrpfarm1.jpg"
+                                                            data-image-src="assets/images/latest-portfolio/slurrpfarm1.webp"
                                                             data-alt-text="Slurrpfarm Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1532,7 +1527,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="gocart.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Gocart1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Gocart1.webp"
                                                             data-alt-text="GoCart Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1570,7 +1565,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="dailymart.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Dailymart1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Dailymart1.webp"
                                                             data-alt-text="DailyMart Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1609,7 +1604,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="quickcart.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Quickcart1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Quickcart1.webp"
                                                             data-alt-text="Quickcart Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1654,7 +1649,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="mydoc.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Mydoc1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Mydoc1.webp"
                                                             data-alt-text="MyDoc Thumbnail" data-container-height="100%"
                                                             data-container-width="100%" data-rotate-amplitude="12"
                                                             data-scale-on-hover="1" data-show-mobile-warning="false"
@@ -1691,7 +1686,7 @@
                                                 <div class="img-box v2 img-box-padding">
                                                     <a href="dronline.html">
                                                         <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Dronline1.png"
+                                                            data-image-src="assets/images/latest-portfolio/Dronline1.webp"
                                                             data-alt-text="DrOnline Thumbnail"
                                                             data-container-height="100%" data-container-width="100%"
                                                             data-rotate-amplitude="12" data-scale-on-hover="1"
@@ -1741,7 +1736,7 @@
                                                     <p class="card-para">Director of Product – Fintech Platform</p>
                                                     <div class="testimonital-icon">
                                                         <img src="assets/images/testimonial/testimonial-icon.svg"
-                                                            alt="testimonial-icon">
+                                                            alt="testimonial-icon" loading="lazy" decoding="async" width="110" height="94">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1763,7 +1758,7 @@
                                                     <p class="card-para">Engineering Manager – Enterprise SaaS</p>
                                                     <div class="testimonital-icon">
                                                         <img src="assets/images/testimonial/testimonial-icon.svg"
-                                                            alt="testimonial-icon">
+                                                            alt="testimonial-icon" loading="lazy" decoding="async" width="110" height="94">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1862,56 +1857,40 @@
             <!-- progress area end -->
         </div>
 
-        <script>
-            // 1. Basic Usage
-            const container = document.getElementById('laser-container');
-            const flow = new LaserFlow(container, { color: '#00FFFF', flowSpeed: 0.5 });
+        <script src="assets/js/vendor/modernizer.js" defer></script>
+        <script src="assets/js/vendor/jquery.js" defer></script>
+        <script src="assets/js/vendor/jquery-ui.min.js" defer></script>
+        <script src="assets/js/vendor/waypoints.min.js" defer></script>
 
-            // 2. Interactive Reveal Example
-            const example = LaserFlowBoxExampleVanilla('laser-container');
-
-            //To clean up:
-            flow.dispose(); // or example.dispose();
-        </script>
-        <script src="assets/js/vendor/modernizer.js"></script>
-        <script src="assets/js/vendor/jquery.js"></script>
-        <script src="assets/js/vendor/jquery-ui.min.js"></script>
-        <script src="assets/js/vendor/waypoints.min.js"></script>
-
-        <script src="assets/js/plugins/odometer.js"></script>
-        <script src="assets/js/vendor/appear.js"></script>
+        <script src="assets/js/plugins/odometer.js" defer></script>
+        <script src="assets/js/vendor/appear.js" defer></script>
 
 
-        <script src="assets/js/vendor/jquery-one-page-nav.js"></script>
-        <script src="assets/js/vendor/tilt.js"></script>
-        <script src="assets/js/plugins/swiper.js"></script>
-        <!-- <script src="assets/js/script.js"></script> -->
-        <script src="assets/js/electricBoarder.js"></script>
-        <script src="assets/js/TiltedCardVanilla.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.180.0/three.min.js"></script>
-
-        <script src="assets/js/laserflow.js"></script>
-        <script src="assets/js/plugins/three.core.js"></script>
-        <script src="assets/js/plugins/three.module.js"></script> -->
+        <script src="assets/js/vendor/jquery-one-page-nav.js" defer></script>
+        <script src="assets/js/vendor/tilt.js" defer></script>
+        <script src="assets/js/plugins/swiper.js" defer></script>
+        <!-- <script src="assets/js/script.js" defer></script> -->
+        <script src="assets/js/electricBoarder.js" defer></script>
+        <script src="assets/js/TiltedCardVanilla.js" defer></script>
 
 
-        <script src="assets/js/plugins/gsap.js"></script>
-        <script src="assets/js/plugins/splittext.js"></script>
-        <script src="assets/js/plugins/scrolltigger.js"></script>
-        <script src="assets/js/plugins/scrolltoplugins.js"></script>
-        <script src="assets/js/plugins/smoothscroll.js"></script>
-        <script src="assets/js/vendor/twinmax.js"></script>
+        <script src="assets/js/plugins/gsap.js" defer></script>
+        <script src="assets/js/plugins/splittext.js" defer></script>
+        <script src="assets/js/plugins/scrolltigger.js" defer></script>
+        <script src="assets/js/plugins/scrolltoplugins.js" defer></script>
+        <script src="assets/js/plugins/smoothscroll.js" defer></script>
+        <script src="assets/js/vendor/twinmax.js" defer></script>
         <!-- bootstrap Js-->
-        <script src="assets/js/vendor/bootstrap.min.js"></script>
-        <script src="assets/js/vendor/waw.js"></script>
-        <script src="assets/js/vendor/intro-video.js"></script>
-        <script src="assets/js/plugins/isotop.js"></script>
-        <script src="assets/js/plugins/animation.js"></script>
-        <script src="assets/js/plugins/contact.form.js"></script>
-        <script src="assets/js/vendor/backtop.js"></script>
-        <script src="assets/js/plugins/text-type.js"></script>
+        <script src="assets/js/vendor/bootstrap.min.js" defer></script>
+        <script src="assets/js/vendor/waw.js" defer></script>
+        <script src="assets/js/vendor/intro-video.js" defer></script>
+        <script src="assets/js/plugins/isotop.js" defer></script>
+        <script src="assets/js/plugins/animation.js" defer></script>
+        <script src="assets/js/plugins/contact.form.js" defer></script>
+        <script src="assets/js/vendor/backtop.js" defer></script>
+        <script src="assets/js/plugins/text-type.js" defer></script>
         <!-- custom Js -->
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/main.js" defer></script>
 
         <!-- Progress Bar Animation Bulletproof Fix -->
         <script>
@@ -2067,8 +2046,8 @@
             })();
         </script>
 
-    <script src="assets/js/lp-mobile-menu.js?v=24"></script>
-    <script src="assets/js/lp-footer-backtop.js?v=35"></script>
+    <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
+    <script src="assets/js/lp-footer-backtop.js?v=35" defer></script>
 </body>
 
 </html>

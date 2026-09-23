@@ -19,6 +19,9 @@
 <meta content="630" property="og:image:height"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <!-- Bootstrap min css -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
 <link href="assets/css/vendor/fontawesome.css" rel="stylesheet"/>
 <link href="assets/css/plugins/swiper.css" rel="stylesheet"/>
 <link href="assets/css/plugins/odometer.css" rel="stylesheet"/>
@@ -189,9 +192,8 @@
 </style>
 <!-- Add this script before
 </body> to initialize the Swiper slider for logos -->
-<script src="https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js"></script>
+<script src="https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js" defer></script>
 <script>
-    // filepath: /Volumes/WORK DATA /LP/LP Tech Pvt Ltd/Website/09 Aug/18 Sept/index.html
     // ...existing code...
     document.addEventListener('scroll', function () {
         var scrollTop = window.scrollY || window.pageYOffset;
@@ -265,7 +267,7 @@
         position: relative;
         min-height: calc(100vw * 809 / 1944);
         background-color: #000 !important;
-        background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .32)), url("assets/images/bg/aboutbg.png") !important;
+        background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .32)), url("assets/images/bg/aboutbg.webp") !important;
         background-blend-mode: normal;
         background-position: center center !important;
         background-repeat: no-repeat !important;
@@ -718,8 +720,8 @@
 <div class="header-content">
 <div class="logo">
 <a href="index.html">
-<img alt="Lajapathy" class="logo-dark" src="assets/images/logo/white-logo-reeni.png"/>
-<img alt="Lajapathy" class="logo-white" src="assets/images/logo/white-logo-reeni.png"/>
+<img alt="Lajapathy" class="logo-dark" src="assets/images/logo/white-logo-reeni.png" width="90" height="90" />
+<img alt="Lajapathy" class="logo-white" src="assets/images/logo/white-logo-reeni.png" width="90" height="90" />
 </a>
 </div>
 <div class="tmp-mainmenu-nav d-none d-xl-block">
@@ -754,7 +756,7 @@
 <div class="lp-menu-backdrop"></div>
 <div aria-label="Navigation" aria-modal="true" class="lp-menu-panel" role="dialog">
 <header class="lp-menu-header">
-<a aria-label="Lajapathy home" class="lp-menu-logo" href="index.html"><img alt="LP" src="assets/images/logo/white-logo-reeni.png"/></a>
+<a aria-label="Lajapathy home" class="lp-menu-logo" href="index.html"><img alt="LP" src="assets/images/logo/white-logo-reeni.png" width="90" height="90" /></a>
 <button aria-label="Close navigation" class="lp-menu-close" type="button"><span></span><span></span></button>
 </header>
 <div class="lp-menu-body">
@@ -800,10 +802,10 @@
 <div class="col-lg-5 order-lg-2"><br/><br/>
 <div class="banner-right-content text-center">
 <div style="margin-left: 50px; display: inline-block; text-align: center; position: relative;">
-<img alt="banner-img" class="about-hero-portrait tmp-scroll-trigger tmp-zoom-in animation-order-1" src="assets/images/bg/aboutport.png" style="background: radial-gradient(circle at 60% 40%, rgba(255,165,0,0.08), transparent 45%);"/>
+<picture><source srcset="assets/images/bg/aboutport.avif" type="image/avif"><source srcset="assets/images/bg/aboutport.webp" type="image/webp"><img alt="banner-img" class="about-hero-portrait tmp-scroll-trigger tmp-zoom-in animation-order-1" src="assets/images/bg/aboutport.png" style="background: radial-gradient(circle at 60% 40%, rgba(255,165,0,0.08), transparent 45%);" loading="lazy" decoding="async" width="914" height="744" /></picture>
 </div>
 <h2 class="banner-big-text-2 up-down-2">LAJAPATHY KODIRAMAN</h2>
-<img class="portrait-sign" src="assets/images/bg/sign.png" alt="Lajapathy signature"/>
+<picture><source srcset="assets/images/bg/sign.avif" type="image/avif"><source srcset="assets/images/bg/sign.webp" type="image/webp"><img class="portrait-sign" src="assets/images/bg/sign.png" alt="Lajapathy signature" loading="lazy" decoding="async" width="1774" height="887" /></picture>
 <script>
     (() => {
         const signature = document.querySelector('.about-page-hero .portrait-sign');
@@ -934,7 +936,7 @@
 <div class="row">
 <div class="intro_design_process_bg mt--50 col-12 d-flex">
 <div class="col-3 discoverbg box1 tmp-scroll-trigger tmp-fade-in animation-order-1">
-<img alt="" class="processarw arw1" src="assets/images/design-process/designprocess_arw.svg">
+<img alt="" class="processarw arw1" src="assets/images/design-process/designprocess_arw.svg" loading="lazy" decoding="async" width="58" height="58">
 <h3>Discovery &amp; Framing</h3>
 <div class="content_box">
 <p>Understanding user needs, business context, and system constraints to define the
@@ -942,22 +944,22 @@
 </div>
 </img></div>
 <div class="col-3 discoverbg box2 tmp-scroll-trigger tmp-fade-in animation-order-2">
-<img alt="" class="processarw arw2" src="assets/images/design-process/designprocess_arw.svg">
+<img alt="" class="processarw arw2" src="assets/images/design-process/designprocess_arw.svg" loading="lazy" decoding="async" width="58" height="58">
 <h3>Product Concept &amp; Strategy</h3>
 <div class="content_box">
 <p>Defining product direction by translating user needs, business goals, and system
                                 constraints into scalable solutions.</p>
 </div>
-<img alt="" class="restarticon" src="assets/images/design-process/restart.svg">
+<img alt="" class="restarticon" src="assets/images/design-process/restart.svg" loading="lazy" decoding="async" width="25" height="30">
 </img></img></div>
 <div class="col-3 discoverbg box3 tmp-scroll-trigger tmp-fade-in animation-order-3">
-<img alt="" class="processarw arw3" src="assets/images/design-process/designprocess_arw.svg">
+<img alt="" class="processarw arw3" src="assets/images/design-process/designprocess_arw.svg" loading="lazy" decoding="async" width="58" height="58">
 <h3>Iterative <br/>Design</h3>
 <div class="content_box">
 <p>Rapidly exploring, validating, and refining solutions to reduce risk and improve
                                 clarity.</p>
 </div>
-<img alt="" class="restarticon" src="assets/images/design-process/restart.svg"/>
+<img alt="" class="restarticon" src="assets/images/design-process/restart.svg" loading="lazy" decoding="async" width="25" height="30" />
 </img></div>
 <div class="col-3 discoverbg box4 tmp-scroll-trigger tmp-fade-in animation-order-4">
 <h3>Delivery &amp; Scale</h3>
@@ -987,7 +989,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-4">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/agile.svg"/>
+<img alt="logo" src="assets/images/agile.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">Product-Driven Discovery</h3>
 </div>
@@ -999,7 +1001,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/team.svg"/>
+<img alt="logo" src="assets/images/team.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">Engineering-First Collaboration</h3>
 </div>
@@ -1011,7 +1013,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/test.svg"/>
+<img alt="logo" src="assets/images/test.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">Metrics-Driven Decisions</h3>
 </div>
@@ -1022,7 +1024,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/access.svg"/>
+<img alt="logo" src="assets/images/access.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">Ethical Product Design</h3>
 </div>
@@ -1034,7 +1036,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/ai.svg"/>
+<img alt="logo" src="assets/images/ai.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">AI-Augmented Design</h3>
 </div>
@@ -1046,7 +1048,7 @@
 <div class="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
 <div class="card-head">
 <div class="logo-img">
-<img alt="logo" src="assets/images/enable.svg"/>
+<img alt="logo" src="assets/images/enable.svg" loading="lazy" decoding="async" width="100" height="100" />
 </div>
 <h3 class="card-title">Team &amp; Stakeholder Alignment</h3>
 </div>
@@ -1096,11 +1098,11 @@
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>DESIGN &amp; PROTOTYPING</u></h5><br/>
 <p>
-<img alt="Figma" src="assets/images/icons/Figma.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Sketch" src="assets/images/icons/Sketch.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Adobe XD" src="assets/images/icons/XD.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Axure RP" src="assets/images/icons/Axure.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="ProtoPie" src="assets/images/icons/Protopie.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="Figma" src="assets/images/icons/Figma.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Sketch" src="assets/images/icons/Sketch.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Adobe XD" src="assets/images/icons/XD.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Axure RP" src="assets/images/icons/Axure.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="ProtoPie" src="assets/images/icons/Protopie.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
@@ -1108,10 +1110,10 @@
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>USER RESEARCH &amp; TESTING</u></h5><br/>
 <p>
-<img alt="Maze" src="assets/images/icons/Maze.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Hotjar" src="assets/images/icons/Hotjar.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Optimal Workshop" src="assets/images/icons/Optimalworkshop.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Dovetail" src="assets/images/icons/Dovetail.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="Maze" src="assets/images/icons/Maze.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Hotjar" src="assets/images/icons/Hotjar.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Optimal Workshop" src="assets/images/icons/Optimalworkshop.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Dovetail" src="assets/images/icons/Dovetail.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
@@ -1119,9 +1121,9 @@
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>DESIGN SYSTEMS &amp; HANDOFF</u></h5><br/>
 <p>
-<img alt="Storybook" src="assets/images/icons/Storybook.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Zeroheight" src="assets/images/icons/Zeroheight.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Zeplin" src="assets/images/icons/Zeplin.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="Storybook" src="assets/images/icons/Storybook.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Zeroheight" src="assets/images/icons/Zeroheight.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Zeplin" src="assets/images/icons/Zeplin.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
@@ -1129,9 +1131,9 @@
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>MOTION &amp; ADVANCED DESIGN</u></h5><br/>
 <p>
-<img alt="Aftereffects" src="assets/images/icons/Aftereffects.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Blender" src="assets/images/icons/Blender.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Rive" src="assets/images/icons/Rive.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="Aftereffects" src="assets/images/icons/Aftereffects.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Blender" src="assets/images/icons/Blender.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Rive" src="assets/images/icons/Rive.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
@@ -1139,8 +1141,8 @@
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>DATA &amp; ANALYTICS</u></h5><br/>
 <p>
-<img alt="GoogleAnalytics" src="assets/images/icons/Googleanalytics.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Mixpanel" src="assets/images/icons/Mixpanel.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="GoogleAnalytics" src="assets/images/icons/Googleanalytics.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Mixpanel" src="assets/images/icons/Mixpanel.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
@@ -1151,23 +1153,23 @@
                                     an augmentation layer—never a decision authority—within clear ethical,
                                     privacy, and quality guardrails. <br/><br/>
 <p>
-<img alt="ChatGPT" src="assets/images/icons/Chatgpt.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Figma" src="assets/images/icons/FigmaAI.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Midjourney" src="assets/images/icons/Midjouney.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="GalileoAI" src="assets/images/icons/GalileoAI.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Uizard" src="assets/images/icons/Uizard.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="RunwayML" src="assets/images/icons/RunwayML.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Notion" src="assets/images/icons/Notion.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Builderio" src="assets/images/icons/Builderio.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="ChatGPT" src="assets/images/icons/Chatgpt.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Figma" src="assets/images/icons/FigmaAI.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Midjourney" src="assets/images/icons/Midjouney.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="GalileoAI" src="assets/images/icons/GalileoAI.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Uizard" src="assets/images/icons/Uizard.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="RunwayML" src="assets/images/icons/RunwayML.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Notion" src="assets/images/icons/Notion.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Builderio" src="assets/images/icons/Builderio.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p><br/>
 </div>
 <!-- End Single Progress Charts -->
 <div class="progress-charts">
 <h5 class="heading heading-h5"><u>GRAPHIC &amp; DESIGN</u></h5><br/>
 <p>
-<img alt="Illustrator" src="assets/images/icons/Illlustrator.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Photoshop" src="assets/images/icons/Photoshop.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
-<img alt="Coreldraw" src="assets/images/icons/Coreldraw.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;"/>
+<img alt="Illustrator" src="assets/images/icons/Illlustrator.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Photoshop" src="assets/images/icons/Photoshop.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
+<img alt="Coreldraw" src="assets/images/icons/Coreldraw.png" style="width:40px; height:40px; vertical-align:middle; margin-right:30px;" loading="lazy" decoding="async" width="417" height="417" />
 </p>
 </div>
 </div>
@@ -1200,37 +1202,37 @@
 <div class="swiper-wrapper">
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/ibm.svg">
+<img alt="" src="assets/images/our-supported-company/ibm.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/google.svg">
+<img alt="" src="assets/images/our-supported-company/google.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/microsoft.svg">
+<img alt="" src="assets/images/our-supported-company/microsoft.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/michigan.svg">
+<img alt="" src="assets/images/our-supported-company/michigan.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/minnesota.svg">
+<img alt="" src="assets/images/our-supported-company/minnesota.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/bits.svg">
+<img alt="" src="assets/images/our-supported-company/bits.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 <div class="swiper-slide">
 <div class="support-company-logo">
-<img alt="" src="assets/images/our-supported-company/ixdf.svg">
+<img alt="" src="assets/images/our-supported-company/ixdf.svg" loading="lazy" decoding="async" width="120" height="58">
 </img></div>
 </div>
 </div>
@@ -1340,32 +1342,32 @@
 </div>
 <!-- progress area end -->
 </div>
-<script src="assets/js/vendor/modernizer.js"></script>
-<script src="assets/js/vendor/jquery.js"></script>
-<script src="assets/js/vendor/jquery-ui.min.js"></script>
-<script src="assets/js/vendor/waypoints.min.js"></script>
-<script src="assets/js/plugins/odometer.js"></script>
-<script src="assets/js/vendor/appear.js"></script>
-<script src="assets/js/vendor/jquery-one-page-nav.js"></script>
-<script src="assets/js/vendor/tilt.js"></script>
-<script src="assets/js/plugins/swiper.js"></script>
-<script src="assets/js/plugins/gsap.js"></script>
-<script src="assets/js/plugins/splittext.js"></script>
-<script src="assets/js/plugins/scrolltigger.js"></script>
-<script src="assets/js/plugins/scrolltoplugins.js"></script>
-<script src="assets/js/plugins/smoothscroll.js"></script>
-<script src="assets/js/vendor/twinmax.js"></script>
+<script src="assets/js/vendor/modernizer.js" defer></script>
+<script src="assets/js/vendor/jquery.js" defer></script>
+<script src="assets/js/vendor/jquery-ui.min.js" defer></script>
+<script src="assets/js/vendor/waypoints.min.js" defer></script>
+<script src="assets/js/plugins/odometer.js" defer></script>
+<script src="assets/js/vendor/appear.js" defer></script>
+<script src="assets/js/vendor/jquery-one-page-nav.js" defer></script>
+<script src="assets/js/vendor/tilt.js" defer></script>
+<script src="assets/js/plugins/swiper.js" defer></script>
+<script src="assets/js/plugins/gsap.js" defer></script>
+<script src="assets/js/plugins/splittext.js" defer></script>
+<script src="assets/js/plugins/scrolltigger.js" defer></script>
+<script src="assets/js/plugins/scrolltoplugins.js" defer></script>
+<script src="assets/js/plugins/smoothscroll.js" defer></script>
+<script src="assets/js/vendor/twinmax.js" defer></script>
 <!-- bootstrap Js-->
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/vendor/waw.js"></script>
-<script src="assets/js/vendor/intro-video.js"></script>
-<script src="assets/js/plugins/isotop.js"></script>
-<script src="assets/js/plugins/animation.js"></script>
-<script src="assets/js/plugins/contact.form.js"></script>
-<script src="assets/js/vendor/backtop.js"></script>
-<script src="assets/js/plugins/text-type.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js" defer></script>
+<script src="assets/js/vendor/waw.js" defer></script>
+<script src="assets/js/vendor/intro-video.js" defer></script>
+<script src="assets/js/plugins/isotop.js" defer></script>
+<script src="assets/js/plugins/animation.js" defer></script>
+<script src="assets/js/plugins/contact.form.js" defer></script>
+<script src="assets/js/vendor/backtop.js" defer></script>
+<script src="assets/js/plugins/text-type.js" defer></script>
 <!-- custom Js -->
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 <!-- =====================================================
          About Page Enhancements — hover effects only
          (scroll animations handled by animation.js + style.css)
@@ -1434,6 +1436,6 @@
             box-shadow: 0 12px 32px rgba(255, 152, 0, 0.12) !important;
         }
     </style>
-<script src="assets/js/lp-mobile-menu.js?v=24"></script>
-<script src="assets/js/lp-footer-backtop.js?v=35"></script></body>
+<script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
+<script src="assets/js/lp-footer-backtop.js?v=35" defer></script></body>
 </html>

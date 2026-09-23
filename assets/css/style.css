@@ -56,7 +56,6 @@
 52.footers';
 ----------------------------*/
 /*----Default Css----*/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
   --color-page: #000000;
@@ -14188,7 +14187,7 @@ header.header-full-width.header--sticky.sticky {
 
 .tmp-banner-one-area {
   padding-top: 26px;
-  background-image: url("../images/banner/banner-background-one.jpg");
+  background-image: url("../images/banner/banner-background-one.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -14290,7 +14289,7 @@ header.header-full-width.header--sticky.sticky {
   align-items: center;
   justify-content: center;
   padding-top: 0;
-  background-image: url(../images/banner/banner-background-02.jpg);
+  background-image: url(../images/banner/banner-background-02.webp);
 }
 
 @media only screen and (max-width: 767px) {
@@ -20522,7 +20521,7 @@ section.clients-testimonial-area {
 
 .tmp-banner-one-area {
   padding-top: 26px;
-  background-image: url("../images/banner/banner-background-one.jpg");
+  background-image: url("../images/banner/banner-background-one.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -20624,7 +20623,7 @@ section.clients-testimonial-area {
   align-items: center;
   justify-content: center;
   padding-top: 0;
-  background-image: url(../images/banner/banner-background-02.jpg);
+  background-image: url(../images/banner/banner-background-02.webp);
 }
 
 @media only screen and (max-width: 767px) {
@@ -24596,7 +24595,7 @@ section.clients-testimonial-area {
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-image: url("../../assets/images/bg/portbg.png");
+  background-image: url("../images/bg/portbg.webp");
 }
 
 .case-study-hero .breadcrumb-inner {
@@ -33241,7 +33240,7 @@ body.white-version .card-greeting p {
   background: var(--color-card);
   grid-row-gap: 2.78rem;
   border: 1px solid var(--stroke-dark-100);
-  background-image: url(../images/bg/bg-footer.jpg);
+  background-image: url(../images/bg/bg-footer.webp);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -36953,7 +36952,7 @@ img {
   /* Set background image on the main banner area - using !important to override specificity issues */
   .tmp-banner-one-area.add-pattern,
   .tmp-banner-one-area {
-    background-image: url('../images/banner/banner-user-image-one.png') !important;
+    background-image: url('../images/banner/banner-user-image-one.webp') !important;
     background-size: cover !important;
     background-position: calc(35% + 120px) 100px !important;
     background-repeat: no-repeat !important;

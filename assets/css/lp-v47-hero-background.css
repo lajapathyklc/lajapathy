@@ -2,7 +2,7 @@
    Replaces the previous space background with the cleaner, darker
    composition while preserving all live HTML content and portrait layers. */
 .tmp-banner-one-area.moody-hero .hero-space-background {
-    background-image: url('../images/bg/hero-space-background.png') !important;
+    background-image: url('../images/bg/hero-space-background.webp') !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
