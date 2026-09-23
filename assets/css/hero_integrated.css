@@ -1204,3 +1204,9 @@ body {
     transform: translate3d(0, var(--impact-parallax-y), 0);
     will-change: transform;
 }
+
+/* Keep the section copy and client row attached to the moving landscape. */
+.impact-scene > .container {
+    transform: translate3d(0, var(--impact-parallax-y), 0);
+    will-change: transform;
+}
