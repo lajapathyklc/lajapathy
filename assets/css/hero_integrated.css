@@ -1185,6 +1185,8 @@ body {
     isolation: isolate;
     background-color: transparent !important;
     background-image: none !important;
+    /* Shrink trailing flow space as the mountain and client row translate up. */
+    margin-bottom: var(--impact-parallax-y);
 }
 
 .impact-scene::before {
@@ -1216,6 +1218,13 @@ body {
 .impact-scene::after {
     transform: translate3d(0, var(--impact-parallax-y), 0);
     will-change: transform;
+}
+
+/* Keep the next chapter opaque as it closes the moving parallax section. */
+#impact.counter-area {
+    position: relative;
+    z-index: 1;
+    background-color: #000 !important;
 }
 
 /* Give the selected client marks more presence in the carousel. */
