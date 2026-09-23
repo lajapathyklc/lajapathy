@@ -21,29 +21,12 @@
 }
 
 .lp-cinematic-scene::after {
-    position: absolute;
-    top: 4%;
-    left: 25%;
-    z-index: -1;
-    width: 50%;
-    height: 44%;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(255, 152, 0, .095), rgba(58, 108, 180, .035) 38%, transparent 72%);
-    content: "";
-    opacity: 0;
-    pointer-events: none;
-    transform: translate3d(0, 22px, 0) scale(.9);
-    transition: opacity 1.3s ease, transform 1.7s cubic-bezier(.2, .75, .25, 1);
+    content: none;
 }
 
 .lp-cinematic-scene.lp-scene-live::before {
     opacity: .82;
     transform: scaleX(1);
-}
-
-.lp-cinematic-scene.lp-scene-live::after {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
 }
 
 .counter-area .container,
@@ -346,12 +329,6 @@
         left: 20px;
     }
 
-    .lp-cinematic-scene::after {
-        left: 8%;
-        width: 84%;
-        height: 30%;
-    }
-
     .counter-area .year-of-expariance-wrapper,
     .counter-area .counter-card {
         border-radius: 18px;
@@ -384,8 +361,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .lp-cinematic-scene::before,
-    .lp-cinematic-scene::after {
+    .lp-cinematic-scene::before {
         opacity: 1;
         transform: none;
         transition: none !important;
