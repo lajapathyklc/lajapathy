@@ -516,7 +516,7 @@
     </div>
 
     <section class="education-experience impact-scene tmp-section-gapTop"
-        style="padding-top: 100px; position: relative; z-index: 1; background-color: transparent; background-image: url('assets/images/bg/impactbg.webp'); background-position: center top; background-repeat: no-repeat; background-size: 100vw auto; background-attachment: scroll;">
+        style="padding-top: 100px; position: relative; z-index: 1; background-color: transparent;">
         <div class="container" style="margin-top: calc(17.7734375vw - 102px);">
             <div class="section-head mb--50">
                 <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
@@ -1994,21 +1994,40 @@
             })();
         </script>
 
-<!-- Transparent background scroll effect -->
+        <!-- Mountain backdrop drifts over the sticky hero as this section enters. -->
         <script>
             (function () {
                 var impactScene = document.querySelector('.impact-scene');
                 if (!impactScene) return;
 
+                var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+                var framePending = false;
+
                 function updateImpactScene() {
-                    var rect = impactScene.getBoundingClientRect();
-                    var offset = Math.max(-180, Math.min(80, rect.top * 0.18));
-                    impactScene.style.backgroundPosition = window.innerWidth <= 991 ? 'center top' : 'center ' + offset + 'px';
+                    if (framePending) return;
+                    framePending = true;
+
+                    window.requestAnimationFrame(function () {
+                        framePending = false;
+
+                        var rect = impactScene.getBoundingClientRect();
+                        var maxShift = window.innerWidth * 0.025;
+                        var offset = reducedMotion.matches
+                            ? 0
+                            : Math.max(-maxShift, Math.min(maxShift, rect.top * 0.07));
+
+                        impactScene.style.setProperty('--impact-parallax-y', offset.toFixed(1) + 'px');
+                    });
                 }
 
                 updateImpactScene();
                 window.addEventListener('scroll', updateImpactScene, { passive: true });
                 window.addEventListener('resize', updateImpactScene);
+                if (reducedMotion.addEventListener) {
+                    reducedMotion.addEventListener('change', updateImpactScene);
+                } else if (reducedMotion.addListener) {
+                    reducedMotion.addListener(updateImpactScene);
+                }
             })();
         </script>
 

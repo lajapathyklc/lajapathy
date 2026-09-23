@@ -1156,3 +1156,30 @@ body {
         bottom: 0;
     }
 }
+
+/* The impact landscape is its own moving layer so it can overlap the sticky
+   hero while the section copy and client marks keep their normal scroll. */
+.tmp-banner-one-area.moody-hero~.impact-scene,
+.tmp-banner-one-area.moody-hero~section.impact-scene,
+.impact-scene {
+    --impact-parallax-y: 0px;
+    isolation: isolate;
+    background-image: none !important;
+}
+
+.impact-scene::before {
+    content: "";
+    position: absolute;
+    top: -2.5vw;
+    right: 0;
+    left: 0;
+    height: calc(100% + 2.5vw);
+    z-index: 0;
+    background-image: url('../images/bg/impactbg.webp');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    pointer-events: none;
+    transform: translate3d(0, var(--impact-parallax-y), 0);
+    will-change: transform;
+}
