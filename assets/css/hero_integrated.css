@@ -1217,3 +1217,28 @@ body {
     transform: translate3d(0, var(--impact-parallax-y), 0);
     will-change: transform;
 }
+
+/* Give the selected client marks more presence in the carousel. */
+.logo-swiper .support-company-logo {
+    min-height: 134px;
+    padding: 20px 16px;
+}
+
+.logo-swiper .support-company-logo img {
+    width: min(100%, 168px);
+    height: auto;
+    max-height: 82px !important;
+    opacity: 0.82;
+}
+
+@media (max-width: 576px) {
+    .logo-swiper .support-company-logo {
+        min-height: 112px;
+        padding: 16px 14px;
+    }
+
+    .logo-swiper .support-company-logo img {
+        width: min(100%, 150px);
+        max-height: 72px !important;
+    }
+}
