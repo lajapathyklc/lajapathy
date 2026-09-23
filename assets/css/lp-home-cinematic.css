@@ -731,13 +731,15 @@
     display: none;
 }
 
+/* One consistent treatment for all seven homepage section labels. */
+.impact-scene .section-sub-title .subtitle,
 #service .section-sub-title .subtitle,
 #problem-spaces .section-sub-title .subtitle,
 #execution-approach .section-sub-title .subtitle,
 #portfolio .section-sub-title .subtitle,
 .testimonial .section-sub-title .subtitle {
     color: #ff9800 !important;
-    font-size: 1rem !important;
+    font-size: 18px !important;
     font-family: "Montserrat", sans-serif !important;
     font-weight: 600;
     letter-spacing: .12em;
