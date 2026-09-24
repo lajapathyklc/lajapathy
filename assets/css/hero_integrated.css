@@ -284,13 +284,40 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    -webkit-filter: blur(30px) grayscale(1);
-    filter: blur(30px) grayscale(1);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
-    opacity: 0.8;
+    -webkit-filter: blur(16px) grayscale(.82);
+    filter: blur(16px) grayscale(.82);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
+    opacity: .78;
     pointer-events: none;
     z-index: 0;
+}
+
+.fogwrapper--foreground {
+    z-index: 4 !important;
+    height: 58%;
+    bottom: 7%;
+    opacity: .46;
+    -webkit-filter: blur(9px) grayscale(.72);
+    filter: blur(9px) grayscale(.72);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 82%, transparent 100%);
+}
+
+.fogwrapper--foreground::before {
+    position: absolute;
+    inset: -12% -8%;
+    z-index: 1;
+    background:
+        radial-gradient(circle at 18% 42%, rgba(255, 214, 157, .45) 0 2px, transparent 3px),
+        radial-gradient(circle at 42% 58%, rgba(255, 235, 194, .35) 0 2px, transparent 3px),
+        radial-gradient(circle at 68% 34%, rgba(255, 190, 118, .4) 0 2px, transparent 3px),
+        radial-gradient(circle at 84% 68%, rgba(255, 225, 177, .32) 0 2px, transparent 3px);
+    background-size: 170px 130px, 220px 180px, 260px 210px, 190px 160px;
+    content: "";
+    opacity: .95;
+    pointer-events: none;
+    animation: hero-dust-drift 24s linear infinite;
 }
 
 /* Extract portrait image above the fog */
@@ -379,29 +406,40 @@ body {
 }
 
 #foglayer_01 {
-    -webkit-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
-    -moz-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
-    animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 45s linear infinite;
+    -webkit-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 52s linear infinite;
+    -moz-animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 52s linear infinite;
+    animation: foglayer_01_opacity 20s linear infinite, foglayer_moveme 52s linear infinite;
 }
 
-#foglayer_02,
 #foglayer_03 {
-    -webkit-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
-    -moz-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
-    animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 39s linear infinite;
+    -webkit-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 24s linear infinite;
+    -moz-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 24s linear infinite;
+    animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 24s linear infinite;
+}
+
+#foglayer_02 {
+    -webkit-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 36s linear infinite;
+    -moz-animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 36s linear infinite;
+    animation: foglayer_02_opacity 42s linear infinite, foglayer_moveme 36s linear infinite;
+}
+
+@keyframes hero-dust-drift {
+    from { transform: translate3d(-2%, 2%, 0) scale(1); }
+    50% { transform: translate3d(3%, -3%, 0) scale(1.06); }
+    to { transform: translate3d(-2%, 2%, 0) scale(1); }
 }
 
 /* ---------- Moving Fog ---------- */
 #foglayer_01 .image01,
 #foglayer_01 .image02 {
-    background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png") center center/cover no-repeat transparent;
+    background: url("../images/bg/hero-fog.svg") center center/cover no-repeat transparent;
 }
 
 #foglayer_02 .image01,
 #foglayer_02 .image02,
 #foglayer_03 .image01,
 #foglayer_03 .image02 {
-    background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png") center center/cover no-repeat transparent;
+    background: url("../images/bg/hero-fog.svg") center center/cover no-repeat transparent;
 }
 
 /* ---------- Keyframe Layer 1 ---------- */

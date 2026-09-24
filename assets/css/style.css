@@ -34974,6 +34974,13 @@ img {
   padding-right: 16px;
 }
 
+@media (max-width: 767px) {
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
 /* ================================
    HERO / BANNER FIX
 ================================ */

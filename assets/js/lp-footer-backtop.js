@@ -9,8 +9,8 @@
         hero.__lpPingPongBound = true;
         forward.muted = true;
         reverse.muted = true;
-        forward.playbackRate = 0.35;
-        reverse.playbackRate = 0.35;
+        forward.playbackRate = 0.7;
+        reverse.playbackRate = 0.7;
 
         function playVideo(video, other) {
             other.pause();

@@ -445,25 +445,20 @@
             <span class="hero-asteroid hero-asteroid--one"></span>
             <span class="hero-asteroid hero-asteroid--two"></span>
             <span class="hero-asteroid hero-asteroid--three"></span>
+            <span class="hero-meteor hero-meteor--one"></span>
+            <span class="hero-meteor hero-meteor--two"></span>
+            <span class="hero-meteor hero-meteor--three"></span>
+            <span class="hero-meteor hero-meteor--four"></span>
         </div>
 
         <!-- Static Portrait Image (z-index 2) -->
         <picture><source srcset="lajapathy-hero-new.avif" type="image/avif"><source srcset="lajapathy-hero-new.webp" type="image/webp"><img src="lajapathy-hero-new.png" class="hero-static-portrait" alt="Lajapathy Portrait" fetchpriority="high" decoding="async" width="1084" height="1451"></picture>
 
-        <!-- New Fog Layers (z-index 0) -->
-        <div class="fogwrapper">
-            <div id="foglayer_01" class="fog">
-                <div class="image01"></div>
-                <div class="image02"></div>
-            </div>
-            <div id="foglayer_02" class="fog">
-                <div class="image01"></div>
-                <div class="image02"></div>
-            </div>
-            <div id="foglayer_03" class="fog">
-                <div class="image01"></div>
-                <div class="image02"></div>
-            </div>
+        <!-- Warm cloud wisps and dust keep the hero atmospheric without a fog wash. -->
+        <div class="hero-atmosphere" aria-hidden="true">
+            <span class="hero-atmosphere__cloud hero-atmosphere__cloud--back"></span>
+            <span class="hero-atmosphere__cloud hero-atmosphere__cloud--front"></span>
+            <span class="hero-atmosphere__dust"></span>
         </div>
 
         <div class="container">
@@ -616,7 +611,7 @@
                             <h2 class="counter year-number" style="font-size: 8rem; font-weight: 800; line-height: 1;">
                                 <span class="odometer" data-count="20">00</span><span class="counter-suffix">+</span>
                             </h2>
-                            <h3 class="year-title">Years of Product &amp; Design Leadership</h3>
+                            <h3 class="year-title">Years of Product &amp; <br>Design Leadership</h3>
                         </div>
                         <p class="year-para mt-auto">Leading product design for enterprise-scale platforms across
                             global

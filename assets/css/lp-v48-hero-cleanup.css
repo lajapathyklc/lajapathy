@@ -16,6 +16,89 @@
     visibility: hidden;
 }
 
+.hero-atmosphere {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-atmosphere__cloud,
+.hero-atmosphere__dust {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+
+.hero-atmosphere__cloud {
+    width: 72vw;
+    height: 34vh;
+    border-radius: 50%;
+    opacity: .42;
+    filter: blur(18px);
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+
+.hero-atmosphere__cloud--back {
+    z-index: 1;
+    right: 22%;
+    bottom: 9%;
+    background:
+        radial-gradient(ellipse at 18% 58%, rgba(192, 183, 169, .28) 0 8%, transparent 34%),
+        radial-gradient(ellipse at 48% 42%, rgba(155, 147, 139, .22) 0 11%, transparent 39%),
+        radial-gradient(ellipse at 78% 62%, rgba(226, 185, 135, .2) 0 7%, transparent 32%);
+    animation: hero-cloud-drift-back 52s ease-in-out infinite alternate;
+}
+
+.hero-atmosphere__cloud--front {
+    bottom: 22%;
+    left: 34%;
+    z-index: 2;
+    width: 54vw;
+    height: 24vh;
+    opacity: .34;
+    filter: blur(12px);
+    background:
+        radial-gradient(ellipse at 24% 48%, rgba(236, 194, 145, .3) 0 7%, transparent 31%),
+        radial-gradient(ellipse at 62% 58%, rgba(194, 181, 165, .24) 0 10%, transparent 36%),
+        radial-gradient(ellipse at 88% 40%, rgba(241, 207, 166, .22) 0 6%, transparent 28%);
+    animation: hero-cloud-drift-front 24s ease-in-out infinite alternate-reverse;
+}
+
+.hero-atmosphere__dust {
+    z-index: 1;
+    inset: 8% 0 14%;
+    opacity: .34;
+    background:
+        radial-gradient(ellipse at 16% 38%, rgba(255, 213, 157, .42) 0 .6px, transparent 1.8px),
+        radial-gradient(ellipse at 32% 68%, rgba(255, 236, 199, .3) 0 .5px, transparent 1.6px),
+        radial-gradient(ellipse at 54% 28%, rgba(255, 191, 119, .34) 0 .6px, transparent 1.8px),
+        radial-gradient(ellipse at 76% 56%, rgba(255, 224, 176, .28) 0 .5px, transparent 1.6px),
+        radial-gradient(ellipse at 91% 34%, rgba(255, 202, 142, .24) 0 .6px, transparent 1.8px);
+    background-size: 220px 180px, 290px 230px, 330px 260px, 260px 210px, 360px 290px;
+    filter: blur(.6px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 72%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 72%, transparent 100%);
+    animation: hero-dust-drift 28s linear infinite;
+}
+
+@keyframes hero-cloud-drift-back {
+    from { transform: translate3d(-5%, 3%, 0) scale(1); }
+    to { transform: translate3d(6%, -3%, 0) scale(1.1); }
+}
+
+@keyframes hero-cloud-drift-front {
+    from { transform: translate3d(7%, -2%, 0) scale(1.02); }
+    to { transform: translate3d(-8%, 3%, 0) scale(1.12); }
+}
+
+@keyframes hero-dust-drift {
+    from { transform: translate3d(-2%, 1%, 0); }
+    50% { transform: translate3d(3%, -2%, 0); }
+    to { transform: translate3d(-2%, 1%, 0); }
+}
+
 .tmp-banner-one-area.moody-hero .hero-asteroids {
     position: absolute;
     z-index: 2;
@@ -39,6 +122,57 @@
     box-shadow: inset -12px -10px 18px rgba(0,0,0,.65), inset 8px 7px 12px rgba(255,194,112,.2), 0 0 22px rgba(255,135,45,.18);
     filter: saturate(.8);
     will-change: transform;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor {
+    position: absolute;
+    display: block;
+    width: 170px;
+    height: 93px;
+    background: url("../images/bg/meteor.png") center / contain no-repeat;
+    opacity: 0;
+    filter: saturate(.78) brightness(.82) contrast(.92);
+    mix-blend-mode: screen;
+    animation-fill-mode: both;
+    will-change: transform, opacity;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor::after {
+    content: none;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor--one {
+    top: 6%;
+    left: 44%;
+    opacity: .3;
+    animation: hero-meteor-fall-one 5.8s linear -1.4s infinite;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor--two {
+    top: 14%;
+    left: 80%;
+    width: 128px;
+    height: 70px;
+    opacity: .25;
+    animation: hero-meteor-fall-two 8.6s linear -3.8s infinite;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor--three {
+    top: 27%;
+    left: 24%;
+    width: 108px;
+    height: 59px;
+    opacity: .2;
+    animation: hero-meteor-fall-three 10.4s linear -5.2s infinite;
+}
+
+.tmp-banner-one-area.moody-hero .hero-meteor--four {
+    top: 3%;
+    left: 70%;
+    width: 82px;
+    height: 45px;
+    opacity: .16;
+    animation: hero-meteor-fall-four 13.2s linear -7.4s infinite;
 }
 
 .tmp-banner-one-area.moody-hero .hero-asteroid--one {
@@ -78,8 +212,34 @@
     to { transform: translate3d(20vw, 8vh, 0) rotate(68deg); }
 }
 
+@keyframes hero-meteor-fall-one {
+    0% { opacity: 0; transform: translate3d(-8vw, -12vh, 0) scaleX(-1); }
+    8%, 18% { opacity: .48; }
+    42% { opacity: .36; }
+    58%, 100% { opacity: 0; transform: translate3d(34vw, 62vh, 0) scaleX(-1); }
+}
+
+@keyframes hero-meteor-fall-two {
+    0% { opacity: 0; transform: translate3d(-12vw, -8vh, 0) scaleX(-1); }
+    10%, 24% { opacity: .38; }
+    58%, 100% { opacity: 0; transform: translate3d(38vw, 58vh, 0) scaleX(-1); }
+}
+
+@keyframes hero-meteor-fall-three {
+    0% { opacity: 0; transform: translate3d(-20vw, -4vh, 0) scaleX(-1); }
+    12%, 26% { opacity: .3; }
+    62%, 100% { opacity: 0; transform: translate3d(28vw, 52vh, 0) scaleX(-1); }
+}
+
+@keyframes hero-meteor-fall-four {
+    0% { opacity: 0; transform: translate3d(-16vw, -10vh, 0) scaleX(-1); }
+    14%, 30% { opacity: .24; }
+    66%, 100% { opacity: 0; transform: translate3d(32vw, 48vh, 0) scaleX(-1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .tmp-banner-one-area.moody-hero .hero-asteroid {
+    .tmp-banner-one-area.moody-hero .hero-asteroid,
+    .tmp-banner-one-area.moody-hero .hero-meteor {
         animation: none;
     }
 }
@@ -100,7 +260,6 @@
     pointer-events: none;
 }
 
-.tmp-banner-one-area.moody-hero .fogwrapper { z-index: 2 !important; }
 .tmp-banner-one-area.moody-hero .hero-static-portrait { z-index: 3 !important; }
 .tmp-banner-one-area.moody-hero > .container { position: relative; z-index: 5 !important; }
 .tmp-banner-one-area.moody-hero #mouse-scroll { z-index: 6 !important; }
