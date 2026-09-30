@@ -86,17 +86,13 @@
         filter: brightness(.92) contrast(1.04) saturate(.96) !important;
         -webkit-mask-image: linear-gradient(to bottom,
             #000 0%,
-            #000 68%,
-            rgba(0,0,0,.98) 78%,
-            rgba(0,0,0,.72) 88%,
-            rgba(0,0,0,.28) 96%,
+            #000 97%,
+            rgba(0,0,0,.85) 99%,
             transparent 100%) !important;
         mask-image: linear-gradient(to bottom,
             #000 0%,
-            #000 68%,
-            rgba(0,0,0,.98) 78%,
-            rgba(0,0,0,.72) 88%,
-            rgba(0,0,0,.28) 96%,
+            #000 97%,
+            rgba(0,0,0,.85) 99%,
             transparent 100%) !important;
     }
 }

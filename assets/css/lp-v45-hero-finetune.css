@@ -6,15 +6,13 @@
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom,
         #000 0%,
-        #000 72%,
-        rgba(0,0,0,.94) 82%,
-        rgba(0,0,0,.55) 93%,
+        #000 97%,
+        rgba(0,0,0,.85) 99%,
         transparent 100%);
     mask-image: linear-gradient(to bottom,
         #000 0%,
-        #000 72%,
-        rgba(0,0,0,.94) 82%,
-        rgba(0,0,0,.55) 93%,
+        #000 97%,
+        rgba(0,0,0,.85) 99%,
         transparent 100%);
     filter: brightness(.94) contrast(1.03);
 }

@@ -57,7 +57,7 @@ class TiltedCardVanilla {
                     <img
                         src="${this.imageSrc}"
                         alt="${this.altText}"
-                        class="tilted-card-img"
+                        class="tilted-card-img" loading="lazy" decoding="async"
                     />
 
                     ${(this.displayOverlayContent && this.overlayContentText) ? `

@@ -34,6 +34,32 @@
     }
 
     function initBackToTop() {
+        var scrollToTopButtons = Array.prototype.slice.call(document.querySelectorAll('.scrollToTop'));
+        scrollToTopButtons.slice(1).forEach(function (button) {
+            if (button.parentNode) button.parentNode.removeChild(button);
+        });
+
+        var scrollToTopButton = scrollToTopButtons[0];
+        if (scrollToTopButton) {
+            var water = scrollToTopButton.querySelector('.water');
+            function updateBackToTopState() {
+                var scroller = document.scrollingElement || document.documentElement;
+                var maxScroll = Math.max(0, scroller.scrollHeight - window.innerHeight);
+                var scrollTop = window.scrollY || window.pageYOffset || scroller.scrollTop || document.body.scrollTop || 0;
+                scrollTop = Math.max(0, Math.min(maxScroll, scrollTop));
+                var scrollProgress = maxScroll ? scrollTop / maxScroll : 0;
+                if (water) water.style.transform = 'translateY(' + (87 - 87 * scrollProgress) + '%)';
+                scrollToTopButton.classList.toggle('active-progress', scrollTop > 50);
+            }
+
+            if (!scrollToTopButton.__lpBackTopStateBound) {
+                scrollToTopButton.__lpBackTopStateBound = true;
+                window.addEventListener('scroll', updateBackToTopState, { passive: true });
+                window.addEventListener('resize', updateBackToTopState, { passive: true });
+            }
+            updateBackToTopState();
+        }
+
         var buttons = document.querySelectorAll('[data-lp-backtop]');
         if (!buttons.length) return;
         buttons.forEach(function (backTop) {

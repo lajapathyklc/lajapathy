@@ -24948,8 +24948,9 @@ section.clients-testimonial-area {
   width: 100%;
   height: 100%;
   transform: translateY(100%);
-  background-color: var(--color-primary);
-  transition: all 0.3s;
+  background-color: #ad6200;
+  transition: none;
+  will-change: transform;
 }
 
 .scrollToTop .water svg symbol path {
@@ -24969,12 +24970,14 @@ symbol path {
 .scrollToTop .water_wave_back {
   right: 0;
   fill: var(--color-heading);
+  filter: brightness(0.82) saturate(1.15);
   animation: wave-back 1.4s infinite linear;
 }
 
 .scrollToTop .water_wave_front {
   left: 0;
   fill: rgba(122, 37, 158, 0.8784313725);
+  filter: brightness(1.08) saturate(1.08);
   margin-bottom: -1px;
   animation: wave-front 0.7s infinite linear;
 }

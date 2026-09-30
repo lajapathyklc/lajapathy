@@ -309,6 +309,6 @@
         height: 43vh !important;
         max-height: 560px !important;
         bottom: -1vh !important;
-        opacity: .76 !important;
+        opacity: 1 !important;
     }
 }

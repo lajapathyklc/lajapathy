@@ -26,22 +26,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="lajapathy-hero-new.avif" type="image/avif" fetchpriority="high">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/plugins/swiper.css">
     <link rel="stylesheet" href="assets/css/plugins/odometer.css">
     <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
     <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.min.css?v=perf-20260930">
     <link rel="stylesheet" href="assets/css/carstyle.css">
     <link rel="stylesheet" href="assets/css/TiltedCard.css">
     <!-- Bootstrap min css -->
     <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/hero_integrated.css?v=client-gap-20260923">
-    <link rel="stylesheet" href="assets/css/lp-v45-hero-finetune.css">
+    <link rel="stylesheet" href="assets/css/hero_integrated.css?v=mountain-transparent-20260929">
+    <link rel="stylesheet" href="assets/css/lp-v45-hero-finetune.css?v=portrait-fade-r2">
     <link rel="stylesheet" href="assets/css/lp-v47-hero-background.css">
-    <link rel="stylesheet" href="assets/css/lp-v48-hero-cleanup.css?v=49">
-    <link rel="stylesheet" href="assets/css/lp-v50-hero-refinement.css">
+    <link rel="stylesheet" href="assets/css/lp-v48-hero-cleanup.css?v=50">
+    <link rel="stylesheet" href="assets/css/lp-v50-hero-refinement.css?v=portrait-fade-r2">
     <link rel="stylesheet" href="assets/css/lp-v51-hero-final-polish.css">
     <link rel="stylesheet" href="assets/css/lp-responsive-menu-fix.css">
     <link rel="stylesheet" href="assets/css/lp-mobile-menu.css?v=24">
@@ -128,7 +128,8 @@
         }
     </style>
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
-<link rel="stylesheet" href="assets/css/lp-home-cinematic.css?v=capabilities-hover-20260923">
+    <link rel="stylesheet" href="assets/css/lp-home-cinematic.css?v=client-rail-black-r9-20260929">
+    <link rel="stylesheet" href="assets/css/lp-hero-cinematic.css?v=mountain1-smooth-r3">
 </head>
 <script>
     // ...existing code...
@@ -434,32 +435,23 @@
     <!-- tmp banner area start -->
     <div class="tmp-banner-one-area add-pattern moody-hero" id="home">
 
-        <!-- Cinematic Space Background (behind smoke/fog) -->
-        <video class="hero-space-background" data-hero-video="forward" autoplay muted playsinline aria-hidden="true" preload="auto" poster="assets/images/bg/hero-space-background.webp">
-            <source src="assets/images/bg/BGVid-clean.mp4" type="video/mp4">
-        </video>
-        <video class="hero-space-background hero-space-background--reverse" data-hero-video="reverse" muted playsinline aria-hidden="true" preload="metadata">
-            <source src="assets/images/bg/BGVid-reverse-clean.mp4" type="video/mp4">
-        </video>
-        <div class="hero-asteroids" aria-hidden="true">
-            <span class="hero-asteroid hero-asteroid--one"></span>
-            <span class="hero-asteroid hero-asteroid--two"></span>
-            <span class="hero-asteroid hero-asteroid--three"></span>
-            <span class="hero-meteor hero-meteor--one"></span>
-            <span class="hero-meteor hero-meteor--two"></span>
-            <span class="hero-meteor hero-meteor--three"></span>
-            <span class="hero-meteor hero-meteor--four"></span>
+        <!-- Homepage-only procedural planet, sunrise and meteor environment. -->
+        <div class="lp-hero-environment" aria-hidden="true"></div>
+        <img class="original-scene-map" src="assets/images/hero-cinematic/space.webp" hidden alt="">
+        <img class="terrain-map" src="assets/images/hero-cinematic/geology-4k.webp" hidden alt="">
+        <canvas class="cosmic-static" aria-hidden="true"></canvas>
+        <canvas class="planet-canvas" aria-hidden="true"></canvas>
+        <canvas class="meteor-canvas meteor-far" aria-hidden="true"></canvas>
+        <canvas class="meteor-canvas meteor-middle" aria-hidden="true"></canvas>
+        <canvas class="meteor-canvas meteor-near" aria-hidden="true"></canvas>
+        <canvas class="meteor-canvas atmosphere-front" aria-hidden="true"></canvas>
+        <img class="original-mountain-layer" src="assets/images/bg/impactbg.avif" width="1920" height="341" alt="" aria-hidden="true">
+        <div class="meteor-controls" aria-label="Hero preview controls" hidden>
+            <button type="button" class="meteor-replay">Replay meteor</button>
+            <button type="button" class="meteor-pause" aria-pressed="false">Pause</button>
         </div>
-
         <!-- Static Portrait Image (z-index 2) -->
         <picture><source srcset="lajapathy-hero-new.avif" type="image/avif"><source srcset="lajapathy-hero-new.webp" type="image/webp"><img src="lajapathy-hero-new.png" class="hero-static-portrait" alt="Lajapathy Portrait" fetchpriority="high" decoding="async" width="1084" height="1451"></picture>
-
-        <!-- Warm cloud wisps and dust keep the hero atmospheric without a fog wash. -->
-        <div class="hero-atmosphere" aria-hidden="true">
-            <span class="hero-atmosphere__cloud hero-atmosphere__cloud--back"></span>
-            <span class="hero-atmosphere__cloud hero-atmosphere__cloud--front"></span>
-            <span class="hero-atmosphere__dust"></span>
-        </div>
 
         <div class="container">
             <div class="banner-one-main-wrapper">
@@ -600,6 +592,7 @@
             </div>
         </div>
     </section>
+    <div class="impact-spacer" aria-hidden="true"></div>
     <!-- Tpm Counter Area Start -->
     <section class="counter-area lp-cinematic-scene" id="impact">
         <div class="container">
@@ -1799,7 +1792,7 @@
                         <ul>
                             <li><a href="privacy.html">Privacy Policy</a></li>
                             <li><a href="terms.html">Terms of Use</a></li>
-                            
+                            <li><a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener noreferrer">Geology source · Solar System Scope / CC BY 4.0</a></li>
                         </ul>
                     </section>
                 </div>
@@ -2025,9 +2018,10 @@
         </script>
 
     <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
-<script src="assets/js/lp-footer-backtop.js?v=35" defer></script>
+<script src="assets/js/lp-footer-backtop.js?v=36" defer></script>
 <script src="assets/js/lp-home-cinematic.js" defer></script>
 <script src="assets/js/lp-reduced-motion.js" defer></script>
+    <script src="assets/js/lp-hero-cinematic.js?v=mountain-atmosphere-r2" defer></script>
 </body>
 
 </html>

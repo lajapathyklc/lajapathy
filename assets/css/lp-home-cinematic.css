@@ -446,7 +446,7 @@
 /* Editorial middle chapters: reserve framed cards for the selected work. */
 .logo-swiper {
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 0;
 }
 
 .logo-swiper .swiper-slide {
@@ -504,7 +504,7 @@
 }
 
 #impact .year-of-expariance-wrapper {
-    padding: 12px clamp(20px, 3vw, 42px) 12px 0;
+    padding: 0 clamp(20px, 3vw, 42px) 12px 0;
     border-right: 0 !important;
 }
 
@@ -646,7 +646,7 @@
     --metric-inset: clamp(16px, 2.1vw, 30px);
     min-height: 172px;
     margin: 0;
-    padding: 24px var(--metric-inset);
+    padding: 0 var(--metric-inset) 24px;
 }
 
 #impact .counter-card::after {
@@ -698,9 +698,16 @@
     vertical-align: .08em;
 }
 
-/* Add a clear black pause after the client rail before the impact metrics. */
-.impact-scene + #impact.counter-area > .container {
-    padding-top: clamp(28px, 4vw, 52px);
+.impact-spacer {
+    position: relative;
+    z-index: 5 !important;
+    height: 50px;
+    background: #000;
+}
+
+#impact.counter-area > .container {
+    padding-top: 0;
+    background-color: #000 !important;
 }
 
 #impact .counter-para {

@@ -92,6 +92,7 @@
     bgActiveBlur: function name(params) {
       document.addEventListener("DOMContentLoaded", function () {
         const overlay = document.querySelector(".background-overlay");
+        if (!overlay) return;
         const closeButton = document.querySelector(".tmp-close-button-audio");
         function checkAndObserve() {
           const videoCard = document.querySelector(".tmp-intro-video-card-wrapper.position-right");

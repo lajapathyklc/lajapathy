@@ -1,0 +1,260 @@
+:root {
+    --case-ink: #f5f7f6;
+    --case-muted: #b8c0bc;
+    --case-line: rgba(255, 255, 255, .12);
+    --case-accent: #ff9800;
+}
+
+.project-case-study {
+    overflow: hidden;
+    background: transparent;
+    color: var(--case-ink);
+    font-family: var(--font-primary, "Montserrat", sans-serif);
+}
+
+.project-case-study *,
+.project-case-study *::before,
+.project-case-study *::after { box-sizing: border-box; }
+
+.project-case-study-hero {
+    position: relative;
+    display: flex;
+    min-height: min(82vh, 780px);
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--case-line);
+    background-color: #07090d;
+    background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, .84) 0%, rgba(0, 0, 0, .7) 34%, rgba(0, 0, 0, .34) 68%, rgba(0, 0, 0, .16) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, .22) 0%, rgba(0, 0, 0, .08) 52%, rgba(0, 0, 0, .72) 100%),
+        url("../images/bg/ewallet%20background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.project-case-study-hero::after {
+    position: absolute;
+    right: 8%;
+    bottom: 0;
+    width: 1px;
+    height: 42%;
+    background: linear-gradient(transparent, rgba(255, 152, 0, .5));
+    content: "";
+}
+
+.project-case-study-hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-top: clamp(130px, 16vh, 180px);
+    padding-bottom: clamp(64px, 10vh, 108px);
+}
+
+.project-case-study-content { display: grid; min-width: 0; gap: 0; }
+.project-case-study-content > *,
+.ewallet-content-shell,
+.ewallet-content-shell > * { min-width: 0; }
+
+.project-story-row {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(12px, 2vw, 24px);
+    align-items: start;
+    padding: clamp(30px, 5vw, 68px) 24px;
+    border-top: 1px solid var(--case-line);
+    background: #000;
+}
+
+.project-story-row h2,
+.project-case-study-gallery-heading h2 {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-secondary, "Poppins", sans-serif);
+    font-size: clamp(2rem, 4.67vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.16;
+}
+
+.project-story-row h2 { grid-column: 1; min-width: 0; }
+.project-story-row > div { grid-column: 2; max-width: 900px; min-width: 0; }
+.project-story-row p { margin: 0 0 13px; color: #fff; font-size: 17px; line-height: 1.7; }
+.project-story-row ul { display: grid; gap: 8px; margin: 0; padding-left: 24px; color: #fff; font-size: 16px; line-height: 1.65; }
+.project-story-row li { list-style: disc outside; padding-left: 4px; }
+.project-story-row li::marker { color: var(--case-accent); }
+.project-story-row strong { color: var(--case-accent); }
+.project-story-row--compact { align-items: center; min-height: 120px; }
+.project-story-row--compact p { margin: 0; font-weight: 500; }
+
+.project-case-study-screens {
+    padding: clamp(36px, 5vw, 68px) 24px;
+    border-top: 1px solid var(--case-line);
+    background: #000;
+}
+
+.project-case-study-screens .container { display: grid; gap: 26px; }
+.project-case-study-gallery-heading h2 { font-size: clamp(2rem, 3.8vw, 3.5rem); }
+.project-case-study-gallery-note { max-width: 30rem; margin: 0; color: var(--case-muted); font-size: 15px; line-height: 1.6; }
+.project-screen-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.project-screen-slot { display: grid; min-width: 0; min-height: 280px; align-content: end; padding: 22px; border: 1px solid var(--case-line); background: radial-gradient(ellipse at 50% 28%, rgba(255, 152, 0, .1), transparent 42%), #111416; }
+.project-screen-slot span { color: var(--case-muted); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.project-screen-slot h3 { margin: 8px 0 0; color: #fff; font-family: var(--font-secondary, "Poppins", sans-serif); font-size: 19px; font-weight: 600; }
+
+.project-case-study-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 24px;
+    color: var(--case-accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.project-case-study-kicker::before {
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    content: "";
+}
+
+.project-case-study-title {
+    max-width: 900px;
+    margin: 0 0 22px;
+    color: #fff;
+    font-family: var(--font-secondary, "Poppins", sans-serif);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 600;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+}
+
+.project-case-study-lede {
+    max-width: 620px;
+    margin: 0;
+    color: rgba(255, 255, 255, .82);
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.65;
+}
+
+.project-case-study-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 30px;
+}
+
+.project-case-study-tags span {
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.project-case-study-gallery {
+    padding: clamp(48px, 7vw, 88px) 0 clamp(64px, 9vw, 112px);
+    border-bottom: 1px solid var(--case-line);
+    background: #000;
+}
+
+.project-case-study-gallery-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(240px, .7fr);
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 28px;
+}
+
+.project-case-study-gallery-heading p { margin: 0; }
+.project-case-study-gallery-heading .project-case-study-kicker { margin-bottom: 12px; }
+.project-case-study-gallery-heading h2 {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-secondary, "Poppins", sans-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.12;
+}
+
+.project-case-study-gallery-note {
+    color: var(--case-muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.project-case-study-artboard {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--case-line);
+    background: #111416;
+}
+
+.project-case-study-artboard img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.project-case-study-board {
+    margin-top: 0 !important;
+    padding-bottom: clamp(64px, 9vw, 112px);
+    background: transparent;
+    color: var(--case-ink);
+}
+
+.project-case-study-board .row { margin-right: 0; margin-left: 0; }
+
+.project-case-study-board .inner_banner_bg {
+    margin-top: 0 !important;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--case-line);
+    background: #111416;
+}
+
+.project-case-study-board .inner_banner_bg img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.project-details-swiper-btn {
+    width: 100%;
+    margin: 30px auto 0;
+    padding: 0;
+    align-items: center;
+}
+
+.project-details-swiper-btn a {
+    display: inline-flex !important;
+    min-width: 0;
+    align-items: center !important;
+    color: var(--case-ink);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.project-details-swiper-btn a:hover,
+.project-details-swiper-btn a:focus-visible { color: var(--case-accent); }
+
+@media (max-width: 640px) {
+    .project-details-swiper-btn { padding-inline: 8px; }
+    .project-case-study-hero { min-height: 72svh; }
+    .project-case-study-hero-inner { padding-top: 126px; padding-bottom: 58px; }
+    .project-case-study-gallery-heading { grid-template-columns: 1fr; gap: 12px; }
+    .project-case-study-gallery-note { max-width: 34rem; }
+    .project-story-row { grid-template-columns: 1fr; gap: 14px; padding-inline: 20px; }
+    .project-story-row h2,
+    .project-story-row > div { grid-column: 1; }
+    .project-case-study-screens { padding-inline: 20px; }
+    .project-screen-slots { grid-template-columns: 1fr; }
+    .project-screen-slot { min-height: 220px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-details-swiper-btn a { transition: none; }
+}

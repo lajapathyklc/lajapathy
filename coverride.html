@@ -28,13 +28,15 @@
 <link href="assets/css/vendor/animate.min.css" rel="stylesheet"/>
 <link href="assets/css/vendor/bootstrap.min.css" rel="stylesheet"/>
 <!-- custom css -->
-<link href="assets/css/style.css" rel="stylesheet"/>
+<link href="assets/css/style.css?v=water-level-contrast-r2-20260926" rel="stylesheet"/>
 <link href="assets/css/lp-responsive-menu-fix.css" rel="stylesheet"/>
 <link href="assets/css/lp-mobile-menu.css?v=24" rel="stylesheet"/>
 <link href="assets/css/lp-v25-footer-linkedin.css?v=25" rel="stylesheet"/>
 <link href="assets/css/lp-v29-footer-option2.css?v=36" rel="stylesheet"/>    <link rel="stylesheet" href="assets/css/lp-v55-portfolio-direct-menu.css">
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
 <link href="assets/css/lp-project-summary.css" rel="stylesheet"/>
+<link href="assets/css/lp-case-study-pages.css?v=case-nav-grid-20260928-r3" rel="stylesheet"/>
+<link href="assets/css/ewallet-case-study.css?v=case-study-hero-sizing-20260929-r9" rel="stylesheet"/>
 </head>
 <script>
     // ...existing code...
@@ -311,21 +313,78 @@
 </footer>
 </div>
 </div>
-<div class="container mt--50">
-<div class="row">
-<div class="col-12 inner_banner_bg" style="margin-top: 150px;">
-<section class="project-summary-panel" aria-labelledby="project-summary-title">
-<a class="project-summary__back" href="Casestudies.html">← All case studies</a>
-<p class="project-summary__eyebrow">Case study · Fintech</p>
-<h1 class="project-summary__title" id="project-summary-title">CoverRide</h1>
-<p class="project-summary__lede">A focused look at claims & risk workflows.</p>
-<dl class="project-summary-facts">
-<div><dt>Role</dt><dd>Lead Product Designer</dd></div>
-<div><dt>Focus</dt><dd>Claims & Risk Workflows</dd></div>
-</dl>
-<p class="project-summary__note">The visual project walkthrough follows.</p>
+<main class="project-case-study ewallet-case-study coverride-case-study" aria-label="CoverRide case study">
+<section class="ewallet-hero">
+<div class="ewallet-hero-inner container">
+<div class="ewallet-hero-copy">
+<p class="ewallet-kicker">End-to-end product design | Mobility | Inspection platform | Field operations</p>
+<h1>CoverRide: Mobile Vehicle Inspection &amp; Damage Assessment</h1>
+<p class="ewallet-hero-lede">A mobile-first inspection experience that replaces inconsistent manual work with guided capture, assessment, and reporting.</p>
+<div class="ewallet-hero-meta"><span>Mobile-first workflows</span><span>Field operations</span></div>
+</div>
+<div class="ewallet-hero-art"><img class="ewallet-hero-illustration" src="assets/images/bg/coverride%20hero.png" alt="CoverRide vehicle inspection app" width="1536" height="1024" fetchpriority="high" decoding="async" /></div>
+</div>
 </section>
-<picture><source srcset="Casestudies/Coverride.avif" type="image/avif"><source srcset="Casestudies/Coverride.webp" type="image/webp"><img alt="Coverride Project" class="tmp-scroll-trigger tmp-fade-in animation-order-1" src="Casestudies/Coverride.png" loading="lazy" decoding="async" width="1290" height="7180"></picture></div>
+<div class="ewallet-content-shell">
+<div class="project-case-study-content">
+<section class="project-story-row">
+<h2>The<br/>Problem</h2>
+<div><p>Manual vehicle inspections led to delays, inconsistent reports, and avoidable operational effort.</p><ul><li>Inspection steps varied between users</li><li>Heavy reliance on manual input increased errors</li><li>Limited visibility into inspection status and findings</li></ul></div>
+</section>
+<section class="project-story-row project-story-row--compact">
+<h2>Key<br/>Insights</h2>
+<div><p><strong>Users needed guided, visual workflows that make inspections consistent across people, vehicles, and field conditions.</strong></p><ul><li>Standardization supports accuracy and scale</li><li>Visual guidance improves damage identification</li><li>Consistent steps reduce training and cognitive effort</li></ul></div>
+</section>
+<section class="project-story-row">
+<h2>My Role &amp;<br/>Ownership</h2>
+<div><p>Led UX strategy and end-to-end product design for a mobile-first vehicle inspection platform.</p><ul><li>Defined the inspection and reporting experience</li><li>Mapped workflows and designed guided capture</li><li>Built reusable patterns for field operations</li><li>Worked with product and engineering through implementation</li></ul></div>
+</section>
+<section class="project-story-row">
+<h2>Constraints &amp;<br/>Complexity</h2>
+<div><ul><li>Design for fast field work with limited time and attention</li><li>Support low-connectivity and offline scenarios</li><li>Maintain accuracy across varied inspection conditions</li><li>Support users with different levels of experience</li></ul></div>
+</section>
+<section class="project-story-row">
+<h2>Key Product &amp;<br/>UX Decisions</h2>
+<div><ul><li>Introduced guided, step-by-step inspection workflows</li><li>Used visual-first interactions for damage identification</li><li>Structured data capture for consistent reporting</li><li>Reduced manual input with predefined patterns and controls</li><li>Improved navigation between inspection stages</li></ul></div>
+</section>
+<section class="project-story-row project-story-row--flow">
+<h2>User Flow<br/>Transformation</h2>
+<div><p>Replaced open-ended manual work with a clear sequence from inspection setup to a standardized report.</p><div class="project-flow-track"><span>Start inspection</span><span>Capture vehicle</span><span>Mark damage</span><span>Add evidence</span><span>Review findings</span><span>Generate report</span></div></div>
+</section>
+<section class="project-story-row">
+<h2>System &amp;<br/>Component Thinking</h2>
+<div><p>A modular workflow foundation keeps capture, validation, and reporting consistent across inspection types.</p><ul><li>Reusable components for inspection steps and evidence capture</li><li>Shared patterns for validation and feedback</li><li>Modular workflows that can support new use cases</li></ul></div>
+</section>
+</div>
+<section class="ewallet-screen-gallery">
+<div class="ewallet-gallery-heading"><h2>High-Fidelity Screens<br/>&amp; Key Flows</h2></div>
+<div class="ewallet-phone-gallery interactive-phone-gallery">
+<div class="ewallet-side-preview ewallet-side-preview--previous is-hidden" aria-hidden="true"><img class="is-active" src="assets/images/bg/coverride%20image/image%2075.png" alt="" /><img src="assets/images/bg/coverride%20image/image%2075.png" alt="" /></div>
+<div class="ewallet-side-preview ewallet-side-preview--next" aria-hidden="true"><img class="is-active" src="assets/images/bg/coverride%20image/image%2076.png" alt="" /><img src="assets/images/bg/coverride%20image/image%2076.png" alt="" /></div>
+<div class="ewallet-phone-device"><span class="ewallet-phone-island" aria-hidden="true"></span><span class="ewallet-phone-side-button ewallet-phone-side-button--action" aria-hidden="true"></span><span class="ewallet-phone-side-button ewallet-phone-side-button--volume-up" aria-hidden="true"></span><span class="ewallet-phone-side-button ewallet-phone-side-button--volume-down" aria-hidden="true"></span><span class="ewallet-phone-side-button ewallet-phone-side-button--power" aria-hidden="true"></span><span class="ewallet-phone-side-button ewallet-phone-side-button--camera" aria-hidden="true"></span>
+<div class="ewallet-phone-screen-viewport" id="coverride-phone-screen-viewport" role="region" aria-label="Scrollable CoverRide inspection screenshots" tabindex="0"><div class="ewallet-phone-screen-track">
+<figure class="ewallet-phone-shot" data-title="Inspection overview" data-narrative="Start a guided vehicle inspection with its key information and next steps in view."><img src="assets/images/bg/coverride%20image/image%2075.png" alt="CoverRide inspection overview screen" decoding="async" /></figure>
+<figure class="ewallet-phone-shot" data-title="Vehicle details" data-narrative="Capture the vehicle details needed for an accurate inspection record."><img src="assets/images/bg/coverride%20image/image%2076.png" alt="CoverRide vehicle details screen" decoding="async" /></figure>
+<figure class="ewallet-phone-shot" data-title="Guided inspection" data-narrative="Move through a consistent inspection sequence with clear visual guidance."><img src="assets/images/bg/coverride%20image/image%2077.png" alt="CoverRide guided inspection screen" decoding="async" /></figure>
+<figure class="ewallet-phone-shot" data-title="Damage assessment" data-narrative="Record vehicle condition and damage as part of the inspection workflow."><img src="assets/images/bg/coverride%20image/image%2078.png" alt="CoverRide damage assessment screen" decoding="async" /></figure>
+<figure class="ewallet-phone-shot" data-title="Review findings" data-narrative="Review captured inspection details before completing the assessment."><img src="assets/images/bg/coverride%20image/image%2079.png" alt="CoverRide inspection findings review" decoding="async" /></figure>
+<figure class="ewallet-phone-shot" data-title="Inspection report" data-narrative="Bring the inspection results together in a clear, consistent report."><img src="assets/images/bg/coverride%20image/image%2080.png" alt="CoverRide inspection report screen" decoding="async" /></figure>
+</div></div></div>
+<div class="ewallet-phone-narrative" aria-live="polite" aria-atomic="true"><h3 class="ewallet-screen-title">Inspection overview</h3><p class="ewallet-screen-description">Start a guided vehicle inspection with its key information and next steps in view.</p><span class="ewallet-gallery-count" aria-live="polite">01 / 06</span></div>
+<div class="ewallet-gallery-controls" aria-label="Screenshot controls"><button class="ewallet-gallery-arrow" type="button" data-gallery-direction="-1" aria-label="Previous screenshot" aria-controls="coverride-phone-screen-viewport"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button><button class="ewallet-gallery-arrow" type="button" data-gallery-direction="1" aria-label="Next screenshot" aria-controls="coverride-phone-screen-viewport"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+</div>
+</section>
+<section class="project-story-row">
+<h2>Results &amp;<br/>Impact</h2>
+<div><p>The redesign moved inspection work from manual and variable toward a more guided, repeatable process.</p><ul><li>Reduced inspection time across workflows</li><li>Improved accuracy and reporting consistency</li><li>Reduced user errors in field operations</li><li>Created workflows that can scale across inspection scenarios</li></ul></div>
+</section>
+<section class="project-story-row">
+<h2>What I’d Do<br/>Next</h2>
+<div><ul><li>Explore AI-assisted damage detection</li><li>Strengthen offline support for remote environments</li><li>Add real-time validation and error prevention</li><li>Expand workflows to additional inspection use cases</li></ul></div>
+</section>
+</div>
+</main>
+<div class="container mt--50"><div class="row">
 <div class="project-details-swiper-btn" style="display: flex; justify-content: space-between;">
 <a class="project-swiper-button-prev" href="smartfin.html" style="display: flex; align-items: center;">
 <span><i class="fa-solid fa-arrow-left"></i></span>
@@ -464,6 +523,7 @@
 <!-- custom Js -->
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
-<script src="assets/js/lp-footer-backtop.js?v=35" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<script src="assets/js/lp-footer-backtop.js?v=36" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<script src="assets/js/case-study-phone-gallery.js" defer></script>
 </body>
 </html>
