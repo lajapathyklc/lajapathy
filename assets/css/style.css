@@ -34978,7 +34978,7 @@ img {
 }
 
 @media (max-width: 767px) {
-  .container {
+  .container:where(:not(.lp-shell)) {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }

@@ -32,12 +32,12 @@
     <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
     <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/style.min.css?v=perf-20260930">
+    <link rel="stylesheet" href="assets/css/style.min.css?v=perf-20260930-grid-20261004">
     <link rel="stylesheet" href="assets/css/carstyle.css">
     <link rel="stylesheet" href="assets/css/TiltedCard.css">
     <!-- Bootstrap min css -->
     <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/hero_integrated.css?v=mountain-transparent-20260929">
+    <link rel="stylesheet" href="assets/css/hero_integrated.css?v=mountain-transparent-20260929-grid-20261004">
     <link rel="stylesheet" href="assets/css/lp-v45-hero-finetune.css?v=portrait-fade-r2">
     <link rel="stylesheet" href="assets/css/lp-v47-hero-background.css">
     <link rel="stylesheet" href="assets/css/lp-v48-hero-cleanup.css?v=50">
@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="assets/css/lp-mobile-menu.css?v=24">
 <link rel="stylesheet" href="assets/css/lp-v25-footer-linkedin.css?v=25">
 <link rel="stylesheet" href="assets/css/lp-v26-footer.css?v=26">
-    <link rel="stylesheet" href="assets/css/lp-v29-footer-option2.css?v=36">
+    <link rel="stylesheet" href="assets/css/lp-v29-footer-option2.css?v=36-grid-20261004">
     <!-- V52: hero text readability pass -->
     <!-- V53: pill + proof readability refinement -->
     <link rel="stylesheet" href="assets/css/lp-v54-orange-building-words.css">
@@ -123,13 +123,23 @@
             }
 
             .tmp-banner-one-area.moody-hero .banner-one-main-wrapper .inner {
+                /* Offset the complete copy stack; scene and header stay independent. */
+                position: relative;
+                top: clamp(34px, calc(10vh - 43px), 56px);
                 transform: none !important;
+            }
+        }
+        @media (min-width: 992px) and (max-height: 820px) {
+            .tmp-banner-one-area.moody-hero .lp-hero-copy {
+                --home-hero-cta-gap: 18px;
             }
         }
     </style>
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
     <link rel="stylesheet" href="assets/css/lp-home-cinematic.css?v=client-rail-black-r9-20260929">
     <link rel="stylesheet" href="assets/css/lp-hero-cinematic.css?v=mountain1-smooth-r3">
+<link rel="stylesheet" href="assets/css/lp-hero-alignment.css?v=shared-guide-20261004">
+<link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=20261004">
 </head>
 <script>
     // ...existing code...
@@ -351,7 +361,7 @@
     <!-- tpm-header-area start -->
     <header class="tmp-header-area-start header-one header--sticky header--transparent">
         <!-- header mid area start -->
-        <div class="container">
+        <div class="container lp-shell">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="header-content">
@@ -453,12 +463,12 @@
         <!-- Static Portrait Image (z-index 2) -->
         <picture><source srcset="lajapathy-hero-new.avif" type="image/avif"><source srcset="lajapathy-hero-new.webp" type="image/webp"><img src="lajapathy-hero-new.png" class="hero-static-portrait" alt="Lajapathy Portrait" fetchpriority="high" decoding="async" width="1084" height="1451"></picture>
 
-        <div class="container">
+        <div class="container lp-shell lp-hero-shell">
             <div class="banner-one-main-wrapper">
                 <div class="row align-items-end">
                     <div class="col-12 col-lg-7">
-                        <div class="inner">
-                            <div class="home-hero-kicker">20 YEARS / 01</div>
+                        <div class="inner lp-hero-copy">
+                            <div class="home-hero-kicker lp-hero-eyebrow">20 YEARS</div>
                             <h1 class="moody-hero-headline" style="margin-bottom: 0;">
                                 I lead design for <br> complex, <br> data-intensive <br> products<br><br>
                                 <span class="driven-by" style="display: block;">Building for
@@ -475,7 +485,7 @@
                                     </span>
                                 </span>
                             </h1>
-                            <div class="button-area" style="margin-top: 30px;">
+                            <div class="button-area" style="margin-top: var(--home-hero-cta-gap, 30px);">
                                 <a href="Casestudies.html" class="moody-cta-btn">VIEW CASE STUDIES →</a>
                             </div>
                             <p class="moody-hero-subtext lp-v50-proof d-none d-lg-block" style="font-size: 1.6rem; line-height: 1.7;">
@@ -1756,7 +1766,7 @@
 
         <!-- LP V28 Option 2 — Bold CTA Footer -->
         <div class="lp-footer-v28-shell">
-            <footer class="lp-footer-v28" aria-label="Website footer">
+            <footer class="lp-footer-v28 lp-cinematic-footer" aria-label="Website footer">
                 <div class="lp-footer-v28__visual" aria-hidden="true">
                     <div class="lp-footer-v28__planet"></div>
                     <div class="lp-footer-v28__horizon"></div>
@@ -1792,7 +1802,6 @@
                         <ul>
                             <li><a href="privacy.html">Privacy Policy</a></li>
                             <li><a href="terms.html">Terms of Use</a></li>
-                            <li><a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener noreferrer">Geology source · Solar System Scope / CC BY 4.0</a></li>
                         </ul>
                     </section>
                 </div>
@@ -2022,6 +2031,7 @@
 <script src="assets/js/lp-home-cinematic.js" defer></script>
 <script src="assets/js/lp-reduced-motion.js" defer></script>
     <script src="assets/js/lp-hero-cinematic.js?v=mountain-atmosphere-r2" defer></script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=20261004"></script>
 </body>
 
 </html>

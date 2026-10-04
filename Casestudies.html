@@ -2,6 +2,15 @@
 
 <html lang="en">
 <head>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+html, body { background-color: #020305; }
+.case-study-hero { background-color: #020305; }
+.universe-canvas { opacity: 0; transition: opacity 500ms ease; }
+.universe-canvas.is-ready { opacity: 1; }
+.universe-fallback { display: none; }
+.case-study-hero .breadcrumb-inner .tmp-scroll-trigger.tmp-fade-in { opacity: 1; animation: none; transform: none; }
+</style>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -28,12 +37,15 @@
 <link href="assets/css/vendor/animate.min.css" rel="stylesheet"/>
 <link href="assets/css/vendor/bootstrap.min.css" rel="stylesheet"/>
 <!-- custom css -->
-<link href="assets/css/style.css?v=water-level-contrast-r2-20260926" rel="stylesheet"/>
+<link href="assets/css/style.css?v=water-level-contrast-r2-20260926-grid-20261004" rel="stylesheet"/>
 <link href="assets/css/lp-responsive-menu-fix.css" rel="stylesheet"/>
 <link href="assets/css/lp-mobile-menu.css?v=24" rel="stylesheet"/>
 <link href="assets/css/lp-v25-footer-linkedin.css?v=25" rel="stylesheet"/>
-<link href="assets/css/lp-v29-footer-option2.css?v=36" rel="stylesheet"/>    <link rel="stylesheet" href="assets/css/lp-v55-portfolio-direct-menu.css">
+<link href="assets/css/lp-v29-footer-option2.css?v=36-grid-20261004" rel="stylesheet"/>    <link rel="stylesheet" href="assets/css/lp-v55-portfolio-direct-menu.css">
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
+<link rel="stylesheet" href="assets/css/portfolio-hero-scene.css?v=preview-lock-20261004">
+<link rel="stylesheet" href="assets/css/lp-hero-alignment.css?v=shared-guide-20261004">
+<link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=20261004">
 </head>
 <script type="application/ld+json">
     {
@@ -258,7 +270,7 @@
         min-height: 100svh;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
-        background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .32) 48%, rgba(0, 0, 0, .8)), url("assets/images/bg/portbg.webp") !important;
+        background-color: #020305;
         background-size: cover !important;
         background-position: 65% center !important;
         display: flex;
@@ -306,7 +318,7 @@
         }
 
         .case-study-hero > .container {
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .case-study-hero .row,
@@ -315,24 +327,24 @@
         }
 
         .case-study-hero .breadcrumb-inner {
-            text-align: center;
+            text-align: left;
         }
 
         .case-study-hero .breadcrumb-inner .title {
             max-width: 366px;
-            margin: 0 auto;
+            margin: 0;
             font-size: clamp(2.2rem, 8.6vw, 4.6rem) !important;
             line-height: .92;
             letter-spacing: -2px;
-            text-align: center !important;
+            text-align: left;
         }
 
         .case-study-hero .breadcrumb-inner .description {
             max-width: 366px;
-            margin: 20px auto 0;
+            margin: 20px 0 0;
             font-size: 1.15rem !important;
             line-height: 1.45;
-            text-align: center !important;
+            text-align: left;
         }
 
         .case-study-hero .breadcrumb-inner .title,
@@ -348,7 +360,7 @@
 <!-- tpm-header-area start -->
 <header class="tmp-header-area-start header-one header--sticky header--transparent">
 <!-- header mid area start -->
-<div class="container">
+<div class="container lp-shell">
 <div class="row">
 <div class="col-lg-12">
 <div class="header-content">
@@ -419,18 +431,26 @@
 </div>
 </div>
 <!-- Breadcrumb Area Start -->
-<div class="breadcrumb-area breadcrumb-bg case-study-hero">
+<div class="breadcrumb-area breadcrumb-bg case-study-hero portfolio-universe">
+<div class="universe-space" aria-hidden="true"></div>
+<div class="universe-fallback" aria-hidden="true"></div>
+<canvas class="universe-canvas" aria-label="Interactive product universe. Use the featured project links for keyboard navigation."></canvas>
+<div class="universe-terrain" aria-hidden="true"><img src="assets/images/hero-cinematic/portfolio-landscape.webp" alt="" width="1920" height="640"></div>
+
+<a class="universe-preview" href="ewallet.html" aria-hidden="true" tabindex="-1"><img alt="" decoding="async"><strong></strong><span class="preview-meta"><small></small><span class="preview-cta">View Case Study →</span></span></a>
+<nav class="universe-project-links" aria-label="Featured case studies"></nav>
 <div class="lp-hero-scroll" aria-hidden="true">
 <div class="mouse"><div class="mouse-in"></div></div>
 <span class="down-arrow-1"></span><span class="down-arrow-2"></span><span class="down-arrow-3"></span>
 </div>
-<div class="container">
+<div class="container lp-shell lp-hero-shell">
 <div class="row">
 <div class="col-lg-12">
-<div class="breadcrumb-inner"><br/><br/>
-<div class="case-hero-kicker">PORTFOLIO / 03</div>
+<div class="breadcrumb-inner lp-hero-copy"><br/><br/>
+<div class="case-hero-kicker lp-hero-eyebrow">PORTFOLIO</div>
 <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Product Design<br/>
-                            Impact Across Systems<br/>
+                            <span class="portfolio-impact">Impact Across</span><br/>
+                            Systems<br/>
                             &amp; Platforms
                             <br/><br/>
 </h2>
@@ -1124,7 +1144,7 @@
 <div class="footer-stars-animation-wrapper-footer">
 <!-- Start Footer Area  -->
 <div class="lp-footer-v28-shell">
-<footer aria-label="Website footer" class="lp-footer-v28">
+<footer aria-label="Website footer" class="lp-footer-v28 lp-cinematic-footer">
 <div aria-hidden="true" class="lp-footer-v28__visual">
 <div class="lp-footer-v28__planet"></div>
 <div class="lp-footer-v28__horizon"></div>
@@ -1243,5 +1263,7 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
 <script src="assets/js/lp-footer-backtop.js?v=36" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<script type="module" src="assets/js/portfolio-hero-scene.js?v=home-meteors-20261004" onerror="document.querySelector('.portfolio-universe').dataset.scene='fallback'; console.error('Product universe: scene module failed to load');"></script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=20261004"></script>
 </body>
 </html>

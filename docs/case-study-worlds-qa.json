@@ -1,0 +1,1742 @@
+{
+  "date": "2026-10-04",
+  "caseStudyCount": 23,
+  "desktop": "23/23 impacts and skims; no page errors",
+  "mobile": "23/23 impacts and skims; no page errors",
+  "tabletHardReload": [
+    {
+      "file": "amazon.html",
+      "deterministic": true,
+      "seed": 2707824184,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "coverride.html",
+      "deterministic": true,
+      "seed": 2059638477,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "dailymart.html",
+      "deterministic": true,
+      "seed": 548143125,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "dronline.html",
+      "deterministic": true,
+      "seed": 2055856637,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "eater.html",
+      "deterministic": true,
+      "seed": 575454593,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "eddiebauer.html",
+      "deterministic": true,
+      "seed": 2408232012,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "eddiebauer_leadership.html",
+      "deterministic": true,
+      "seed": 3670462034,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "ewallet.html",
+      "deterministic": true,
+      "seed": 759292886,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "ewallet_leadership.html",
+      "deterministic": true,
+      "seed": 1936784796,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "fluxcrm.html",
+      "deterministic": true,
+      "seed": 3770195193,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "gocart.html",
+      "deterministic": true,
+      "seed": 2067257144,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "homenest.html",
+      "deterministic": true,
+      "seed": 1388314881,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "lider.html",
+      "deterministic": true,
+      "seed": 2698130470,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "mydoc.html",
+      "deterministic": true,
+      "seed": 4104414008,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "norton.html",
+      "deterministic": true,
+      "seed": 565679056,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "quickcart.html",
+      "deterministic": true,
+      "seed": 58995949,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "slurrpfarm.html",
+      "deterministic": true,
+      "seed": 586471150,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "smartfin.html",
+      "deterministic": true,
+      "seed": 1795282162,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "staffee.html",
+      "deterministic": true,
+      "seed": 3859778512,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "taskee.html",
+      "deterministic": true,
+      "seed": 3976379163,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "unipay.html",
+      "deterministic": true,
+      "seed": 3694895852,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "zappay.html",
+      "deterministic": true,
+      "seed": 1484245763,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    },
+    {
+      "file": "zmeet.html",
+      "deterministic": true,
+      "seed": 3889312017,
+      "overflow": false,
+      "canvasCount": 1,
+      "rotation": 0,
+      "fallback": true
+    }
+  ],
+  "worldEffects": [
+    {
+      "file": "amazon.html",
+      "seed": 2707824184,
+      "geology": "COMMERCE_DUSTY",
+      "atmosphere": "DUSTY_WARM",
+      "period": 95,
+      "rotation": true,
+      "fps": 60.00226423638626,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 2.200000000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.03334304063839122,
+            0.25558276576343525,
+            0.9662120323643768
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "coverride.html",
+      "seed": 2059638477,
+      "geology": "ENTERPRISE_STRUCTURED",
+      "atmosphere": "EMERALD_THIN",
+      "period": 100,
+      "rotation": true,
+      "fps": 55.29411764705879,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 2.2499,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.0385538317437808,
+            0.4783770877527456,
+            0.8773077931781263
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "dailymart.html",
+      "seed": 548143125,
+      "geology": "COMMERCE_DUSTY",
+      "atmosphere": "DUSTY_WARM",
+      "period": 100,
+      "rotation": true,
+      "fps": 58.666666666666615,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.200000000000002,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.060052005721644264,
+            0.5330775356796453,
+            0.8439325195550437
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "dronline.html",
+      "seed": 2055856637,
+      "geology": "HEALTHCARE_CALM",
+      "atmosphere": "STANDARD_COOL",
+      "period": 100,
+      "rotation": true,
+      "fps": 58.764691172793185,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 5.551115123125783e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.1997,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.17448743100852382,
+            0.49961277581583025,
+            0.8484934947668408
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "eater.html",
+      "seed": 575454593,
+      "geology": "CONSUMER_ORGANIC",
+      "atmosphere": "DUSTY_WARM",
+      "period": 95,
+      "rotation": true,
+      "fps": 58.71840694408986,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 1.683300000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.24197958639550216,
+            0.6486637121277589,
+            0.7215824750757863
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "eddiebauer.html",
+      "seed": 2408232012,
+      "geology": "OUTDOOR_RUGGED",
+      "atmosphere": "DUSTY_WARM",
+      "period": 110,
+      "rotation": true,
+      "fps": 57.50718839854981,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 5.551115123125783e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.183199999999999,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.09069053747934652,
+            0.4077975918069289,
+            0.908557290724243
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "eddiebauer_leadership.html",
+      "seed": 3670462034,
+      "geology": "OUTDOOR_RUGGED",
+      "atmosphere": "DUSTY_WARM",
+      "period": 110,
+      "rotation": true,
+      "fps": 56.24999999999997,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 2.7755575615628914e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.199900000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.10848530603139175,
+            -0.0973246380812555,
+            0.989322421254885
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "ewallet.html",
+      "seed": 759292886,
+      "geology": "FINTECH_SMOOTH",
+      "atmosphere": "STANDARD_COOL",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.21462461624338,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 1.8999999999999997,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.020224779464529163,
+            0.046249322926115166,
+            0.9987251666121603
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "ewallet_leadership.html",
+      "seed": 1936784796,
+      "geology": "FINTECH_SMOOTH",
+      "atmosphere": "STANDARD_COOL",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.388809182209464,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.3877787807814457e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.1832000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.04712886794663218,
+            -0.06922867267210739,
+            0.9964869596166963
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "fluxcrm.html",
+      "seed": 3770195193,
+      "geology": "ENTERPRISE_STRUCTURED",
+      "atmosphere": "THIN_CLEAN",
+      "period": 105,
+      "rotation": true,
+      "fps": 56.83612251341965,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 2.0832000000000015,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.08457958339035754,
+            0.256112754241979,
+            0.9629395366211221
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "gocart.html",
+      "seed": 2067257144,
+      "geology": "COMMERCE_DUSTY",
+      "atmosphere": "EMERALD_THIN",
+      "period": 95,
+      "rotation": true,
+      "fps": 54.999999999999964,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.0833000000000004,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.07288624789556232,
+            0.49185383671526045,
+            0.8676216907017625
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "homenest.html",
+      "seed": 1388314881,
+      "geology": "CONSUMER_ORGANIC",
+      "atmosphere": "EMERALD_THIN",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.396295330028686,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 2.7755575615628914e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.1832000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.056126067143833946,
+            0.47326212995761424,
+            0.8791318563986565
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "lider.html",
+      "seed": 2698130470,
+      "geology": "COMMERCE_DUSTY",
+      "atmosphere": "DUSTY_WARM",
+      "period": 100,
+      "rotation": true,
+      "fps": 56.16543272912944,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 5.551115123125783e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.150000000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.057221554324163426,
+            0.39414192016190625,
+            0.9172665046167403
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "mydoc.html",
+      "seed": 4104414008,
+      "geology": "HEALTHCARE_CALM",
+      "atmosphere": "THIN_CLEAN",
+      "period": 105,
+      "rotation": true,
+      "fps": 57.548671482796614,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.2167,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.07974181798542301,
+            0.4829702942268122,
+            0.8719982438966526
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "norton.html",
+      "seed": 565679056,
+      "geology": "TECH_SECURITY_FRACTURED",
+      "atmosphere": "THIN_CLEAN",
+      "period": 95,
+      "rotation": true,
+      "fps": 57.44925315970893,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.1666000000000003,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.06528833802699707,
+            0.45419825757437876,
+            0.8885051354573427
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "quickcart.html",
+      "seed": 58995949,
+      "geology": "CONSUMER_ORGANIC",
+      "atmosphere": "THIN_CLEAN",
+      "period": 90,
+      "rotation": true,
+      "fps": 55.00000000000001,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.3877787807814457e-17,
+        "contact": {
+          "type": "contact",
+          "time": 1.6999999999999997,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.009745599115615457,
+            0.06480707506204327,
+            0.9978502223879998
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "slurrpfarm.html",
+      "seed": 586471150,
+      "geology": "CONSUMER_ORGANIC",
+      "atmosphere": "DENSE_HAZE",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.38880918220946,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.0666000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.051323277315928895,
+            0.5416732728445381,
+            0.8390208499742058
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "smartfin.html",
+      "seed": 1795282162,
+      "geology": "ENTERPRISE_STRUCTURED",
+      "atmosphere": "THIN_CLEAN",
+      "period": 105,
+      "rotation": true,
+      "fps": 58.674489931990955,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 5.551115123125783e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.1665,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.12982636243885584,
+            0.49296118660984706,
+            0.8603106323370104
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "staffee.html",
+      "seed": 3859778512,
+      "geology": "ENTERPRISE_STRUCTURED",
+      "atmosphere": "DENSE_HAZE",
+      "period": 105,
+      "rotation": true,
+      "fps": 57.396295330028686,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 5.551115123125783e-17,
+        "contact": {
+          "type": "contact",
+          "time": 2.149900000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.029568669812811692,
+            0.3414680251869028,
+            0.9394281673126783
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "taskee.html",
+      "seed": 3976379163,
+      "geology": "ENTERPRISE_STRUCTURED",
+      "atmosphere": "EMERALD_THIN",
+      "period": 95,
+      "rotation": true,
+      "fps": 56.33112907176093,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 2.1999000000000004,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.13435453298709568,
+            0.43606603285272,
+            0.8898287894072152
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "unipay.html",
+      "seed": 3694895852,
+      "geology": "FINTECH_SMOOTH",
+      "atmosphere": "VIOLET_SOFT",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.45658835546472,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.1102230246251565e-16,
+        "contact": {
+          "type": "contact",
+          "time": 2.1165000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.050451511933347515,
+            0.5145126720772264,
+            0.8559972869206958
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "zappay.html",
+      "seed": 1484245763,
+      "geology": "FINTECH_SMOOTH",
+      "atmosphere": "THIN_CLEAN",
+      "period": 95,
+      "rotation": true,
+      "fps": 58.75,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 1.3010426069826053e-18,
+        "contact": {
+          "type": "contact",
+          "time": 2.1166,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.02982086128388639,
+            0.0003905681347157186,
+            0.9995551829132895
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    },
+    {
+      "file": "zmeet.html",
+      "seed": 3889312017,
+      "geology": "CONSUMER_ORGANIC",
+      "atmosphere": "VIOLET_SOFT",
+      "period": 100,
+      "rotation": true,
+      "fps": 57.51437859464865,
+      "sunFixed": true,
+      "fallbackHidden": true,
+      "overflow": false,
+      "attachment": {
+        "error": 0,
+        "contact": {
+          "type": "contact",
+          "time": 2.1999,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.05757279674073623,
+            0.46490681235517445,
+            0.8834857264841355
+          ]
+        }
+      },
+      "reduced": true,
+      "legacy": [],
+      "errors": []
+    }
+  ],
+  "ewalletForcedVisibleImpacts": "10/10, all feedback channels",
+  "meteorSimulation": {
+    "seconds": 600,
+    "visibleEvents": 264,
+    "impacts": 12,
+    "skims": 11
+  },
+  "contentComparison": "All original HTML content preserved outside shared environment links and E-Wallet environment consolidation",
+  "mainPageRegression": "About, Portfolio, Contact ready without page errors",
+  "fallbackRenders": "46 desktop/mobile captures, with planet, horizon and no content/navigation baked in",
+  "finalDesktopImpactPass": [
+    {
+      "file": "amazon.html",
+      "hit": true,
+      "skim": true,
+      "world": "amazon",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.1856067132392383,
+            0.2237985239108659,
+            0.9567990221022621
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "Amazon: Product Discovery & Checkout",
+      "errors": []
+    },
+    {
+      "file": "coverride.html",
+      "hit": true,
+      "skim": true,
+      "world": "coverride",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7165000000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.1546917250828681,
+            0.4259305468969948,
+            0.8914334744729489
+          ]
+        }
+      ],
+      "frames": 103,
+      "title": "CoverRide: Mobile Vehicle Inspection & Damage Assessment",
+      "errors": []
+    },
+    {
+      "file": "dailymart.html",
+      "hit": true,
+      "skim": true,
+      "world": "dailymart",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6666000000000005,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.21058219879734486,
+            0.4698574173751459,
+            0.857256755521491
+          ]
+        }
+      ],
+      "frames": 99,
+      "title": "DailyMart: Grocery Shopping & Delivery",
+      "errors": []
+    },
+    {
+      "file": "dronline.html",
+      "hit": true,
+      "skim": true,
+      "world": "dronline",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.4334000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.012849127100912128,
+            0.20730467054524732,
+            0.9781920432629122
+          ]
+        }
+      ],
+      "frames": 86,
+      "title": "DrOnline: Care at Your Fingertips",
+      "errors": []
+    },
+    {
+      "file": "eater.html",
+      "hit": true,
+      "skim": true,
+      "world": "eater",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.1832000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.1515126133328524,
+            0.6236451337253476,
+            0.7668837429374437
+          ]
+        }
+      ],
+      "frames": 72,
+      "title": "Eater: Food Discovery & Ordering",
+      "errors": []
+    },
+    {
+      "file": "eddiebauer.html",
+      "hit": true,
+      "skim": true,
+      "world": "eddiebauer",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.08254134633307575,
+            0.4626321095953771,
+            0.8826995283316142
+          ]
+        }
+      ],
+      "frames": 101,
+      "title": "Eddie Bauer: Confident Outdoor Shopping",
+      "errors": []
+    },
+    {
+      "file": "eddiebauer_leadership.html",
+      "hit": true,
+      "skim": true,
+      "world": "eddiebauer_leadership",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7000000000000008,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.10874209907119159,
+            -0.0007965069857476803,
+            0.994069676363892
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "Eddie Bauer: Scaling Confidence Across Commerce",
+      "errors": []
+    },
+    {
+      "file": "ewallet.html",
+      "hit": true,
+      "skim": true,
+      "world": "ewallet",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7166000000000008,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.08864291637285106,
+            0.48647329514976606,
+            0.869187072201977
+          ]
+        }
+      ],
+      "frames": 103,
+      "title": "E-Wallet Platform for P2P Payments & Financial Insights",
+      "errors": []
+    },
+    {
+      "file": "ewallet_leadership.html",
+      "hit": true,
+      "skim": true,
+      "world": "ewallet_leadership",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6833000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.16430391458089047,
+            0.03141867773619381,
+            0.9859092708473255
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "E-Wallet: Building a Trusted P2P Platform",
+      "errors": []
+    },
+    {
+      "file": "fluxcrm.html",
+      "hit": true,
+      "skim": true,
+      "world": "fluxcrm",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6666000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.09512303738904326,
+            0.2807823661123735,
+            0.9550460044616803
+          ]
+        }
+      ],
+      "frames": 100,
+      "title": "FluxCRM: Clinic Operations Dashboard",
+      "errors": []
+    },
+    {
+      "file": "gocart.html",
+      "hit": true,
+      "skim": true,
+      "world": "gocart",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6833000000000002,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.07902515708643731,
+            0.5161129547831063,
+            0.8528671892226335
+          ]
+        }
+      ],
+      "frames": 100,
+      "title": "GoCart: A Scalable Commerce Experience",
+      "errors": []
+    },
+    {
+      "file": "homenest.html",
+      "hit": true,
+      "skim": true,
+      "world": "homenest",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.666700000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.07136100235239495,
+            0.5101822787993193,
+            0.8571007232189197
+          ]
+        }
+      ],
+      "frames": 101,
+      "title": "HomeNest: Smart Living & Home Automation",
+      "errors": []
+    },
+    {
+      "file": "lider.html",
+      "hit": true,
+      "skim": true,
+      "world": "lider",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.7000000000000002,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.1017452929822551,
+            0.4579723858915073,
+            0.8831246735975592
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "L\u00edder: Checkout & Purchase Flow",
+      "errors": []
+    },
+    {
+      "file": "mydoc.html",
+      "hit": true,
+      "skim": true,
+      "world": "mydoc",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.4499000000000009,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.21085512622827451,
+            0.5744039708426205,
+            0.7909489199837677
+          ]
+        }
+      ],
+      "frames": 87,
+      "title": "MyDoc: Find & Book Specialist Care",
+      "errors": []
+    },
+    {
+      "file": "norton.html",
+      "hit": true,
+      "skim": true,
+      "world": "norton",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6999000000000006,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.18488553141663847,
+            0.4520943929621098,
+            0.8725984185895647
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "Norton OPS: Security & Monitoring Platform",
+      "errors": []
+    },
+    {
+      "file": "quickcart.html",
+      "hit": true,
+      "skim": true,
+      "world": "quickcart",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.5833000000000002,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.03448664929825673,
+            0.570516006469161,
+            0.8205620984317149
+          ]
+        }
+      ],
+      "frames": 94,
+      "title": "QuickCart: Instant Cart, Instant Happiness",
+      "errors": []
+    },
+    {
+      "file": "slurrpfarm.html",
+      "hit": true,
+      "skim": true,
+      "world": "slurrpfarm",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6999000000000004,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.07962676792225754,
+            0.5210785442864336,
+            0.8497862840235693
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "Slurrp Farm: D2C Commerce Redesign",
+      "errors": []
+    },
+    {
+      "file": "smartfin.html",
+      "hit": true,
+      "skim": true,
+      "world": "smartfin",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6667000000000005,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.05978947425177751,
+            0.438980467167518,
+            0.8965050854368223
+          ]
+        }
+      ],
+      "frames": 99,
+      "title": "SmartFin: Personal Finance & Investment Platform",
+      "errors": []
+    },
+    {
+      "file": "staffee.html",
+      "hit": true,
+      "skim": true,
+      "world": "staffee",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.566600000000001,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 1.1102230246251565e-16,
+          "visible": true,
+          "local": [
+            -0.08345407914609694,
+            0.24759200501395773,
+            0.9652634954907627
+          ]
+        }
+      ],
+      "frames": 95,
+      "title": "Staffee: Workforce Insights",
+      "errors": []
+    },
+    {
+      "file": "taskee.html",
+      "hit": true,
+      "skim": true,
+      "world": "taskee",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6832000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 2.220446049250313e-16,
+          "visible": true,
+          "local": [
+            -0.239660105219278,
+            0.3894376167893126,
+            0.8893263611271991
+          ]
+        }
+      ],
+      "frames": 100,
+      "title": "Taskee: Team Tasks & Workflows",
+      "errors": []
+    },
+    {
+      "file": "unipay.html",
+      "hit": true,
+      "skim": true,
+      "world": "unipay",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6666000000000003,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.04074142241142065,
+            0.4721088136358141,
+            0.8805983219307646
+          ]
+        }
+      ],
+      "frames": 99,
+      "title": "UniPay: Unified Payments & Financial Management",
+      "errors": []
+    },
+    {
+      "file": "zappay.html",
+      "hit": true,
+      "skim": true,
+      "world": "zappay",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6832000000000007,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.028150928330085367,
+            0.31173847716322217,
+            0.9497508342139583
+          ]
+        }
+      ],
+      "frames": 100,
+      "title": "ZapPay: Mobile Payments & Financial Transactions Platform",
+      "errors": []
+    },
+    {
+      "file": "zmeet.html",
+      "hit": true,
+      "skim": true,
+      "world": "zmeet",
+      "contact": [
+        {
+          "type": "contact",
+          "time": 1.6831000000000012,
+          "feedback": {
+            "entry": true,
+            "flash": true,
+            "terrain": true,
+            "ejecta": true,
+            "mark": true
+          },
+          "error": 0,
+          "visible": true,
+          "local": [
+            -0.22643359415542474,
+            0.45598537713048287,
+            0.8607003911240123
+          ]
+        }
+      ],
+      "frames": 102,
+      "title": "Z-Meet: Meetings, Notes & Follow-Ups",
+      "errors": []
+    }
+  ],
+  "worldIdentityRefinement": {
+    "version": "worlds-v4",
+    "changes": [
+      "Broader visible mineral regions",
+      "Stronger differentiated macro terrain",
+      "Clearer atmospheric tint"
+    ],
+    "masterPixelComparison": {
+      "pixelIdentical": true,
+      "hashes": [
+        "86f3861e66443b659279f11f08afe971399e17fe4d12d5b66b6c13a35af85168",
+        "86f3861e66443b659279f11f08afe971399e17fe4d12d5b66b6c13a35af85168"
+      ]
+    },
+    "desktopImpactSkim": "23/23",
+    "mobileImpactSkim": "23/23",
+    "fallbacks": "46 refreshed"
+  }
+}

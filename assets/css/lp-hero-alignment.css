@@ -1,0 +1,54 @@
+/* The existing Home/header content measure (1290px shell minus 16px gutters).
+   Only opted-in main-page headers/heroes use this shared horizontal guide.
+   Scene layers, type, copy measures and vertical placement remain page-owned. */
+:root {
+  --lp-content-max:1258px;
+  --lp-page-gutter:clamp(32px,3vw,48px);
+  --lp-content-start:max(var(--lp-page-gutter),calc((100% - var(--lp-content-max)) / 2));
+}
+.lp-shell,
+.container.lp-shell,
+.container.lp-shell.lp-hero-shell {
+  box-sizing:border-box;
+  width:min(calc(100% - var(--lp-page-gutter) * 2),var(--lp-content-max));
+  max-width:var(--lp-content-max);
+  margin-inline:auto;
+  padding-inline:0;
+}
+.lp-hero-shell .lp-hero-copy {
+  margin-inline:0;
+  padding-inline:0;
+  text-align:left;
+}
+.lp-hero-copy :is(h1,h2,p,.button-area) {
+  margin-inline:0;
+  text-align:left;
+}
+.lp-hero-shell .lp-hero-eyebrow {
+  text-align:left;
+  justify-content:flex-start;
+}
+.contact-hero .lp-hero-shell {
+  position:relative;
+  z-index:2;
+  flex-shrink:0;
+}
+.contact-hero .lp-hero-copy {
+  position:relative;
+  z-index:1;
+  width:min(760px,100%);
+}
+@media(max-width:767px) {
+  :root { --lp-page-gutter:24px; }
+}
+/* Eyebrow rules share a horizontal footprint without changing type or baseline. */
+.lp-hero-shell .lp-hero-eyebrow { gap:18px; }
+.lp-hero-shell .lp-hero-eyebrow::before { width:30px; margin-right:18px; }
+.lp-hero-shell .lp-hero-eyebrow > span:first-child { width:30px; flex-shrink:0; }
+@media(max-width:767px) {
+  /* Preserve Contact's approved text measure when removing its old footer inset. */
+  .contact-hero .lp-hero-shell .lp-hero-copy { width:min(366px,calc(100vw - 36px - 2 * clamp(32px,12vw,78px))); }
+}
+@media(max-width:420px) {
+  .contact-hero .lp-hero-shell .lp-hero-copy { width:calc(100vw - 84px); }
+}

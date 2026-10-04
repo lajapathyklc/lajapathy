@@ -1,0 +1,116 @@
+/* The original About page owns navigation, grids, copy and all other sections.
+   These rules add only the cinematic environment to its existing hero. */
+.about-page-hero.about-journey-hero { position:relative; isolation:isolate; background:#020305 !important; --planet-y:0px; --mountain-y:0px; }
+.about-page-hero.about-journey-hero::before { display:block !important; content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(90deg,#020305f2,#020305c9 36%,transparent 62%),linear-gradient(#020305 0%,#020305c9 10%,transparent 18%); }
+.about-page-hero.about-journey-hero .about-planet-stage { position:absolute; inset:0; width:100%; height:100%; z-index:1; transform:translateY(var(--planet-y)); }
+.about-page-hero.about-journey-hero .about-space-detail { position:absolute; inset:0; z-index:0; background:url('../images/hero-cinematic/space.webp') center/cover; opacity:.1; }
+.about-page-hero.about-journey-hero > .container { z-index:7; }
+.about-page-hero.about-journey-hero .about-mountain-depth { position:absolute; left:0; bottom:0; width:100%; height:28%; z-index:4; transform:translateY(var(--mountain-y)); mask-image:linear-gradient(transparent,#000 16%,#000 76%,transparent); pointer-events:none; }
+.about-page-hero.about-journey-hero .about-mountain-depth img { width:100%; height:100%; object-fit:cover; object-position:center bottom; filter:brightness(.62) saturate(.79); }
+.about-page-hero.about-journey-hero .about-valley-fog { position:absolute; left:0; bottom:0; width:100%; height:30%; z-index:5; pointer-events:none; }
+.about-page-hero.about-journey-hero .about-orbit { position:absolute; inset:0; z-index:8; transform:translateY(var(--planet-y)); pointer-events:none; }
+.about-orbit svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.about-orbit ol { list-style:none; padding:0; margin:0; }
+.about-orbit li { position:absolute; left:var(--x); top:var(--y); padding-left:22px; color:#ddd; text-shadow:0 2px 8px #000; opacity:0; animation:restored-node .7s calc(.65s + var(--i)*.4s) forwards; }
+.about-orbit li strong { display:block; color:#fff; font-size:clamp(18px,1.15vw,22px); font-weight:600; line-height:1.2; }
+.about-orbit li span { display:block; font-size:clamp(12px,.83vw,16px); line-height:1.2; width:max-content; max-width:var(--label-width,130px); white-space:normal; }
+.about-orbit li::before { content:""; position:absolute; left:-5px; top:-5px; width:10px; height:10px; border:1px solid #ef924a; border-radius:50%; background:radial-gradient(circle,#fff 25%,#ffb266 40%,#df792a 65%); box-shadow:0 0 8px #ff8633; }
+.about-orbit li.is-now strong { color:#ffd6a5; }
+.about-orbit li.is-now::before { animation:restored-pulse var(--timeline-pulse,6s) infinite; }
+.orbit-arc { fill:none; stroke:#ec9452; stroke-width:1.1; opacity:.55; stroke-dasharray:1600; stroke-dashoffset:1600; animation:restored-arc 1.6s .2s forwards; }
+.orbit-back-arc { display:none; }
+.orbit-traveler { fill:#ffc48d; opacity:.18; r:1.5; }
+@keyframes restored-node { to { opacity:1; } }
+@keyframes restored-arc { to { stroke-dashoffset:0; } }
+@keyframes restored-pulse { 50% { box-shadow:0 0 13px #ff8633; } }
+@media(max-width:900px) {
+ .about-page-hero.about-journey-hero { height:1080px; min-height:100svh; }
+ .about-orbit li { transform:translateX(-100%); text-align:right; padding-left:0; padding-right:18px; }
+ .about-orbit li::before { left:auto; right:-4px; }
+ .about-orbit li strong { font-size:14px; }
+ .about-orbit li span { font-size:9px; max-width:140px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .about-orbit li,.orbit-arc { animation:none; opacity:1; stroke-dashoffset:0; }
+ .about-orbit li.is-now::before { animation:none; }
+ .orbit-traveler { display:none; }
+}
+@media(max-width:900px) {
+ .about-page-hero.about-journey-hero { height:1080px !important; min-height:1080px !important; }
+ .about-page-hero.about-journey-hero .col-lg-7 { top:130px !important; transform:none !important; }
+ .about-page-hero.about-journey-hero::before { background:linear-gradient(#020305 0%,#020305e8 39%,transparent 62%); }
+}
+/* Final polish only: restored content, restrained optics and foreground depth. */
+.about-page-hero.about-journey-hero .about-hero-title { font-size:clamp(28px,3vw,56px); line-height:.98; }
+.about-page-hero.about-journey-hero .about-hero-title span { background:linear-gradient(90deg,#ff6833,#ffba55); background-clip:text; -webkit-background-clip:text; color:transparent; }
+.about-page-hero.about-journey-hero .about-hero-description { font-size:17px; line-height:1.6; color:#b6b7ba; }
+.about-page-hero.about-journey-hero .about-hero-cta { background:#080808ad; color:#fff; box-shadow:0 0 12px #ff980018; }
+.about-page-hero.about-journey-hero .about-mountain-depth::after { content:""; position:absolute; inset:50% 0 0; background:linear-gradient(transparent,#00000019 40%,#000 100%); }
+.about-page-hero.about-journey-hero .about-orbit li span { margin-top:3px; }
+.about-page-hero.about-journey-hero .orbit-arc { stroke-width:1; opacity:.55; }
+.about-page-hero.about-journey-hero .about-orbit li:not(.is-now)::before { animation:restored-pulse 10s infinite; }
+.about-page-hero.about-journey-hero .lp-hero-scroll { animation:about-scroll-drift 2.4s ease-in-out infinite; }
+.about-page-hero.about-journey-hero .lp-hero-scroll span { animation:none; opacity:.55; }
+@keyframes about-scroll-drift { 50% { margin-bottom:4px; } }
+@media(min-width:1200px) {
+ .about-page-hero.about-journey-hero .col-lg-7 { top:calc(50% - 225px) !important; transform:none !important; }
+}
+@media(max-width:900px) {
+ .about-desktop-copy-break { display:none; }
+ .about-page-hero.about-journey-hero .about-hero-description { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .about-page-hero.about-journey-hero .lp-hero-scroll,.about-page-hero.about-journey-hero .about-orbit li::before { animation:none; }
+}
+
+.about-page-hero.about-journey-hero .about-hero-cta { display:inline-flex !important; align-items:center; gap:28px; min-height:56px; padding:13px 28px !important; border:1px solid #ed923e !important; border-radius:999px !important; color:#fff !important; }
+.about-page-hero.about-journey-hero .about-hero-cta span { color:#fff !important; }
+.about-page-hero.about-journey-hero .about-story-marker { position:absolute; left:var(--lp-content-start); bottom:4.5%; z-index:8; color:#ff9800; font-size:12px; letter-spacing:1px; }
+.about-story-marker::before { content:""; display:inline-block; width:20px; height:1px; background:#ff9800; margin-right:12px; vertical-align:middle; }
+.about-page-hero.about-journey-hero .about-valley-fog { background:radial-gradient(ellipse at 78% 5%,#b26b220a,transparent 65%); }
+.about-page-hero.about-journey-hero .about-valley-fog { mask-image:linear-gradient(transparent,#000 20%,#000 85%,transparent); }
+.about-page-hero.about-journey-hero .about-orbit li:not(.is-now)::before { animation:restored-quiet-pulse 10s infinite; }
+@keyframes restored-quiet-pulse { 50% { box-shadow:0 0 9px #ff8633bb; } }
+@media(prefers-reduced-motion:reduce) {
+ .about-page-hero.about-journey-hero .about-orbit li:not(.is-now)::before { animation:none; }
+}
+
+/* Geometry-bound orbit and quiet interaction polish. */
+.about-page-hero.about-journey-hero .about-hero-description { max-width:600px; }
+.about-page-hero.about-journey-hero .about-hero-cta { transition:border-color .25s,background .25s; }
+.about-page-hero.about-journey-hero .about-hero-cta:hover { border-color:#ffc175 !important; background:#16100bad; }
+.about-page-hero.about-journey-hero .about-hero-cta span { transition:transform .25s; }
+.about-page-hero.about-journey-hero .about-hero-cta:hover span { transform:translateX(4px); }
+
+.about-page-hero.about-journey-hero .about-orbit li span { font-size:clamp(12px,.78vw,15px); }
+.about-journey-hero:not([data-scene="ready"]) .about-orbit { visibility:hidden; }
+.about-journey-hero:not([data-scene="ready"]) .about-orbit li,
+.about-journey-hero:not([data-scene="ready"]) .orbit-arc { animation-play-state:paused; }
+@media(max-width:900px) { .about-page-hero.about-journey-hero .about-orbit li span { font-size:9px; } }
+/* Selective exposure and depth compositing; header/copy/CTA remain locked. */
+.about-page-hero.about-journey-hero .about-space-detail { opacity:.21; filter:saturate(.65); }
+.about-page-hero.about-journey-hero::before { background:linear-gradient(90deg,#020305e8,#020305b0 36%,transparent 60%),linear-gradient(#020305 0%,#020305b0 9%,transparent 18%); }
+.about-page-hero.about-journey-hero .about-mountain-depth { mask-image:url('../images/hero-cinematic/about-horizon-mask.svg'); mask-size:100% 100%; -webkit-mask-image:url('../images/hero-cinematic/about-horizon-mask.svg'); -webkit-mask-size:100% 100%; }
+.about-page-hero.about-journey-hero .about-valley-fog { height:42%; background:none; mask-image:linear-gradient(transparent,#000 28%,#000 75%,transparent); }
+.about-page-hero.about-journey-hero .about-orbit li { padding:0; transform:none; text-align:left; width:0; height:0; }
+.about-orbit .timeline-label { position:absolute; width:150px; }
+.about-page-hero.about-journey-hero .about-orbit li span { width:auto; max-width:none; line-height:1.3; font-size:clamp(12px,.73vw,14px); margin-top:5px; }
+.about-page-hero.about-journey-hero .about-orbit li::before { left:-5px; right:auto; }
+.about-page-hero.about-journey-hero .orbit-arc { opacity:.48; }
+.timeline-connectors path { fill:none; stroke:#ec9452; stroke-width:1; opacity:0; animation:connector-intro .7s calc(.65s + var(--i)*.4s) forwards; }
+@keyframes connector-intro { to { opacity:.32; } }
+.about-journey-hero:not([data-scene="ready"]) .timeline-connectors path { animation-play-state:paused; }
+@media(max-width:900px) {
+ .about-page-hero.about-journey-hero::before { background:linear-gradient(#020305 0%,#020305d0 38%,transparent 60%); }
+ .about-page-hero.about-journey-hero .about-orbit .timeline-label { text-align:right; }
+ .about-page-hero.about-journey-hero .about-orbit li span { font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) { .timeline-connectors path { animation:none; opacity:.32; } }
+
+/* Horizon owns its depth in the shader; no rectangular fog mask/black section overlay. */
+.about-page-hero.about-journey-hero .about-valley-fog { height:100%; mask-image:none; -webkit-mask-image:none; background:none; }
+.about-page-hero.about-journey-hero .about-space-detail { filter:saturate(.60) blur(.3px); }
+
+/* Approved composition locked: only arc visual weight and label rhythm. */
+.about-page-hero.about-journey-hero .orbit-arc { opacity:.42; }
+.about-page-hero.about-journey-hero .about-orbit li span { margin-top:6px; }

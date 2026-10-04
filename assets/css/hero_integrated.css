@@ -807,7 +807,6 @@ body {
         margin: 0 !important;
         padding: 0 !important;
         overflow: visible !important;
-        text-align: center !important;
     }
 
     /* Force the row and column to allow the full h1 height */
@@ -823,10 +822,6 @@ body {
         /* Ensure the container itself doesn't clip and obeys the parent padding */
         position: relative !important;
         display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 15px !important;
         /* Centered padding */
         overflow: visible !important;
     }

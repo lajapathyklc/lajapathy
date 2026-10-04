@@ -37,6 +37,9 @@
 <link href="assets/css/lp-project-summary.css" rel="stylesheet"/>
 <link href="assets/css/ewallet-case-study.css?v=case-study-hero-sizing-20260929-r5" rel="stylesheet"/>
 <link href="assets/css/lp-case-study-pages.css?v=case-nav-grid-20260928-r3" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=20261004">
+<link rel="stylesheet" href="assets/css/lp-case-study-cinematic-hero.css?v=20261004-worlds-v4"/>
+
 </head>
 <script>
     // ...existing code...
@@ -314,7 +317,8 @@
 </div>
 </div>
 <main class="ewallet-case-study" aria-label="E-wallet case study">
-<section class="ewallet-hero">
+<section class="ewallet-hero case-study-cinematic-hero" data-case-study="ewallet">
+<div class="ewallet-hero-transition" aria-hidden="true"></div>
 <div class="ewallet-hero-inner container">
 <div class="ewallet-hero-copy">
 <p class="ewallet-kicker">End-to-end product design &amp; UX strategy | Fintech | Mobile platform</p>
@@ -465,7 +469,7 @@
 <div class="footer-stars-animation-wrapper-footer">
 <!-- Start Footer Area  -->
 <div class="lp-footer-v28-shell">
-<footer aria-label="Website footer" class="lp-footer-v28">
+<footer aria-label="Website footer" class="lp-footer-v28 lp-cinematic-footer">
 <div aria-hidden="true" class="lp-footer-v28__visual">
 <div class="lp-footer-v28__planet"></div>
 <div class="lp-footer-v28__horizon"></div>
@@ -701,5 +705,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateGalleryState();
 });
 </script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=20261004"></script>
+<script type="module" src="assets/js/lp-case-study-cinematic-hero.js?v=20261004-worlds-v4"></script>
 </body>
 </html>

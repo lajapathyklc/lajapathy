@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640">
+<defs>
+<linearGradient id="horizon" gradientUnits="userSpaceOnUse" x1="0" y1="463" x2="0" y2="487"><stop stop-color="white" stop-opacity="0"/><stop offset="1" stop-color="white"/></linearGradient>
+<linearGradient id="left" gradientUnits="userSpaceOnUse" x1="790" y1="0" x2="818" y2="0"><stop stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+</defs>
+<!-- The source landscape is unchanged. Feather its distant atmospheric boundary. -->
+<rect width="1920" height="640" fill="url(#horizon)"/>
+<rect width="818" height="640" fill="url(#left)"/>
+<path fill="white" filter="url(#soft)" d="M1510 483 L1532 459 1550 465 1580 481 1602 468 1620 444 1640 430 1662 421 1681 412 1705 402 1731 390 1754 381 1780 374 1810 365 1831 352 1855 345 1880 328 1902 317 1920 302 L1920 640 H1510 Z"/>
+</svg>

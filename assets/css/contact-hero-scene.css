@@ -1,0 +1,24 @@
+/* Contact only: retain the approved text/layout and the original landscape crop. */
+.contact-hero .contact-universe { background:#030303; }
+.contact-hero .contact-universe::before { background-image:linear-gradient(90deg,#030303 0%,#030303 46%,transparent 72%),url('../images/hero-cinematic/space.webp'); opacity:.035; }
+.contact-hero .contact-universe::after { z-index:3; pointer-events:none; }
+.contact-universe > .lp-hero-shell { position:relative; z-index:5; }
+.contact-environment,
+.contact-terrain,
+.contact-fallback,
+.contact-valley-fog { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.contact-environment { z-index:0; opacity:0; transition:opacity .5s ease; mask-image:linear-gradient(90deg,transparent 42%,#000 52%); }
+.contact-universe[data-scene="ready"] .contact-environment { opacity:1; }
+.contact-terrain { z-index:1; background:url('../images/bg/footerbg.webp') center/cover no-repeat;
+ mask:url('../images/hero-cinematic/contact-horizon-mask.svg') center/cover no-repeat;
+ -webkit-mask:url('../images/hero-cinematic/contact-horizon-mask.svg') center/cover no-repeat; }
+.contact-valley-fog { z-index:2; opacity:0; transition:opacity .5s ease; }
+.contact-universe[data-scene="ready"] .contact-valley-fog { opacity:1; }
+.contact-fallback { display:none; z-index:0; background:url('../images/bg/footerbg.webp') center/cover no-repeat; }
+.contact-universe[data-scene="fallback"] .contact-fallback { display:block; }
+.contact-universe[data-scene="fallback"] .contact-environment,
+.contact-universe[data-scene="fallback"] .contact-valley-fog { display:none; }
+@media(prefers-reduced-motion:reduce) {
+ .contact-environment,.contact-valley-fog { transition:none; }
+ .contact-hero .lp-hero-scroll,.contact-hero .lp-hero-scroll * { animation:none; }
+}

@@ -28,11 +28,11 @@
 <link href="assets/css/vendor/animate.min.css" rel="stylesheet"/>
 <link href="assets/css/vendor/bootstrap.min.css" rel="stylesheet"/>
 <!-- custom css -->
-<link href="assets/css/style.css?v=water-level-contrast-r2-20260926" rel="stylesheet"/>
+<link href="assets/css/style.css?v=water-level-contrast-r2-20260926-grid-20261004" rel="stylesheet"/>
 <link href="assets/css/lp-responsive-menu-fix.css" rel="stylesheet"/>
 <link href="assets/css/lp-mobile-menu.css?v=24" rel="stylesheet"/>
 <link href="assets/css/lp-v25-footer-linkedin.css?v=25" rel="stylesheet"/>
-<link href="assets/css/lp-v29-footer-option2.css?v=36" rel="stylesheet"/>    <link rel="stylesheet" href="assets/css/lp-v55-portfolio-direct-menu.css">
+<link href="assets/css/lp-v29-footer-option2.css?v=36-grid-20261004" rel="stylesheet"/>    <link rel="stylesheet" href="assets/css/lp-v55-portfolio-direct-menu.css">
 <style>
     /* Labels for screen readers without changing the visual design */
     .visually-hidden {
@@ -72,6 +72,9 @@
     }
 </style>
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
+<link rel="stylesheet" href="assets/css/lp-hero-alignment.css?v=shared-guide-20261004">
+<link rel="stylesheet" href="assets/css/contact-hero-scene.css?v=cinematic-20261004">
+<link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=20261004">
 </head>
 <script>
     // ...existing code...
@@ -226,8 +229,7 @@
         }
     }
 </style>
-<!-- Add this script before
-</body> to initialize the Swiper slider for logos -->
+<!-- Initialize the Swiper slider for logos. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Swiper !== 'undefined') {
@@ -311,6 +313,16 @@
         max-width: 760px;
     }
 
+    .contact-hero .lp-footer-v28__eyebrow.lp-hero-eyebrow {
+        font-family: "Montserrat", serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #b5b7bd;
+        letter-spacing: 4px;
+        line-height: 1.75;
+        text-transform: none;
+    }
+
     @media (max-width: 991px) {
         .contact-hero {
             height: 100svh;
@@ -321,46 +333,46 @@
             box-sizing: border-box;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100svh;
-            padding: 76px 18px;
+            padding: 76px 0;
         }
 
         .contact-hero .lp-footer-v28__hero-copy {
             width: 100%;
             max-width: 366px;
-            margin: 0 auto;
-            text-align: center;
+            margin: 0;
+            text-align: left;
         }
 
         .contact-hero .lp-footer-v28__eyebrow {
             width: 100%;
-            justify-content: center;
-            text-align: center;
+            justify-content: flex-start;
+            text-align: left;
         }
 
         .contact-hero .lp-footer-v28__title {
             font-size: clamp(2.2rem, 8.6vw, 4.6rem);
             line-height: .92;
             letter-spacing: -2px;
-            text-align: center !important;
+            text-align: left;
         }
 
         .contact-hero .lp-footer-v28__sub {
             max-width: 366px;
-            margin: 20px auto 0;
+            margin: 20px 0 0;
             font-size: 1.15rem;
             line-height: 1.45;
-            text-align: center !important;
+            text-align: left;
         }
     }
 </style>
 <!-- ...existing code... -->
-<body>
+<body data-footer-variant="legal-only">
 <!-- tpm-header-area start -->
 <header class="tmp-header-area-start header-one header--sticky header--transparent">
 <!-- header mid area start -->
-<div class="container">
+<div class="container lp-shell">
 <div class="row">
 <div class="col-lg-12">
 <div class="header-content">
@@ -414,7 +426,7 @@
 <a class="lp-nav-row" href="contact.html"><span class="lp-nav-num">04</span><span class="lp-nav-label">CONTACT</span><span class="lp-nav-arrow">↗</span></a>
 </nav>
 </div>
-<footer class="lp-menu-footer">
+<div class="lp-menu-footer">
 <div class="lp-menu-milestone">
 <strong>20</strong><span>Yrs</span>
 <small>DESIGNING &amp; SCALING<br/>HIGH-IMPACT PRODUCTS</small>
@@ -427,7 +439,7 @@
 </div>
 </div>
 <div class="lp-menu-next"><span>LET’S BUILD<br/>WHAT’S NEXT</span><i></i></div>
-</footer>
+</div>
 </div>
 </div>
 <!-- Breadcrumb Area Start -->
@@ -436,12 +448,19 @@
 <div class="mouse"><div class="mouse-in"></div></div>
 <span class="down-arrow-1"></span><span class="down-arrow-2"></span><span class="down-arrow-3"></span>
 </div>
-<div class="container">
-<div class="lp-footer-v28__hero">
-<div class="lp-footer-v28__hero-copy">
-<div class="lp-footer-v28__eyebrow"><span></span> NEXT CHAPTER</div>
+<div class="container lp-shell lp-hero-shell">
+<div class="lp-footer-v28__hero contact-universe" data-scene="loading">
+<canvas class="contact-environment" aria-hidden="true"></canvas>
+<div class="contact-terrain" aria-hidden="true"></div>
+<canvas class="contact-valley-fog" aria-hidden="true"></canvas>
+<div class="contact-fallback" aria-hidden="true"></div>
+<noscript><style>.contact-universe .contact-fallback{display:block}</style></noscript>
+<div class="lp-shell lp-hero-shell">
+<div class="lp-footer-v28__hero-copy lp-hero-copy">
+<div class="lp-footer-v28__eyebrow lp-hero-eyebrow"><span></span> NEXT CHAPTER</div>
 <h2 class="lp-footer-v28__title">LET’S BUILD<br/><em>WHAT’S NEXT</em></h2>
 <p class="lp-footer-v28__sub">Designing products that move businesses forward.</p>
+</div>
 </div>
 </div>
 </div>
@@ -607,19 +626,11 @@
 <!-- Tpm Get In touch End -->
 </div>
 
-<br/>
-<br/>
 <!-- Start Footer Area  -->
 <div class="footer-stars-animation-wrapper-footer">
 <!-- Start Footer Area  -->
 <div class="lp-footer-v28-shell">
-<footer aria-label="Website footer" class="lp-footer-v28">
-<div aria-hidden="true" class="lp-footer-v28__visual">
-<div class="lp-footer-v28__planet"></div>
-<div class="lp-footer-v28__horizon"></div>
-<div class="lp-footer-v28__glow"></div>
-<div class="lp-footer-v28__stars"></div>
-</div>
+<footer aria-label="Website footer" class="lp-footer-v28 lp-cinematic-footer">
 <div class="container lp-footer-v28__inner">
 <section class="lp-footer-v28__navrow">
 <div class="lp-footer-v28__identity">
@@ -723,5 +734,76 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/lp-mobile-menu.js?v=24" defer></script>
 <script src="assets/js/lp-footer-backtop.js?v=36" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<style>
+/* Reuse the LP space atlas behind the globe; reserve darkness for the copy. */
+.contact-hero .contact-universe::before {
+    z-index:-1;
+    background-image:linear-gradient(90deg,#030303 0%,#030303 32%,rgba(3,3,3,.96) 40%,rgba(3,3,3,.87) 48%,rgba(3,3,3,.62) 57%,rgba(3,3,3,.38) 65%,transparent 85%),url('assets/images/hero-cinematic/space.webp');
+    filter:sepia(.45) saturate(.7);
+    opacity:0;
+    transition:opacity .5s ease;
+}
+.contact-hero .contact-universe[data-scene="ready"]::before { opacity:.22; }
+@media(prefers-reduced-motion:reduce) {
+    .contact-hero .contact-universe::before { transition:none; }
+}
+</style>
+<script type="module" onerror="document.querySelector('.contact-universe').dataset.scene='fallback'">
+// Contact-only material refinements; shared scene physics and cadence stay canonical.
+import {THREE} from './assets/js/hero-3d-core.js';
+const baseCompile=THREE.ShaderMaterial.prototype.onBeforeCompile;
+THREE.ShaderMaterial.prototype.onBeforeCompile=function(shader,renderer){
+    baseCompile.call(this,shader,renderer);
+    if(this.uniforms.surfaceExposure && this.uniforms.impactPoints){
+        shader.fragmentShader=shader.fragmentShader
+            .replace('mix(n,detail,.55)','mix(n,detail,mix(.56,.77,grazing))')
+            .replace('albedo=mix(albedo,geological*.72,.25)',
+                'albedo=mix(albedo,geological*.72,.33);albedo*=mix(.88,1.13,smoothstep(.24,.67,elevation));albedo=mix(albedo,albedo*vec3(.91,1.025,1.075),mineral*.22)')
+            .replace('mix(.90,.78,smoothstep(.28,.65,elevation))',
+                'mix(.94,.72,smoothstep(.28,.65,elevation))')
+            .replace('energy*=surfaceExposure;',
+                'energy*=surfaceExposure;energy*=mix(1.,mix(.82,1.22,smoothstep(.27,.64,elevation)),grazing*smoothstep(-.14,.24,ld));');
+    }else if(this.uniforms.sunDirection && this.uniforms.intensity && this.uniforms.time){
+        shader.fragmentShader=shader.fragmentShader
+            .replace('float rayleigh=fresnel*(day+.33*max(v.y,0.));',
+                'float alignment=dot(normalize(v.xy),normalize(sunDirection.xy));float angular=pow(smoothstep(-.17,1.,alignment),3.);float nearSun=pow(max(alignment,0.),12.);float rayleigh=fresnel*angular*(day*.80+nearSun*.15);')
+            .replace('mie*.65','mie*.78*angular')
+            .replace('time*.628','time*.785');
+    }else if(this.uniforms.opacity && this.uniforms.time && this.vertexShader.includes('p=uv-.5')){
+        // Shift the optical source inward by 1.1% of planet radius. Depth testing
+        // against the opaque globe hides part of the core, bloom and ray roots.
+        shader.vertexShader=shader.vertexShader.replace('vec4(position,1.)',
+            'vec4(position-vec3(normalize(vec2(-.20,.82))*(.011/.82),0.),1.)');
+        shader.fragmentShader=shader.fragmentShader
+            .replace('glare*4.','glare*2.4')
+            .replace('direction=-.85+j*.31','direction=.95+j*.30')
+            .replace('(.024+j*.005)','(.040+j*.007)')
+            .replace('(12.+j*2.3)','(8.+j*1.8)')
+            .replace('(.041+mod(j,3.)*.014)','(.085+mod(j,3.)*.020)')
+            .replaceAll('time*.48','time*.785')
+            .replace('time*.628','time*.785');
+    }else if(this.uniforms.speeds && this.uniforms.opacities){
+        // A narrow right-side depth veil at the existing landscape intersection.
+        shader.fragmentShader=shader.fragmentShader.replace('vec3 tint=mix(',
+            'a+=.018*exp(-pow((p.y-.275)*24.,2.))*smoothstep(.48,.76,p.x);vec3 tint=mix(');
+    }
+};
+try{
+    // Decode the shared background before the scene can publish its ready frame.
+    const spaceAtlas=new Image();
+    spaceAtlas.src='assets/images/hero-cinematic/space.webp';
+    await spaceAtlas.decode();
+    const {contactHeroConfig:config}=await import('./assets/js/contact-hero-scene.js?v=cinematic-20261004');
+    // The scene awaits its geology atlas before constructing these materials.
+    Object.assign(config,{relief:2.15,cloudSpeed:1.012,hazeSpeed:1.020,
+        atmosphereIntensity:.47,outerAtmosphereIntensity:.075,
+        cloudOpacity:.14,highHazeOpacity:.055,
+        fogOpacity:[.095,.060,.025]});
+}catch(error){
+    document.querySelector('.contact-universe').dataset.scene='fallback';
+    console.error('Contact hero polish:',error);
+}
+</script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=20261004"></script>
 </body>
 </html>
