@@ -61,6 +61,7 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
       atmosphereThickness:1.006,outerAtmosphereScale:1.012,outerAtmosphereIntensity:.060,
       sunGlow:calm?.33:.40};
     renderer=createHeroRenderer(canvas,mobile?1.25:1.75);
+    renderer.setClearColor(0x000000,0);
     scene=new THREE.Scene();const camera=new THREE.OrthographicCamera(-1,1,1,-1,.1,100);camera.position.z=8;
     atlas=own(await loadGeology(renderer,mobile));
     const loader=new THREE.TextureLoader();
@@ -123,8 +124,14 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
       renderer.setSize(width,height,false);
       const sourceAspect=1920/640;
       landscapeUniforms.cover.value.set(Math.min(1,aspect/sourceAspect),Math.min(1,sourceAspect/aspect));
-      const radius=width*(small?.82:width<1100?.285:.28);
-      const x=width*(small?1.10:.86),y=height*(small?.87:.84);
+      // Orthographic framing uses the actual scene height, not a 16:9 viewport.
+      // Preserve the approved desktop/mobile framing until the upper air shell
+      // would leave its safe zone; then bound growth and retain the right crop.
+      const safeTop=Math.max(40,Math.min(90,height*.08));
+      const y=height*(small?.87:.84);
+      const preferredRadius=width*(small?.82:width<1100?.285:.28);
+      const radius=width<1100?preferredRadius:Math.min(preferredRadius,(y-safeTop)/config.outerAtmosphereScale);
+      const x=width<1100?width*(small?1.10:.86):Math.max(width*.86,width-radius*.5);
       group.position.set((x-width/2)*2/height,1-y*2/height,0);group.scale.setScalar(radius*2/height);
       const direction=new THREE.Vector2(light.x,light.y).normalize();
       sun.position.set(group.position.x+direction.x*group.scale.x*1.005,group.position.y+direction.y*group.scale.x*1.005,-1.4);

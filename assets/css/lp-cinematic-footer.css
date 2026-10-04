@@ -1,15 +1,19 @@
-/* Shared closing chapter. Every selector is confined to the real website footer. */
+:root { --lp-black:var(--color-page,#000000); }
+html, body, main { background-color:var(--lp-black); }
+.lp-footer-v28-shell:has(> footer.lp-cinematic-footer),
+.footer-stars-animation-wrapper-footer:has(footer.lp-cinematic-footer) { background-color:var(--lp-black); }
+/* Shared closing chapter; the primary canvas token also keeps page/scene joins continuous. */
 .lp-footer-v28-shell:has(> footer.lp-cinematic-footer),
 .footer-stars-animation-wrapper-footer:has(footer.lp-cinematic-footer) { width:100vw; margin-left:calc(50% - 50vw); }
-footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --footer-max:var(--lp-content-max,1258px); background:#030303; padding:0 0 26px; color:#fff; }
+footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --footer-max:var(--lp-content-max,1258px); background:var(--lp-black); padding:0 0 26px; color:#fff; }
 .lp-cinematic-footer > .lp-footer-v28__inner.container { width:100%!important; max-width:none!important; padding:0!important; margin:0!important; }
 .lp-cinematic-footer__scene,
-.lp-cinematic-footer .lp-footer-v28__hero { position:relative; isolation:isolate; overflow:hidden; min-height:clamp(620px,78vh,760px); width:100%; margin:0; padding:0; background:#030303; border:0; }
+.lp-cinematic-footer .lp-footer-v28__hero { position:relative; isolation:isolate; overflow:hidden; min-height:clamp(620px,78vh,760px); width:100%; margin:0; padding:0; background:var(--lp-black); border:0; }
 .lp-cinematic-footer .lp-footer-v28__hero::before { background:none; }
-.lp-cinematic-footer__scene::after { content:""; position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(180deg,#030303 0%,transparent 16%,transparent 76%,#030303 100%); }
+.lp-cinematic-footer__scene::after { content:""; position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(180deg,var(--lp-black) 0%,transparent 16%,transparent 76%,var(--lp-black) 100%); }
 .lp-cinematic-footer__space,.lp-cinematic-footer__canvas,.lp-cinematic-footer__terrain,.lp-cinematic-footer__fallback { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-.lp-cinematic-footer__space { z-index:0; background:linear-gradient(90deg,#030303 32%,rgba(3,3,3,.94) 44%,rgba(3,3,3,.50) 65%,transparent 88%),url('../images/hero-cinematic/space.webp') center/cover; opacity:0; filter:sepia(.45) saturate(.7); transition:opacity .5s ease; }
-.lp-cinematic-footer__canvas { z-index:1; opacity:0; transition:opacity .5s ease; }
+.lp-cinematic-footer__space { z-index:0; background:linear-gradient(90deg,var(--lp-black) 32%,rgba(0,0,0,.94) 44%,rgba(0,0,0,.50) 65%,transparent 88%),url('../images/hero-cinematic/space.webp') center/cover; opacity:0; filter:sepia(.45) saturate(.7); transition:opacity .5s ease; }
+.lp-cinematic-footer__canvas { background:transparent; z-index:1; opacity:0; transition:opacity .5s ease; }
 .lp-cinematic-footer__terrain { z-index:2; background:url('../images/bg/footerbg.webp') center/cover no-repeat; mask:url('../images/hero-cinematic/contact-horizon-mask.svg') center/cover no-repeat; -webkit-mask:url('../images/hero-cinematic/contact-horizon-mask.svg') center/cover no-repeat; transition:opacity .5s ease; }
 .lp-cinematic-footer__scene[data-scene="ready"] .lp-cinematic-footer__terrain { opacity:0; }
 .lp-cinematic-footer__fallback { display:none; z-index:1; background:url('../images/hero-cinematic/footer-fallback.webp') center/cover no-repeat; }
@@ -30,7 +34,7 @@ footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --foo
 .lp-cinematic-footer__cta:hover { border-color:var(--footer-orange); box-shadow:0 0 16px rgba(255,152,0,.075); }
 .lp-cinematic-footer__cta:hover span { transform:translateX(4px); }
 .lp-cinematic-footer__cta:focus-visible { outline:2px solid var(--footer-orange); outline-offset:5px; }
-.lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:min(calc(100% - 2 * clamp(32px,3vw,48px)),var(--footer-max))!important; margin:0 auto!important; padding-inline:0!important; background:#030303; }
+.lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:min(calc(100% - 2 * clamp(32px,3vw,48px)),var(--footer-max))!important; margin:0 auto!important; padding-inline:0!important; background:var(--lp-black); }
 .lp-cinematic-footer .lp-footer-v28__navrow { grid-template-columns:1fr auto auto; gap:36px; padding-block:25px; border-bottom:1px solid rgba(255,255,255,.10); }
 .lp-cinematic-footer .lp-footer-v28__navrow nav { gap:32px; }
 .lp-cinematic-footer .lp-footer-v28__bottom { grid-template-columns:1fr auto; padding-top:20px; gap:24px; }
@@ -39,6 +43,9 @@ footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --foo
 /* Contact ends at the form: this variant never mounts a cinematic scene. */
 body[data-footer-variant="legal-only"] .footer-stars-animation-wrapper-footer { margin-top:0; }
 body[data-footer-variant="legal-only"] .lp-cinematic-footer .lp-footer-v28__navrow { border-top:1px solid rgba(255,255,255,.10); }
+@media(min-width:1101px) {
+ .lp-cinematic-footer__space { mask-image:radial-gradient(ellipse at 84% 60%,#000 0%,transparent 72%); }
+}
 @media(max-width:1100px) {
  .lp-cinematic-footer__fallback { background-image:url('../images/hero-cinematic/footer-fallback-tablet.webp'); }
  .lp-cinematic-footer__copy { width:58%; }
