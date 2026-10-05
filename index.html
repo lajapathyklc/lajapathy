@@ -140,6 +140,7 @@
     <link rel="stylesheet" href="assets/css/lp-hero-cinematic.css?v=mountain1-smooth-r3">
 <link rel="stylesheet" href="assets/css/lp-hero-alignment.css?v=shared-guide-20261004">
 <link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=20261004-footer-framing">
+<link rel="stylesheet" href="assets/css/lp-home-selected-work.css">
 </head>
 <script>
     // ...existing code...
@@ -810,891 +811,101 @@
             </div>
         </div>
     </section>
-    <!-- Tpm Latest Portfolio Area Start -->
-    <div class="latest-portfolio-area custom-column-grid lp-cinematic-scene tmp-section-gapTop" id="portfolio">
-                    <div class="container">
-                        <div class="section-head mb--60">
-                            <div
-                                class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
-                                <span class="subtitle">SELECTED WORK · 21 CASE STUDIES</span><br>
-                            </div>
-                            <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Featured
-                                Product Design Work
-                            </h2>
-                            <p class="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3">Explore
-                                work across fintech, enterprise platforms, SaaS, commerce, and healthcare.</p>
+    <section class="home-selected-work" id="portfolio" aria-labelledby="selected-work-title">
+        <div class="container selected-work-container">
+            <header class="selected-work-intro" data-work-reveal>
+                <p class="selected-work-eyebrow">SELECTED WORK / 21 CASE STUDIES</p>
+                <h2 id="selected-work-title">Products built for<br><span>real-world complexity.</span></h2>
+                <p class="selected-work-summary">From fintech and commerce to healthcare and enterprise platforms, I design digital products that solve real problems and deliver measurable outcomes.</p>
+            </header>
+            <div class="selected-work-tabs" role="tablist" aria-label="Case study categories" aria-orientation="horizontal" hidden>
+                <button type="button" role="tab" id="work-tab-fintech" aria-controls="work-panel-fintech" aria-selected="true" tabindex="0" data-work-category="fintech">Fintech <span aria-hidden="true">·</span> <span class="work-tab-count">5</span></button>
+                <button type="button" role="tab" id="work-tab-enterprise" aria-controls="work-panel-enterprise" aria-selected="false" tabindex="-1" data-work-category="enterprise">Enterprise &amp; Platform Products <span aria-hidden="true">·</span> <span class="work-tab-count">4</span></button>
+                <button type="button" role="tab" id="work-tab-saas" aria-controls="work-panel-saas" aria-selected="false" tabindex="-1" data-work-category="saas">SaaS <span aria-hidden="true">·</span> <span class="work-tab-count">3</span></button>
+                <button type="button" role="tab" id="work-tab-ecommerce" aria-controls="work-panel-ecommerce" aria-selected="false" tabindex="-1" data-work-category="ecommerce">E-Commerce <span aria-hidden="true">·</span> <span class="work-tab-count">7</span></button>
+                <button type="button" role="tab" id="work-tab-healthcare" aria-controls="work-panel-healthcare" aria-selected="false" tabindex="-1" data-work-category="healthcare">Healthcare <span aria-hidden="true">·</span> <span class="work-tab-count">2</span></button>
+            </div>
+            <div class="selected-work-grid" id="work-panel-fintech" role="tabpanel" aria-labelledby="work-tab-fintech">
+                <article class="work-project work-card--large work-project--ewallet" data-work-reveal>
+                    <a class="work-project-link" href="ewallet.html" aria-label="View E-Wallet case study">
+                        <div class="work-world" aria-hidden="true"></div>
+                        <div class="work-project-copy">
+                            <p class="work-category">FINTECH · CONSUMER</p>
+                            <h3>E-Wallet</h3>
+                            <p class="work-story">Redefining digital payments for a connected world</p>
                         </div>
-                        <div class="latest-portfolio-tabs-area">
-                            <nav aria-label="Portfolio categories">
-                                <ul class="nav nav-tabs tmp-scroll-trigger tmp-fade-in animation-order-4" id="nav-tab"
-                                    role="tablist">
-                                    <li>
-                                        <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
-                                            aria-selected="true">Fintech</button>
-                                    </li>
-                                    <li>
-                                        <button class="nav-link" id="nav-enterprise-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-content-writing" type="button" role="tab"
-                                            aria-controls="nav-content-writing" aria-selected="false">Enterprise &
-                                            Platform Products</button>
-                                    </li>
-                                    <li>
-                                        <button class="nav-link" id="nav-saas-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-saas" type="button" role="tab" aria-controls="nav-saas"
-                                            aria-selected="false">SaaS</button>
-                                    </li>
-                                    <li>
-                                        <button class="nav-link" id="nav-branding-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-branding" type="button" role="tab"
-                                            aria-controls="nav-branding" aria-selected="false">E-Commerce</button>
-                                    </li>
-                                    <li>
-                                        <button class="nav-link" id="nav-design-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-design" type="button" role="tab"
-                                            aria-controls="nav-design" aria-selected="false">Healthcare</button>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                <!-- Fintech Tab -->
-                                <div class="tab-pane fade show active" id="nav-all" role="tabpanel"
-                                    aria-labelledby="nav-all-tab">
-                                    <div class="row animation-action-3">
-
-                                        <!-- E-Wallet Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left"><span
-                                                            style="font-size: 20px; color: #FF9800;">⚡ Improved user
-                                                            activation via first-transaction completion by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~25%</span></span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="ewallet.html">E-Wallet</a></h3>
-                                                        <p class="portfoli-card-para">Redesigned onboarding to reduce
-                                                            drop-offs and improve user activation</p>
-                                                    </div>
-                                                    <a href="ewallet.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="ewallet.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/E-wallet1.webp"
-                                                            data-alt-text="E-Wallet Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- ZapPay Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left"> <span
-                                                            style="color: #FF9800; font-size: 20px;">⚡ Minimized
-                                                            cross-border payment errors by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~17%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="zappay.html">ZapPay</a></h3>
-
-                                                        <p class="portfoli-card-para">Structured multi-currency
-                                                            workflows to reduce errors and improve transaction
-                                                            reliability</p>
-                                                    </div>
-                                                    <a href="zappay.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="zappay.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/zappay1.webp"
-                                                            data-alt-text="ZapPay Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- UniPay Card --><br><br><br><br>
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-3"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800; font-size: 20px;">⚡ Improved
-                                                            payment reliability and transaction success rate by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~18–22%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="unipay.html">UniPay</a></h3>
-                                                        <p class="portfoli-card-para">Streamlined payment journeys
-                                                            to
-                                                            reduce friction and improve completion rates
-                                                        </p>
-                                                    </div>
-                                                    <a href="unipay.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="unipay.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Unipay1.webp"
-                                                            data-alt-text="UniPay Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-oerlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- SmartFin Card --><br><br><br><br>
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-4"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800; font-size: 20px;">⚡ Drove user
-                                                            engagement with financial insights up by
-                                                            <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~19%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="smartfin.html">SmartFin</a></h3>
-
-                                                        <p class="portfoli-card-para">Designed insight-driven
-                                                            experiences to improve financial decision confidence and
-                                                            engagement
-                                                        </p>
-                                                    </div>
-                                                    <a href="smartfin.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="smartfin.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Smartfin1.webp"
-                                                            data-alt-text="SmartFin Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- CoverRide Card --><br><br><br><br>
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-5"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800; font-size: 20px;">⚡ Decreased claim
-                                                            submission drop-offs by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~24%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="coverride.html">CoverRide</a></h3>
-                                                        <p class="portfoli-card-para">Simplified user journeys to
-                                                            improve claim completion and reduce drop-offs
-                                                        </p>
-                                                    </div>
-                                                    <a href="coverride.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="coverride.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Coverride1.webp"
-                                                            data-alt-text="CoverRide Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-content-writing" role="tabpanel"
-                                    aria-labelledby="nav-enterprise-tab">
-                                    <div class="row animation-action-3">
-                                        <!-- Norton Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-4"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Accelerated
-                                                            threat detection and response time by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~28%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="norton.html">Norton Security</a></h3>
-                                                        <p class="portfoli-card-para">Delivered an enterprise security
-                                                            platform for real-time
-                                                            threat detection and risk analysis
-                                                        </p>
-                                                    </div>
-                                                    <a href="norton.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="norton.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/norton1.webp"
-                                                            data-alt-text="Norton Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- HomeNest Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Simplified
-                                                            smart-home device management and control
-                                                            time by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~18%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="homenest.html">HomeNest</a></h3>
-                                                        <p class="portfoli-card-para">Built a connected home platform
-                                                            enabling seamless device
-                                                            control and automation
-                                                        </p>
-                                                    </div>
-                                                    <a href="homenest.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="homenest.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Homenest1.webp"
-                                                            data-alt-text="Homenest Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Z-Meet Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Cut
-                                                            cross-functional meeting management time by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~15%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="zmeet.html">Z-Meet</a></h3>
-                                                        <p class="portfoli-card-para">Developed a collaboration platform
-                                                            for scheduling, tracking,
-                                                            and aligning team meetings and decisions</p>
-                                                    </div>
-                                                    <a href="zmeet.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="zmeet.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Zmeet1.webp"
-                                                            data-alt-text="Z-Meet Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Eater Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-3"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left"> <span
-                                                            style="color: #FF9800;font-size: 20px;">⚡ Streamlined
-                                                            food
-                                                            discovery and ordering experience
-                                                            by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~21%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="eater.html">Eater</a></h3>
-                                                        <p class="portfoli-card-para">Optimized a food delivery platform
-                                                            for faster discovery,
-                                                            ordering, and checkout experiences</p>
-                                                    </div>
-                                                    <a href="eater.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="eater.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Eater1.webp"
-                                                            data-alt-text="Eater Thumbnail" data-container-height="100%"
-                                                            data-container-width="100%" data-rotate-amplitude="12"
-                                                            data-scale-on-hover="1" data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-saas" role="tabpanel" aria-labelledby="nav-saas-tab">
-                                    <div class="row animation-action-3">
-                                        <!-- FluxCRM Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Enhanced sales
-                                                            pipeline visibility and decision speed by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~16%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="fluxcrm.html">FluxCRM</a></h3>
-                                                        <p class="portfoli-card-para">Built a CRM platform enabling
-                                                            real-time sales tracking,
-                                                            pipeline visibility, and faster decision-making</p>
-                                                    </div>
-                                                    <a href="fluxcrm.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="fluxcrm.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Fluxcrm1.webp"
-                                                            data-alt-text="FluxCRM Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Taskee Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Accelerated
-                                                            task execution and team collaboration by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~22%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="taskee.html">Taskee</a></h3>
-                                                        <p class="portfoli-card-para">Developed a task management
-                                                            platform for tracking,
-                                                            prioritizing, and executing work across teams</p>
-                                                    </div>
-                                                    <a href="taskee.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="taskee.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Taskee1.webp"
-                                                            data-alt-text="Taskee Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Staffee Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-3"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Elevated
-                                                            workforce visibility and HR decision speed by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~26%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="staffee.html">Staffee</a></h3>
-                                                        <p class="portfoli-card-para">Delivered an HR analytics platform
-                                                            for workforce performance
-                                                            and engagement insights across teams</p>
-                                                    </div>
-                                                    <a href="staffee.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="staffee.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Staffee1.webp"
-                                                            data-alt-text="Staffee Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- E-Commerce Tab -->
-                                <div class="tab-pane fade" id="nav-branding" role="tabpanel"
-                                    aria-labelledby="nav-branding-tab">
-                                    <div class="row animation-action-3">
-                                        <!-- Amazon Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Reimagined
-                                                            mobile shopping journeys to improve
-                                                            discovery and checkout efficiency
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="amazon.html">Amazon — Shopping Experience</a>
-                                                        </h3>
-                                                        <p class="portfoli-card-para">Explored a mobile-first shopping
-                                                            experience to simplify
-                                                            discovery and reduce checkout friction</p>
-                                                    </div>
-                                                    <a href="amazon.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="amazon.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Amazon1.webp"
-                                                            data-alt-text="Amazon Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Eddiebauer Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Strengthened
-                                                            purchase confidence by improving
-                                                            discovery and checkout by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~22%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="eddiebauer.html">Eddie Bauer</a></h3>
-                                                        <p class="portfoli-card-para">Redesigned browsing and checkout
-                                                            experiences to build
-                                                            trust and support confident purchase decisions</p>
-                                                    </div>
-                                                    <a href="eddiebauer.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="eddiebauer.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/eddiebauer1.webp"
-                                                            data-alt-text="Eddiebauer Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Lider Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Simplified
-                                                            multi-category shopping and checkout
-                                                            flows for retail at scale by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~15%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="lider.html">Líder (Walmart Chile)</a></h3>
-                                                        <p class="portfoli-card-para">Redesigned discovery, cart, and
-                                                            checkout flows for
-                                                            high-volume, multi-category retail journeys</p>
-                                                    </div>
-                                                    <a href="lider.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="lider.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/lider1.webp"
-                                                            data-alt-text="Lider Thumbnail" data-container-height="100%"
-                                                            data-container-width="100%" data-rotate-amplitude="12"
-                                                            data-scale-on-hover="1" data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Slurrpfarm Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Elevated
-                                                            purchase confidence for health-focused
-                                                            nutrition products by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~18%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="slurrpfarm.html">Slurrpfarm</a></h3>
-                                                        <p class="portfoli-card-para">Designed a trust-focused shopping
-                                                            experience for
-                                                            health and nutrition products
-                                                        </p>
-                                                    </div>
-                                                    <a href="slurrpfarm.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="slurrpfarm.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/slurrpfarm1.webp"
-                                                            data-alt-text="Slurrpfarm Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- GoCart Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Reduced browsing
-                                                            friction and improved
-                                                            checkout conversion by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~18%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="gocart.html">GoCart</a></h3>
-                                                        <p class="portfoli-card-para">Optimized browsing and cart
-                                                            experiences to improve
-                                                            conversion across ecommerce journeys
-                                                        </p>
-                                                    </div>
-                                                    <a href="gocart.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="gocart.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Gocart1.webp"
-                                                            data-alt-text="GoCart Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- DailyMart Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-3"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Improved
-                                                            discovery and repeat purchases
-                                                            through faster reordering by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~20%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="dailymart.html">DailyMart</a></h3>
-                                                        <p class="portfoli-card-para">Designed product discovery and
-                                                            reorder experiences
-                                                            for high-frequency grocery shopping</p>
-                                                    </div>
-                                                    <a href="dailymart.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="dailymart.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Dailymart1.webp"
-                                                            data-alt-text="DailyMart Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Quickcart Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-4"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left"><span
-                                                            style="color: #FF9800;font-size: 20px;">⚡ Accelerated
-                                                            instant ordering and checkout speed
-                                                            for mobile commerce by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~25%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="quickcart.html">Quickcart</a></h3>
-                                                        <p class="portfoli-card-para">Developed browsing, cart, and
-                                                            checkout experiences
-                                                            optimized for fast mobile ordering</p>
-                                                    </div>
-                                                    <a href="quickcart.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="quickcart.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Quickcart1.webp"
-                                                            data-alt-text="Quickcart Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Healthcare Tab (empty or add cards as needed) -->
-                                <div class="tab-pane fade" id="nav-design" role="tabpanel"
-                                    aria-labelledby="nav-design-tab">
-                                    <div class="row animation-action-3">
-                                        <!-- MyDoc Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Simplified
-                                                            specialist discovery and appointment
-                                                            completion by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~20%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="mydoc.html">MyDoc</a></h3>
-                                                        <p class="portfoli-card-para">Built a telehealth platform
-                                                            enabling seamless specialist
-                                                            discovery and appointment booking across care journeys
-                                                        </p>
-                                                    </div>
-                                                    <a href="mydoc.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="mydoc.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Mydoc1.webp"
-                                                            data-alt-text="MyDoc Thumbnail" data-container-height="100%"
-                                                            data-container-width="100%" data-rotate-amplitude="12"
-                                                            data-scale-on-hover="1" data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- DrOnline Card -->
-                                        <div class="col-lg-6 col-sm-6 paralax-image">
-                                            <div class="latest-portfolio-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                <div class="portfolio-card-content-wrap img-box-padding">
-                                                    <div class="content-left">
-                                                        <span style="color: #FF9800;font-size: 20px;">⚡ Increased
-                                                            virtual consultation completion and
-                                                            care delivery efficiency by <span
-                                                                style="font-weight: 800; font-size: 2.5rem;">~17%</span>
-                                                        </span><br><br>
-                                                        <h3 class="portfolio-card-title"><a class="link"
-                                                                href="dronline.html">DrOnline</a></h3>
-                                                        <p class="portfoli-card-para">Developed a telehealth platform
-                                                            for virtual consultations,
-                                                            care delivery, and continuous patient engagement</p>
-                                                    </div>
-                                                    <a href="dronline.html" class="tmp-arrow-icon-btn">
-                                                        <div class="btn-inner">
-                                                            <i class="tmp-icon fa-solid fa-arrow-up-right"></i>
-                                                            <i class="tmp-icon-bottom fa-solid fa-arrow-up-right"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="img-box v2 img-box-padding">
-                                                    <a href="dronline.html">
-                                                        <div class="tilted-card-container"
-                                                            data-image-src="assets/images/latest-portfolio/Dronline1.webp"
-                                                            data-alt-text="DrOnline Thumbnail"
-                                                            data-container-height="100%" data-container-width="100%"
-                                                            data-rotate-amplitude="12" data-scale-on-hover="1"
-                                                            data-show-mobile-warning="false"
-                                                            data-display-overlay-content="true">
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="work-product"><img src="assets/images/latest-portfolio/ewallet-home-product.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="E-Wallet payment and spending insight screens"></div>
+                        <div class="work-project-foot">
+                            <div class="work-impact"><strong>↑ 25%</strong><span>Faster transaction completion</span></div>
+                            <span class="work-link-cue" aria-hidden="true">View case study <span>↗</span></span>
                         </div>
-                    </div>
-                </div>
-                <!-- Tpm Latest Portfolio Area End -->
+                    </a>
+                </article>
+                <article class="work-project work-card--large work-project--zappay" data-work-reveal>
+                    <a class="work-project-link" href="zappay.html" aria-label="View ZapPay case study">
+                        <div class="work-world" aria-hidden="true"></div>
+                        <div class="work-project-copy">
+                            <p class="work-category">FINTECH · PAYMENTS</p>
+                            <h3>ZapPay</h3>
+                            <p class="work-story">Making everyday payments fast, clear and reliable</p>
+                        </div>
+                        <div class="work-product"><img src="assets/images/latest-portfolio/zappay-home-product.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="ZapPay mobile payment screens"></div>
+                        <div class="work-project-foot">
+                            <div class="work-impact"><strong>↓ 17%</strong><span>Fewer cross-border payment errors</span></div>
+                            <span class="work-link-cue" aria-hidden="true"><span>↗</span></span>
+                        </div>
+                    </a>
+                </article>
+                <article class="work-project work-card--large work-project--unipay" data-work-reveal>
+                    <a class="work-project-link" href="unipay.html" aria-label="View UniPay case study">
+                        <div class="work-world" aria-hidden="true"></div>
+                        <div class="work-project-copy">
+                            <p class="work-category">FINTECH · PLATFORM</p>
+                            <h3>UniPay</h3>
+                            <p class="work-story">One platform for payments and financial access</p>
+                        </div>
+                        <div class="work-product"><img src="assets/images/latest-portfolio/unipay-home-product.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="UniPay account and payment screens"></div>
+                        <div class="work-project-foot">
+                            <div class="work-impact"><strong>↑ 18–22%</strong><span>Improved transaction success and reliability</span></div>
+                            <span class="work-link-cue" aria-hidden="true"><span>↗</span></span>
+                        </div>
+                    </a>
+                </article>
+                <article class="work-project work-card--large work-project--smartfin" data-work-reveal>
+                    <a class="work-project-link" href="smartfin.html" aria-label="View SmartFin case study">
+                        <div class="work-world" aria-hidden="true"></div>
+                        <div class="work-project-copy">
+                            <p class="work-category">FINTECH · PERSONAL FINANCE</p>
+                            <h3>SmartFin</h3>
+                            <p class="work-story">Helping individuals make smarter financial decisions</p>
+                        </div>
+                        <div class="work-product"><img src="assets/images/bg/smartfin.png" width="1486" height="1058" loading="lazy" decoding="async" alt="SmartFin case-study hero with finance, investment and payment screens"></div>
+                        <div class="work-project-foot">
+                            <div class="work-impact"><strong>↑ ~19%</strong><span>Higher engagement with financial insights</span></div>
+                            <span class="work-link-cue" aria-hidden="true"><span>↗</span></span>
+                        </div>
+                    </a>
+                </article>
+                <article class="work-project work-card--featured work-project--coverride" data-work-reveal>
+                    <a class="work-project-link" href="coverride.html" aria-label="View CoverRide case study">
+                        <div class="work-world" aria-hidden="true"></div>
+                        <div class="work-project-copy">
+                            <p class="work-category">MOBILITY · VEHICLE INSPECTION</p>
+                            <h3>CoverRide</h3>
+                            <p class="work-story">Bringing clarity to every vehicle inspection</p>
+                        </div>
+                        <div class="work-product"><img src="assets/images/bg/coverride%20hero.png" width="1536" height="1024" loading="lazy" decoding="async" alt="CoverRide case-study hero with vehicle capture, details and damage inspection screens"></div>
+                        <div class="work-project-foot">
+                            <div class="work-impact"><strong>↓ ~24%</strong><span>Fewer claim submission drop-offs</span></div>
+                            <span class="work-link-cue" aria-hidden="true"><span>↗</span></span>
+                        </div>
+                    </a>
+                </article>
+            </div>
+            <div class="selected-work-end" data-work-reveal><a class="selected-work-cta" href="Casestudies.html">Explore all 21 case studies <span aria-hidden="true">→</span></a></div>
+        </div>
+    </section>
+
 
                 <section class="testimonial lp-cinematic-scene tmp-section-gapTop">
                     <div class="testimonial-wrapper">
@@ -2032,6 +1243,7 @@
 <script src="assets/js/lp-reduced-motion.js" defer></script>
     <script src="assets/js/lp-hero-cinematic.js?v=mountain-atmosphere-r2" defer></script>
 <script type="module" src="assets/js/lp-cinematic-footer.js?v=20261004-footer-framing"></script>
+<script src="assets/js/lp-home-selected-work.js" defer></script>
 </body>
 
 </html>
