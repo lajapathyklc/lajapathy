@@ -5,7 +5,7 @@ import {
   createHeroRenderer,
   loadGeology,
   heroLifecycle,
-} from "./hero-3d-core.js";
+} from "./hero-3d-core.js?v=reduced-planet-motion-20261007";
 export const aboutHeroConfig = {
   planetRotationDuration: 240,
   planetCenter: { x: 0.7346, y: 0.5107, radius: 0.6565 },
@@ -330,15 +330,18 @@ async function init() {
     fogRenderer.setSize(width, fogCanvas.clientHeight, false);
   }
   const meteors=createHeroMeteors({system:group,globe:planet,camera,renderer,root,uniforms,page:"About"});
-  const lifecycle = heroLifecycle(root, resize, (time, dt, reduced) => {
+  let planetTime=0,cloudTime=0,ambientTime=0;
+  const lifecycle = heroLifecycle(root, resize, (_time, dt, reduced) => {
     const start = performance.now();
-    uniforms.turn.value = time / aboutHeroConfig.planetRotationDuration;
-    clouds.u.cloudTurn.value = uniforms.turn.value * clouds.speed;
-    haze.u.cloudTurn.value = uniforms.turn.value * haze.speed;
-    fogUniforms.time.value = time;
-    sun.material.uniforms.time.value = time;
-    air.material.uniforms.time.value = time;
-    outerAir.material.uniforms.time.value = time;
+    const slowMotion = reduced ? 0.3 : 1;
+    planetTime += dt * (reduced ? 1 / 1.6 : 1);
+    cloudTime += dt * slowMotion;
+    ambientTime += dt * slowMotion;
+    uniforms.turn.value = planetTime / aboutHeroConfig.planetRotationDuration;
+    clouds.u.cloudTurn.value = cloudTime / aboutHeroConfig.planetRotationDuration * clouds.speed;
+    haze.u.cloudTurn.value = cloudTime / aboutHeroConfig.planetRotationDuration * haze.speed;
+    fogUniforms.time.value = sun.material.uniforms.time.value =
+      air.material.uniforms.time.value = outerAir.material.uniforms.time.value = ambientTime;
     scene.updateMatrixWorld(true);
     meteors.update(dt,reduced,aboutHeroConfig.meteorEnabled);
     renderer.render(scene, camera);
@@ -352,7 +355,7 @@ async function init() {
     root.dataset.rotation = String(uniforms.turn.value);
     root.dataset.cloudRotation = String(clouds.u.cloudTurn.value);
     root.dataset.reducedMotion = String(reduced);
-    root.dataset.fogTime = String(time);
+    root.dataset.fogTime = String(ambientTime);
   });
   function parallax() {
     const svg = root.querySelector(".about-orbit svg");

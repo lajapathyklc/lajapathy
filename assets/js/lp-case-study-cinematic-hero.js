@@ -1,4 +1,4 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
 import {createHeroMeteors} from './lp-meteor-system.js';
 import {CASE_STUDY_WORLDS,validateCaseStudyWorlds,seedHash} from './lp-case-study-worlds.js';
@@ -8,7 +8,7 @@ async function mount(root){
  root.style.setProperty('--world-nebula',world.nebulaColor);root.dataset.scene='loading';
  const canvas=document.createElement('canvas');canvas.className='lp-case-study-planet';canvas.setAttribute('aria-hidden','true');root.prepend(canvas);const terrain=document.createElement('div');terrain.className='lp-case-study-horizon';terrain.setAttribute('aria-hidden','true');canvas.after(terrain);if(!root.querySelector('.ewallet-hero-transition')){const transition=document.createElement('div');transition.className='ewallet-hero-transition';transition.setAttribute('aria-hidden','true');terrain.after(transition);}
  const fallback=document.createElement('div');fallback.className='lp-case-study-fallback';fallback.style.setProperty('--case-fallback-desktop',`url('${new URL(`assets/images/hero-cinematic/case-${world.id}.webp`,document.baseURI).href}')`);fallback.style.setProperty('--case-fallback-mobile',`url('${new URL(`assets/images/hero-cinematic/case-${world.id}-mobile.webp`,document.baseURI).href}')`);root.prepend(fallback);
- let observer;let renderer,scene,lifecycle,meteors,atlas,disposed=false,paused=false,inViewport=true,elapsed=0,rotation=0,frames=0,cost=16,frameMS=16.7,previousFrame=0,last=0;
+ let observer;let renderer,scene,lifecycle,meteors,atlas,disposed=false,paused=false,inViewport=true,elapsed=0,rotation=0,cloudRotation=0,frames=0,cost=16,frameMS=16.7,previousFrame=0,last=0;
  const artInsets=new WeakMap();
  let mobile=innerWidth<700;const tilt=world.axialTilt*Math.PI/180;
  const resources=new Set();
@@ -70,7 +70,8 @@ async function mount(root){
  }
  resize();meteors=createHeroMeteors({system:globe.group,globe:globe.planet,camera,renderer,root,uniforms:globe.uniforms,page:'CaseStudy',firstDelay:.5,cadenceScale:1/.8,eventKind:n=>n%24===0?'impact':n%12===0?'skim':'flyby',protectedSelector:world.safeArea,protectedRegions:regions,protectedInset:(e,r)=>{const a=artInsets.get(e);return a?{left:a.left*r.width,right:a.right*r.width,top:a.top*r.height,bottom:a.bottom*r.height}:null},screenBounds:{left:.50,right:.995,top:.10,bottom:.70},axisTilt:tilt,targetNormal:target,impactDirection:()=>[-.15,-.15,-1],failedEventFallback:true,config:{skimArc:mobile?.35:.65,skimDirection:[1,0],intensity:world.meteorIntensity,mobileDebrisCount:4,debrisCount:8}});
  lifecycle=heroLifecycle(root,resize,(_time,dt,reduced)=>{
-  if(paused||!inViewport)return;elapsed+=dt;rotation+=dt/world.rotationSeconds;globe.uniforms.turn.value=rotation;globe.clouds.u.cloudTurn.value=rotation*world.cloudSpeed;globe.haze.u.cloudTurn.value=rotation*world.hazeSpeed;
+  if(paused||!inViewport)return;const slowMotion=reduced?.3:1;elapsed+=dt*slowMotion;rotation+=dt/(world.rotationSeconds*(reduced?1.6:1));cloudRotation+=dt*slowMotion;globe.uniforms.turn.value=rotation;
+  globe.clouds.u.cloudTurn.value=cloudRotation/world.rotationSeconds*world.cloudSpeed;globe.haze.u.cloudTurn.value=cloudRotation/world.rotationSeconds*world.hazeSpeed;
   globe.air.material.uniforms.time.value=globe.outerAir.material.uniforms.time.value=globe.sun.material.uniforms.time.value=fog.time.value=elapsed;
   meteors.update(dt,reduced,true);const start=performance.now();if(previousFrame&&start-previousFrame<150)frameMS=frameMS*.95+(start-previousFrame)*.05;previousFrame=start;renderer.render(scene,camera);cost=cost*.95+(performance.now()-start)*.05;frames++;
   if(frames%240===0&&(cost>20||frameMS>23)&&renderer.getPixelRatio()>1)renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()*.8));

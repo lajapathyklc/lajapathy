@@ -1,4 +1,4 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
 import {createHeroMeteors} from './lp-meteor-system.js';
 
@@ -45,7 +45,7 @@ async function init(){
   }
   meteors=createHeroMeteors({system:group,globe:planet,camera,renderer,root,uniforms,page:'Contact',firstDelay:contactHeroConfig.firstMeteorDelay,
     eventKind:count=>count%12===8?'impact':count%12===0?'skim':'flyby',targetBounds:{x:[-.85,.15],y:[.30,.90]},impactDirection:({width})=>width<700?[-.4,0,-1]:null,targetNormal:visibleTarget,failedEventFallback:true});
-  let width=1,height=1,frames=0,cost=16.7;
+  let width=1,height=1,frames=0,cost=16.7,planetTime=0,cloudTime=0,ambientTime=0;
   function resize(){
     width=root.clientWidth;height=root.clientHeight;const aspect=width/height;
     camera.left=-aspect;camera.right=aspect;camera.updateProjectionMatrix();
@@ -59,18 +59,21 @@ async function init(){
     scene.updateMatrixWorld(true);
     root.dataset.planetGeometry=JSON.stringify({x,y,radius:r,width,height});
   }
-  lifecycle=heroLifecycle(root,resize,(time,dt,reduced)=>{
+  lifecycle=heroLifecycle(root,resize,(_time,dt,reduced)=>{
     if(disposed)return;const start=performance.now();
-    uniforms.turn.value=time/contactHeroConfig.rotationDuration;
-    clouds.u.cloudTurn.value=uniforms.turn.value*clouds.speed;haze.u.cloudTurn.value=uniforms.turn.value*haze.speed;
-    sun.material.uniforms.time.value=time;air.material.uniforms.time.value=time;outerAir.material.uniforms.time.value=time;
-    fogUniforms.time.value=time;scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
+    const slowMotion=reduced?.3:1;
+    planetTime+=dt*(reduced?1/1.6:1);cloudTime+=dt*slowMotion;ambientTime+=dt*slowMotion;
+    uniforms.turn.value=planetTime/contactHeroConfig.rotationDuration;
+    clouds.u.cloudTurn.value=cloudTime/contactHeroConfig.rotationDuration*clouds.speed;
+    haze.u.cloudTurn.value=cloudTime/contactHeroConfig.rotationDuration*haze.speed;
+    sun.material.uniforms.time.value=air.material.uniforms.time.value=outerAir.material.uniforms.time.value=ambientTime;
+    fogUniforms.time.value=ambientTime;scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
     renderer.render(scene,camera);fogRenderer.render(fogScene,fogCamera);
     if(root.dataset.scene!=='ready')root.dataset.scene='ready';
     cost=cost*.95+(performance.now()-start)*.05;
     if(++frames%240===0&&cost>19&&renderer.getPixelRatio()>1){renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()*.8));resize();}
     root.dataset.rotation=String(uniforms.turn.value);root.dataset.cloudRotation=String(clouds.u.cloudTurn.value);
-    root.dataset.hazeRotation=String(haze.u.cloudTurn.value);root.dataset.fogTime=String(time);
+    root.dataset.hazeRotation=String(haze.u.cloudTurn.value);root.dataset.fogTime=String(ambientTime);
     root.dataset.reducedMotion=String(reduced);root.dataset.dpr=String(renderer.getPixelRatio());
   });
   canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();root.dataset.scene='fallback';dispose();},{once:true});

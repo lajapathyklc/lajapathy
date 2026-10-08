@@ -1,4 +1,4 @@
-# Lajapathy V49 — Hero Background Replacement
+# Lajapathy — Local Portfolio
 
 ## Local preview
 
@@ -30,10 +30,16 @@ The cinematic hero draws at up to 30 fps with a maximum canvas pixel ratio of
 1.25. Layout and portrait resolution are unchanged. The CPU planet fallback is
 only prepared when WebGL is unavailable. Portfolio card images load lazily.
 
-## Background replacement
+## Component map
 
-Replaced the V48 Home hero background asset with the exact supplied `background1.png` image.
+- `assets/css/lp-home-hero.css` contains the active homepage hero rules previously spread across ten versioned patches. Keep its current cascade position in `index.html`.
+- `assets/css/lp-selected-work.css`, `assets/js/lp-selected-work.js` and `assets/js/lp-portfolio-data.js` power Selected Work on Home and Case Studies. The listing adds its existing library-specific stylesheet.
+- `assets/js/hero-3d-core.js` supplies the shared renderer and lifecycle; page scene modules retain their individual artwork and reduced-motion rotation clocks. The footer controller imports its renderer only when nearby.
+- Swiper and Odometer assets load on Home and About, text typing on Home, and Tilt on Leadership. Keep these libraries on the pages that use them.
+- The contact page's native submit handler owns submission; do not also load the legacy `contact.form.js` handler.
 
-- Existing live portrait remains separate.
-- Existing hero content, navigation, typography, CTA, smoke/fog and V48 CSS remain unchanged.
-- Background is wired through `assets/css/lp-v48-hero-cleanup.css`.
+## Image and legacy asset maintenance
+
+Case-study PNG masters remain in place. Referenced `*-lossless.webp` variants preserve the masters' decoded pixels and dimensions; regenerate them losslessly if a master changes. Below-fold screenshots carry intrinsic dimensions and load lazily. Social metadata keeps its existing image URLs.
+
+Unreferenced versioned hero styles and legacy scripts remain physically present for rollback. Check live HTML references, module imports, and component selectors before deleting old assets. The shared template CSS, icon fonts, menu/footer overrides and existing back-to-top handlers remain because broader removal requires separate visual verification.

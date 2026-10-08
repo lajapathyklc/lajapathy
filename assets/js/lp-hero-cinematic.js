@@ -6,11 +6,18 @@
   const stage=root,canvases=[...root.querySelectorAll('.meteor-canvas')],contexts=canvases.map(c=>c.getContext('2d'));
   const replay=root.querySelector('.meteor-replay'),pause=root.querySelector('.meteor-pause'),reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   root.querySelector('.meteor-controls').hidden=true;
-  let w=1,h=1,meteors=[],particles=[],impacts=[],spawnCount=0,running=!reduced.matches,visible=true,last=0,elapsed=0,next=.25,raf=0;
+  let w=1,h=1,meteors=[],particles=[],impacts=[],spawnCount=0,running=true,visible=true,last=0,elapsed=0,planetMotionTime=0,cloudMotionTime=0,ambientMotionTime=0,next=.25,raf=0;
   const random=(a,b)=>a+Math.random()*(b-a),clamp=v=>Number.isFinite(v)?Math.max(0,Math.min(1,v)):0;
   const planetConfig={previewControls:HERO_DEBUG,rotationDuration:200,centerX:.82,centerY:.55,sunX:.965,sunY:.21,light:[.44,.804,-.40],relief:4.1,displacement:.0032,atmosphere:.52,cloudOpacity:.23,cloudRotationMultiplier:1.012,highHazeRotationMultiplier:1.022,lavaIntensity:.38,plumeDensity:.16,nebulaIntensity:.38,maxDPR:1.25,meteorEnabled:true};
   let renderScale=Math.min(window.devicePixelRatio||1,planetConfig.maxDPR),frameCost=16.7,qualityFrames=0,parallaxX=0,parallaxY=0;
   function planetPlacement(){
+    // Frame the planet behind the lower portrait chapter on phones. Rendering,
+    // shaders, DPR limits and the animation lifecycle stay shared with desktop.
+    if(w<768){
+      const r=Math.min(w*.82,h*.38),cx=w*.76,cy=h-r*.76;
+      const sx=Math.min(w*.985,cx+r*.86),dx=sx-cx;
+      return {r,cx,cy,sx,sy:cy-Math.sqrt(Math.max(0,r*r-dx*dx))};
+    }
     const r=h*(w<600?.55:.60),cx=w*planetConfig.centerX,cy=h*(w<600?.58:w/h<1.5?.60:planetConfig.centerY)+100;
     const sx=Math.min(w*.985,cx+r*.86),dx=sx-cx;
     const sy=cy-Math.sqrt(Math.max(0,r*r-dx*dx));
@@ -24,7 +31,7 @@
   const starCanvas=root.querySelector('.cosmic-static'),starCtx=starCanvas.getContext('2d');
   const globe=gl?null:document.createElement('canvas');if(globe){globe.width=512;globe.height=512;}
   const globeCtx=globe?globe.getContext('2d'):null,globeImage=globeCtx?globeCtx.createImageData(512,512):null,samples=[];
-  let surface=null,surfaceWidth=0,surfaceHeight=0,planetTime=-1;
+  let surface=null,surfaceWidth=0,surfaceHeight=0,lastPlanetDrawTime=-1;
   function initPlanetGPU(){
     if(!gl)return;
     const vertex=`attribute vec2 position;varying vec2 uv;void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
@@ -209,12 +216,12 @@ void main(){
     const anis=gl.getExtension('EXT_texture_filter_anisotropic');if(anis)gl.texParameterf(gl.TEXTURE_2D,anis.TEXTURE_MAX_ANISOTROPY_EXT,Math.min(8,gl.getParameter(anis.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
     gpu={program,uniforms,texture,ready:false};
   }
-  function drawPlanetGPU(time){
+  function drawPlanetGPU(time,ambientTime,cloudTime){
     if(!gpu||!gpu.ready)return;
     const {r,cx,cy,sx,sy}=planetPlacement(),u=gpu.uniforms;
     gl.viewport(0,0,planetCanvas.width,planetCanvas.height);gl.useProgram(gpu.program);
-    gl.uniform1f(u.pixelSize,w/planetCanvas.width);gl.uniform1f(u.glowPhase,(time%48)/48*Math.PI*2);gl.uniform2f(u.view,w,h);gl.uniform2f(u.center,cx,cy);gl.uniform2f(u.sun,sx,sy);gl.uniform1f(u.radius,r);gl.uniform1f(u.turns,(time/planetConfig.rotationDuration)%1);gl.uniform2f(u.texel,1/(gpu.textureWidth||4096),1/(gpu.textureHeight||2048));
-    gl.uniform3f(u.sunDirection,(sx-cx)/r*.9165,(cy-sy)/r*.9165,-.4);gl.uniform2f(u.cloudTurns,(time/planetConfig.rotationDuration*planetConfig.cloudRotationMultiplier)%1,(time/planetConfig.rotationDuration*planetConfig.highHazeRotationMultiplier)%1);for(const k of ['relief','atmosphere','cloudOpacity','lavaIntensity','displacement','plumeDensity'])gl.uniform1f(u[k],planetConfig[k]*(w<600&&(k==='plumeDensity'||k==='cloudOpacity')?.65:1));
+    gl.uniform1f(u.pixelSize,w/planetCanvas.width);gl.uniform1f(u.glowPhase,(ambientTime%48)/48*Math.PI*2);gl.uniform2f(u.view,w,h);gl.uniform2f(u.center,cx,cy);gl.uniform2f(u.sun,sx,sy);gl.uniform1f(u.radius,r);gl.uniform1f(u.turns,(time/planetConfig.rotationDuration)%1);gl.uniform2f(u.texel,1/(gpu.textureWidth||4096),1/(gpu.textureHeight||2048));
+    gl.uniform3f(u.sunDirection,(sx-cx)/r*.9165,(cy-sy)/r*.9165,-.4);gl.uniform2f(u.cloudTurns,(cloudTime/planetConfig.rotationDuration*planetConfig.cloudRotationMultiplier)%1,(cloudTime/planetConfig.rotationDuration*planetConfig.highHazeRotationMultiplier)%1);for(const k of ['relief','atmosphere','cloudOpacity','lavaIntensity','displacement','plumeDensity'])gl.uniform1f(u[k],planetConfig[k]*(w<600&&(k==='plumeDensity'||k==='cloudOpacity')?.65:1));
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   }
   initPlanetGPU();
@@ -222,7 +229,7 @@ void main(){
   surfaceImage.onload=()=>{
     if(gl){let upload=surfaceImage;if(w<600){upload=document.createElement('canvas');upload.width=2048;upload.height=1024;upload.getContext('2d').drawImage(surfaceImage,0,0,2048,1024);}gpu.textureWidth=upload.width||surfaceImage.naturalWidth;gpu.textureHeight=upload.height||surfaceImage.naturalHeight;gl.bindTexture(gl.TEXTURE_2D,gpu.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,upload);gl.generateMipmap(gl.TEXTURE_2D);gpu.ready=true;surface=true;}
     else{const t=document.createElement('canvas');t.width=Math.min(1024,surfaceImage.naturalWidth);t.height=Math.round(t.width*surfaceImage.naturalHeight/surfaceImage.naturalWidth);const c=t.getContext('2d');c.drawImage(surfaceImage,0,0,t.width,t.height);surface=c.getImageData(0,0,t.width,t.height).data;surfaceWidth=t.width;surfaceHeight=t.height;}
-    drawPlanet(elapsed,true);
+    drawPlanet(planetMotionTime,true);
   };
   surfaceImage.src=root.querySelector('.terrain-map').src;
   if(!gl)for(let y=0;y<512;y++)for(let x=0;x<512;x++){
@@ -237,7 +244,7 @@ void main(){
     starCtx.clearRect(0,0,w,h);
     for(const s of stars){starCtx.fillStyle=`rgba(190,200,217,${s.a*(s.x<.42?.4:1)})`;starCtx.beginPath();starCtx.arc(s.x*w,s.y*h,s.r,0,Math.PI*2);starCtx.fill();}
     drawDistantBodies();
-    drawPlanet(elapsed,true);
+    drawPlanet(planetMotionTime,true);
   }
   function drawDistantBodies(){
     for(const body of [{x:.49,y:.15,r:4,a:.24},{x:.57,y:.40,r:7,a:.19}]){
@@ -246,10 +253,10 @@ void main(){
       starCtx.strokeStyle='#b28b61';starCtx.lineWidth=.65;starCtx.beginPath();starCtx.arc(x,y,r,-1.5,-.25);starCtx.stroke();starCtx.restore();
     }
   }
-  function drawPlanet(time,force=false){
+  function drawPlanet(time,force=false,ambientTime=ambientMotionTime,cloudTime=cloudMotionTime){
     if(!surface)return;
-    if(gl){drawPlanetGPU(time);return;}
-    if(!force&&time-planetTime<1/24)return;planetTime=time;
+    if(gl){drawPlanetGPU(time,ambientTime,cloudTime);return;}
+    if(!force&&time-lastPlanetDrawTime<1/24)return;lastPlanetDrawTime=time;
     // One full turn every 200 seconds. Wrapping longitude preserves direction and continuity.
     const turns=time/planetConfig.rotationDuration,data=globeImage.data,placement=planetPlacement();const lx=(placement.sx-placement.cx)/placement.r*.9165,ly=(placement.cy-placement.sy)/placement.r*.9165;
     for(const p of samples){
@@ -356,43 +363,44 @@ void main(){
       mountainDust.push({x:random(w*.38,w*1.08),y:random(minY,maxY),minY,maxY,depth,vx:random(-6,6)*scale,vy:random(-1.4,1.4)*scale,sway:random(.7,1.8)*scale,r:radius*scale,alpha:random(.05,.13),seed:random(0,100)});
     }
   }
-  function renderAtmosphere(dt){
+  function renderAtmosphere(dt,isReduced){
     valleyCtx.clearRect(0,0,w,h);
-    const lightBreath=1+.045*Math.sin(elapsed/48*Math.PI*2)+.018*Math.sin(elapsed/48*Math.PI*4);
+    const cloudDt=dt*(isReduced?.3:1);
+    const lightBreath=1+.045*Math.sin(ambientMotionTime/48*Math.PI*2)+.018*Math.sin(ambientMotionTime/48*Math.PI*4);
     if(mountainLighting){const b=mountainElement.getBoundingClientRect(),bounds=stage.getBoundingClientRect(),ctx=valleyCtx;ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(.94*lightBreath);ctx.drawImage(mountainLighting,b.left-bounds.left,b.top-bounds.top,b.width,b.height);ctx.restore();}
     if(portraitLighting){const b=portraitElement.getBoundingClientRect(),bounds=stage.getBoundingClientRect(),ctx=contexts[3];ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(.94*lightBreath);ctx.drawImage(portraitLighting,b.left-bounds.left,b.top-bounds.top,b.width,b.height);ctx.restore();}
     for(const c of clouds){
-      const wind=.8+.28*Math.sin(elapsed*.16+c.seed);
-      c.x+=c.vx*dt*wind;c.y+=c.vy*dt*wind;
+      const wind=.8+.28*Math.sin(ambientMotionTime*.16+c.seed);
+      c.x+=c.vx*cloudDt*wind;c.y+=c.vy*cloudDt*wind;
       if(c.x>w+c.width*.5)c.x=-c.width;
       if(c.x<-c.width*1.1)c.x=w+c.width*.2;
       if(c.y>h+30)c.y=-c.height*.5;
       if(c.y<-c.height)c.y=h-20;
       const ctx=c.front?contexts[3]:valleyCtx;ctx.save();ctx.globalCompositeOperation='screen';
       const sunPosition=planetPlacement();const lightReach=clamp(1-Math.abs(c.x+c.width*.5-sunPosition.sx)/(w*1.1));
-      ctx.globalAlpha=clamp(c.alpha*(.88+.12*Math.sin(elapsed*.08+c.seed))*(.8+lightReach*.65)*lightBreath);
+      ctx.globalAlpha=clamp(c.alpha*(.88+.12*Math.sin(ambientMotionTime*.08+c.seed))*(.8+lightReach*.65)*lightBreath);
       ctx.filter=c.front?'blur(5px)':'blur(3px)';
-      const stretch=1+.035*Math.sin(elapsed*.05+c.seed);
+      const stretch=1+.035*Math.sin(ambientMotionTime*.05+c.seed);
       ctx.translate(c.x+c.width*.5,c.y+c.height*.5);ctx.scale(c.flip,1);
       ctx.drawImage(textures[c.texture],-c.width*stretch*.5,-c.height*.5,c.width*stretch,c.height);
       ctx.restore();
     }
-    for(const p of dust){
-      p.x+=(p.vx+Math.sin(elapsed*.2+p.seed)*.65)*dt;p.y+=p.vy*dt;
+    if(!isReduced)for(const p of dust){
+      p.x+=(p.vx+Math.sin(ambientMotionTime*.2+p.seed)*.65)*dt;p.y+=p.vy*dt;
       if(p.x<-5)p.x=w+5;if(p.x>w+5)p.x=-5;if(p.y<-5)p.y=h+5;if(p.y>h+5)p.y=-5;
-      const ctx=p.y>h*.74?valleyCtx:contexts[0],a=p.alpha*(.75+.25*Math.sin(elapsed*.4+p.seed));
+      const ctx=p.y>h*.74?valleyCtx:contexts[0],a=p.alpha*(.75+.25*Math.sin(ambientMotionTime*.4+p.seed));
       ctx.save();ctx.globalCompositeOperation='screen';ctx.fillStyle=`rgba(217,190,143,${clamp(a)})`;
       if(p.r>1)ctx.filter='blur(.6px)';ctx.beginPath();ctx.ellipse(p.x,p.y,p.r,p.r*.7,p.seed,0,Math.PI*2);ctx.fill();ctx.restore();
     }
     const sun=planetPlacement();
-    for(const p of mountainDust){
-      const wind=.55+.2*Math.sin(elapsed*.07+p.seed);
-      p.x+=(p.vx+Math.sin(elapsed*.11+p.seed)*p.sway)*dt*wind;
-      p.y+=(p.vy+Math.cos(elapsed*.09+p.seed)*p.sway*.2)*dt*wind;
+    if(!isReduced)for(const p of mountainDust){
+      const wind=.55+.2*Math.sin(ambientMotionTime*.07+p.seed);
+      p.x+=(p.vx+Math.sin(ambientMotionTime*.11+p.seed)*p.sway)*dt*wind;
+      p.y+=(p.vy+Math.cos(ambientMotionTime*.09+p.seed)*p.sway*.2)*dt*wind;
       if(p.x<w*.34)p.x=w*1.08;if(p.x>w*1.1)p.x=w*.34;
       if(p.y<p.minY)p.y=p.maxY;if(p.y>p.maxY)p.y=p.minY;
       const ctx=p.depth===0?contexts[0]:p.depth===1?valleyCtx:contexts[3];
-      const light=clamp(1-Math.abs(p.x-sun.sx)/(w*.95)),shimmer=.78+.22*Math.sin(elapsed*.35+p.seed);
+      const light=clamp(1-Math.abs(p.x-sun.sx)/(w*.95)),shimmer=.78+.22*Math.sin(ambientMotionTime*.35+p.seed);
       ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(p.alpha*(.58+light*.8)*shimmer);
       ctx.fillStyle=p.depth===0?'rgba(200,170,133,1)':'rgba(255,207,151,1)';
       ctx.filter=p.depth===0?'none':p.depth===1?'blur(.45px)':'blur(1.1px)';
@@ -401,7 +409,7 @@ void main(){
       ctx.restore();
     }
   }
-  function resize(){const b=stage.getBoundingClientRect();if(w===b.width&&h===b.height)return;w=b.width;h=b.height;const d=Math.min(window.devicePixelRatio||1,1.25);for(let i=0;i<canvases.length;i++){canvases[i].width=Math.round(w*d);canvases[i].height=Math.round(h*d);contexts[i].setTransform(d,0,0,d,0,0);}valleyCanvas.width=Math.round(w*d);valleyCanvas.height=Math.round(h*d);valleyCtx.setTransform(d,0,0,d,0,0);particles=[];meteors=[];impacts=[];next=elapsed+.25;resetAtmosphere();renderAtmosphere(0);resizeCosmos();preparePortraitLighting();prepareMountainLighting();}
+  function resize(){const b=stage.getBoundingClientRect();if(w===b.width&&h===b.height)return;w=b.width;h=b.height;const d=Math.min(window.devicePixelRatio||1,1.25);for(let i=0;i<canvases.length;i++){canvases[i].width=Math.round(w*d);canvases[i].height=Math.round(h*d);contexts[i].setTransform(d,0,0,d,0,0);}valleyCanvas.width=Math.round(w*d);valleyCanvas.height=Math.round(h*d);valleyCtx.setTransform(d,0,0,d,0,0);particles=[];meteors=[];impacts=[];next=elapsed+.25;resetAtmosphere();renderAtmosphere(0,reduced.matches);resizeCosmos();preparePortraitLighting();prepareMountainLighting();}
   const ro=new ResizeObserver(resize);ro.observe(stage);
   function spawn(layer,kind){
     spawnCount++;
@@ -426,7 +434,7 @@ void main(){
   }
   function contact(m,point){
     const axisX=point.x*.990+point.y*.14,axisY=-point.x*.14+point.y*.990;
-    const lon=Math.atan2(axisX,point.z)-elapsed/planetConfig.rotationDuration*Math.PI*2;
+    const lon=Math.atan2(axisX,point.z)-planetMotionTime/planetConfig.rotationDuration*Math.PI*2;
     impacts.push({lon,ny:axisY,age:0,life:4.2,seed:m.seed,r:m.r,
       debris:Array.from({length:12},()=>({angle:random(-2.8,-.2),speed:random(12,46),life:random(.35,1.5),width:random(.35,1.05)})),
       plume:Array.from({length:5},(_,i)=>({drift:random(-9,9),rise:random(8,21),size:random(15,27),texture:i%3,delay:i*.09}))});
@@ -447,7 +455,7 @@ void main(){
   function renderImpacts(dt){
     const P=planetPlacement(),ctx=contexts[1];
     for(const hit of impacts){
-      hit.age+=dt;const lon=hit.lon+elapsed/planetConfig.rotationDuration*Math.PI*2,latRadius=Math.sqrt(Math.max(0,1-hit.ny*hit.ny));
+      hit.age+=dt;const lon=hit.lon+planetMotionTime/planetConfig.rotationDuration*Math.PI*2,latRadius=Math.sqrt(Math.max(0,1-hit.ny*hit.ny));
       const nz=Math.cos(lon)*latRadius;if(nz<=0)continue;
       const ax=Math.sin(lon)*latRadius,nx=ax*.990-hit.ny*.14,ny=ax*.14+hit.ny*.990;
       const x=P.cx+nx*P.r,y=P.cy-ny*P.r,age=hit.age;
@@ -507,36 +515,44 @@ void main(){
     for(let j=0;j<m.fragments;j++){const t=.12+j*.14;const x=-length*t,offset=Math.sin(m.seed+j*4)*radius*.7;ctx.strokeStyle=`rgba(255,209,151,${clamp(fade*.4*(1-t))})`;ctx.lineWidth=Math.max(.3,radius*.22);ctx.beginPath();ctx.moveTo(x,offset);ctx.lineTo(x-radius*7,offset);ctx.stroke();}
     ctx.restore();
   }
-  function render(dt){
+  function render(dt,isReduced){
     for(const ctx of contexts)ctx.clearRect(0,0,w,h);elapsed+=dt;
-    if(planetConfig.meteorEnabled&&elapsed>=next){if(meteors.length<(w<600?3:4))spawn();next=elapsed+(spawnCount%6===0?random(3.8,5.5):random(.75,1.65));}
-    for(const m of meteors){
+    planetMotionTime+=dt*(isReduced?1/1.8:1);
+    cloudMotionTime+=dt*(isReduced?.3:1);
+    ambientMotionTime+=dt*(isReduced?.3:1);
+    if(!isReduced&&planetConfig.meteorEnabled&&elapsed>=next){if(meteors.length<(w<600?3:4))spawn();next=elapsed+(spawnCount%6===0?random(3.8,5.5):random(.75,1.65));}
+    if(!isReduced)for(const m of meteors){
       advanceMeteor(m,dt);
       // A thin residual ionization wake hangs very briefly in the flight path.
       if(m.emit>.025){m.emit=0;particles.push({layer:m.layer,x:m.x,y:m.y,vx:m.vx,vy:m.vy,r:m.r,age:0,life:random(.18,.35),a:m.a*.08});}
     }
-    meteors=meteors.filter(m=>!m.dead&&m.age<m.life&&m.y<h+100&&m.x<w+m.length);
-    particles=particles.filter(p=>p.age+dt<p.life).slice(-160);
+    if(!isReduced){
+      meteors=meteors.filter(m=>!m.dead&&m.age<m.life&&m.y<h+100&&m.x<w+m.length);
+      particles=particles.filter(p=>p.age+dt<p.life).slice(-160);
+    }
     for(let layer=0;layer<3;layer++){
       const ctx=contexts[layer];ctx.save();ctx.beginPath();ctx.rect(w*.47,0,w*.53,h);ctx.clip();if(layer===0){const P=planetPlacement();ctx.beginPath();ctx.rect(0,0,w,h);ctx.moveTo(P.cx+P.r,P.cy);ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip('evenodd');}ctx.globalCompositeOperation='lighter';
       for(const p of particles){if(p.layer!==layer)continue;p.age+=dt;const a=clamp(1-p.age/p.life)*p.a;ctx.strokeStyle=`rgba(229,168,113,${a})`;ctx.lineWidth=Math.max(.35,p.r*.5);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.vx*.032,p.y-p.vy*.032);ctx.stroke();}
       for(const m of meteors){if(m.layer!==layer)continue;const fade=clamp(Math.min(m.age/.08,(m.life-m.age)/.16))*m.a;streak(ctx,m,fade);if(m.burn>.01)puff(ctx,m.x,m.y,9,'rgba(255,162,74,ALPHA)',m.burn*.25,3,Math.atan2(m.vy,m.vx));}
       ctx.globalCompositeOperation='source-over';ctx.restore();
     }
-    renderImpacts(dt);renderAtmosphere(dt);drawPlanet(elapsed);
+    if(!isReduced)renderImpacts(dt);
+    renderAtmosphere(dt,isReduced);drawPlanet(planetMotionTime,false,ambientMotionTime,cloudMotionTime);
+    root.dataset.rotation=String(planetMotionTime/planetConfig.rotationDuration);
+    root.dataset.reducedMotion=String(isReduced);
   }
   function frame(t){raf=0;if(!root.isConnected){ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('scroll',scrollParallax);return;}if(!running||!visible||document.hidden){last=0;return;}// Limit expensive canvas draws to 30 fps, retaining elapsed time between draws.
-    const raw=last?t-last:1000/30;if(last&&raw<1000/30-.5){raf=requestAnimationFrame(frame);return;}
+    const minFrame= reduced.matches?1000/20:1000/30,raw=last?t-last:minFrame;if(last&&raw<minFrame-.5){raf=requestAnimationFrame(frame);return;}
     const dt=last?Math.min(raw/1000,.1):0;last=t;
     if(gl&&raw<120){frameCost=frameCost*.95+raw*.05;qualityFrames++;if(qualityFrames>180&&frameCost>40&&renderScale>1){renderScale=Math.max(1,renderScale*.75);qualityFrames=0;resizeCosmos();}}
-    render(dt);raf=requestAnimationFrame(frame);}
+    render(dt,reduced.matches);raf=requestAnimationFrame(frame);}
   function start(){if(!raf&&running&&visible&&!document.hidden)raf=requestAnimationFrame(frame);}
   function sync(){pause.textContent=running?'Pause':'Play';pause.setAttribute('aria-pressed',String(!running));}
-  replay.addEventListener('click',()=>{meteors=[];particles=[];impacts=[];spawn(1,'impact');spawn(0,'flyby');next=elapsed+.85;running=true;last=0;sync();start();});
+  replay.addEventListener('click',()=>{if(reduced.matches)return;meteors=[];particles=[];impacts=[];spawn(1,'impact');spawn(0,'flyby');next=elapsed+.85;running=true;last=0;sync();start();});
   pause.addEventListener('click',()=>{running=!running;last=0;sync();start();});
   function visibility(){last=0;start();}document.addEventListener('visibilitychange',visibility);
   const io=new IntersectionObserver(e=>{visible=e[0].isIntersecting;last=0;start();});io.observe(stage);
-  reduced.addEventListener('change',()=>{running=!reduced.matches;sync();start();});
+  reduced.addEventListener('change',()=>{meteors=[];particles=[];impacts=[];last=0;scrollParallax();start();});
   function scrollParallax(){const y=reduced.matches?0:Math.max(-18,Math.min(18,-stage.getBoundingClientRect().top*.065));stage.style.setProperty('--mountain-y',y+'px');}
   window.addEventListener('scroll',scrollParallax,{passive:true});
   sync();resize();start();

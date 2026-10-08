@@ -1,6 +1,6 @@
 // Shared geological material, shells and optical sun from About's approved scene.
 // Uses hero-3d-core's atlas, grazing relief, roughness and shader color pipeline.
-import {THREE,geologyGLSL} from './hero-3d-core.js';
+import {THREE,geologyGLSL} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 export function createHeroPlanet({scene,atlas,light,mobile,config}) {
   const uniforms = {
     atlas: { value: atlas },

@@ -1,4 +1,4 @@
-import {THREE, geologyGLSL, createHeroRenderer, loadGeology, heroLifecycle} from './hero-3d-core.js';
+import {THREE, geologyGLSL, createHeroRenderer, loadGeology, heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 import {createSafeOrbits} from './portfolio-orbit-safety.js';
 import {createHeroMeteors} from './lp-meteor-system.js?v=home-cadence-20261004';
 
@@ -142,7 +142,7 @@ async function init(){
     if(event.pointerType==='touch')return;
     const w=hit(event);canvas.style.cursor=w?'pointer':'default';
     if(w){clearTimeout(closeTimer);hovered=w;choose(w);}else leave();
-    targetParallax.set((event.clientX/width-.5)*.012,(event.clientY/height-.5)*.012);if(lifecycle.reduced.matches)redraw();
+    if(!lifecycle.reduced.matches)targetParallax.set((event.clientX/width-.5)*.012,(event.clientY/height-.5)*.012);
   },{signal});
   canvas.addEventListener('pointerleave',()=>{leave();targetParallax.set(0,0);},{signal});
   canvas.addEventListener('click',event=>{const w=hit(event);if(!w){dismiss();return;}if(event.pointerType==='touch'||matchMedia('(hover: none)').matches){if(tapped===w){location.assign(w.p.url);return;}choose(w);tapped=w;hovered=null;redraw();}else location.assign(w.p.url);},{signal});
@@ -180,6 +180,7 @@ async function init(){
   function wScreenRadius(w){return w.mesh.scale.x*scale/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*camera.position.distanceTo(w.position));}
   let safetyClock=0;
   const predicted=worlds.map(()=>new THREE.Vector3());
+  let planetTime=0,cloudTime=0,ambientTime=0;
   function predictiveSafety(dt){
     safetyClock+=dt;if(safetyClock<.5)return;safetyClock=0;
     worlds.forEach(w=>w.avoidanceTarget=1);let minimumGap=Infinity;
@@ -202,16 +203,21 @@ async function init(){
   }
   const lifecycle=heroLifecycle(root,resize,(time,dt,reduced)=>{
     const begin=performance.now();scroll=reduced?0:THREE.MathUtils.clamp(-root.getBoundingClientRect().top/(height*portfolioHeroConfig.scrollDistance),0,1);
-    parallax.lerp(reduced?new THREE.Vector2():targetParallax,.04);
+    if(reduced)parallax.set(0,0);else parallax.lerp(targetParallax,.04);
     system.position.copy(center).add(new THREE.Vector3(scroll*.06+parallax.x,scroll*portfolioHeroConfig.planetScrollLift+parallax.y,0));system.scale.setScalar(scale);
-    uniforms.turn.value=time/portfolioHeroConfig.rotationDuration;dustShells.forEach(shell=>shell.u.turn.value=uniforms.turn.value*shell.speed);sun.material.uniforms.time.value=time;fog.material.uniforms.time.value=time;
+    const slowMotion=reduced?.3:1;
+    planetTime+=dt*(reduced?1/1.6:1);cloudTime+=dt*slowMotion;ambientTime+=dt*slowMotion;
+    uniforms.turn.value=planetTime/portfolioHeroConfig.rotationDuration;
+    dustShells.forEach(shell=>shell.u.turn.value=cloudTime/portfolioHeroConfig.rotationDuration*shell.speed);
+    sun.material.uniforms.time.value=fog.material.uniforms.time.value=ambientTime;
     root.style.setProperty('--universe-scroll',scroll);root.style.setProperty('--terrain-rise',`${-scroll*12}px`);
     for(const [id,line] of Object.entries(orbitLines)){const w=worlds.find(w=>w.p.id===id);line.material.uniforms.activeAngle.value=w.angle;line.material.uniforms.emphasis.value=w.emphasis;line.scale.setScalar(1+scroll*.035);}
     if(!reduced)predictiveSafety(dt);
     worlds.forEach((w,i)=>{
       if(i>=count)return;
-      const o=orbitConfig[w.p.orbit];const selected=active===w&&(hovered===w||focused===w||tapped===w);const damping=reduced?1:1-Math.exp(-dt*4);w.speedFactor=THREE.MathUtils.lerp(w.speedFactor,selected?portfolioHeroConfig.hoverSlowdown:1,damping);w.emphasis=THREE.MathUtils.lerp(w.emphasis,selected?1:0,damping);w.avoidance=THREE.MathUtils.lerp(w.avoidance,w.avoidanceTarget,damping);w.angle+=dt*Math.PI*2/w.p.orbitDuration*w.p.direction*(1-scroll*portfolioHeroConfig.orbitScrollSlowdown)*w.speedFactor*w.avoidance;
-      w.mesh.position.copy(safeOrbits.position(w.p,w.angle)).multiplyScalar(1+scroll*.035);w.spin+=dt/w.p.axialDuration;w.u.turn.value=w.spin;const depth=THREE.MathUtils.clamp(w.mesh.position.z/.9,-1,1);w.focusDim=THREE.MathUtils.lerp(w.focusDim,active&&active!==w&&(hovered||focused||tapped)?.93:1,damping);w.u.emphasis.value=w.emphasis;w.mesh.scale.setScalar(portfolioHeroConfig.moonRadius*w.p.scale*(1+w.emphasis*.03));w.u.dim.value=(.92+depth*.10)*w.focusDim*(1+w.emphasis*.05);w.air.uniforms.strength.value=w.p.atmosphere*(1+w.emphasis*.15)*(.90+depth*.12);
+      const selected=active===w&&(hovered===w||focused===w||tapped===w);const damping=reduced?1:1-Math.exp(-dt*4);w.speedFactor=THREE.MathUtils.lerp(w.speedFactor,selected?portfolioHeroConfig.hoverSlowdown:1,damping);w.emphasis=reduced?0:THREE.MathUtils.lerp(w.emphasis,selected?1:0,damping);w.avoidance=THREE.MathUtils.lerp(w.avoidance,w.avoidanceTarget,damping);
+      if(!reduced)w.angle+=dt*Math.PI*2/w.p.orbitDuration*w.p.direction*(1-scroll*portfolioHeroConfig.orbitScrollSlowdown)*w.speedFactor*w.avoidance;
+      w.mesh.position.copy(safeOrbits.position(w.p,w.angle)).multiplyScalar(1+scroll*.035);if(!reduced)w.spin+=dt/w.p.axialDuration;w.u.turn.value=w.spin;const depth=THREE.MathUtils.clamp(w.mesh.position.z/.9,-1,1);w.focusDim=THREE.MathUtils.lerp(w.focusDim,active&&active!==w&&(hovered||focused||tapped)?.93:1,damping);w.u.emphasis.value=w.emphasis;w.mesh.scale.setScalar(portfolioHeroConfig.moonRadius*w.p.scale*(1+w.emphasis*.03));w.u.dim.value=(.92+depth*.10)*w.focusDim*(1+w.emphasis*.05);w.air.uniforms.strength.value=w.p.atmosphere*(1+w.emphasis*.15)*(.90+depth*.12);
     });
     if(debugOrbits?.visible)debugMoons.forEach((m,i)=>{m.position.copy(worlds[i].mesh.position);m.visible=i<count;});
     system.updateMatrixWorld(true);
@@ -303,9 +309,11 @@ async function init(){
     root.dataset.rotation=uniforms.turn.value;root.dataset.orbitTime=time;root.dataset.worldCount=count;root.dataset.worlds=JSON.stringify(worlds.slice(0,count).map(w=>({id:w.p.id,angle:w.angle,z:w.position.z,visible:w.eligible,x:w.screen?.x,y:w.screen?.y,eclipse:w.eclipse,sun:w.u.sunDirection.value.toArray(),planetshine:w.u.planetshine.value,phase:(1+w.u.sunDirection.value.dot(camera.position.clone().sub(w.position).normalize()))*.5})));root.dataset.reducedMotion=reduced;
     cost=cost*.96+(performance.now()-begin)*.04;if(++frames%240===0&&cost>19&&renderer.getPixelRatio()>1){renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()*.85));renderer.setSize(width,height,false);}
   });
+  // Bind once, outside the render loop; the existing controller owns cleanup.
+  lifecycle.reduced.addEventListener('change',()=>{targetParallax.set(0,0);parallax.set(0,0);},{signal});
   window.addEventListener('scroll',()=>{if(lifecycle.reduced.matches)return;root.style.setProperty('--universe-scroll',THREE.MathUtils.clamp(-root.getBoundingClientRect().top/(height*.35),0,1));},{passive:true,signal});
   const initialFocus=document.activeElement;
   if(initialFocus?.matches('.universe-project-links a')){focused=worlds.find(w=>w.p.id===initialFocus.dataset.project);choose(focused);redraw();}
-  window.addEventListener('pagehide',()=>{cancelAnimationFrame(readyFrame);clearTimeout(closeTimer);abort.abort();if(development)delete window.setPortfolioOrbitDebug;meteors.dispose();scene.traverse(o=>{o.geometry?.dispose();if(o.material)o.material.dispose();});atlas.dispose();renderer.dispose();},{once:true});
+  window.addEventListener('pagehide',event=>{if(event.persisted)return;lifecycle.dispose();cancelAnimationFrame(readyFrame);clearTimeout(closeTimer);abort.abort();if(development)delete window.setPortfolioOrbitDebug;meteors.dispose();scene.traverse(o=>{o.geometry?.dispose();if(o.material)o.material.dispose();});atlas.dispose();renderer.dispose();},{signal});
 
 }

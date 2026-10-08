@@ -1,0 +1,175 @@
+/* Shared Selected Work system. Keep card rules identical across both views. */
+.selected-work { position:relative; isolation:isolate; padding:clamp(90px,9vw,150px) 0 20px; background:transparent; overflow:hidden; }
+.selected-work::before,.selected-work::after { content:none; }
+/* Opaque page-black shields this chapter from the fixed hero behind the body. */
+.selected-work#portfolio { background:#000!important; box-shadow:none; }
+.selected-work :is(.selected-work-container,.selected-work-intro,.selected-work-tabs,.selected-work-grid,.selected-work-end) { background:transparent; box-shadow:none; }
+.selected-work .selected-work-container { width:min(calc(100% - var(--lp-page-gutter,32px) * 2),var(--lp-content-max,1258px)); max-width:var(--lp-content-max,1258px); padding-inline:0; }
+.selected-work .selected-work-intro { margin-bottom:52px; text-align:left; }
+.selected-work .selected-work-eyebrow { display:flex; align-items:center; gap:16px; color:#c3beb8; font-size:12px; letter-spacing:.18em; margin:0 0 26px; }
+.selected-work-eyebrow::before { content:""; width:32px; height:1px; background:var(--color-primary); }
+.selected-work h2 { font-size:clamp(38px,4.3vw,66px); line-height:1.08; letter-spacing:-.045em; margin:0 0 24px; font-weight:600; color:#f4f1ed; }
+.selected-work h2 span { color:var(--color-primary); }
+.selected-work .selected-work-summary { max-width:610px; color:#aaa7a3; font-size:17px; line-height:1.75; margin:0; }
+/* Shared card system: composition is expressed only through size variants. */
+.selected-work { scroll-margin-top:110px; }
+.selected-work .selected-work-grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:24px; }
+.selected-work .work-project { --world:55,100,255; --card-padding:32px; --world-position:70% 50%; position:relative; min-width:0; height:660px; border:1px solid rgba(190,200,220,.085); border-radius:20px; background:#090b0e; overflow:hidden; box-shadow:0 24px 55px #0008,inset 0 1px #ffffff04; transition:transform .5s,border-color .5s; }
+.selected-work .work-card--featured { grid-column:span 12; height:480px; }
+.selected-work .work-card--large { grid-column:span 6; }
+.selected-work .work-card--standard { grid-column:span 4; }
+.selected-work .work-project-link { display:grid; position:relative; height:100%; padding:var(--card-padding); grid-template-rows:132px minmax(0,1fr) 130px; gap:12px; color:#f4f1ed; text-decoration:none; }
+.selected-work .work-project-copy,.selected-work .work-product,.selected-work .work-project-foot { position:relative; z-index:1; min-width:0; }
+.selected-work .work-category { display:flex; align-items:center; gap:9px; color:#a5aaaf; font-size:9px; letter-spacing:.1em; margin:0 0 14px; line-height:1.5; }
+.selected-work .work-category::before { content:""; width:16px; height:1px; flex-shrink:0; background:var(--color-primary); opacity:.75; }
+.selected-work .work-project h3 { color:#f6f3ef; font-size:40px; font-weight:600; letter-spacing:-.035em; line-height:1.1; margin:0 0 12px; }
+.selected-work .work-story { max-width:340px; color:#b0ada9; font-size:15px; line-height:1.5; margin:0; }
+.selected-work .work-product { display:flex; align-items:center; justify-content:center; container-type:size; overflow:visible; pointer-events:none; z-index:2; }
+.selected-work .work-product img { display:block; width:100%; height:100%; max-width:100%; min-height:0; object-fit:contain; object-position:center; filter:none; }
+.selected-work .work-project-copy { z-index:3; }
+.selected-work .work-project-foot { z-index:3; display:flex; align-items:end; justify-content:space-between; gap:16px; }
+.selected-work .work-impact { display:flex; flex-direction:column; align-items:start; gap:8px; min-width:0; }
+.selected-work .work-impact strong { color:var(--color-primary); font-size:38px; font-weight:600; line-height:1.15; letter-spacing:-.035em; margin:0; }
+.selected-work .work-impact > span { order:-1; display:block; color:#b0ada9; font-size:15px; line-height:1.45; }
+.selected-work .work-impact--duration strong { font-size:clamp(28px,2vw,38px); white-space:nowrap; }
+.selected-work .work-impact--qualitative strong { font-size:18px; font-weight:500; line-height:1.45; letter-spacing:-.02em; }
+.selected-work .work-link-cue { display:flex; flex:none; align-items:center; gap:12px; color:#e0ddd8; font-size:0; white-space:nowrap; }
+.selected-work .work-link-cue > span:last-child { display:grid; place-items:center; width:42px; height:42px; border:1px solid #ff980052; border-radius:50%; color:var(--color-primary); font-size:22px; transition:transform .5s,border-color .5s; }
+.selected-work .work-card--featured .work-project-link { grid-template-columns:minmax(0,2fr) minmax(0,3fr); grid-template-rows:1fr 130px; gap:24px; }
+.selected-work .work-card--featured .work-product { grid-column:2; grid-row:1 / 3; }
+.selected-work .work-card--featured .work-project-foot { grid-column:1 / -1; grid-row:2; }
+.selected-work .work-card--featured .work-impact { max-width:34%; }
+/* Product sizing stays independent from full-bleed atmospheric coverage. */
+.selected-work .work-project--smartfin { --product-scale:1.08; }
+/* Wide worlds contain a baked near-black floor. Normalize that floor before
+   the brightness grade so it cannot become a rectangular tinted plate. */
+.selected-work .work-card--featured .work-world::before { inset:0; width:100%; height:100%; filter:contrast(1.1) var(--world-grade); mask-image:none; }
+.selected-work .work-card--featured .work-world::after { inset:0; background:linear-gradient(90deg,rgba(2,4,5,.78) 0%,rgba(2,4,5,.64) 13%,rgba(2,4,5,.44) 25%,rgba(2,4,5,.24) 38%,rgba(2,4,5,.1) 48%,rgba(2,4,5,0) 62%); }
+.selected-work .work-card--featured :is(.work-project-copy,.work-project-foot) { background:transparent; backdrop-filter:none; }
+.selected-work .work-tab-count { opacity:.78; font-size:.92em; }
+.selected-work [data-project="fluxcrm"] { --world-position:center center; }
+/* Project identity changes atmosphere only, never layout. */
+.work-project--ewallet { --world:44,100,225; --world-art:url('../images/hero-cinematic/case-ewallet.webp'); --world-grade:sepia(1) saturate(3.2) hue-rotate(175deg) brightness(3.1); }
+.work-project--zappay { --world:25,155,161; --world-art:url('../images/hero-cinematic/case-zappay.webp'); --world-grade:sepia(1) saturate(2) hue-rotate(128deg) brightness(3.05); }
+/* UniPay's case-page fallback includes legacy metric badges; use the clean
+   environment base here, retaining UniPay's violet grade and real phones. */
+.work-project--unipay { --world:126,79,206; --world-art:url('../images/hero-cinematic/case-ewallet.webp'); --world-grade:sepia(1) saturate(1.8) hue-rotate(208deg) brightness(2.8); }
+.work-project--smartfin { --world:100,140,180; --world-art:url('../images/hero-cinematic/case-smartfin.webp'); --world-grade:sepia(1) saturate(.8) hue-rotate(170deg) brightness(2.9); }
+.work-project--coverride { --world-position:center center; --world:26,142,97; --world-art:url('../images/hero-cinematic/case-coverride.webp'); --world-grade:sepia(1) saturate(1.8) hue-rotate(100deg) brightness(2.2); }
+.selected-work .work-world { position:absolute; inset:0; pointer-events:none; }
+.selected-work .work-world::before { content:""; position:absolute; inset:0; width:100%; height:100%; background:var(--world-art) no-repeat var(--world-position) / cover; filter:var(--world-grade); mask-image:radial-gradient(ellipse at 65% 52%,#000 35%,#000d 70%,#0008 100%); }
+.selected-work .work-world::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,#090b0eee,transparent 38%),linear-gradient(0deg,#090b0ef5,transparent 34%),linear-gradient(90deg,#090b0e99,transparent 58%),radial-gradient(ellipse at 65% 48%,transparent 30%,#090b0e99 100%); }
+.selected-work .selected-work-end { text-align:center; padding:52px 0 25px; }
+.selected-work .selected-work-cta { display:inline-flex; align-items:center; gap:28px; padding:20px 29px; color:var(--color-primary); border:1px solid color-mix(in srgb,var(--color-primary) 68%,transparent); border-radius:6px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; background:#ff980003; transition:background .5s,box-shadow .5s; }
+.selected-work .selected-work-cta span { font-size:20px; transition:transform .5s; }
+.selected-work .selected-work-cta:hover { background:#ff980014; box-shadow:0 0 26px #ff98000e; }
+.selected-work .selected-work-cta:hover span { transform:translateX(5px); }
+.selected-work a:focus-visible { outline:2px solid var(--color-primary); outline-offset:-5px; }
+.selected-work [hidden] { display:none!important; }
+.selected-work .selected-work-tabs { display:flex; gap:clamp(22px,2.6vw,40px); overflow-x:auto; scrollbar-width:thin; scrollbar-color:#ff980044 transparent; margin:0 0 36px; border-bottom:1px solid #ffffff12; }
+.selected-work .selected-work-tabs button { position:relative; flex:none; width:auto; min-width:0; white-space:nowrap; appearance:none; border:0; border-radius:0; background:transparent; color:#bcb8b2; padding:0 0 18px; font-size:12px; font-weight:500; line-height:1.6; letter-spacing:.075em; text-transform:uppercase; cursor:pointer; transition:color .25s; }
+.selected-work .selected-work-tabs button::after { content:""; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--color-primary); opacity:0; scale:.55 1; transition:opacity .3s,scale .3s; }
+.selected-work .selected-work-tabs button[aria-selected=true],.selected-work .selected-work-tabs button:hover { color:var(--color-primary); }
+.selected-work .selected-work-tabs button[aria-selected=true]::after { opacity:1; scale:1 1; }
+.selected-work .selected-work-tabs button:focus-visible { outline:2px solid var(--color-primary); outline-offset:-2px; }
+
+@media(hover:hover) and (pointer:fine) {
+ .selected-work .work-project:hover { transform:translateY(-6px); border-color:#ff980055; }
+ .selected-work .work-project:hover .work-art-frame { transform:scale(calc(var(--product-scale,1) * 1.02)); }
+ .selected-work .work-project:hover .work-link-cue > span:last-child { transform:translate(3px,-3px); border-color:#ff980099; }
+}
+@media(min-width:768px) and (max-width:1199px) {
+ .selected-work .work-card--standard { grid-column:span 6; }
+ .selected-work .work-project { --card-padding:26px; }
+ .selected-work .work-project h3 { font-size:32px; }
+ .selected-work .work-project-link { grid-template-rows:142px minmax(0,1fr) 140px; }
+ .selected-work .work-card--featured .work-project-link { grid-template-rows:1fr 140px; }
+}
+@media(max-width:767px) {
+ .selected-work { padding-top:80px; }
+ .selected-work .selected-work-intro { margin-bottom:32px; }
+ .selected-work .selected-work-eyebrow { font-size:10px; letter-spacing:.12em; gap:10px; }
+ .selected-work .selected-work-summary { font-size:15px; }
+ .selected-work .work-project { --world-position:74% 50%; --card-padding:24px; grid-column:span 12; height:640px; }
+ .selected-work .work-project h3 { font-size:34px; }
+ .selected-work .work-project--smartfin { --product-scale:1.18; }
+ .selected-work .work-project--coverride { --product-scale:1.18; }
+ .selected-work [data-project="fluxcrm"] { --product-scale:1.12; }
+ .selected-work .work-story { font-size:14px; }
+ .selected-work .work-project-link,.selected-work .work-card--featured .work-project-link { grid-template-columns:minmax(0,1fr); grid-template-rows:132px minmax(0,1fr) 136px; gap:12px; }
+ .selected-work .work-card--featured .work-product,.selected-work .work-card--featured .work-project-foot { grid-column:auto; grid-row:auto; }
+ .selected-work .work-card--featured .work-impact { max-width:none; }
+ .selected-work .work-impact > span { font-size:14px; }
+ .selected-work .work-impact--qualitative strong { font-size:17px; }
+ .selected-work .selected-work-tabs { gap:24px; margin-bottom:28px; scrollbar-width:none; }
+ .selected-work .selected-work-tabs::-webkit-scrollbar { display:none; }
+ .selected-work .selected-work-tabs button { font-size:11px; padding-bottom:15px; }
+ .selected-work .selected-work-end { padding-top:36px; }
+ .selected-work .selected-work-cta { font-size:10px; gap:16px; padding:18px 22px; }
+}
+@media(prefers-reduced-motion:no-preference) {
+ .selected-work .work-category-leaving { opacity:0; translate:0 6px; transition:opacity .18s,translate .18s; }
+ .selected-work .work-category-entering > .work-project { animation:work-enter .4s cubic-bezier(.2,.7,.3,1) both; animation-delay:var(--work-stagger,0ms); }
+ .selected-work .work-revealed { animation:work-enter .75s cubic-bezier(.2,.7,.3,1) both; }
+ @keyframes work-enter { from { opacity:0; translate:0 12px; } to { opacity:1; translate:0 0; } }
+}
+@media(prefers-reduced-motion:reduce) { .selected-work *, .selected-work *::before,.selected-work *::after { transition:none!important; animation:none!important; transform:none!important; } }
+
+/* Fitted internal art frame: contain the complete source, with no clipped tail.
+   Reflections are duplicates of only the final 8%; the primary UI is unmasked. */
+.selected-work .work-art-frame { position:relative; flex:none; width:min(100cqw,calc(100cqh * var(--art-ratio))); aspect-ratio:var(--art-ratio); max-width:100%; max-height:100%; isolation:isolate; transform:scale(var(--product-scale,1)); filter:drop-shadow(0 20px 30px #0006); transition:transform .5s; }
+.selected-work .work-art-frame::before { content:""; position:absolute; z-index:-1; left:16%; right:16%; bottom:4%; height:7%; border-radius:50%; background:radial-gradient(ellipse,#0007,rgba(var(--world),.06) 50%,transparent 75%); filter:blur(9px); }
+.selected-work .work-art-frame--reflected .work-art-primary { clip-path:inset(0 0 8% 0); }
+.selected-work .work-art-frame .work-art-reflection { position:absolute; inset:0; clip-path:inset(92% 0 0 0); mask-image:linear-gradient(to bottom,#000 92%,transparent 100%); }
+
+/* HomeNest keeps its real phones and reflection, enlarged inside the existing rows. */
+.selected-work [data-project="homenest"] { --product-scale:1.35; }
+.selected-work [data-project="homenest"] .work-world::before { filter:sepia(1) saturate(1.5) hue-rotate(345deg) brightness(2); }
+.selected-work [data-project="homenest"] .work-art-frame { filter:drop-shadow(0 20px 30px #0008) drop-shadow(0 0 6px #bd996b22); }
+@media(max-width:767px) {
+ .selected-work [data-project="homenest"] { --product-scale:1.18; }
+}
+
+/* Library-only precision polish. Home and the hero retain their approved rules. */
+.selected-work.selected-work--library#portfolio {
+    padding-top:96px;
+    padding-bottom:68px;
+    background:linear-gradient(#020305,#000 320px)!important;
+}
+.selected-work--library .work-impact { max-width:340px; }
+.selected-work--library .work-card--featured .work-impact { max-width:min(34%,340px); }
+@media(min-width:768px) {
+    .selected-work--library .selected-work-tabs { gap:clamp(26px,2.8vw,44px); }
+    .selected-work--library .selected-work-tabs button { font-size:13.5px; color:#c4c0ba; }
+    .selected-work--library .selected-work-tabs button[aria-selected=true],
+    .selected-work--library .selected-work-tabs button:hover { color:var(--color-primary); }
+    .selected-work--library .selected-work-tabs button[aria-selected=true] { font-weight:600; }
+}
+.selected-work--library .work-project--unipay { --product-scale:1.08; }
+.selected-work--library .work-project--smartfin { --product-scale:1.16; }
+.selected-work--library .work-project--coverride { --product-scale:1.10; }
+.selected-work--library .work-project--coverride .work-product { translate:-18px 0; }
+/* Continuous, full-card grading reveals more detail through the middle;
+   the existing seam-free world coverage and emerald grade remain intact. */
+.selected-work--library .work-project--coverride .work-world::after {
+    background:linear-gradient(90deg,rgba(2,4,5,.70) 0%,rgba(2,4,5,.52) 13%,rgba(2,4,5,.32) 25%,rgba(2,4,5,.16) 38%,rgba(2,4,5,.06) 48%,rgba(2,4,5,0) 62%);
+}
+@media(max-width:767px) {
+    .selected-work.selected-work--library#portfolio { padding-top:48px; padding-bottom:48px; }
+    .selected-work--library .work-project--smartfin { --product-scale:1.26; }
+    .selected-work--library .work-project--coverride { --product-scale:1.28; }
+    .selected-work--library .work-project--coverride .work-product { translate:-6px 0; }
+    .selected-work--library .work-card--featured .work-impact { max-width:340px; }
+}
+
+/* Home and the library share one large-screen measure. Extra art room comes
+   from modest card-height growth; source transforms, worlds and copy stay owned. */
+@media(min-width:1600px) {
+ .selected-work .selected-work-intro { max-width:760px; }
+ .selected-work .selected-work-grid { gap:clamp(28px,1vw,32px); }
+ .selected-work .work-project { height:clamp(680px,calc(660px + (100vw - 1600px) * .045),720px); }
+ .selected-work .work-card--featured { height:clamp(490px,calc(480px + (100vw - 1600px) * .025),530px); }
+ .selected-work .selected-work-tabs { gap:clamp(32px,2vw,44px); }
+ .selected-work .selected-work-tabs button { font-size:13px; }
+ .selected-work--library .selected-work-tabs button { font-size:14.25px; }
+}

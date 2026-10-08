@@ -185,9 +185,12 @@
     z-index: 2;
 }
 
+/* The spacer supplies one hero-height of flow. Keep the artwork anchored to
+   that document position so it exits before the transparent Impact landscape;
+   a viewport-fixed layer otherwise reappears as a second partial hero. */
 .tmp-banner-one-area.moody-hero {
     overflow: hidden;
-    position: fixed !important;
+    position: absolute !important;
     top: 0 !important;
     right: 0;
     left: 0;

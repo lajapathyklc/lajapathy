@@ -1,11 +1,7 @@
 /* The existing Home/header content measure (1290px shell minus 16px gutters).
-   Only opted-in main-page headers/heroes use this shared horizontal guide.
+   Site-wide width tokens live in lp-cinematic-footer.css, already loaded on every page.
    Scene layers, type, copy measures and vertical placement remain page-owned. */
-:root {
-  --lp-content-max:1258px;
-  --lp-page-gutter:clamp(32px,3vw,48px);
-  --lp-content-start:max(var(--lp-page-gutter),calc((100% - var(--lp-content-max)) / 2));
-}
+
 .lp-shell,
 .container.lp-shell,
 .container.lp-shell.lp-hero-shell {
@@ -51,4 +47,11 @@
 }
 @media(max-width:420px) {
   .contact-hero .lp-hero-shell .lp-hero-copy { width:calc(100vw - 84px); }
+}
+
+/* Large-screen editorial measures stay independent of the outer canvas. */
+@media(min-width:1600px) {
+ .about-page-hero .about-hero-copy { max-width:620px; }
+ :is(.about-area,.about-us-area) p { max-width:var(--lp-copy-max); }
+ .contact-hero .lp-hero-copy { max-width:760px; }
 }

@@ -7,6 +7,14 @@
     var close=menu.querySelector('.lp-menu-close');
     var backdrop=menu.querySelector('.lp-menu-backdrop');
     var lastFocus=null;
+    if(!menu.id) menu.id='lp-mobile-navigation';
+    // Keep the approved nav labels; expose the same current-page state everywhere.
+    var current=location.pathname.split('/').pop() || 'index.html';
+    var portfolio=Boolean(document.querySelector('.case-snapshot'));
+    document.querySelectorAll('header a, .lp-mobile-nav a').forEach(function(a){
+      var target=new URL(a.href,location.href).pathname.split('/').pop() || 'index.html';
+      if(target===current || (portfolio && target==='Casestudies.html')) a.setAttribute('aria-current','page');
+    });
 
     function openMenu(e){
       if(e){ e.preventDefault(); e.stopImmediatePropagation(); }
@@ -39,6 +47,8 @@
     // every legacy handler individually.
     openers.forEach(function(b){
       b.setAttribute('aria-haspopup','dialog');
+      b.setAttribute('aria-controls',menu.id);
+      if(!b.hasAttribute('aria-label')) b.setAttribute('aria-label','Open navigation');
       b.setAttribute('aria-expanded','false');
       b.addEventListener('click',openMenu,true);
       b.addEventListener('keydown',function(e){
@@ -52,7 +62,14 @@
       a.addEventListener('click',function(){ closeMenu(); });
     });
     document.addEventListener('keydown',function(e){
-      if(e.key==='Escape' && menu.classList.contains('is-open')) closeMenu(e);
+      if(!menu.classList.contains('is-open')) return;
+      if(e.key==='Escape') closeMenu(e);
+      if(e.key==='Tab') {
+        var items=Array.from(menu.querySelectorAll('a[href],button,input,[tabindex]')).filter(function(el){return !el.disabled && el.tabIndex>=0 && el.getClientRects().length;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && (document.activeElement===first || !menu.contains(document.activeElement))){e.preventDefault();if(last) last.focus();}
+        else if(!e.shiftKey && (document.activeElement===last || !menu.contains(document.activeElement))){e.preventDefault();if(first) first.focus();}
+      }
     });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();

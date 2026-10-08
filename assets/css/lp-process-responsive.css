@@ -1,0 +1,34 @@
+/* Preserve the four-stage desktop diagram; expose its full content in a
+   readable sequence on phones and a balanced two-column grid on tablets. */
+.inner_banner_bg { padding-top: 150px; }
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .discoverbg h4 { font-size: 28px; line-height: 1.2; }
+}
+
+@media (max-width: 1199px) {
+    .inner_banner_bg { padding-top: 138px; }
+    .designprocess_banner { font-size: clamp(30px, 5vw, 42px); line-height: 1.2; }
+    .intro_design_process_bg {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        align-items: stretch;
+        margin-top: 0 !important;
+    }
+    .intro_design_process_bg .discoverbg {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        margin-top: 0;
+        padding: 28px 24px 38px;
+        border-radius: 20px;
+    }
+    .discoverbg h4 { font-size: 28px; line-height: 1.2; letter-spacing: 0; overflow-wrap: normal; }
+    .discoverbg .content_box ul li { font-size: 15px; line-height: 1.6; }
+    .intro_design_process_bg .processarw { display: none; }
+    .intro_design_process_bg .content_box:last-of-type { margin-bottom: 0; }
+}
+@media (max-width: 575px) {
+    .intro_design_process_bg { grid-template-columns: minmax(0, 1fr); }
+}

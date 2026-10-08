@@ -1,4 +1,4 @@
-import {THREE} from './hero-3d-core.js';
+import {THREE} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 import {homeMeteorCadence as home,homeMeteorKind,nextHomeMeteorDelay} from './lp-meteor-cadence.js';
 
 // Adapter of Home's spawn/advanceMeteor/contact/streak/renderImpacts logic in

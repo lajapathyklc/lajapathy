@@ -47,7 +47,7 @@ export function loadGeology(renderer, mobile) {
 }
 export function heroLifecycle(root, resize, render) {
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'); let visible=true,raf=0,last=0,time=0,disposed=false;
- function frame(now){raf=0;if(disposed||document.hidden||!visible)return;const dt=last?Math.min((now-last)/1000,.05):0;last=now;if(!reduced.matches)time+=dt;render(time, reduced.matches?0:dt,reduced.matches);if(!reduced.matches)raf=requestAnimationFrame(frame);}
+ function frame(now){raf=0;if(disposed||document.hidden||!visible)return;const isReduced=reduced.matches,interval=isReduced?1000/20:0;if(last&&now-last<interval){raf=requestAnimationFrame(frame);return;}const dt=last?Math.min((now-last)/1000,.05):0;last=now;time+=dt;render(time,dt,isReduced);raf=requestAnimationFrame(frame);}
  function start(){if(disposed)return;last=0;if(!raf&&visible&&!document.hidden)raf=requestAnimationFrame(frame);}
  const ro=new ResizeObserver(()=>{resize();start();});ro.observe(root);
  const io=new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(!visible){cancelAnimationFrame(raf);raf=0;}start();});io.observe(root);

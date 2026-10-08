@@ -22,3 +22,9 @@
  .contact-environment,.contact-valley-fog { transition:none; }
  .contact-hero .lp-hero-scroll,.contact-hero .lp-hero-scroll * { animation:none; }
 }
+
+/* The shared shell may widen; the input and introduction measures do not. */
+@media(min-width:1600px) {
+ #contacts .contact-inner { width:min(100%,720px); margin-left:auto; }
+ #contacts .section-head { max-width:500px; }
+}

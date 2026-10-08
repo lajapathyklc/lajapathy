@@ -289,7 +289,6 @@ const cardData = [
 ];
 
 const cardContainer = document.getElementById('card-container');
-console.log(cardContainer)
 cardData.forEach((data, index) => {
     // create a col div
     const cardCol = document.createElement('div');
@@ -305,10 +304,8 @@ cardData.forEach((data, index) => {
         <h3 class="service-title">${data.title}</h3>
         <p class="service-para">${data.description}</p>
     `;
-    console.log(cardContainer)
 
     cardCol.appendChild(cardEl)
-    console.log(cardEl)
     // 3. Append to the container
     cardContainer.appendChild(cardCol);
 

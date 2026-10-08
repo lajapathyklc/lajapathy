@@ -1,4 +1,29 @@
-:root { --lp-black:var(--color-page,#000000); }
+/* Shared page-canvas tokens live in this site-wide stylesheet so every page
+   uses the same guide without another CSS request. Component copy stays bounded. */
+:root {
+ --lp-black:var(--color-page,#000000);
+ --lp-content-max:1258px;
+ --lp-page-gutter:clamp(32px,3vw,48px);
+ --lp-content-start:max(var(--lp-page-gutter),calc((100% - var(--lp-content-max)) / 2));
+ --lp-copy-max:70ch;
+ --lp-container-padding:16px;
+}
+@media(max-width:767px) { :root { --lp-page-gutter:24px; } }
+@media(min-width:1600px) {
+ :root { --lp-content-max:1360px; --lp-page-gutter:clamp(32px,4vw,96px); }
+ /* Existing template shells include 16px inner padding. Opted-in hero/Work
+    shells have no inner padding; both expose the same usable content width.
+    Nested containers and the unchanged testimonial chapter keep their owners. */
+ .inner_banner_bg > section:not([class]) { max-width:var(--lp-copy-max); }
+ .container:not(.lp-shell,.selected-work-container,.lp-footer-v28__inner,.container .container,.testimonial .container) {
+  width:min(calc(100% - 2 * var(--lp-page-gutter) + 2 * var(--lp-container-padding)),calc(var(--lp-content-max) + 2 * var(--lp-container-padding)));
+  max-width:calc(var(--lp-content-max) + 2 * var(--lp-container-padding));
+ }
+}
+@media(min-width:1800px) { :root { --lp-content-max:1440px; } }
+@media(min-width:2200px) { :root { --lp-content-max:1500px; } }
+@media(min-width:2560px) { :root { --lp-content-max:1560px; } }
+@media(min-width:3200px) { :root { --lp-content-max:1600px; } }
 html, body, main { background-color:var(--lp-black); }
 .lp-footer-v28-shell:has(> footer.lp-cinematic-footer),
 .footer-stars-animation-wrapper-footer:has(footer.lp-cinematic-footer) { background-color:var(--lp-black); }
@@ -22,7 +47,7 @@ footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --foo
 .lp-cinematic-footer[data-calm="true"] .lp-cinematic-footer__scene[data-scene="ready"] .lp-cinematic-footer__space { opacity:.14; }
 .lp-cinematic-footer__scene[data-scene="fallback"] .lp-cinematic-footer__fallback { display:block; }
 .lp-cinematic-footer__scene[data-scene="fallback"] .lp-cinematic-footer__canvas { display:none; }
-.lp-cinematic-footer__shell { position:relative; z-index:5; width:min(calc(100% - 2 * clamp(32px,3vw,48px)),var(--footer-max)); margin:auto; min-height:inherit; display:flex; align-items:center; padding:78px 0 115px; }
+.lp-cinematic-footer__shell { position:relative; z-index:5; width:min(calc(100% - 2 * var(--lp-page-gutter,clamp(32px,3vw,48px))),var(--footer-max)); margin:auto; min-height:inherit; display:flex; align-items:center; padding:78px 0 115px; }
 .lp-cinematic-footer__copy { width:min(640px,52%); }
 .lp-cinematic-footer__eyebrow { display:flex; align-items:center; gap:18px; margin-bottom:27px; color:#b5b7bd; font-size:13px; line-height:1.75; font-weight:700; letter-spacing:4px; }
 .lp-cinematic-footer__eyebrow span { width:30px; height:2px; flex-shrink:0; background:var(--footer-orange); }
@@ -34,7 +59,7 @@ footer.lp-cinematic-footer { --footer-orange:var(--color-primary,#ff9800); --foo
 .lp-cinematic-footer__cta:hover { border-color:var(--footer-orange); box-shadow:0 0 16px rgba(255,152,0,.075); }
 .lp-cinematic-footer__cta:hover span { transform:translateX(4px); }
 .lp-cinematic-footer__cta:focus-visible { outline:2px solid var(--footer-orange); outline-offset:5px; }
-.lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:min(calc(100% - 2 * clamp(32px,3vw,48px)),var(--footer-max))!important; margin:0 auto!important; padding-inline:0!important; background:var(--lp-black); }
+.lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:min(calc(100% - 2 * var(--lp-page-gutter,clamp(32px,3vw,48px))),var(--footer-max))!important; margin:0 auto!important; padding-inline:0!important; background:var(--lp-black); }
 .lp-cinematic-footer .lp-footer-v28__navrow { grid-template-columns:1fr auto auto; gap:36px; padding-block:25px; border-bottom:1px solid rgba(255,255,255,.10); }
 .lp-cinematic-footer .lp-footer-v28__navrow nav { gap:32px; }
 .lp-cinematic-footer .lp-footer-v28__bottom { grid-template-columns:1fr auto; padding-top:20px; gap:24px; }
@@ -75,4 +100,18 @@ body[data-footer-variant="legal-only"] .lp-cinematic-footer .lp-footer-v28__navr
 @media(prefers-reduced-motion:reduce) {
  .lp-cinematic-footer__scene * { transition:none!important; animation:none!important; }
  .lp-cinematic-footer__cta:hover span { transform:none; }
+}
+
+/* Extra vertical room on tall 2K/4K viewports; ultrawide scenes keep their
+   existing depth. The renderer's height-bound planet framing remains intact. */
+@media(min-width:2560px) {
+ .lp-cinematic-footer__scene { min-height:clamp(760px,38vh,860px); }
+}
+
+@media (max-width: 991px) {
+ .lp-cinematic-footer .lp-footer-v28__navrow nav a,
+ .lp-cinematic-footer .lp-footer-v28__bottom a,
+ .lp-cinematic-footer .lp-footer-v28__linkedin {
+  display:inline-flex; align-items:center; min-height:44px;
+ }
 }

@@ -1,4 +1,4 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
 import {createHeroMeteors} from './lp-meteor-system.js';
 
@@ -117,7 +117,7 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
         if(nx*nx+ny*ny>.85)return null;
         return[nx,ny,Math.sqrt(1-nx*nx-ny*ny)];
       }});
-    let width=1,height=1,frames=0,cost=16,frameDuration=16.7;
+    let width=1,height=1,frames=0,cost=16,frameDuration=16.7,planetTime=0,cloudTime=0,ambientTime=0;
     function resize(){
       width=root.clientWidth;height=root.clientHeight;const aspect=width/height,small=width<768;
       camera.left=-aspect;camera.right=aspect;camera.updateProjectionMatrix();
@@ -142,12 +142,15 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
       }else canvas.style.maskImage='none';
       scene.updateMatrixWorld(true);root.dataset.planetGeometry=JSON.stringify({x,y,radius,width,height});
     }
-    lifecycle=heroLifecycle(root,resize,(time,dt,reduced)=>{
+    lifecycle=heroLifecycle(root,resize,(_time,dt,reduced)=>{
       if(disposed)return;const start=performance.now();
-      uniforms.turn.value=time/config.rotationDuration;
-      clouds.u.cloudTurn.value=uniforms.turn.value*clouds.speed;haze.u.cloudTurn.value=uniforms.turn.value*haze.speed;
-      for(const object of [sun,air,outerAir])object.material.uniforms.time.value=time;
-      fogUniforms.time.value=time;scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
+      const slowMotion=reduced?.3:1;
+      planetTime+=dt*(reduced?1/1.6:1);cloudTime+=dt*slowMotion;ambientTime+=dt*slowMotion;
+      uniforms.turn.value=planetTime/config.rotationDuration;
+      clouds.u.cloudTurn.value=cloudTime/config.rotationDuration*clouds.speed;
+      haze.u.cloudTurn.value=cloudTime/config.rotationDuration*haze.speed;
+      for(const object of [sun,air,outerAir])object.material.uniforms.time.value=ambientTime;
+      fogUniforms.time.value=ambientTime;scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
       renderer.render(scene,camera);
       root.dataset.scene='ready';root.dataset.rotation=String(uniforms.turn.value);
       root.dataset.cloudRotation=String(clouds.u.cloudTurn.value);root.dataset.hazeRotation=String(haze.u.cloudTurn.value);

@@ -120,7 +120,6 @@
         if (closeButton) {
           closeButton.addEventListener("click", function () {
             overlay.classList.remove("active");
-            console.log("Overlay closed.");
           });
         }
 
@@ -132,7 +131,8 @@
     tmpgradientAnimation: function name(params) {
       var e = document.querySelectorAll(".tmp-gradient-wrapper"),
         t = document.querySelectorAll(".tmp-gradient-animation");
-      gsap.to(e, { scale: 0.6, repeat: -1, duration: 3, yoyo: !0, ease: Linear.easeNone }).play(), gsap.to(t, { repeat: -1, duration: 3, rotation: 360, ease: Linear.easeNone }).play();
+      if (e.length) gsap.to(e, { scale: 0.6, repeat: -1, duration: 3, yoyo: !0, ease: Linear.easeNone }).play();
+      if (t.length) gsap.to(t, { repeat: -1, duration: 3, rotation: 360, ease: Linear.easeNone }).play();
     },
 
     tmpTiltAnimation: function () {
@@ -250,6 +250,7 @@
     },
 
     swiperJs: function () {
+      if (typeof window.Swiper !== "function") return;
       $(document).ready(function () {
         var swiper = new Swiper(".testimonial-swiper", {
           // slidesPerView: 2,
@@ -362,7 +363,7 @@
     },
 
     wowActive: function () {
-      new WOW().init();
+      if (document.querySelector(".wow") && typeof window.WOW === "function") new WOW().init();
     },
 
     tmpVedioActivation: function (e) {
@@ -815,6 +816,7 @@
     },
 
     odoMeter: function () {
+      if (!document.querySelector(".odometer")) return;
 
       $(document).ready(function () {
         function isInViewport(element) {

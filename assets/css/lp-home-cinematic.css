@@ -341,18 +341,18 @@
 }
 
 .testimonial.lp-cinematic-scene .testimonial-card {
-    padding: 32px 34px 34px;
+    padding: 28px 30px;
     border: 1px solid rgba(255, 255, 255, .11);
-    border-radius: 22px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, .07), rgba(10, 12, 18, .92) 72%);
-    box-shadow: 0 20px 58px rgba(0, 0, 0, .3);
-    transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
+    border-radius: 14px;
+    background: #0a0b0e;
+    box-shadow: none;
+    transition: border-color .2s ease;
 }
 
 .testimonial.lp-cinematic-scene .testimonial-card:hover {
-    border-color: rgba(255, 152, 0, .36);
-    box-shadow: 0 24px 68px rgba(255, 152, 0, .07);
-    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: none;
+    transform: none;
 }
 
 @media (max-width: 1199px) {
@@ -386,7 +386,7 @@
     }
 
     .testimonial.lp-cinematic-scene .testimonial-card {
-        padding: 24px 22px 28px;
+        padding: 24px;
     }
 
     .education-experience#problem-spaces .my-skill-card {
@@ -718,11 +718,12 @@
 }
 
 #service.service-area {
-    padding: clamp(64px, 8vw, 106px) 0;
+    padding: clamp(54px, 6.8vw, 90px) 0 clamp(54px, 6.8vw, 88px);
 }
 
 #service .service-chapter-head {
-    margin-bottom: 34px !important;
+    max-width: 850px;
+    margin-bottom: 32px;
     text-align: left;
 }
 
@@ -732,12 +733,57 @@
 }
 
 #service .service-chapter-head .title {
-    margin-bottom: 0;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    :is(#service, #problem-spaces, #execution-approach) > .container {
+        padding-inline: var(--lp-container-padding);
+    }
+}
+
+#service .service-chapter-head,
+#problem-spaces .section-head,
+#execution-approach .execution-chapter-head {
+    padding-inline: 0;
+}
+
+/* Three middle chapters share one restrained editorial intro. Existing shell
+   tokens retain large-screen positioning; grid measure keeps items grouped. */
+:is(#service, #problem-spaces, #execution-approach) .section-sub-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+:is(#service, #problem-spaces, #execution-approach) .middle-chapter-marker {
+    color: #b5b7bd;
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    line-height: 1.4;
+}
+
+:is(#service, #problem-spaces, #execution-approach) .section-sub-title::before {
+    content: "";
+    width: 24px;
+    height: 2px;
+    flex: 0 0 24px;
+    background: var(--color-primary);
+}
+
+#service #card-container,
+#problem-spaces .skill-cards-container,
+#execution-approach .execution-grid {
+    max-width: min(100%, calc(var(--lp-copy-max) * 2.4));
 }
 
 #service #card-container {
     --bs-gutter-x: 0;
     --bs-gutter-y: 0;
+    margin-inline: 0;
     border-top: 1px solid rgba(255, 255, 255, .15);
 }
 
@@ -781,7 +827,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 26px clamp(18px, 2.4vw, 34px) 30px;
+    padding: 24px clamp(18px, 2.4vw, 34px) 28px;
     background: transparent;
     box-shadow: none;
     text-align: left;
@@ -790,8 +836,10 @@
 #service .service-card-v1 .service-card-icon {
     justify-content: flex-start;
     min-width: 0;
-    min-height: 0;
-    margin: 0 0 18px;
+    height: 32px;
+    min-height: 32px;
+    align-items: center;
+    margin: 0 0 16px;
     font-size: 28px;
 }
 
@@ -815,14 +863,14 @@
 
 #problem-spaces.education-experience,
 #execution-approach.tmp-skill-area {
-    padding-top: clamp(54px, 7vw, 88px);
-    padding-bottom: clamp(54px, 7vw, 88px);
+    padding-top: clamp(46px, 5.9vw, 74px);
+    padding-bottom: clamp(46px, 5.9vw, 74px);
 }
 
 #problem-spaces .section-head,
 #execution-approach .execution-chapter-head {
     max-width: 850px;
-    margin: 0 0 34px !important;
+    margin: 0 0 32px;
     text-align: left;
 }
 
@@ -834,7 +882,7 @@
 
 #problem-spaces .section-head .title,
 #execution-approach .execution-chapter-head .title {
-    margin: 8px 0 14px;
+    margin: 0 0 14px;
     text-align: left;
 }
 
@@ -847,6 +895,7 @@
 #problem-spaces .skill-cards-container .row {
     --bs-gutter-x: 0;
     --bs-gutter-y: 0;
+    margin-inline: 0;
     border-top: 1px solid rgba(255, 255, 255, .15);
 }
 
@@ -876,7 +925,7 @@
     position: static;
     display: block;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     background: none;
     color: #ff9800;
     content: "0" counter(problem-space, decimal);
@@ -927,8 +976,16 @@
     line-height: 1.6;
 }
 
+#execution-approach .execution-chapter-head .title {
+    margin-bottom: 0;
+}
+
 #execution-approach .execution-chapter-head {
-    margin-bottom: 26px !important;
+    margin-bottom: 32px;
+}
+
+#execution-approach.tmp-skill-area {
+    padding-bottom: clamp(50px, 6vw, 80px);
 }
 
 /* Let the two editorial chapters read as one continuous section. */
@@ -936,11 +993,8 @@
     display: none;
 }
 
-/* One consistent treatment for all seven homepage section labels. */
+/* Preserve the approved labels outside the middle chapter sequence. */
 .impact-scene .section-sub-title .subtitle,
-#service .section-sub-title .subtitle,
-#problem-spaces .section-sub-title .subtitle,
-#execution-approach .section-sub-title .subtitle,
 #portfolio .section-sub-title .subtitle,
 .testimonial .section-sub-title .subtitle {
     color: #ff9800 !important;
@@ -1133,76 +1187,150 @@
     grid-template-columns: 1fr auto !important;
 }
 
-/* Keep testimonial panels and their author lines aligned as a pair. */
-.testimonial.lp-cinematic-scene .row.justify-content-center {
-    align-items: stretch;
+/* Quiet social proof: static cards, readable quotes and separate attribution. */
+#testimonials.testimonial {
+    padding-top: clamp(64px, 6vw, 104px);
+    padding-bottom: 24px;
 }
 
-.testimonial.lp-cinematic-scene .row.justify-content-center > [class*="col-"] {
-    display: flex;
+#testimonials .section-head {
+    padding-inline: 0;
 }
 
-.testimonial.lp-cinematic-scene .testimonial-card {
+#testimonials .testimonial-grid > .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    margin: 0;
+}
+
+#testimonials .testimonial-grid > .row > div {
+    margin: 0;
     display: flex;
     width: 100%;
-    height: 100%;
+    padding: 0;
 }
 
-.testimonial.lp-cinematic-scene .testimonial-card .card-content-wrap {
+@media (min-width: 992px) {
+    #testimonials .testimonial-grid > .row > div:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        width: 70%;
+        justify-self: center;
+    }
+}
+
+#testimonials .testimonial-placeholder-label {
+    padding-top: 10px;
+    color: rgba(255, 152, 0, .7);
+    font-size: 10px;
+    letter-spacing: .1em;
+}
+
+#testimonials .testimonial-card {
+    width: 100%;
+    margin: 0;
+}
+
+#testimonials .card-content-wrap {
+    margin: 0;
     display: flex;
     width: 100%;
     flex-direction: column;
 }
 
-.testimonial.lp-cinematic-scene .testimonial-quote {
+#testimonials .testimonial-quote {
+    max-width: calc(var(--lp-copy-max) * .9);
     min-width: 0;
     margin: 0;
-    color: var(--color-heading);
-    font-size: clamp(1.12rem, 1.5vw, 1.45rem);
+    color: #e4e5e8;
+    font-size: clamp(16px, calc(.8vw + 6px), 18px);
+    font-style: normal;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.65;
 }
 
-.testimonial.lp-cinematic-scene .testimonial-quote strong {
+#testimonials .testimonial-quote strong {
+    font-weight: 600;
+}
+
+#testimonials .testimonial-attribution {
+    position: relative;
+    margin-top: auto;
+    padding-top: 24px;
+    padding-right: 64px;
+}
+
+#testimonials .testimonial-attribution p {
+    margin: 0;
+    font-style: normal;
+    line-height: 1.5;
+}
+
+#testimonials .testimonial-author-name {
+    color: var(--color-heading);
+    font-size: 15px;
     font-weight: 700;
 }
 
-.testimonial.lp-cinematic-scene .author-doc {
-    margin-top: auto;
-    padding-top: 30px;
+#testimonials .testimonial-author-role {
+    padding-top: 4px;
+    color: #b5b7bd;
+    font-size: 14px;
 }
 
-.testimonial.lp-cinematic-scene .author-doc .testimonital-icon {
-    margin-top: 18px;
+#testimonials .testimonial-author-context {
+    padding-top: 2px;
+    color: #999da6;
+    font-size: 13px;
+}
+
+#testimonials .testimonital-icon {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    width: 48px;
+    height: 41px;
+    margin: 0;
+    pointer-events: none;
+    opacity: .28;
+}
+
+#testimonials .testimonital-icon img {
+    display: block;
+    width: 48px;
+    height: 41px;
+}
+
+@media (max-width: 991px) {
+    #testimonials .testimonial-grid > .row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
 }
 
 @media (max-width: 767px) {
-    .testimonial.lp-cinematic-scene .row.justify-content-center > [class*="col-"] {
-        display: block;
+    #testimonials.testimonial {
+        padding-top: 60px;
+        padding-bottom: 16px;
     }
 
-    .testimonial.lp-cinematic-scene .testimonial-quote {
-        font-size: clamp(1.08rem, 4.2vw, 1.25rem);
-        line-height: 1.58;
+    #testimonials .testimonial-attribution {
+        padding-top: 20px;
+        padding-right: 52px;
     }
 
-    .testimonial.lp-cinematic-scene .author-doc .card-title {
-        margin-bottom: 6px;
-        font-size: clamp(1.15rem, 4vw, 1.35rem);
-        line-height: 1.3;
+    #testimonials .testimonital-icon,
+    #testimonials .testimonital-icon img {
+        width: 32px;
+        height: 27px;
     }
+}
 
-    .testimonial.lp-cinematic-scene .author-doc .card-para {
-        font-size: clamp(1rem, 3.6vw, 1.15rem);
-        line-height: 1.5;
-    }
-
-    .testimonial.lp-cinematic-scene .testimonial-card {
-        height: auto;
-        min-height: 100%;
-    }
-
-    .testimonial.lp-cinematic-scene .author-doc {
-        padding-top: 24px;
-    }
+/* Horizontal composition only; chapter timing, spacing and testimonials stay
+   unchanged. Cards gain room while their descriptions retain a compact measure. */
+@media(min-width:1600px) {
+ #service .service-para,
+ #problem-spaces .my-skill-card p { max-width:42ch; }
 }

@@ -1,4 +1,4 @@
-import {THREE} from './hero-3d-core.js';
+import {THREE} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
 // Non-overlapping radial shells guarantee clearance for every phase, speed,
 // hover slowdown and inclination, rather than only a finite time sample.
 export function createSafeOrbits(projects,orbits,planetRadius,moonRadius){
