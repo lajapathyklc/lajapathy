@@ -49,99 +49,6 @@
 }
 
 .project-case-study-content { display: grid; min-width: 0; gap: 0; }
-
-/* Static executive summary shared by the 21 individual project pages. */
-.case-snapshot {
-    padding: 28px var(--lp-content-start) 34px;
-    background: #000;
-}
-.case-snapshot__inner { width: 100%; max-width: none; margin: 0; padding: 0; }
-.case-snapshot__title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 20px;
-    color: #b5b7bd;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    line-height: 1.4;
-}
-.case-snapshot__title::before {
-    content: "";
-    width: 24px;
-    height: 2px;
-    flex: 0 0 24px;
-    background: var(--case-accent);
-}
-.case-snapshot__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, .95fr);
-    max-width: calc(var(--lp-copy-max, 70ch) * 2);
-    margin: 0;
-    border-block: 1px solid var(--ew-line, var(--case-line));
-}
-.case-snapshot__item {
-    min-width: 0;
-    padding: 14px 12px 16px 0;
-}
-.case-snapshot__item--scope { grid-column: 2; }
-.case-snapshot__grid--role-omitted .case-snapshot__item--scope { grid-column: 1 / span 2; }
-.case-snapshot__item--domain { grid-column: 3; }
-.case-snapshot__item--challenge,
-.case-snapshot__item--decision,
-.case-snapshot__item--impact { border-top: 1px solid var(--ew-line, var(--case-line)); }
-.case-snapshot__item--challenge { grid-column: 1; }
-.case-snapshot__label {
-    margin: 0 0 8px;
-    color: #999fa7;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    line-height: 1.4;
-}
-.case-snapshot__value {
-    max-width: 42ch;
-    margin: 0;
-    color: #e0e3e6;
-    font-size: 16.2px;
-    line-height: 1.4;
-}
-.case-snapshot__impact { color: var(--case-accent); font-weight: 700; }
-/* E-Wallet's first narrative rule was transparent before the pilot. */
-.case-snapshot + .ewallet-story-row { border-top-color: transparent; }
-@media (max-width: 991px) {
-    .project-story-row .project-flow-track {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 20px;
-        padding: 16px;
-        border: 1px solid var(--case-line);
-        border-radius: 8px;
-        background: #101214;
-    }
-    .project-story-row .project-flow-track span {
-        padding: 8px 10px;
-        border: 1px solid var(--case-line);
-        border-radius: 4px;
-        color: #d9deda;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-    .project-case-study-board .project-swiper-button-next,
-    .project-details-swiper-btn a { min-height: 44px; gap: 8px; }
-    .case-snapshot__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .case-snapshot__item { grid-column: auto; border-top: 0; }
-    .case-snapshot__grid--role-omitted .case-snapshot__item--scope { grid-column: auto; }
-    .case-snapshot__item:nth-child(n+3) { border-top: 1px solid var(--ew-line, var(--case-line)); }
-}
-@media (max-width: 575px) {
-    .case-snapshot { padding: 26px var(--lp-content-start) 28px; }
-    .case-snapshot__grid { grid-template-columns: minmax(0, 1fr); }
-    .case-snapshot__item { padding: 12px 0; }
-    .case-snapshot__item:nth-child(n+2) { border-top: 1px solid var(--ew-line, var(--case-line)); }
-}
 .project-case-study-content > *,
 .ewallet-content-shell,
 .ewallet-content-shell > * { min-width: 0; }
@@ -152,7 +59,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(12px, 2vw, 24px);
     align-items: start;
-    padding: clamp(30px, 5vw, 68px) var(--lp-content-start);
+    padding: clamp(30px, 5vw, 68px) 24px;
     border-top: 1px solid var(--case-line);
     background: #000;
 }
@@ -337,15 +244,14 @@
     .project-case-study-hero-inner { padding-top: 126px; padding-bottom: 58px; }
     .project-case-study-gallery-heading { grid-template-columns: 1fr; gap: 12px; }
     .project-case-study-gallery-note { max-width: 34rem; }
-    .project-story-row { grid-template-columns: 1fr; gap: 14px; padding-inline: var(--lp-content-start); }
+    .project-story-row { grid-template-columns: 1fr; gap: 14px; padding-inline: 20px; }
     .project-story-row h2,
     .project-story-row > div { grid-column: 1; }
-    .project-case-study-screens { padding-inline: var(--lp-content-start); }
+    .project-case-study-screens { padding-inline: 20px; }
     .project-screen-slots { grid-template-columns: 1fr; }
     .project-screen-slot { min-height: 220px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .project-case-study-board .project-swiper-button-next,
     .project-details-swiper-btn a { transition: none; }
 }
