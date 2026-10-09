@@ -8,8 +8,8 @@
 .lp-cinematic-scene::before {
     position: absolute;
     top: 0;
-    right: max(24px, calc((100% - 1240px) / 2));
-    left: max(24px, calc((100% - 1240px) / 2));
+    right: var(--lp-content-start);
+    left: var(--lp-content-start);
     z-index: -1;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(83, 173, 255, .28) 18%, rgba(255, 152, 0, .78) 52%, rgba(255, 152, 0, .1) 82%, transparent);
@@ -543,10 +543,7 @@
         margin-top: 48px;
     }
 
-    #impact .container {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+
 
     #impact .row {
         justify-content: center !important;
@@ -738,7 +735,7 @@
 
 @media (min-width: 768px) {
     :is(#service, #problem-spaces, #execution-approach) > .container {
-        padding-inline: var(--lp-container-padding);
+        padding-inline: 0;
     }
 }
 

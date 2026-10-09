@@ -4,7 +4,6 @@
 /* Opaque page-black shields this chapter from the fixed hero behind the body. */
 .selected-work#portfolio { background:#000!important; box-shadow:none; }
 .selected-work :is(.selected-work-container,.selected-work-intro,.selected-work-tabs,.selected-work-grid,.selected-work-end) { background:transparent; box-shadow:none; }
-.selected-work .selected-work-container { width:min(calc(100% - var(--lp-page-gutter,32px) * 2),var(--lp-content-max,1258px)); max-width:var(--lp-content-max,1258px); padding-inline:0; }
 .selected-work .selected-work-intro { margin-bottom:52px; text-align:left; }
 .selected-work .selected-work-eyebrow { display:flex; align-items:center; gap:16px; color:#c3beb8; font-size:12px; letter-spacing:.18em; margin:0 0 26px; }
 .selected-work-eyebrow::before { content:""; width:32px; height:1px; background:var(--color-primary); }

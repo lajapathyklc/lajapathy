@@ -1,0 +1,49 @@
+/* A shared navigation veil; page content and scene layers never transform. */
+.lp-page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483100;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    --lp-transition-leave: 280ms;
+    --lp-transition-enter: 200ms;
+}
+.lp-page-transition__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 66%, rgba(255,152,0,.14), rgba(255,110,0,.045) 22%, transparent 55%);
+    opacity: 0;
+}
+.lp-page-transition.is-covered { opacity: 1; }
+.lp-page-transition.is-leaving {
+    animation: lp-page-leave var(--lp-transition-leave) cubic-bezier(.4,0,.2,1) both;
+}
+.lp-page-transition.is-leaving .lp-page-transition__glow {
+    animation: lp-page-horizon var(--lp-transition-leave) ease-in-out both;
+}
+.lp-page-transition.is-entering {
+    animation: lp-page-enter var(--lp-transition-enter) ease-out both;
+}
+@keyframes lp-page-leave {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes lp-page-horizon {
+    0%, 28%, 100% { opacity: 0; }
+    58% { opacity: 1; }
+}
+@keyframes lp-page-enter {
+    0%, 15% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@media (max-width: 767px) {
+    .lp-page-transition { --lp-transition-leave: 170ms; --lp-transition-enter: 140ms; }
+    .lp-page-transition__glow {
+        background: radial-gradient(ellipse at 50% 66%, rgba(255,152,0,.08), transparent 50%);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lp-page-transition,
+    .lp-page-transition__glow { animation: none !important; opacity: 0 !important; }
+}

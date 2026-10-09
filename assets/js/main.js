@@ -602,7 +602,8 @@
         changeHash: false,
         scrollSpeed: 500,
         scrollThreshold: 0.2,
-        filter: ":not(.external)",
+        // HTML page links use native/shared navigation; this plugin owns hash targets only.
+        filter: 'a[href^="#"]:not([href="#"]):not(.external)',
         easing: "swing",
       });
     },

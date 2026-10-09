@@ -2,6 +2,10 @@
 
 <html lang="en">
 <head>
+<!-- Shared page transitions: initialize before paint; no layout changes. -->
+<link rel="stylesheet" href="assets/css/lp-page-transition.css">
+<script src="assets/js/lp-page-transition.js"></script>
+
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -92,7 +96,7 @@
 <!-- tpm-header-area start -->
 <header class="tmp-header-area-start header-one header--sticky header--transparent">
 <!-- header mid area start -->
-<div class="container">
+<div class="container lp-shell">
 <div class="row">
 <div class="col-lg-12">
 <div class="header-content">
@@ -164,13 +168,13 @@
 </div>
 <!-- tmp banner area start -->
 <div class="inner_banner_bg">
-<div class="container">
+<div class="container lp-shell">
 <h1 class="designprocess_banner" aria-label="Product Design Process" style="margin:0">
 Product Design Process</h1>
 </div>
 </div>
 <!-- tmp banner area end -->
-<div class="container mt--50">
+<div class="container mt--50 lp-shell">
 <div class="row">
 <div class="intro_design_process_bg mt--50 col-12 d-flex">
 <div class="col-3 discoverbg box1 tmp-scroll-trigger tmp-fade-in animation-order-1">
@@ -295,7 +299,7 @@ Product Design Process</h1>
 </div>
 <!-- tmp About Me Start -->
 <section class="about-us-area tmp-section-gapTop" id="about">
-<div class="container">
+<div class="container lp-shell">
 <div class="row align-items-start justify-content-between">
 <div class="col-lg-4">
 <h3 class="section_left_title" aria-level="2">What Differentiates My Process</h3>

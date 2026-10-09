@@ -1,0 +1,42 @@
+{
+  "back": {
+    "lifecycle": [
+      {
+        "url": "/a.html",
+        "persisted": false
+      },
+      {
+        "url": "/b.html",
+        "persisted": false
+      },
+      {
+        "url": "/a.html",
+        "persisted": false
+      }
+    ],
+    "veil": "lp-page-transition",
+    "opacity": "0"
+  },
+  "forward": {
+    "lifecycle": [
+      {
+        "url": "/a.html",
+        "persisted": false
+      },
+      {
+        "url": "/b.html",
+        "persisted": false
+      },
+      {
+        "url": "/a.html",
+        "persisted": false
+      },
+      {
+        "url": "/b.html",
+        "persisted": false
+      }
+    ],
+    "veil": "lp-page-transition",
+    "opacity": "0"
+  }
+}

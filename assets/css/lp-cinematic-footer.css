@@ -6,19 +6,11 @@
  --lp-page-gutter:clamp(32px,3vw,48px);
  --lp-content-start:max(var(--lp-page-gutter),calc((100% - var(--lp-content-max)) / 2));
  --lp-copy-max:70ch;
- --lp-container-padding:16px;
 }
 @media(max-width:767px) { :root { --lp-page-gutter:24px; } }
 @media(min-width:1600px) {
  :root { --lp-content-max:1360px; --lp-page-gutter:clamp(32px,4vw,96px); }
- /* Existing template shells include 16px inner padding. Opted-in hero/Work
-    shells have no inner padding; both expose the same usable content width.
-    Nested containers and the unchanged testimonial chapter keep their owners. */
- .inner_banner_bg > section:not([class]) { max-width:var(--lp-copy-max); }
- .container:not(.lp-shell,.selected-work-container,.lp-footer-v28__inner,.container .container,.testimonial .container) {
-  width:min(calc(100% - 2 * var(--lp-page-gutter) + 2 * var(--lp-container-padding)),calc(var(--lp-content-max) + 2 * var(--lp-container-padding)));
-  max-width:calc(var(--lp-content-max) + 2 * var(--lp-container-padding));
- }
+
 }
 @media(min-width:1800px) { :root { --lp-content-max:1440px; } }
 @media(min-width:2200px) { :root { --lp-content-max:1500px; } }
@@ -83,7 +75,7 @@ body[data-footer-variant="legal-only"] .lp-cinematic-footer .lp-footer-v28__navr
  body[data-footer-variant="legal-only"] .footer-stars-animation-wrapper-footer { margin-top:40px; }
  .lp-cinematic-footer__fallback { background-image:url('../images/hero-cinematic/footer-fallback-mobile.webp'); }
  .lp-cinematic-footer__scene,.lp-cinematic-footer .lp-footer-v28__hero { min-height:720px; }
- .lp-cinematic-footer__shell { width:calc(100% - 48px); align-items:flex-start; padding:70px 0 0; }
+ .lp-cinematic-footer__shell { width:calc(100% - 2 * var(--lp-page-gutter)); align-items:flex-start; padding:70px 0 0; }
  .lp-cinematic-footer__copy { width:100%; max-width:430px; }
  .lp-cinematic-footer__title { font-size:clamp(43px,10.8vw,65px); }
  .lp-cinematic-footer__eyebrow { font-size:11px; letter-spacing:3.5px; margin-bottom:22px; }
@@ -91,7 +83,7 @@ body[data-footer-variant="legal-only"] .lp-cinematic-footer .lp-footer-v28__navr
  .lp-cinematic-footer__cta { font-size:10px; padding:14px 19px; margin-top:23px; }
  .lp-cinematic-footer__canvas { mask-image:linear-gradient(180deg,transparent 34%,#000 51%); }
  .lp-cinematic-footer__space { background-position:65% center; }
- .lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:calc(100% - 48px)!important; }
+ .lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) { width:calc(100% - 2 * var(--lp-page-gutter))!important; }
  .lp-cinematic-footer .lp-footer-v28__navrow { gap:24px; }
  .lp-cinematic-footer .lp-footer-v28__navrow nav { display:flex; flex-wrap:wrap; gap:16px 26px; }
  .lp-cinematic-footer .lp-footer-v28__bottom { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
@@ -115,3 +107,40 @@ body[data-footer-variant="legal-only"] .lp-cinematic-footer .lp-footer-v28__navr
   display:inline-flex; align-items:center; min-height:44px;
  }
 }
+
+/* Primary page canvas. Nested Bootstrap components keep their own layout. */
+.lp-shell,
+.container.lp-shell,
+.container.lp-shell.lp-hero-shell {
+ box-sizing:border-box;
+ width:min(calc(100% - (var(--lp-page-gutter) * 2)),var(--lp-content-max));
+ max-width:var(--lp-content-max);
+ margin-inline:auto;
+ padding-inline:0;
+}
+/* Full-bleed narrative backgrounds; only the two-column content is inset. */
+.case-snapshot,
+.project-story-row,
+.project-case-study-screens,
+.ewallet-case-study .project-story-row,
+.ewallet-case-study .project-case-study-screens,
+.ewallet-story-row,
+.ewallet-screen-gallery { padding-inline:var(--lp-content-start); }
+html.lp-debug-grid::before,
+html.lp-debug-grid::after {
+ content:"";
+ position:fixed;
+ top:0;
+ bottom:0;
+ width:1px;
+ pointer-events:none;
+ z-index:99999;
+ background:rgba(255,0,180,.35);
+}
+html.lp-debug-grid::before { left:var(--lp-content-start); }
+html.lp-debug-grid::after { right:var(--lp-content-start); background:rgba(0,220,255,.35); }
+
+/* Contact chapter inset belongs to the page shell; form columns retain their proportions. */
+#contacts .get-in-touch-wrapper { padding-inline:0; }
+
+.project-case-study-screens > .container { width:100%; max-width:none; margin-inline:0; padding-inline:0; }

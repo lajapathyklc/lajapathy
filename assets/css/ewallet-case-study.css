@@ -138,7 +138,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(12px, 2vw, 24px);
     align-items: start;
-    padding: clamp(30px, 5vw, 68px) 24px;
+    padding: clamp(30px, 5vw, 68px) var(--lp-content-start);
     border-top: 1px solid var(--ew-line);
     background: #000;
 }
@@ -166,7 +166,7 @@
 .ewallet-flow-track span:not(:last-child)::after { position: absolute; top: 50%; left: calc(100% + 1px); width: 8px; border-top: 1px solid #78817c; content: ""; }
 .ewallet-flow-track .ewallet-flow-success { border-color: #e34f50; color: #ff7777; }
 
-.ewallet-screen-gallery { padding: clamp(32px, 5vw, 68px) 24px; border-top: 1px solid var(--ew-line); background: #000; }
+.ewallet-screen-gallery { padding: clamp(32px, 5vw, 68px) var(--lp-content-start); border-top: 1px solid var(--ew-line); background: #000; }
 .ewallet-gallery-heading { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 24px); align-items: start; margin-bottom: 24px; }
 .ewallet-gallery-heading h2 { grid-column: span 4; font-size: clamp(3rem, 3.8vw, 3.8rem); }
 .ewallet-gallery-intro { max-width: 500px; margin: 0; padding-left: 24px; color: #fff; font-size: 18px; line-height: 1.6; }
@@ -254,7 +254,7 @@
 .ewallet-next { margin-bottom: 10px; }
 
 .project-case-study.ewallet-case-study:not(.zappay-case-study) { background: transparent; }
-.ewallet-case-study .project-story-row { padding: clamp(30px, 5vw, 68px) 24px; border-color: var(--ew-line); background: #000; }
+.ewallet-case-study .project-story-row { padding: clamp(30px, 5vw, 68px) var(--lp-content-start); border-color: var(--ew-line); background: #000; }
 .ewallet-case-study .project-story-row h2 { color: #fff; font-family: var(--ew-font-heading); font-size: clamp(3.2rem, 4.67vw, 4.2rem); font-weight: 600; line-height: 1.2; }
 .ewallet-case-study .project-story-row p { margin-bottom: 13px; color: #fff; font-size: 18px; line-height: 1.7; }
 .ewallet-case-study .project-story-row ul { display: grid; gap: 8px; margin-bottom: 0; padding-left: 24px; color: #fff; font-size: 18px; line-height: 1.6; }
@@ -269,35 +269,15 @@
 .ewallet-case-study .project-flow-track { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-top: 25px; padding: 20px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background-color: #101214; background-image: radial-gradient(rgba(255,255,255,.11) .8px, transparent .8px); background-size: 18px 18px; }
 .ewallet-case-study .project-flow-track span { position: relative; padding: 8px 10px; border: 1px solid rgba(255,255,255,.22); border-radius: 4px; background: #1b1e21; color: #d9deda; font-size: 14px; text-align: center; }
 .ewallet-case-study .project-flow-track span:not(:last-child)::after { position: absolute; top: 50%; left: calc(100% + 1px); width: 8px; border-top: 1px solid #78817c; content: ""; }
-.ewallet-case-study .project-case-study-screens { padding: clamp(32px, 5vw, 68px) 24px; border-color: var(--ew-line); background: #000; }
+.ewallet-case-study .project-case-study-screens { padding: clamp(32px, 5vw, 68px) var(--lp-content-start); border-color: var(--ew-line); background: #000; }
 
-@media (min-width: 576px) {
-    .ewallet-case-study .project-story-row,
-    .ewallet-case-study .project-case-study-screens { padding-inline: max(24px, calc((100% - 540px) / 2 + 16px)); }
-}
 
-@media (min-width: 768px) {
-    .ewallet-case-study .project-story-row,
-    .ewallet-case-study .project-case-study-screens { padding-inline: max(24px, calc((100% - 720px) / 2 + 16px)); }
-}
 
-@media (min-width: 992px) {
-    .ewallet-case-study .project-story-row,
-    .ewallet-case-study .project-case-study-screens { padding-inline: max(24px, calc((100% - 960px) / 2 + 16px)); }
-}
 
-@media (min-width: 1200px) {
-    .ewallet-case-study .project-story-row,
-    .ewallet-case-study .project-case-study-screens { padding-inline: max(24px, calc((100% - 1140px) / 2 + 16px)); }
-}
 
-@media (min-width: 1400px) {
-    .ewallet-case-study .project-story-row,
-    .ewallet-case-study .project-case-study-screens { padding-inline: max(24px, calc((100% - 1320px) / 2 + 16px)); }
-}
 
 @media (max-width: 640px) {
-    .ewallet-case-study .project-story-row { grid-template-columns: 1fr; row-gap: 14px; padding: 23px 20px; }
+    .ewallet-case-study .project-story-row { grid-template-columns: 1fr; row-gap: 14px; padding: 23px var(--lp-content-start); }
     .ewallet-case-study .project-story-row h2,
     .ewallet-case-study .project-story-row > div { grid-column: 1; }
     .ewallet-case-study .project-story-row h2 { font-size: 25px; }
@@ -309,33 +289,13 @@
     .ewallet-case-study .project-flow-track { gap: 6px; padding: 12px 8px; }
     .ewallet-case-study .project-flow-track span { padding: 6px; font-size: 11px; }
     .ewallet-case-study .project-flow-track span:not(:last-child)::after { display: none; }
-    .ewallet-case-study .project-case-study-screens { padding: 22px 15px; }
+    .ewallet-case-study .project-case-study-screens { padding: 22px var(--lp-content-start); }
 }
 
-@media (min-width: 576px) {
-    .ewallet-story-row,
-    .ewallet-screen-gallery { padding-inline: max(24px, calc((100% - 540px) / 2 + 16px)); }
-}
 
-@media (min-width: 768px) {
-    .ewallet-story-row,
-    .ewallet-screen-gallery { padding-inline: max(24px, calc((100% - 720px) / 2 + 16px)); }
-}
 
-@media (min-width: 992px) {
-    .ewallet-story-row,
-    .ewallet-screen-gallery { padding-inline: max(24px, calc((100% - 960px) / 2 + 16px)); }
-}
 
-@media (min-width: 1200px) {
-    .ewallet-story-row,
-    .ewallet-screen-gallery { padding-inline: max(24px, calc((100% - 1140px) / 2 + 16px)); }
-}
 
-@media (min-width: 1400px) {
-    .ewallet-story-row,
-    .ewallet-screen-gallery { padding-inline: max(24px, calc((100% - 1320px) / 2 + 16px)); }
-}
 
 @media (max-width: 900px) {
     .ewallet-phone-screen { min-height: 430px; padding-right: 15px; padding-left: 15px; }
@@ -404,7 +364,7 @@
         scale: 1.1;
         translate: none;
     }
-    .ewallet-story-row { grid-template-columns: 1fr; row-gap: 14px; padding: 23px 20px; }
+    .ewallet-story-row { grid-template-columns: 1fr; row-gap: 14px; padding: 23px var(--lp-content-start); }
     .ewallet-story-row h2,
     .ewallet-story-row > div,
     .ewallet-gallery-heading h2,
@@ -430,7 +390,7 @@
     .ewallet-flow-track { gap: 6px; }
     .ewallet-flow-track span { padding: 6px; font-size: 11px; }
     .ewallet-flow-track span:not(:last-child)::after { display: none; }
-    .ewallet-screen-gallery { padding: 22px 20px; }
+    .ewallet-screen-gallery { padding: 22px var(--lp-content-start); }
     .ewallet-gallery-heading { margin-bottom: 18px; }
     .ewallet-mini-screen { padding: 34px 10px 12px; }
     .ewallet-mini-screen > strong { font-size: 11px; }

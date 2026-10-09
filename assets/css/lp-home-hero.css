@@ -97,7 +97,6 @@
         --lp-mobile-portrait-height: clamp(380px, 116vw, 660px);
     }
     #home.moody-hero + .hero-scroll-spacer { height: 0; }
-    #home.moody-hero > .container { width: calc(100% - 48px); }
     .tmp-banner-one-area.moody-hero .banner-one-main-wrapper .inner { transform: none !important; }
     .tmp-banner-one-area.moody-hero .button-area { margin-top: 18px !important; }
     .tmp-banner-one-area.moody-hero .lp-v50-proof {

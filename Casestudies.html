@@ -2,6 +2,10 @@
 
 <html lang="en">
 <head>
+<!-- Shared page transitions: initialize before paint; no layout changes. -->
+<link rel="stylesheet" href="assets/css/lp-page-transition.css">
+<script src="assets/js/lp-page-transition.js"></script>
+
 <script>document.documentElement.classList.add('js');</script>
 <style>
 html, body { background-color: #020305; }
@@ -466,7 +470,7 @@ html, body { background-color: #020305; }
 </div>
 <!-- Breadcrumb Area End -->
     <section class="selected-work selected-work--library" data-work-history="true" id="portfolio" aria-labelledby="selected-work-title">
-        <div class="container selected-work-container">
+        <div class="container selected-work-container lp-shell">
             <header class="selected-work-intro" data-work-reveal>
                 <p class="selected-work-eyebrow">SELECTED WORK / 21 CASE STUDIES</p>
                 <h2 id="selected-work-title">Products built for<br><span>real-world complexity.</span></h2>
