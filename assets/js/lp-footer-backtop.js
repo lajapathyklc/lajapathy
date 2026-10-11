@@ -54,8 +54,14 @@
 
             if (!scrollToTopButton.__lpBackTopStateBound) {
                 scrollToTopButton.__lpBackTopStateBound = true;
-                window.addEventListener('scroll', updateBackToTopState, { passive: true });
-                window.addEventListener('resize', updateBackToTopState, { passive: true });
+                var pending = false;
+                function scheduleUpdate() {
+                    if (pending) return;
+                    pending = true;
+                    requestAnimationFrame(function () { pending = false; updateBackToTopState(); });
+                }
+                window.addEventListener('scroll', scheduleUpdate, { passive: true });
+                window.addEventListener('resize', scheduleUpdate, { passive: true });
             }
             updateBackToTopState();
         }

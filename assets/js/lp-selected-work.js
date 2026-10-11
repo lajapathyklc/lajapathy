@@ -9,6 +9,15 @@ for (const section of document.querySelectorAll('.selected-work')) {
     const historyEnabled = section.dataset.workHistory === 'true';
     let active = 'fintech';
     let request = 0;
+    let revealObserver;
+    let cancelWait = () => {};
+
+    function waitForMotion(duration) {
+        return new Promise(resolve => {
+            const timer = window.setTimeout(() => { cancelWait = () => {}; resolve(true); }, duration);
+            cancelWait = () => { window.clearTimeout(timer); resolve(false); };
+        });
+    }
 
     function element(tag, className, text) {
         const node = document.createElement(tag);
@@ -41,6 +50,7 @@ for (const section of document.querySelectorAll('.selected-work')) {
         const layout = historyEnabled && key === 'ecommerce'
             ? (index === 0 ? 'featured' : 'standard') : project.layout;
         const card = element('article', 'work-project work-card--' + layout + (fintech ? ' work-project--' + project.slug : ''));
+        card.style.setProperty('--filter-order', index);
         if (fintech) card.setAttribute('data-work-reveal', '');
         else {
             card.dataset.project = project.slug;
@@ -114,35 +124,62 @@ for (const section of document.querySelectorAll('.selected-work')) {
         if (updateHistory) updateURL(key);
         if (key === active && !section.hasAttribute('aria-busy')) return;
         const version = ++request;
+        cancelWait();
         const outgoing = panels.get(active);
         const incoming = panels.get(key) || createPanel(key);
+        const animated = animate && !motion.matches;
+        const mobile = window.matchMedia('(max-width:575px)').matches;
+        const leavingDuration = mobile ? 100 : 140;
+        const enteringDuration = mobile ? 190 : 240;
+        const staggerLimit = mobile ? 75 : 90;
+        const staggerStep = mobile ? 25 : 35;
+        const enteringTotal = enteringDuration + Math.min((categories[key].length - 1) * staggerStep, staggerLimit);
+        panels.forEach(panel => {
+            panel.classList.remove('work-category-leaving', 'work-category-entering');
+            panel.inert = animated;
+            // Category entry owns the outer card; the original scroll reveal must
+            // not restart when returning to a cached Fintech panel.
+            panel.querySelectorAll('[data-work-reveal]').forEach(card => {
+                if (revealObserver) revealObserver.unobserve(card);
+                card.classList.remove('work-revealed');
+            });
+        });
         section.setAttribute('aria-busy', 'true');
         tabs.forEach(tab => {
             const selected = tab.dataset.workCategory === key;
             tab.setAttribute('aria-selected', String(selected));
             tab.tabIndex = selected ? 0 : -1;
         });
-        // Inactive panels have no images until first selected. Decode the lead art
-        // before revealing a panel, with a bounded wait for a slow connection.
+        // Start the existing lead-image decode during exit rather than holding
+        // tab feedback behind an 800 ms network wait. Panels and assets stay cached.
         const firstImage = incoming.querySelector('img');
         if (firstImage && !firstImage.complete) {
             firstImage.loading = 'eager';
-            await Promise.race([firstImage.decode().catch(() => {}), new Promise(resolve => setTimeout(resolve, 800))]);
+            firstImage.decode().catch(() => {});
         }
-        if (version !== request) return;
-        if (animate && !motion.matches) {
+        if (animated) {
             outgoing.classList.add('work-category-leaving');
-            await new Promise(resolve => setTimeout(resolve, 180));
+            if (!await waitForMotion(leavingDuration) || version !== request) return;
         }
-        if (version !== request) return;
-        panels.forEach(panel => {
-            panel.hidden = panel !== incoming;
-            panel.classList.remove('work-category-leaving', 'work-category-entering');
-        });
+        panels.forEach(panel => { panel.hidden = panel !== incoming; });
+        outgoing.classList.remove('work-category-leaving');
         active = key;
-        if (animate && !motion.matches) incoming.classList.add('work-category-entering');
+        if (animated) {
+            incoming.classList.add('work-category-entering');
+            if (!await waitForMotion(enteringTotal) || version !== request) return;
+        }
+        incoming.classList.remove('work-category-entering');
+        panels.forEach(panel => { panel.inert = false; });
         section.removeAttribute('aria-busy');
     }
+
+    function finishPendingCategory() {
+        if (!section.hasAttribute('aria-busy')) return;
+        const selected = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+        selectCategory(selected.dataset.workCategory, { updateHistory: false, animate: false });
+    }
+    window.addEventListener('pageshow', finishPendingCategory);
+    motion.addEventListener('change', finishPendingCategory);
 
     tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => selectCategory(tab.dataset.workCategory));
@@ -181,13 +218,13 @@ for (const section of document.querySelectorAll('.selected-work')) {
     }
 
     if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries => {
+        revealObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                if (!motion.matches) entry.target.classList.add('work-revealed');
-                observer.unobserve(entry.target);
+                if (!motion.matches && !section.hasAttribute('aria-busy') && active === 'fintech') entry.target.classList.add('work-revealed');
+                revealObserver.unobserve(entry.target);
             });
         }, { threshold: 0.12 });
-        section.querySelectorAll('[data-work-reveal]').forEach(node => observer.observe(node));
+        section.querySelectorAll('[data-work-reveal]').forEach(node => revealObserver.observe(node));
     }
 }

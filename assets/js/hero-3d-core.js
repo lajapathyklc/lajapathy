@@ -33,25 +33,36 @@ float specularBRDF(vec3 n,vec3 l,float rough){
  float F=.035+.965*pow(1.-vh,5.);return min(.06,D*G*F/(4.*nl*nv+.0001));
 }
 `;
+export function heroQuality() {
+ const cores=navigator.hardwareConcurrency, memory=navigator.deviceMemory;
+ const constrained=!!navigator.connection?.saveData || (cores>0&&cores<=2) || (memory>0&&memory<=2);
+ const standard=(cores>0&&cores<=4)||(memory>0&&memory<=4);
+ return constrained?{name:'constrained',dpr:1,fps:30}:standard?{name:'standard',dpr:1.5,fps:45}:{name:'high',dpr:2,fps:0};
+}
 export function createHeroRenderer(canvas, maxDPR) {
  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});
- renderer.setPixelRatio(Math.min(devicePixelRatio,maxDPR));
+ const quality=heroQuality();
+ renderer.setPixelRatio(Math.min(devicePixelRatio,maxDPR,quality.dpr));
+ canvas.dataset.quality=quality.name;
  renderer.outputColorSpace=THREE.SRGBColorSpace;
  return renderer;
 }
 export function loadGeology(renderer, mobile) {
- return new THREE.TextureLoader().loadAsync('assets/images/hero-cinematic/geology-4k.webp').then(texture=>{
+ return new THREE.TextureLoader().loadAsync('assets/images/hero-cinematic/geology-'+(heroQuality().name==='constrained'?'2k':'4k')+'.webp').then(texture=>{
  texture.wrapS=THREE.RepeatWrapping; texture.anisotropy=Math.min(mobile?2:8,renderer.capabilities.getMaxAnisotropy());
  texture.generateMipmaps=true; return texture;
  });
 }
 export function heroLifecycle(root, resize, render) {
- const reduced=matchMedia('(prefers-reduced-motion: reduce)'); let visible=true,raf=0,last=0,time=0,disposed=false;
- function frame(now){raf=0;if(disposed||document.hidden||!visible)return;const isReduced=reduced.matches,interval=isReduced?1000/20:0;if(last&&now-last<interval){raf=requestAnimationFrame(frame);return;}const dt=last?Math.min((now-last)/1000,.05):0;last=now;time+=dt;render(time,dt,isReduced);raf=requestAnimationFrame(frame);}
- function start(){if(disposed)return;last=0;if(!raf&&visible&&!document.hidden)raf=requestAnimationFrame(frame);}
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)'); let visible=true,raf=0,last=0,time=0,disposed=false,suspended=false,firstFrame=true; const quality=heroQuality();
+ function frame(now){raf=0;if(disposed||suspended||document.hidden||!visible)return;if(firstFrame){firstFrame=false;raf=requestAnimationFrame(frame);return;}const isReduced=reduced.matches,interval=isReduced?1000/20:(quality.fps?1000/quality.fps:0);if(last&&now-last<interval){raf=requestAnimationFrame(frame);return;}const dt=last?Math.min((now-last)/1000,.05):0;last=now;time+=dt;render(time,dt,isReduced);raf=requestAnimationFrame(frame);}
+ function start(){if(disposed||suspended)return;last=0;if(!raf&&visible&&!document.hidden)raf=requestAnimationFrame(frame);}
  const ro=new ResizeObserver(()=>{resize();start();});ro.observe(root);
  const io=new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(!visible){cancelAnimationFrame(raf);raf=0;}start();});io.observe(root);
  function motionChange(){cancelAnimationFrame(raf);raf=0;start();}
- document.addEventListener('visibilitychange',start);reduced.addEventListener('change',motionChange);
- resize();start();return {reduced,redraw:start,dispose(){disposed=true;cancelAnimationFrame(raf);raf=0;ro.disconnect();io.disconnect();document.removeEventListener("visibilitychange",start);reduced.removeEventListener("change",motionChange);}};
+ function visibility(){if(document.hidden){cancelAnimationFrame(raf);raf=0;}else start();}
+ function hide(){suspended=true;cancelAnimationFrame(raf);raf=0;}
+ function show(){suspended=false;start();}
+ document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',hide);window.addEventListener('pageshow',show);reduced.addEventListener('change',motionChange);
+ resize();start();return {reduced,redraw:start,dispose(){disposed=true;cancelAnimationFrame(raf);raf=0;ro.disconnect();io.disconnect();document.removeEventListener("visibilitychange",visibility);window.removeEventListener("pagehide",hide);window.removeEventListener("pageshow",show);reduced.removeEventListener("change",motionChange);}};
 }

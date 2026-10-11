@@ -1,11 +1,11 @@
-import {createHeroMeteors} from "./lp-meteor-system.js?v=home-cadence-20261004";
+import {createHeroMeteors} from "./lp-meteor-system.js?v=performance-20261011-09b";
 import {
   THREE,
   geologyGLSL,
   createHeroRenderer,
   loadGeology,
   heroLifecycle,
-} from "./hero-3d-core.js?v=reduced-planet-motion-20261007";
+} from "./hero-3d-core.js?v=performance-20261011-09b";
 export const aboutHeroConfig = {
   planetRotationDuration: 240,
   planetCenter: { x: 0.7346, y: 0.5107, radius: 0.6565 },
@@ -33,6 +33,7 @@ export const aboutHeroConfig = {
   relief: 1.8,
   displacement: 0.003,
 };
+let disposeScene = () => {};
 const root = document.querySelector(".about-journey-hero");
 if (root) {
   root.style.setProperty(
@@ -47,7 +48,8 @@ if (root) {
 if (root)
   init().catch((error) => {
     root.dataset.scene = "unavailable";
-    console.error("About hero:", error);
+    disposeScene();
+    console.warn("About hero fallback:", error);
   });
 async function init() {
   const mobile = matchMedia("(max-width:900px)").matches,
@@ -58,10 +60,33 @@ async function init() {
     ),
     scene = new THREE.Scene(),
     camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
+  let disposed=false, atlas, fogRenderer, fogScene, lifecycle, meteors;
+  function lost(event) { event.preventDefault(); root.dataset.scene='unavailable'; disposeScene(); }
+  function hide(event) { if(!event.persisted) disposeScene(); }
+  disposeScene=()=>{
+    if(disposed)return; disposed=true;
+    lifecycle?.dispose(); meteors?.dispose();
+    window.removeEventListener('scroll',parallax);
+    lifecycle?.reduced.removeEventListener('change',parallax);
+    window.removeEventListener('pagehide',hide);
+    canvas.removeEventListener('webglcontextlost',lost);
+    root.querySelector('.about-valley-fog').removeEventListener('webglcontextlost',lost);
+    const geometries=new Set(),materials=new Set();
+    for(const world of [scene,fogScene])world?.traverse(object=>{
+      if(object.geometry)geometries.add(object.geometry);
+      if(object.material)materials.add(object.material);
+    });
+    geometries.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());
+    atlas?.dispose(); renderer.dispose();fogRenderer?.dispose();
+  };
+  canvas.addEventListener('webglcontextlost',lost);
+  root.querySelector('.about-valley-fog').addEventListener('webglcontextlost',lost);
+  window.addEventListener('pagehide',hide);
   camera.position.z = 8;
   // Shared atlas remains a data texture: albedo uses explicit linearization; height must not be sRGB-decoded.
-  const atlas = await loadGeology(renderer, mobile),
-    light = new THREE.Vector3(0.98, 0.25, 0.25).normalize();
+  atlas = await loadGeology(renderer, mobile);
+  if(disposed){atlas.dispose();return;}
+  const light = new THREE.Vector3(0.98, 0.25, 0.25).normalize();
   const uniforms = {
     atlas: { value: atlas },
     texel: {
@@ -180,10 +205,10 @@ async function init() {
   );
   scene.add(stars);
 
-  const fogCanvas = root.querySelector(".about-valley-fog"),
-    fogRenderer = createHeroRenderer(fogCanvas, mobile ? 1 : 1.25),
-    fogScene = new THREE.Scene(),
-    fogCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 2);
+  const fogCanvas = root.querySelector(".about-valley-fog");
+  fogRenderer = createHeroRenderer(fogCanvas, mobile ? 1 : 1.25);
+  fogScene = new THREE.Scene();
+  const fogCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 2);
   const fogUniforms = {
     time: { value: 0 },
     speeds: { value: new THREE.Vector3(...aboutHeroConfig.fogSpeed) },
@@ -329,9 +354,9 @@ async function init() {
     sun.scale.setScalar(r * 1.12);
     fogRenderer.setSize(width, fogCanvas.clientHeight, false);
   }
-  const meteors=createHeroMeteors({system:group,globe:planet,camera,renderer,root,uniforms,page:"About"});
+  meteors=createHeroMeteors({system:group,globe:planet,camera,renderer,root,uniforms,page:"About"});
   let planetTime=0,cloudTime=0,ambientTime=0;
-  const lifecycle = heroLifecycle(root, resize, (_time, dt, reduced) => {
+  lifecycle = heroLifecycle(root, resize, (_time, dt, reduced) => {
     const start = performance.now();
     const slowMotion = reduced ? 0.3 : 1;
     planetTime += dt * (reduced ? 1 / 1.6 : 1);

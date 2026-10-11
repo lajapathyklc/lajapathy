@@ -1,0 +1,12 @@
+{
+  "name": "lp-social-cards",
+  "private": true,
+  "scripts": {
+    "capture": "node capture-scenes.cjs",
+    "render": "node render.cjs",
+    "validate": "node ../validate-social-metadata.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

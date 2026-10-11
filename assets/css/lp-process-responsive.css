@@ -32,3 +32,9 @@
 @media (max-width: 575px) {
     .intro_design_process_bg { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Reading rhythm inside the existing process diagram and supporting cards. */
+.discoverbg .content_box ul li { line-height: 1.6; }
+#about .section_left_title, #about .card-title { text-wrap: balance; }
+#about .card-para { max-width: 52ch; line-height: 1.65; }
+.price-plan-card .per-month { line-height: 1.6; text-wrap: pretty; }

@@ -31,7 +31,7 @@ if(footer&&!legalOnly){
   async function initialize(){
     if(initializing||destroyed)return;initializing=true;scene.dataset.scene='loading';
     try{
-      const {createCinematicFooterScene}=await import('./lp-cinematic-footer-scene.js?v=reduced-planet-motion-20261007');
+      const {createCinematicFooterScene}=await import('./lp-cinematic-footer-scene.js?v=performance-20261011-09b');
       if(destroyed)return;
       instance=await createCinematicFooterScene(scene,{calm:contact});
       if(destroyed)instance.dispose();

@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-<link href="assets/css/vendor/fontawesome.css" rel="stylesheet"/>
+<link href="assets/css/vendor/fontawesome.min.css" rel="stylesheet"/>
 <link href="assets/css/plugins/swiper.css" rel="stylesheet"/>
 <link href="assets/css/plugins/odometer.css" rel="stylesheet"/>
 <link href="assets/css/vendor/animate.min.css" rel="stylesheet"/>
@@ -69,22 +69,40 @@
 <!-- Page-specific search and social metadata -->
 <title>About Lajapathy Kodiraman — Product Design Leadership &amp; Systems Thinking</title>
 <meta name="description" content="Meet Lajapathy: product design leadership, systems thinking and AI-augmented workflows that align teams and scale complex enterprise products.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Static social sharing metadata; generated from scripts/social-cards/manifest.json. -->
 <link rel="canonical" href="https://www.lajapathy.com/about.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="About Lajapathy Kodiraman — Product Design Leadership &amp; Systems Thinking">
-<meta property="og:description" content="Meet Lajapathy: product design leadership, systems thinking and AI-augmented workflows that align teams and scale complex enterprise products.">
+<meta property="og:title" content="About Lajapathy — Product Design Leadership">
+<meta property="og:description" content="20 years designing products, systems and teams across complex digital platforms.">
 <meta property="og:url" content="https://www.lajapathy.com/about.html">
 <meta property="og:site_name" content="Lajapathy">
-<meta property="og:image" content="https://www.lajapathy.com/assets/thumbnail.jpg">
+<meta property="og:image" content="https://www.lajapathy.com/assets/social/og-about.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Lajapathy — Product Design Leader">
+<meta property="og:image:alt" content="LP About card with an orange-rimmed planet and systems, products and teams headline">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About Lajapathy Kodiraman — Product Design Leadership &amp; Systems Thinking">
-<meta name="twitter:description" content="Meet Lajapathy: product design leadership, systems thinking and AI-augmented workflows that align teams and scale complex enterprise products.">
-<meta name="twitter:image" content="https://www.lajapathy.com/assets/thumbnail.jpg">
-<meta name="twitter:image:alt" content="Lajapathy — Product Design Leader">
+<meta name="twitter:title" content="About Lajapathy — Product Design Leadership">
+<meta name="twitter:description" content="20 years designing products, systems and teams across complex digital platforms.">
+<meta name="twitter:image" content="https://www.lajapathy.com/assets/social/og-about.jpg">
+<meta name="twitter:image:alt" content="LP About card with an orange-rimmed planet and systems, products and teams headline">
 </head>
 <!-- Add this CSS in a <style> tag in your <head> section -->
 <style>
@@ -209,21 +227,8 @@
 </style>
 <!-- Add this script before
 </body> to initialize the Swiper slider for logos -->
-<script src="https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js" defer></script>
-<script>
-    // ...existing code...
-    document.addEventListener('scroll', function () {
-        var scrollTop = window.scrollY || window.pageYOffset;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var scrollPercent = docHeight > 0 ? (scrollTop / docHeight) : 0;
-        // 87% (bottom) when at top, 0% (top) when at bottom
-        var translateY = 87 - (87 * scrollPercent);
-        var water = document.querySelectorAll('.scrollToTop .water');
-        water.forEach(function (w) {
-            w.style.transform = 'translate(0px, ' + translateY + '%)';
-        });
-    });
-</script>
+<script src="assets/js/lp-chat-loader.js?v=performance-20261011-09b" defer></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Swiper !== 'undefined') {
@@ -799,7 +804,7 @@
 <li style="--x:32%;--y:69%;--i:3"><div class="timeline-label"><strong>2021</strong><span>Design systems,<br>AI &amp; scale</span></div></li>
 <li class="is-now" style="--x:81%;--y:93%;--i:4"><div class="timeline-label"><strong>Now</strong><span>Building what's next</span></div></li>
 </ol></div>
-<div class="about-mountain-depth" aria-hidden="true"><img src="assets/images/hero-cinematic/about-mountain.png" alt="" width="1916" height="821"></div>
+<div class="about-mountain-depth" aria-hidden="true"><img src="assets/images/hero-cinematic/about-mountain-lossless.webp" loading="eager" fetchpriority="high" alt="" width="1916" height="821"></div>
 <canvas class="about-valley-fog" aria-hidden="true"></canvas>
 <a class="about-story-marker" href="#about-story">MY STORY</a>
 <div class="lp-hero-scroll" aria-hidden="true">
@@ -831,17 +836,15 @@
 <div class="container lp-shell">
 <div class="row">
 <div class="col-lg-12">
-<h2 class="tmp-scroll-trigger tmp-fade-in" style="color: #FF9800; font-size: 2.0rem; font-weight: 400; line-height: 1.4; margin-bottom: 80px; text-align: center;">
-                    I lead design for complex, data-intensive products across enterprise platforms, fintech, and
-                    commerce.<br/><br/>
-                    My focus is on simplifying workflows, aligning cross-functional teams, <br/>and building scalable
-                    systems
-                    that improve efficiency, adoption, and business impact.
-                </h2>
+<p class="about-chapter-marker">01 / EXPERIENCE / IMPACT</p>
+<div class="about-experience-intro">
+<p class="tmp-scroll-trigger tmp-fade-in" style="color: #FF9800; font-size: 2.0rem; font-weight: 400; line-height: 1.4; text-align: left; margin: 0 0 1.4em;">I lead design for complex, data-intensive products across enterprise platforms, fintech, and commerce.</p>
+<p class="tmp-scroll-trigger tmp-fade-in" style="color: #FF9800; font-size: 2.0rem; font-weight: 400; line-height: 1.4; text-align: left; margin: 0;">My focus is on simplifying workflows, aligning cross-functional teams, and building scalable systems that improve efficiency, adoption, and business impact.</p>
 </div>
 </div>
 </div>
-<section class="counter-area">
+</div>
+<section class="counter-area" aria-label="Experience / Impact">
 <div class="container lp-shell">
 <div class="row g-5 align-items-stretch">
 <div class="col-12 col-lg-6 col-xl-6 col-xxl-6 d-flex">
@@ -898,72 +901,8 @@
 </div>
 </div>
 </section>
-<!-- About Us Section-->
-<section class="about-content-section" id="about-leadership" aria-labelledby="about-leadership-title">
-<div class="container lp-shell">
-<header class="about-chapter-head">
-<p class="about-chapter-marker">01 / LEADERSHIP</p>
-<h2 id="about-leadership-title">Crafting Digital Experiences That Resonate</h2>
-</header>
-<p class="about-intro-copy">I design and lead complex digital products, focusing on systems that
-                            operate at scale and deliver measurable outcomes.<br/>
-
-                            I simplify data-heavy workflows, align teams, and build products that improve efficiency,
-                            decision-making, and user adoption.</p>
-</div>
-</section>
-<section class="about-content-section" id="about-process" aria-labelledby="about-process-title">
-<div class="container lp-shell">
-<header class="about-chapter-head">
-<p class="about-chapter-marker">02 / PROCESS</p>
-<h2 id="about-process-title">What Differentiates My Process</h2>
-</header>
-<p class="about-intro-copy">I approach design as a system—connecting user needs, business goals, and technical
-                                    feasibility to deliver scalable, high-impact outcomes.<br/>
-<br/> My role often extends
-                                    beyond design—bringing clarity to ambiguous problems, aligning stakeholders, and
-                                    driving decisions that move products forward.</p>
-<div class="about-leadership-grid">
-<article>
-<h3>Product-Driven Discovery</h3>
-<p>Grounding design decisions in real user problems and
-                                            business context</p>
-</article>
-<article>
-<h3>Engineering-First Collaboration</h3>
-<p>Designing with technical feasibility and scalability in
-                                            mind</p>
-</article>
-<article>
-<h3>Metrics-Driven Decisions</h3>
-<p>Using data and validation to guide product direction</p>
-</article>
-<article>
-<h3>Ethical Product Design</h3>
-<p>Ensuring accessibility, inclusivity, and responsible design
-                                            practices</p>
-</article>
-<article>
-<h3>AI-Augmented Design</h3>
-<p>Leveraging AI to accelerate workflows, improve
-                                            decision-making, and enhance product capabilities</p>
-</article>
-<article>
-<h3>Team &amp; Stakeholder Alignment</h3>
-<p>Driving clarity, alignment, and decision-making across
-                                            cross-functional teams
-                                        </p>
-</article>
-</div>
-</div>
-</section>
-<section class="about-content-section" id="about-outcomes" aria-labelledby="about-outcomes-title">
-<div class="container lp-shell">
-<header class="about-chapter-head">
-<p class="about-chapter-marker">03 / EXECUTION</p>
-<h2 id="about-outcomes-title">How I Drive Product &amp; Design Outcomes</h2>
-</header>
-<div class="about-outcomes-grid">
+<section class="about-content-section" id="about-leadership" aria-labelledby="about-leadership-title"><div class="container lp-shell"><header class="about-chapter-head"><p class="about-chapter-marker">02 / HOW I THINK</p><h2 id="about-leadership-title">How I Think</h2></header><p class="about-intro-copy">I design and lead complex digital products, focusing on systems that operate at scale and deliver measurable outcomes.</p><ol class="about-principles"><li><h3>Product-Driven Decisions</h3><p>Grounding design decisions in real user problems and business context, using data and validation to guide product direction.</p></li><li><h3>Engineering-First Collaboration</h3><p>Designing with technical feasibility and scalability in mind.</p></li><li><h3>Ethical &amp; AI-Augmented Design</h3><p>Ensuring accessibility, inclusivity, and responsible design practices. Using AI to accelerate workflows and enhance product capabilities.</p></li><li><h3>Team &amp; Stakeholder Alignment</h3><p>Driving clarity, alignment, and decision-making across cross-functional teams.</p></li></ol></div></section>
+<section class="about-content-section" id="about-outcomes" aria-labelledby="about-outcomes-title"><div class="container lp-shell"><header class="about-chapter-head"><p class="about-chapter-marker">03 / HOW I LEAD &amp; DELIVER</p><h2 id="about-outcomes-title">How I Lead &amp; Deliver</h2></header><p class="about-intro-copy">My role often extends beyond design—bringing clarity to ambiguous problems, aligning stakeholders, and driving decisions that move products forward.</p><div class="about-outcomes-grid">
 <article>
 <h3>Discovery &amp; Framing</h3>
 <p>Understanding user needs, business context, and system constraints to define the
@@ -984,24 +923,10 @@
 <p>Driving execution, ensuring adoption, and scaling solutions across products and teams.
                             </p>
 </article>
-</div>
-</div>
-</section>
-<section class="about-content-section" id="about-practice" aria-labelledby="about-practice-title">
-<div class="container lp-shell">
-<header class="about-chapter-head">
-<p class="about-chapter-marker">04 / PRACTICE</p>
-<h2 id="about-practice-title">Core Capabilities &amp; Tools</h2>
-</header>
-<p class="about-intro-copy">I use tools to enable speed and precision—but my core strength lies in solving
-                                    complex product and system challenges across design, data, and engineering.<br/>
-<br/>
-
-                                    My work spans end-to-end product thinking—from discovery and strategy to execution
-                                    and scale—ensuring solutions are usable, feasible, and impactful.</p>
-<div class="about-practice-grid">
+</div></div></section>
+<section class="about-content-section" id="about-practice" aria-labelledby="about-practice-title"><div class="container lp-shell"><header class="about-chapter-head"><p class="about-chapter-marker">04 / CAPABILITIES &amp; TOOLS</p><h2 id="about-practice-title">Capabilities &amp; Tools</h2></header><p class="about-intro-copy">My core strength lies in solving complex product and system challenges across design, data, and engineering.</p><div class="about-practice-grid">
 <article>
-<h3>What I Actually Do</h3>
+<p class="about-support-label">CAPABILITIES</p>
 <ul>
 <li>
 <strong>Structure complex workflows</strong> into scalable product experiences</li>
@@ -1016,7 +941,7 @@
 </ul>
 </article>
 <article>
-<h3>Where I Apply These Tools</h3>
+<p class="about-support-label">WHERE I APPLY THEM</p>
 <ul>
 <li>
 <strong>Enterprise platforms</strong> and internal systems</li>
@@ -1030,10 +955,8 @@
 <strong>AI-assisted workflows</strong> and automation systems</li>
 </ul>
 </article>
-</div>
-</div>
-</section>
-<section class="about-content-section" id="about-toolkit" aria-labelledby="about-toolkit-title">
+</div></div></section>
+<section aria-labelledby="about-toolkit-title" class="about-content-section" id="about-toolkit">
 <div class="container lp-shell">
 <header class="about-chapter-head">
 <p class="about-chapter-marker">05 / TOOLKIT</p>
@@ -1046,23 +969,23 @@
 <h3>DESIGN &amp; PROTOTYPING</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Figma.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Figma.png" width="28"/>
 <span>Figma</span>
 </li>
 <li>
-<img src="assets/images/icons/Sketch.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Sketch.png" width="28"/>
 <span>Sketch</span>
 </li>
 <li>
-<img src="assets/images/icons/XD.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/XD.png" width="28"/>
 <span>Adobe XD</span>
 </li>
 <li>
-<img src="assets/images/icons/Axure.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Axure.png" width="28"/>
 <span>Axure RP</span>
 </li>
 <li>
-<img src="assets/images/icons/Protopie.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Protopie.png" width="28"/>
 <span>ProtoPie</span>
 </li>
 </ul>
@@ -1071,19 +994,19 @@
 <h3>USER RESEARCH &amp; TESTING</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Maze.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Maze.png" width="28"/>
 <span>Maze</span>
 </li>
 <li>
-<img src="assets/images/icons/Hotjar.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Hotjar.png" width="28"/>
 <span>Hotjar</span>
 </li>
 <li>
-<img src="assets/images/icons/Optimalworkshop.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Optimalworkshop.png" width="28"/>
 <span>Optimal Workshop</span>
 </li>
 <li>
-<img src="assets/images/icons/Dovetail.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Dovetail.png" width="28"/>
 <span>Dovetail</span>
 </li>
 </ul>
@@ -1092,15 +1015,15 @@
 <h3>DESIGN SYSTEMS &amp; HANDOFF</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Storybook.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Storybook.png" width="28"/>
 <span>Storybook</span>
 </li>
 <li>
-<img src="assets/images/icons/Zeroheight.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Zeroheight.png" width="28"/>
 <span>Zeroheight</span>
 </li>
 <li>
-<img src="assets/images/icons/Zeplin.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Zeplin.png" width="28"/>
 <span>Zeplin</span>
 </li>
 </ul>
@@ -1109,15 +1032,15 @@
 <h3>MOTION &amp; ADVANCED DESIGN</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Aftereffects.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Aftereffects.png" width="28"/>
 <span>Aftereffects</span>
 </li>
 <li>
-<img src="assets/images/icons/Blender.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Blender.png" width="28"/>
 <span>Blender</span>
 </li>
 <li>
-<img src="assets/images/icons/Rive.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Rive.png" width="28"/>
 <span>Rive</span>
 </li>
 </ul>
@@ -1126,69 +1049,69 @@
 <h3>DATA &amp; ANALYTICS</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Googleanalytics.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Googleanalytics.png" width="28"/>
 <span>GoogleAnalytics</span>
 </li>
 <li>
-<img src="assets/images/icons/Mixpanel.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Mixpanel.png" width="28"/>
 <span>Mixpanel</span>
 </li>
 </ul>
 </article>
-<article class="about-tool-group">
-<h3>AI &amp; EMERGING TECH</h3>
-<ul>
-<li>
-<img src="assets/images/icons/Chatgpt.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>ChatGPT</span>
-</li>
-<li>
-<img src="assets/images/icons/FigmaAI.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>Figma</span>
-</li>
-<li>
-<img src="assets/images/icons/Midjouney.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>Midjourney</span>
-</li>
-<li>
-<img src="assets/images/icons/GalileoAI.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>GalileoAI</span>
-</li>
-<li>
-<img src="assets/images/icons/Uizard.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>Uizard</span>
-</li>
-<li>
-<img src="assets/images/icons/RunwayML.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>RunwayML</span>
-</li>
-<li>
-<img src="assets/images/icons/Notion.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>Notion</span>
-</li>
-<li>
-<img src="assets/images/icons/Builderio.png" alt="" width="28" height="28" loading="lazy" decoding="async">
-<span>Builderio</span>
-</li>
+<article class="about-tool-group about-ai-tool-group"><h3>AI &amp; EMERGING TECH</h3>
+<p class="about-ai-subgroup">THINK &amp; RESEARCH</p><ul>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Chatgpt.png" width="28"/><span>ChatGPT</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/claude-official.webp" width="28"/><span>Claude</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/gemini-official.webp" width="28"/><span>Gemini</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/perplexity-brand.svg" width="28"/><span>Perplexity</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Dovetail.png" width="28"/><span>Dovetail</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Maze.png" width="28"/><span>Maze</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/attention-insight-official.webp" width="28"/><span>Attention Insight</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Notion.png" width="28"/><span>Notion AI</span></li>
+</ul>
+<p class="about-ai-subgroup">CREATE &amp; DESIGN</p><ul>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/FigmaAI.png" width="28"/><span>Figma AI</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/google-stitch-official.webp" width="28"/><span>Google Stitch</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Uizard.png" width="28"/><span>Uizard</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/GalileoAI.png" width="28"/><span>Galileo AI</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/ux-pilot-official.webp" width="28"/><span>UX Pilot</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/magic-patterns-official.webp" width="28"/><span>Magic Patterns</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/visily.webp" width="28"/><span>Visily</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/relume-official.webp" width="28"/><span>Relume</span></li>
+</ul>
+<p class="about-ai-subgroup">PROTOTYPE &amp; BUILD</p><ul>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/v0.svg" width="28"/><span>v0</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/lovable-official.svg" width="28"/><span>Lovable</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/bolt-official.svg" width="28"/><span>Bolt</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Builderio.png" width="28"/><span>Builder.io</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/framer-official.webp" width="28"/><span>Framer AI</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/anima.svg" width="28"/><span>Anima</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/claude-official.webp" width="28"/><span>Claude Code</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/cursor-official.svg" width="28"/><span>Cursor</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/onlook.svg" width="28"/><span>Onlook</span></li>
+</ul>
+<p class="about-ai-subgroup">VISUAL IDEATION</p><ul>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Midjouney.png" width="28"/><span>Midjourney</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/adobe-firefly-official.webp" width="28"/><span>Adobe Firefly</span></li>
+<li><img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/RunwayML.png" width="28"/><span>Runway</span></li>
 </ul>
 <p class="about-tool-note">*AI is used
                                     as
                                     an augmentation layer—never a decision authority—within clear ethical,
-                                    privacy, and quality guardrails.</p>
-</article>
+                                    privacy, and quality guardrails.</p></article>
 <article class="about-tool-group">
 <h3>GRAPHIC &amp; DESIGN</h3>
 <ul>
 <li>
-<img src="assets/images/icons/Illlustrator.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Illlustrator.png" width="28"/>
 <span>Illustrator</span>
 </li>
 <li>
-<img src="assets/images/icons/Photoshop.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Photoshop.png" width="28"/>
 <span>Photoshop</span>
 </li>
 <li>
-<img src="assets/images/icons/Coreldraw.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+<img alt="" decoding="async" height="28" loading="lazy" src="assets/images/icons/Coreldraw.png" width="28"/>
 <span>Coreldraw</span>
 </li>
 </ul>
@@ -1196,38 +1119,29 @@
 </div>
 </div>
 </section>
-<section class="about-content-section" id="about-learning" aria-labelledby="about-learning-title">
-<div class="container lp-shell">
-<header class="about-chapter-head">
-<p class="about-chapter-marker">06 / LEARNING</p>
-<h2 id="about-learning-title">Professional Certifications</h2>
-</header>
-<p class="about-intro-copy">Selected certifications in product design, systems thinking, and accessibility.</p>
-<ul class="about-certifications">
+<section class="about-content-section" id="about-learning" aria-labelledby="about-learning-title"><div class="container lp-shell"><header class="about-chapter-head"><p class="about-chapter-marker">05 / EDUCATION &amp; CREDENTIALS</p><h2 id="about-learning-title">Education &amp; Credentials</h2></header><ol class="about-education"><li><span class="about-education-number" aria-hidden="true">01</span><div><strong>M.Sc. (Software Engineering)</strong></div></li><li><span class="about-education-number" aria-hidden="true">02</span><div><strong>MBA (AI)</strong></div></li></ol><h3 class="about-support-label">PROFESSIONAL LEARNING</h3><ul class="about-certifications">
 <li>
-<img src="assets/images/our-supported-company/ibm.svg" alt="IBM" width="120" height="58" loading="lazy" decoding="async">
+<img alt="IBM" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/ibm.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/google.svg" alt="Google" width="120" height="58" loading="lazy" decoding="async">
+<img alt="Google" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/google.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/microsoft.svg" alt="Microsoft" width="120" height="58" loading="lazy" decoding="async">
+<img alt="Microsoft" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/microsoft.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/michigan.svg" alt="University of Michigan" width="120" height="58" loading="lazy" decoding="async">
+<img alt="University of Michigan" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/michigan.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/minnesota.svg" alt="University of Minnesota" width="120" height="58" loading="lazy" decoding="async">
+<img alt="University of Minnesota" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/minnesota.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/bits.svg" alt="BITS" width="120" height="58" loading="lazy" decoding="async">
+<img alt="BITS" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/bits.svg" width="120"/>
 </li>
 <li>
-<img src="assets/images/our-supported-company/ixdf.svg" alt="IxDF" width="120" height="58" loading="lazy" decoding="async">
+<img alt="IxDF" decoding="async" height="58" loading="lazy" src="assets/images/our-supported-company/ixdf.svg" width="120"/>
 </li>
-</ul>
-</div>
-</section>
+</ul></div></section>
 
 <!-- Start Footer Area  -->
 <div class="footer-stars-animation-wrapper-footer">
@@ -1344,22 +1258,24 @@
          ===================================================== -->
 <style>
         /* About body: leadership first, tools as supporting evidence. */
-        .about-content-section { padding: 54px 0; background: #000; }
-        #about-leadership { padding-top: 80px; padding-bottom: 30px; }
-        #about-outcomes { padding-top: 28px; }
-        .about-chapter-head { max-width: var(--lp-copy-max); margin-bottom: 28px; }
-        .about-chapter-marker { display:flex; align-items:center; gap:12px; margin:0 0 14px; color:#b5b7bd; font-size:12px; font-weight:600; letter-spacing:.12em; }
+        .about-content-section { padding: 70px 0; background: #000; }
+        #about-leadership { padding-top: 130px; padding-bottom: 70px; }
+        #about-outcomes { padding-top: 70px; }
+        .about-chapter-head { max-width: var(--lp-copy-max); margin-bottom: 32px; }
+        .about-chapter-marker { display:flex; align-items:center; gap:12px; margin:0 0 16px; color:#b5b7bd; font-size:12px; font-weight:600; letter-spacing:.12em; }
         .about-chapter-marker::before { content:""; width:24px; height:2px; flex:0 0 24px; background:var(--color-primary); }
-        .about-content-section h2 { margin:0; font-size:clamp(26px,2.5vw,36px); line-height:1.25; font-weight:700; }
-        .about-content-section h3 { margin:0 0 12px; color:var(--color-heading); font-size:20px; line-height:1.35; }
+        .about-content-section h2 { margin:0; font-size:clamp(28px,2.7vw,40px); line-height:1.2; font-weight:700; letter-spacing:-.025em; text-wrap:balance; }
+        .about-content-section h3 { margin:0 0 14px; color:var(--color-heading); font-size:20px; line-height:1.35; text-wrap:balance; }
         .about-content-section p { line-height:1.65; }
-        .about-content-section .about-intro-copy { max-width:var(--lp-copy-max); margin:0 0 30px; }
-        .about-outcomes-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
-        .about-outcomes-grid article, .about-leadership-grid article { padding-top:22px; border-top:1px solid #ffffff26; }
+        .about-content-section .about-intro-copy { max-width:min(var(--lp-copy-max),62ch); margin:0 0 36px; text-wrap:pretty; }
+        #about-leadership h2 { font-size:clamp(30px,3vw,44px); }
+        :is(#about-toolkit,#about-learning) h2 { font-size:clamp(26px,2.35vw,34px); }
+        .about-outcomes-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:36px 40px; }
+        .about-outcomes-grid article, .about-leadership-grid article { padding-top:26px; padding-bottom:8px; border-top:1px solid #ffffff26; }
         .about-outcomes-grid p, .about-leadership-grid p { max-width:42ch; margin:0; }
         .about-leadership-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:30px 36px; }
         .about-practice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px; }
-        .about-practice-grid article { padding-top:22px; border-top:1px solid #ffffff26; }
+        .about-practice-grid article { padding-top:26px; padding-bottom:8px; border-top:1px solid #ffffff26; }
         .about-practice-grid ul { display:grid; gap:14px; max-width:var(--lp-copy-max); padding:0; margin:0; list-style:none; }
         .about-practice-grid li { color:var(--color-body); line-height:1.6; padding-left:16px; position:relative; }
         .about-practice-grid li::before { content:""; width:4px; height:4px; position:absolute; top:11px; left:0; background:var(--color-primary); }
@@ -1370,23 +1286,77 @@
         .about-tool-group li { display:flex; align-items:center; gap:8px; color:#c3c5cb; font-size:13px; line-height:1.4; }
         .about-tool-group img { width:28px; height:28px; object-fit:contain; flex-shrink:0; }
         .about-tool-group .about-tool-note { font-size:12px; color:#9fa3ad; margin:14px 0 0; max-width:var(--lp-copy-max); }
-        .about-certifications { display:flex; flex-wrap:wrap; gap:24px 32px; align-items:center; list-style:none; margin:0; padding:0; max-width:calc(var(--lp-copy-max) * 1.65); }
+        .about-certifications { display:flex; flex-wrap:wrap; gap:24px 32px; align-items:center; list-style:none; margin:0; padding:0; max-width:100%; }
         .about-certifications img { width:120px; height:58px; object-fit:contain; }
-        #about-learning { padding-bottom:64px; }
+        #about-learning { padding-bottom:clamp(100px,8.33vw,130px); }
         @media(max-width:1199px) {
             .about-outcomes-grid, .about-leadership-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
         }
         @media(max-width:767px) {
-            .about-content-section { padding:38px 0; }
-            #about-leadership { padding-top:56px; }
+            .about-content-section { padding:52px 0; }
+            #about-leadership { padding-top:80px; padding-bottom:52px; }
+            #about-outcomes { padding-top:52px; }
+            #about-learning { padding-bottom:84px; }
             .about-outcomes-grid, .about-leadership-grid, .about-practice-grid, .about-toolkit-grid { grid-template-columns:minmax(0,1fr); }
             .about-practice-grid { gap:30px; }
             .about-toolkit-grid { gap:26px; }
             .about-tool-group { padding-top:18px; }
             .about-content-section h3 { font-size:19px; }
-            .about-content-section .about-intro-copy { margin-bottom:24px; }
+            .about-content-section .about-intro-copy { margin-bottom:28px; }
             .about-certifications { gap:20px; }
             .about-certifications img { width:100px; height:50px; }
+        }
+
+
+
+        .about-ai-tool-group .about-ai-subgroup { margin:26px 0 14px; color:#9fa3ad; font-size:10px; font-weight:600; letter-spacing:.08em; }
+        .about-ai-tool-group h3 + .about-ai-subgroup { margin-top:0; }
+        .about-ai-tool-group li { min-height:28px; }
+        /* Tools chapter restored from the current live About component (2026-10-10). */
+        #about-toolkit { padding:54px 0; }
+        #about-toolkit .about-chapter-head { margin-bottom:28px; }
+        #about-toolkit .about-chapter-marker { margin-bottom:14px; }
+        #about-toolkit h2 { font-size:clamp(26px,2.5vw,36px); line-height:1.25; letter-spacing:normal; text-wrap:wrap; }
+        #about-toolkit .about-intro-copy { max-width:var(--lp-copy-max); margin:0 0 30px; text-wrap:wrap; }
+        #about-toolkit h3 { text-wrap:wrap; }
+        @media(max-width:767px) {
+            #about-toolkit { padding:38px 0; }
+            #about-toolkit .about-intro-copy { margin-bottom:24px; }
+        }
+
+        /* Tools-only visual scale; approved content and full-width rows retained. */
+        #about-toolkit { --lp-tool-icon-size:30px; --lp-tool-label-size:14px; }
+        #about-toolkit .about-tool-group li { gap:10px; font-size:var(--lp-tool-label-size); }
+        #about-toolkit .about-tool-group img { width:var(--lp-tool-icon-size); height:var(--lp-tool-icon-size); }
+        #about-toolkit .about-tool-group ul { gap:16px 22px; }
+        #about-toolkit .about-tool-group h3 { margin-bottom:22px; }
+        @media(min-width:768px) {
+            #about-toolkit { --lp-tool-icon-size:32px; --lp-tool-label-size:14.5px; }
+        }
+        @media(min-width:1200px) {
+            #about-toolkit { --lp-tool-icon-size:36px; --lp-tool-label-size:15px; }
+            #about-toolkit .about-tool-group li { gap:12px; }
+            #about-toolkit .about-tool-group ul { gap:18px 24px; }
+        }
+
+        /* Consolidated editorial body: principles, delivery, supporting tools and education. */
+        .about-principles { list-style:none; padding:0; margin:0; counter-reset:principle; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px 40px; max-width:calc(var(--lp-copy-max) * 1.4); }
+        .about-principles li { counter-increment:principle; padding:22px 0 0 36px; border-top:1px solid #ffffff26; position:relative; }
+        .about-principles li::before { content:"0" counter(principle); position:absolute; left:0; top:24px; color:#9fa3ad; font-size:11px; letter-spacing:.12em; }
+        .about-principles p { max-width:52ch; margin:0; }
+        .about-content-section .about-support-label { color:#b5b7bd; font-size:12px; font-weight:600; letter-spacing:.12em; line-height:1.4; margin:0 0 18px; }
+        .about-education { list-style:none; padding:0; margin:0 0 48px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px; max-width:min(100%,1000px); }
+        .about-education li { display:flex; gap:20px; padding:20px 0; border-top:1px solid #ffffff26; }
+        .about-education-number { color:#9fa3ad; font-size:11px; letter-spacing:.12em; padding-top:5px; }
+        .about-education strong { color:var(--color-heading); font-size:clamp(18px,1.6vw,22px); line-height:1.35; font-weight:600; white-space:nowrap; }
+        #about-learning .about-support-label { font-size:20px; line-height:1.35; letter-spacing:.02em; margin-bottom:32px; }
+        .about-experience-intro { max-width:70ch; margin:0 0 80px; text-align:left; }
+        @media(max-width:991px) { .about-education { grid-template-columns:minmax(0,1fr); gap:0; } }
+        @media(max-width:767px) { .about-education li { gap:14px; } .about-education strong { font-size:clamp(16px,4.1vw,18px); } }
+        @media(max-width:379px) { .about-education strong { white-space:normal; } }
+        @media(max-width:767px) {
+            .about-principles, .about-education { grid-template-columns:minmax(0,1fr); gap:28px; }
+            .about-education { gap:0; }
         }
 
         /* ── 4. Counter cards → hover shimmer ────────────── */
@@ -1401,8 +1371,55 @@
         }
     </style>
 <script src="assets/js/lp-mobile-menu.js?v=production-qa-20261008" defer></script>
-<script src="assets/js/lp-footer-backtop.js?v=36" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
-<script type="module" src="assets/js/about-hero-scene.js?v=reduced-planet-motion-20261007"></script>
-<script type="module" src="assets/js/lp-cinematic-footer.js?v=reduced-planet-motion-20261007"></script>
+<script src="assets/js/lp-footer-backtop.js?v=performance-20261011-09b" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<script type="module" src="assets/js/about-hero-scene.js?v=performance-20261011-09b"></script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=performance-20261011-09b"></script>
+<script>
+/* About-only planet-local orbit: each node owns its label and short connector.
+   Shared WebGL geometry, typography, animation and mobile placement stay intact. */
+(() => {
+    const root = document.querySelector('.about-page-hero');
+    if (!root || root.__lpPlanetLocalTimeline) return;
+    root.__lpPlanetLocalTimeline = true;
+    let frame = 0;
+    function placeTimeline() {
+        frame = 0;
+        if (innerWidth <= 900 || root.dataset.scene !== 'ready' || !root.dataset.orbitGeometry) return;
+        const {centerX:cx,centerY:cy,orbitRadius:r} = JSON.parse(root.dataset.orbitGeometry);
+        const orbit = root.querySelector('.about-orbit');
+        const angles = innerWidth < 1200 ? [-150,-65,-50,45,65] : [-118,-60,-30,26,32];
+        const points = angles.map(a => ({x:cx+Math.cos(a*Math.PI/180)*r,y:cy+Math.sin(a*Math.PI/180)*r}));
+        const path = `M ${points[0].x} ${points[0].y} A ${r} ${r} 0 ${angles[4]-angles[0]>180?1:0} 1 ${points[4].x} ${points[4].y}`;
+        orbit.querySelector('.orbit-arc').setAttribute('d',path);
+        orbit.querySelector('animateMotion').setAttribute('path',path);
+        const nodes = [...orbit.querySelectorAll('li')];
+        const connectors = [...orbit.querySelectorAll('.timeline-connectors path')];
+        nodes.forEach((node,i) => {
+            const point = points[i], label = node.querySelector('.timeline-label');
+            node.style.setProperty('--x',`${point.x/root.clientWidth*100}%`);
+            node.style.setProperty('--y',`${point.y/root.clientHeight*100}%`);
+            label.style.width = i===0 ? '170px' : '150px';
+            if (i===0 || (i===4 && innerWidth<1200)) label.style.textAlign='right';
+            else label.style.removeProperty('text-align');
+            const height = label.offsetHeight;
+            const offset = i===0 ? {x:-206,y:-30} :
+                i===1 ? {x:24,y:innerWidth<1200?-height-12:-height/2} :
+                i===2 || i===3 ? {x:24,y:-height/2} : i===4 && innerWidth<1200 ? {x:-174,y:34} : {x:18,y:36};
+            label.style.left = `${offset.x}px`;
+            label.style.top = `${offset.y}px`;
+            const end = i===0 ? {x:point.x-36,y:point.y} : i===4 && innerWidth<1200 ? {x:point.x-24,y:point.y+34} : {x:point.x+offset.x,y:point.y+offset.y+(i===2||i===3||i===1&&innerWidth>=1200?height/2:i===1?height:0)};
+            const dx=end.x-point.x,dy=end.y-point.y,length=Math.hypot(dx,dy);
+            // Leave a small breathing gap before the text while connecting to its anchor.
+            const scale=Math.min(36,length-6)/length;
+            connectors[i]?.setAttribute('d',`M ${point.x} ${point.y} L ${point.x+dx*scale} ${point.y+dy*scale}`);
+        });
+    }
+    function schedule() { if (!frame) frame=requestAnimationFrame(placeTimeline); }
+    new MutationObserver(schedule).observe(root,{attributes:true,attributeFilter:['data-orbit-geometry','data-scene']});
+    document.fonts.ready.then(schedule);
+    schedule();
+})();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,585 @@
+{
+  "cards": [
+    {
+      "id": "home",
+      "kind": "home",
+      "label": "20 YEARS · PRODUCT DESIGN LEAD",
+      "title": "Lajapathy — Product Design Leader",
+      "lines": [
+        "I LEAD DESIGN FOR",
+        "COMPLEX,",
+        "DATA-INTENSIVE PRODUCTS"
+      ],
+      "support": "Enterprise · Fintech · SaaS · Commerce · AI",
+      "url": "lajapathy.com"
+    },
+    {
+      "id": "about",
+      "kind": "about",
+      "label": "ABOUT",
+      "title": "About Lajapathy — Product Design Leadership",
+      "lines": [
+        "20 YEARS OF",
+        "DESIGNING SYSTEMS,",
+        "PRODUCTS & TEAMS"
+      ],
+      "support": "Product design leadership · Systems thinking · AI",
+      "url": "lajapathy.com/about.html"
+    },
+    {
+      "id": "portfolio",
+      "kind": "portfolio",
+      "label": "SELECTED WORK",
+      "title": "Selected Work — Lajapathy",
+      "lines": [
+        "PRODUCTS BUILT FOR",
+        "REAL-WORLD",
+        "COMPLEXITY"
+      ],
+      "support": "21 products across Fintech · Enterprise · SaaS · Commerce · Healthcare",
+      "url": "lajapathy.com/Casestudies.html"
+    },
+    {
+      "id": "contact",
+      "kind": "contact",
+      "label": "START A CONVERSATION",
+      "title": "Start a Conversation — Lajapathy",
+      "lines": [
+        "LET’S BUILD",
+        "WHAT’S NEXT"
+      ],
+      "support": "Product design leadership · UX transformation · Design systems · Product strategy",
+      "url": "lajapathy.com/contact.html"
+    },
+    {
+      "id": "ewallet",
+      "kind": "case",
+      "label": "FINTECH CASE STUDY",
+      "title": "E-Wallet — Product Design Case Study | Lajapathy",
+      "lines": [
+        "E-WALLET"
+      ],
+      "support": "Payments · Wallet flows · Financial insights",
+      "url": "lajapathy.com/ewallet.html",
+      "product": "assets/images/latest-portfolio/ewallet-home-product.webp",
+      "accent": "#4bc5ff"
+    },
+    {
+      "id": "zappay",
+      "kind": "case",
+      "label": "FINTECH CASE STUDY",
+      "title": "ZapPay — Product Design Case Study | Lajapathy",
+      "lines": [
+        "ZAPPAY"
+      ],
+      "support": "Digital payments · Payment journeys",
+      "url": "lajapathy.com/zappay.html",
+      "product": "assets/images/latest-portfolio/zappay-home-product.webp",
+      "accent": "#40d4d9"
+    },
+    {
+      "id": "unipay",
+      "kind": "case",
+      "label": "FINTECH CASE STUDY",
+      "title": "UniPay — Product Design Case Study | Lajapathy",
+      "lines": [
+        "UNIPAY"
+      ],
+      "support": "Payments · Account journeys",
+      "url": "lajapathy.com/unipay.html",
+      "product": "assets/images/latest-portfolio/unipay-home-product.webp",
+      "accent": "#9886db"
+    },
+    {
+      "id": "smartfin",
+      "kind": "case",
+      "label": "FINTECH CASE STUDY",
+      "title": "SmartFin — Product Design Case Study | Lajapathy",
+      "lines": [
+        "SMARTFIN"
+      ],
+      "support": "Investing · Financial insights",
+      "url": "lajapathy.com/smartfin.html",
+      "product": "assets/images/latest-portfolio/smartfin-home-product.webp",
+      "accent": "#739fcd"
+    },
+    {
+      "id": "coverride",
+      "kind": "case",
+      "label": "FINTECH CASE STUDY",
+      "title": "CoverRide — Product Design Case Study | Lajapathy",
+      "lines": [
+        "COVERRIDE"
+      ],
+      "support": "Insurance · Coverage journeys",
+      "url": "lajapathy.com/coverride.html",
+      "product": "assets/images/latest-portfolio/coverride-home-product.webp",
+      "accent": "#829d68"
+    },
+    {
+      "id": "norton",
+      "kind": "case",
+      "label": "ENTERPRISE CASE STUDY",
+      "title": "Norton — Product Design Case Study | Lajapathy",
+      "lines": [
+        "NORTON"
+      ],
+      "support": "Security monitoring · Information architecture · Enterprise UX",
+      "url": "lajapathy.com/norton.html",
+      "product": "assets/images/latest-portfolio/norton-home-product.webp",
+      "accent": "#43b8df"
+    },
+    {
+      "id": "homenest",
+      "kind": "case",
+      "label": "ENTERPRISE CASE STUDY",
+      "title": "HomeNest — Product Design Case Study | Lajapathy",
+      "lines": [
+        "HOMENEST"
+      ],
+      "support": "Property discovery · Search journeys",
+      "url": "lajapathy.com/homenest.html",
+      "product": "assets/images/latest-portfolio/homenest-home-product.webp",
+      "accent": "#93b29e"
+    },
+    {
+      "id": "zmeet",
+      "kind": "case",
+      "label": "ENTERPRISE CASE STUDY",
+      "title": "Zmeet — Product Design Case Study | Lajapathy",
+      "lines": [
+        "ZMEET"
+      ],
+      "support": "Collaboration · Meeting experiences",
+      "url": "lajapathy.com/zmeet.html",
+      "product": "assets/images/latest-portfolio/zmeet-home-product.webp",
+      "accent": "#967acb"
+    },
+    {
+      "id": "eater",
+      "kind": "case",
+      "label": "ENTERPRISE CASE STUDY",
+      "title": "Eater — Product Design Case Study | Lajapathy",
+      "lines": [
+        "EATER"
+      ],
+      "support": "Food discovery · Ordering journeys",
+      "url": "lajapathy.com/eater.html",
+      "product": "assets/images/latest-portfolio/eater-home-product.webp",
+      "accent": "#c27d55"
+    },
+    {
+      "id": "fluxcrm",
+      "kind": "case",
+      "label": "SAAS CASE STUDY",
+      "title": "FluxCRM — Product Design Case Study | Lajapathy",
+      "lines": [
+        "FLUXCRM"
+      ],
+      "support": "Operational dashboards · Reporting · Workflow visibility",
+      "url": "lajapathy.com/fluxcrm.html",
+      "product": "assets/images/latest-portfolio/fluxcrm-home-product.webp",
+      "accent": "#7fa5b9"
+    },
+    {
+      "id": "taskee",
+      "kind": "case",
+      "label": "SAAS CASE STUDY",
+      "title": "Taskee — Product Design Case Study | Lajapathy",
+      "lines": [
+        "TASKEE"
+      ],
+      "support": "Project planning · Team workflows",
+      "url": "lajapathy.com/taskee.html",
+      "product": "assets/images/latest-portfolio/taskee-home-product.webp",
+      "accent": "#65ab91"
+    },
+    {
+      "id": "staffee",
+      "kind": "case",
+      "label": "SAAS CASE STUDY",
+      "title": "Staffee — Product Design Case Study | Lajapathy",
+      "lines": [
+        "STAFFEE"
+      ],
+      "support": "People operations · Employee workflows",
+      "url": "lajapathy.com/staffee.html",
+      "product": "assets/images/latest-portfolio/staffee-home-product.webp",
+      "accent": "#ba9c6b"
+    },
+    {
+      "id": "amazon",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "Amazon — Product Design Case Study | Lajapathy",
+      "lines": [
+        "AMAZON"
+      ],
+      "support": "Product discovery · Commerce journeys",
+      "url": "lajapathy.com/amazon.html",
+      "product": "assets/images/latest-portfolio/amazon-home-product.webp",
+      "accent": "#c78b51"
+    },
+    {
+      "id": "eddiebauer",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "Eddie Bauer — Product Design Case Study | Lajapathy",
+      "lines": [
+        "EDDIE BAUER"
+      ],
+      "support": "Outdoor retail · Shopping journeys",
+      "url": "lajapathy.com/eddiebauer.html",
+      "product": "assets/images/latest-portfolio/eddiebauer-home-product.webp",
+      "accent": "#a78d69"
+    },
+    {
+      "id": "lider",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "Líder — Product Design Case Study | Lajapathy",
+      "lines": [
+        "LÍDER"
+      ],
+      "support": "Retail discovery · Shopping journeys",
+      "url": "lajapathy.com/lider.html",
+      "product": "assets/images/latest-portfolio/lider-home-product.webp",
+      "accent": "#bb7861"
+    },
+    {
+      "id": "slurrpfarm",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "Slurrpfarm — Product Design Case Study | Lajapathy",
+      "lines": [
+        "SLURRPFARM"
+      ],
+      "support": "Food commerce · Product discovery",
+      "url": "lajapathy.com/slurrpfarm.html",
+      "product": "assets/images/latest-portfolio/slurrpfarm-home-product.webp",
+      "accent": "#b38aa6"
+    },
+    {
+      "id": "gocart",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "GoCart — Product Design Case Study | Lajapathy",
+      "lines": [
+        "GOCART"
+      ],
+      "support": "Product discovery · Checkout journeys",
+      "url": "lajapathy.com/gocart.html",
+      "product": "assets/images/latest-portfolio/gocart-home-product.webp",
+      "accent": "#61a78d"
+    },
+    {
+      "id": "dailymart",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "DailyMart — Product Design Case Study | Lajapathy",
+      "lines": [
+        "DAILYMART"
+      ],
+      "support": "Grocery discovery · Ordering journeys",
+      "url": "lajapathy.com/dailymart.html",
+      "product": "assets/images/latest-portfolio/dailymart-home-product.webp",
+      "accent": "#b6a070"
+    },
+    {
+      "id": "quickcart",
+      "kind": "case",
+      "label": "COMMERCE CASE STUDY",
+      "title": "Quickcart — Product Design Case Study | Lajapathy",
+      "lines": [
+        "QUICKCART"
+      ],
+      "support": "Shopping flows · Everyday commerce",
+      "url": "lajapathy.com/quickcart.html",
+      "product": "assets/images/latest-portfolio/quickcart-home-product.webp",
+      "accent": "#6cb8c1"
+    },
+    {
+      "id": "mydoc",
+      "kind": "case",
+      "label": "HEALTHCARE CASE STUDY",
+      "title": "MyDoc — Product Design Case Study | Lajapathy",
+      "lines": [
+        "MYDOC"
+      ],
+      "support": "Care discovery · Patient journeys",
+      "url": "lajapathy.com/mydoc.html",
+      "product": "assets/images/latest-portfolio/mydoc-home-product.webp",
+      "accent": "#76b9c7"
+    },
+    {
+      "id": "dronline",
+      "kind": "case",
+      "label": "HEALTHCARE CASE STUDY",
+      "title": "DrOnline — Product Design Case Study | Lajapathy",
+      "lines": [
+        "DRONLINE"
+      ],
+      "support": "Digital care · Consultation journeys",
+      "url": "lajapathy.com/dronline.html",
+      "product": "assets/images/latest-portfolio/dronline-home-product.webp",
+      "accent": "#73b7dc"
+    }
+  ],
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "Lajapathy — Product Design Leader",
+      "description": "Product design leadership for complex, data-intensive products across enterprise, fintech, SaaS and commerce.",
+      "url": "https://www.lajapathy.com/",
+      "image": "https://www.lajapathy.com/assets/social/og-home.jpg",
+      "alt": "Lajapathy portrait with LP branding and product design leadership headline"
+    },
+    {
+      "file": "about.html",
+      "title": "About Lajapathy — Product Design Leadership",
+      "description": "20 years designing products, systems and teams across complex digital platforms.",
+      "url": "https://www.lajapathy.com/about.html",
+      "image": "https://www.lajapathy.com/assets/social/og-about.jpg",
+      "alt": "LP About card with an orange-rimmed planet and systems, products and teams headline"
+    },
+    {
+      "file": "Casestudies.html",
+      "title": "Selected Work — Lajapathy",
+      "description": "Product design case studies across fintech, enterprise, SaaS, commerce and healthcare.",
+      "url": "https://www.lajapathy.com/Casestudies.html",
+      "image": "https://www.lajapathy.com/assets/social/og-portfolio.jpg",
+      "alt": "Lajapathy product design portfolio featuring E-Wallet, Norton and FluxCRM"
+    },
+    {
+      "file": "contact.html",
+      "title": "Start a Conversation — Lajapathy",
+      "description": "Let's discuss product design leadership, UX transformation, design systems or product strategy.",
+      "url": "https://www.lajapathy.com/contact.html",
+      "image": "https://www.lajapathy.com/assets/social/og-contact.jpg",
+      "alt": "LP Contact card with a cinematic landscape and Let’s Build What’s Next headline"
+    },
+    {
+      "file": "ewallet.html",
+      "title": "E-Wallet — Product Design Case Study | Lajapathy",
+      "description": "Payment journeys, wallet flows and financial insights for a fintech product.",
+      "url": "https://www.lajapathy.com/ewallet.html",
+      "image": "https://www.lajapathy.com/assets/social/og-ewallet.jpg",
+      "alt": "E-Wallet product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "zappay.html",
+      "title": "ZapPay — Product Design Case Study | Lajapathy",
+      "description": "Digital payment journeys and transaction flows for ZapPay.",
+      "url": "https://www.lajapathy.com/zappay.html",
+      "image": "https://www.lajapathy.com/assets/social/og-zappay.jpg",
+      "alt": "ZapPay product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "unipay.html",
+      "title": "UniPay — Product Design Case Study | Lajapathy",
+      "description": "Account and payment experiences for the UniPay fintech product.",
+      "url": "https://www.lajapathy.com/unipay.html",
+      "image": "https://www.lajapathy.com/assets/social/og-unipay.jpg",
+      "alt": "UniPay product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "smartfin.html",
+      "title": "SmartFin — Product Design Case Study | Lajapathy",
+      "description": "Investment journeys and financial information experiences for SmartFin.",
+      "url": "https://www.lajapathy.com/smartfin.html",
+      "image": "https://www.lajapathy.com/assets/social/og-smartfin.jpg",
+      "alt": "SmartFin product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "coverride.html",
+      "title": "CoverRide — Product Design Case Study | Lajapathy",
+      "description": "Insurance discovery and coverage journeys for CoverRide.",
+      "url": "https://www.lajapathy.com/coverride.html",
+      "image": "https://www.lajapathy.com/assets/social/og-coverride.jpg",
+      "alt": "CoverRide product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "norton.html",
+      "title": "Norton — Product Design Case Study | Lajapathy",
+      "description": "Security monitoring and information architecture for a complex enterprise platform.",
+      "url": "https://www.lajapathy.com/norton.html",
+      "image": "https://www.lajapathy.com/assets/social/og-norton.jpg",
+      "alt": "Norton product mockup with LP branding and enterprise case-study title"
+    },
+    {
+      "file": "homenest.html",
+      "title": "HomeNest — Product Design Case Study | Lajapathy",
+      "description": "Property discovery and search experiences for HomeNest.",
+      "url": "https://www.lajapathy.com/homenest.html",
+      "image": "https://www.lajapathy.com/assets/social/og-homenest.jpg",
+      "alt": "HomeNest product mockup with LP branding and enterprise case-study title"
+    },
+    {
+      "file": "zmeet.html",
+      "title": "Zmeet — Product Design Case Study | Lajapathy",
+      "description": "Meeting and collaboration experiences for Zmeet.",
+      "url": "https://www.lajapathy.com/zmeet.html",
+      "image": "https://www.lajapathy.com/assets/social/og-zmeet.jpg",
+      "alt": "Zmeet product mockup with LP branding and enterprise case-study title"
+    },
+    {
+      "file": "eater.html",
+      "title": "Eater — Product Design Case Study | Lajapathy",
+      "description": "Food discovery and ordering experiences for Eater.",
+      "url": "https://www.lajapathy.com/eater.html",
+      "image": "https://www.lajapathy.com/assets/social/og-eater.jpg",
+      "alt": "Eater product mockup with LP branding and enterprise case-study title"
+    },
+    {
+      "file": "fluxcrm.html",
+      "title": "FluxCRM — Product Design Case Study | Lajapathy",
+      "description": "Operational dashboards, reporting and workflow visibility for FluxCRM.",
+      "url": "https://www.lajapathy.com/fluxcrm.html",
+      "image": "https://www.lajapathy.com/assets/social/og-fluxcrm.jpg",
+      "alt": "FluxCRM product mockup with LP branding and saas case-study title"
+    },
+    {
+      "file": "taskee.html",
+      "title": "Taskee — Product Design Case Study | Lajapathy",
+      "description": "Project planning and team workflow experiences for Taskee.",
+      "url": "https://www.lajapathy.com/taskee.html",
+      "image": "https://www.lajapathy.com/assets/social/og-taskee.jpg",
+      "alt": "Taskee product mockup with LP branding and saas case-study title"
+    },
+    {
+      "file": "staffee.html",
+      "title": "Staffee — Product Design Case Study | Lajapathy",
+      "description": "Employee management and people operations workflows for Staffee.",
+      "url": "https://www.lajapathy.com/staffee.html",
+      "image": "https://www.lajapathy.com/assets/social/og-staffee.jpg",
+      "alt": "Staffee product mockup with LP branding and saas case-study title"
+    },
+    {
+      "file": "amazon.html",
+      "title": "Amazon — Product Design Case Study | Lajapathy",
+      "description": "Product discovery and shopping experiences explored in the Amazon commerce case study.",
+      "url": "https://www.lajapathy.com/amazon.html",
+      "image": "https://www.lajapathy.com/assets/social/og-amazon.jpg",
+      "alt": "Amazon product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "eddiebauer.html",
+      "title": "Eddie Bauer — Product Design Case Study | Lajapathy",
+      "description": "Outdoor retail discovery and shopping experiences for Eddie Bauer.",
+      "url": "https://www.lajapathy.com/eddiebauer.html",
+      "image": "https://www.lajapathy.com/assets/social/og-eddiebauer.jpg",
+      "alt": "Eddie Bauer product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "lider.html",
+      "title": "Líder — Product Design Case Study | Lajapathy",
+      "description": "Retail discovery and shopping journeys for Líder.",
+      "url": "https://www.lajapathy.com/lider.html",
+      "image": "https://www.lajapathy.com/assets/social/og-lider.jpg",
+      "alt": "Líder product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "slurrpfarm.html",
+      "title": "Slurrpfarm — Product Design Case Study | Lajapathy",
+      "description": "Food product discovery and commerce experiences for Slurrpfarm.",
+      "url": "https://www.lajapathy.com/slurrpfarm.html",
+      "image": "https://www.lajapathy.com/assets/social/og-slurrpfarm.jpg",
+      "alt": "Slurrpfarm product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "gocart.html",
+      "title": "GoCart — Product Design Case Study | Lajapathy",
+      "description": "Product discovery and checkout journeys for GoCart.",
+      "url": "https://www.lajapathy.com/gocart.html",
+      "image": "https://www.lajapathy.com/assets/social/og-gocart.jpg",
+      "alt": "GoCart product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "dailymart.html",
+      "title": "DailyMart — Product Design Case Study | Lajapathy",
+      "description": "Grocery discovery and ordering journeys for DailyMart.",
+      "url": "https://www.lajapathy.com/dailymart.html",
+      "image": "https://www.lajapathy.com/assets/social/og-dailymart.jpg",
+      "alt": "DailyMart product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "quickcart.html",
+      "title": "Quickcart — Product Design Case Study | Lajapathy",
+      "description": "Everyday shopping and commerce journeys for Quickcart.",
+      "url": "https://www.lajapathy.com/quickcart.html",
+      "image": "https://www.lajapathy.com/assets/social/og-quickcart.jpg",
+      "alt": "Quickcart product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "mydoc.html",
+      "title": "MyDoc — Product Design Case Study | Lajapathy",
+      "description": "Care discovery and patient journeys for the MyDoc healthcare product.",
+      "url": "https://www.lajapathy.com/mydoc.html",
+      "image": "https://www.lajapathy.com/assets/social/og-mydoc.jpg",
+      "alt": "MyDoc product mockup with LP branding and healthcare case-study title"
+    },
+    {
+      "file": "dronline.html",
+      "title": "DrOnline — Product Design Case Study | Lajapathy",
+      "description": "Digital care and consultation journeys for DrOnline.",
+      "url": "https://www.lajapathy.com/dronline.html",
+      "image": "https://www.lajapathy.com/assets/social/og-dronline.jpg",
+      "alt": "DrOnline product mockup with LP branding and healthcare case-study title"
+    },
+    {
+      "file": "Leadership.html",
+      "title": "Design Leadership — Enterprise Products & Team Alignment | Lajapathy",
+      "description": "Explore design leadership case studies in commerce and fintech, connecting team alignment, scalable experience systems and measurable product outcomes.",
+      "url": "https://www.lajapathy.com/Leadership.html",
+      "image": "https://www.lajapathy.com/assets/social/og-portfolio.jpg",
+      "alt": "Lajapathy product design portfolio featuring E-Wallet, Norton and FluxCRM"
+    },
+    {
+      "file": "process.html",
+      "title": "Product Design Process — Systems Thinking, UX Strategy & Execution | Lajapathy",
+      "description": "Explore Lajapathy’s product design process: discovery, strategy, iterative design and execution, with engineering collaboration and evidence-led decisions.",
+      "url": "https://www.lajapathy.com/process.html",
+      "image": "https://www.lajapathy.com/assets/social/og-about.jpg",
+      "alt": "LP About card with an orange-rimmed planet and systems, products and teams headline"
+    },
+    {
+      "file": "privacy.html",
+      "title": "Privacy Policy | Lajapathy",
+      "description": "Read how lajapathy.com collects, uses and protects personal information, including cookies, analytics, data retention and your privacy rights.",
+      "url": "https://www.lajapathy.com/privacy.html",
+      "image": "https://www.lajapathy.com/assets/social/og-home.jpg",
+      "alt": "Lajapathy portrait with LP branding and product design leadership headline"
+    },
+    {
+      "file": "terms.html",
+      "title": "Terms & Conditions | Lajapathy",
+      "description": "Read the terms for using lajapathy.com, including portfolio content, intellectual property, external links and professional disclaimers.",
+      "url": "https://www.lajapathy.com/terms.html",
+      "image": "https://www.lajapathy.com/assets/social/og-home.jpg",
+      "alt": "Lajapathy portrait with LP branding and product design leadership headline"
+    },
+    {
+      "file": "ewallet_leadership.html",
+      "title": "E-Wallet — Design Leadership Case Study | Lajapathy",
+      "description": "Design leadership and product experience work for the E-Wallet fintech platform.",
+      "url": "https://www.lajapathy.com/ewallet_leadership.html",
+      "image": "https://www.lajapathy.com/assets/social/og-ewallet.jpg",
+      "alt": "E-Wallet product mockup with LP branding and fintech case-study title"
+    },
+    {
+      "file": "eddiebauer_leadership.html",
+      "title": "Eddie Bauer — Design Leadership Case Study | Lajapathy",
+      "description": "Design leadership and commerce experience work for Eddie Bauer.",
+      "url": "https://www.lajapathy.com/eddiebauer_leadership.html",
+      "image": "https://www.lajapathy.com/assets/social/og-eddiebauer.jpg",
+      "alt": "Eddie Bauer product mockup with LP branding and commerce case-study title"
+    }
+  ],
+  "excluded": {
+    "404.html": "Error utility disallowed in robots.txt; existing metadata retained.",
+    "docs/": "Local QA/review artifacts, outside the production public-page audit."
+  },
+  "logo": "assets/images/logo/white-logo-reeni.png",
+  "portrait": "lajapathy-hero-new.png",
+  "fonts": "Existing Poppins 700 and Montserrat 400/600 downloaded from the same Google Fonts family for local build use only."
+}

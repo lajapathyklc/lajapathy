@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-<link href="assets/css/vendor/fontawesome.css" rel="stylesheet"/>
+<link href="assets/css/vendor/fontawesome.min.css" rel="stylesheet"/>
 <link href="assets/css/vendor/animate.min.css" rel="stylesheet"/>
 <link href="assets/css/vendor/bootstrap.min.css" rel="stylesheet"/>
 <!-- custom css -->
@@ -65,43 +65,50 @@
 <link rel="stylesheet" href="assets/css/lp-reduced-motion.css">
 <link rel="stylesheet" href="assets/css/lp-hero-alignment.css?v=shared-guide-20261004">
 <link rel="stylesheet" href="assets/css/contact-hero-scene.css?v=cinematic-20261004">
+<link rel="stylesheet" href="assets/css/lp-contact-concierge.css">
 <link rel="stylesheet" href="assets/css/lp-cinematic-footer.css?v=responsive-20261008">
 
 <!-- Page-specific search and social metadata -->
 <title>Contact Lajapathy Kodiraman — Product Design Leader</title>
 <meta name="description" content="Connect with Lajapathy for product design discussions, enterprise UX, design leadership and collaboration on scalable, outcome-driven products.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Static social sharing metadata; generated from scripts/social-cards/manifest.json. -->
 <link rel="canonical" href="https://www.lajapathy.com/contact.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact Lajapathy Kodiraman — Product Design Leader">
-<meta property="og:description" content="Connect with Lajapathy for product design discussions, enterprise UX, design leadership and collaboration on scalable, outcome-driven products.">
+<meta property="og:title" content="Start a Conversation — Lajapathy">
+<meta property="og:description" content="Let&#x27;s discuss product design leadership, UX transformation, design systems or product strategy.">
 <meta property="og:url" content="https://www.lajapathy.com/contact.html">
 <meta property="og:site_name" content="Lajapathy">
-<meta property="og:image" content="https://www.lajapathy.com/assets/thumbnail.jpg">
+<meta property="og:image" content="https://www.lajapathy.com/assets/social/og-contact.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Lajapathy — Product Design Leader">
+<meta property="og:image:alt" content="LP Contact card with a cinematic landscape and Let’s Build What’s Next headline">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact Lajapathy Kodiraman — Product Design Leader">
-<meta name="twitter:description" content="Connect with Lajapathy for product design discussions, enterprise UX, design leadership and collaboration on scalable, outcome-driven products.">
-<meta name="twitter:image" content="https://www.lajapathy.com/assets/thumbnail.jpg">
-<meta name="twitter:image:alt" content="Lajapathy — Product Design Leader">
+<meta name="twitter:title" content="Start a Conversation — Lajapathy">
+<meta name="twitter:description" content="Let&#x27;s discuss product design leadership, UX transformation, design systems or product strategy.">
+<meta name="twitter:image" content="https://www.lajapathy.com/assets/social/og-contact.jpg">
+<meta name="twitter:image:alt" content="LP Contact card with a cinematic landscape and Let’s Build What’s Next headline">
+
 </head>
-<script>
-    // ...existing code...
-    document.addEventListener('scroll', function () {
-        var scrollTop = window.scrollY || window.pageYOffset;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var scrollPercent = docHeight > 0 ? (scrollTop / docHeight) : 0;
-        // 87% (bottom) when at top, 0% (top) when at bottom
-        var translateY = 87 - (87 * scrollPercent);
-        var water = document.querySelectorAll('.scrollToTop .water');
-        water.forEach(function (w) {
-            w.style.transform = 'translate(0px, ' + translateY + '%)';
-        });
-    });
-</script>
-<script src="https://www.noupe.com/embed/01995bdd01597da5b1195cbbd8e283fd0a1a.js" defer></script>
+
+<script src="assets/js/lp-chat-loader.js?v=performance-20261011-09b" defer></script>
 <!-- Add this CSS in a <style> tag in your <head> section -->
 <style>
     /* Desktop Dropdown Styles */
@@ -490,8 +497,26 @@
 <div class="col-lg-7">
 <div class="contact-inner">
 <div class="contact-form">
-<div aria-live="polite" class="error" id="form-messages" role="status"></div>
+<div class="lp-contact-conversation">
 <form action="/api/contact" class="tmp-dynamic-form" id="contact-form" method="POST">
+<div class="lp-contact-topic">
+<label for="contact-topic">WHAT WOULD YOU LIKE TO DISCUSS?</label>
+<div class="lp-contact-topic__select">
+<select id="contact-topic" name="subject">
+<option value="">Choose a conversation topic</option>
+<option>Product Design Leadership</option>
+<option>UX / Product Transformation</option>
+<option>Design Systems</option>
+<option>Product Strategy</option>
+<option>Something Else</option>
+</select>
+</div>
+<div class="lp-contact-topic__custom" hidden>
+<label for="contact-custom-subject">Tell me what you'd like to discuss</label>
+<input class="input-field" id="contact-custom-subject" type="text" placeholder="Tell me what you'd like to discuss"/>
+</div>
+</div>
+<div aria-live="polite" id="form-messages" role="status"></div>
 <div class="contact-form-wrapper row">
 <div class="col-lg-6">
 <div class="form-group">
@@ -505,16 +530,10 @@
 <input autocomplete="tel" class="input-field" id="contact-phone" name="phone" placeholder="Phone Number (optional)" type="tel"/>
 </div>
 </div>
-<div class="col-lg-6">
+<div class="col-lg-12">
 <div class="form-group">
 <label class="visually-hidden" for="contact-email">Your email</label>
 <input autocomplete="email" class="input-field" id="contact-email" name="email" placeholder="Your Email" required="" type="email"/>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="form-group">
-<label class="visually-hidden" for="subject">Subject</label>
-<input class="input-field" id="subject" name="subject" placeholder="Subject" type="text"/>
 </div>
 </div>
 <div class="col-lg-12">
@@ -529,7 +548,7 @@
 </div>
 <div class="col-lg-12">
 <div class="tmp-button-here">
-<button class="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon">
+<button type="submit" class="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon">
 <span class="icon-reverse-wrapper">
 <span class="btn-text">Discuss Your
                                                                             Product</span>
@@ -544,81 +563,14 @@
 </div>
 </div>
 </form>
-<div id="mail-success-popup" role="dialog" aria-modal="true" aria-label="Message sent successfully" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);">
-<div style="background:#272727; padding:2rem 2.5rem; border-radius:10px; max-width:350px; margin:10% auto; box-shadow:0 2px 16px rgba(0,0,0,0.2); text-align:center; position:relative;">
-<span style="font-size:4rem; color:#FF9800; display:block; margin-bottom:1rem;">✓</span>
-<div style="font-size:2rem; margin-bottom:2rem;">Message
-                                                            sent
-                                                            successfully!</div>
-<button type="button" style="background:#FF9800; color:#fff; border:none; border-radius:5px; padding:0.5rem 1.5rem; font-size:2rem; cursor:pointer; min-height:44px;">OK</button>
 </div>
+<div class="lp-contact-success" role="status" aria-live="polite" hidden>
+<p class="lp-contact-success__label"><span aria-hidden="true">✓</span> MESSAGE RECEIVED</p>
+<h3 tabindex="-1">Thanks for reaching out.</h3>
+<p>I’ll review the context and get back to you shortly.</p>
+<a href="Casestudies.html">EXPLORE SELECTED WORK <span aria-hidden="true">→</span></a>
 </div>
-<script>
-    (function () {
-        var form = document.getElementById('contact-form');
-        var status = document.getElementById('form-messages');
-        var popup = document.getElementById('mail-success-popup');
-        if (!form) return;
-
-        var submitBtn = form.querySelector('button');
-        var FALLBACK = 'info@lajapathy.com';
-        var popupButton = popup && popup.querySelector('button');
-        function closeSuccess() {
-            popup.style.display = 'none';
-            if (submitBtn) submitBtn.focus();
-        }
-        if (popupButton) popupButton.addEventListener('click', closeSuccess);
-        if (popup) popup.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') { e.preventDefault(); closeSuccess(); }
-            if (e.key === 'Tab') { e.preventDefault(); if (popupButton) popupButton.focus(); }
-        });
-
-        function say(msg, isError) {
-            if (!status) return;
-            status.textContent = msg;
-            status.style.color = isError ? '#ff6b6b' : '#7ddf87';
-        }
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
-
-            var data = new FormData(form);
-            var payload = {};
-            data.forEach(function (v, k) { payload[k] = v; });
-
-            if (submitBtn) submitBtn.disabled = true;
-            say('Sending your message…', false);
-
-            fetch(form.getAttribute('action'), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-                .then(function (res) {
-                    return res.json().catch(function () { return { ok: res.ok }; })
-                        .then(function (body) { return { ok: res.ok && body.ok !== false, body: body }; });
-                })
-                .then(function (result) {
-                    if (result.ok) {
-                        form.reset();
-                        say('', false);
-                        if (popup) { popup.style.display = 'block'; if (popupButton) popupButton.focus(); }
-                    } else {
-                        var msg = (result.body && result.body.error) ||
-                            'Something went wrong. Please email ' + FALLBACK + ' directly.';
-                        say(msg, true);
-                    }
-                })
-                .catch(function () {
-                    say('Could not reach the server. Please email ' + FALLBACK + ' directly.', true);
-                })
-                .then(function () {
-                    if (submitBtn) submitBtn.disabled = false;
-                });
-        });
-    })();
-                                                </script>
+<script src="assets/js/lp-contact-concierge.js" defer></script>
 </div>
 </div>
 </div>
@@ -722,7 +674,7 @@
 <!-- custom Js -->
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/lp-mobile-menu.js?v=production-qa-20261008" defer></script>
-<script src="assets/js/lp-footer-backtop.js?v=36" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
+<script src="assets/js/lp-footer-backtop.js?v=performance-20261011-09b" defer></script><script src="assets/js/lp-reduced-motion.js" defer></script>
 <style>
 /* Reuse the LP space atlas behind the globe; reserve darkness for the copy. */
 .contact-hero .contact-universe::before {
@@ -739,7 +691,7 @@
 </style>
 <script type="module" onerror="document.querySelector('.contact-universe').dataset.scene='fallback'">
 // Contact-only material refinements; shared scene physics and cadence stay canonical.
-import {THREE} from './assets/js/hero-3d-core.js';
+import {THREE} from './assets/js/hero-3d-core.js?v=performance-20261011-09b';
 const baseCompile=THREE.ShaderMaterial.prototype.onBeforeCompile;
 THREE.ShaderMaterial.prototype.onBeforeCompile=function(shader,renderer){
     baseCompile.call(this,shader,renderer);
@@ -782,7 +734,7 @@ try{
     const spaceAtlas=new Image();
     spaceAtlas.src='assets/images/hero-cinematic/space.webp';
     await spaceAtlas.decode();
-    const {contactHeroConfig:config}=await import('./assets/js/contact-hero-scene.js?v=reduced-planet-motion-20261007');
+    const {contactHeroConfig:config}=await import('./assets/js/contact-hero-scene.js?v=performance-20261011-09b');
     // The scene awaits its geology atlas before constructing these materials.
     Object.assign(config,{relief:2.15,cloudSpeed:1.012,hazeSpeed:1.020,
         atmosphereIntensity:.47,outerAtmosphereIntensity:.075,
@@ -793,6 +745,6 @@ try{
     console.error('Contact hero polish:',error);
 }
 </script>
-<script type="module" src="assets/js/lp-cinematic-footer.js?v=reduced-planet-motion-20261007"></script>
+<script type="module" src="assets/js/lp-cinematic-footer.js?v=performance-20261011-09b"></script>
 </body>
 </html>

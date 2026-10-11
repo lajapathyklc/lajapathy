@@ -1,6 +1,6 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js';
-import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
-import {createHeroMeteors} from './lp-meteor-system.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=performance-20261011-09b';
+import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js?v=performance-20261011-09b';
+import {createHeroMeteors} from './lp-meteor-system.js?v=performance-20261011-09b';
 import {CASE_STUDY_WORLDS,validateCaseStudyWorlds,seedHash} from './lp-case-study-worlds.js';
 
 async function mount(root){

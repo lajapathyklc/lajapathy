@@ -114,3 +114,11 @@
 /* Approved composition locked: only arc visual weight and label rhythm. */
 .about-page-hero.about-journey-hero .orbit-arc { opacity:.42; }
 .about-page-hero.about-journey-hero .about-orbit li span { margin-top:6px; }
+
+/* Desktop orbit shares the projected planet center; labels stay node-local. */
+@media(min-width:901px) {
+ .about-page-hero.about-journey-hero .about-orbit li { margin:0; }
+ .about-page-hero.about-journey-hero .about-orbit {
+  transform:translateY(var(--planet-y));
+ }
+}

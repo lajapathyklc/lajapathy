@@ -1331,3 +1331,13 @@
  #service .service-para,
  #problem-spaces .my-skill-card p { max-width:42ch; }
 }
+
+/* Narrative type refinement; cinematic heroes and evidence retain their scale. */
+:is(#service, #problem-spaces, #execution-approach) .section-head .title {
+    text-wrap: balance;
+}
+:is(.impact-scene, #service, #problem-spaces, #execution-approach) .section-head .description {
+    max-width: 62ch;
+    margin-inline: auto;
+    text-wrap: pretty;
+}

@@ -1,6 +1,6 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
-import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
-import {createHeroMeteors} from './lp-meteor-system.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=performance-20261011-09b';
+import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js?v=performance-20261011-09b';
+import {createHeroMeteors} from './lp-meteor-system.js?v=performance-20261011-09b';
 
 // Contact's material treatment, applied to instances so no page hero is modified.
 function polishPlanet({group,planet,air,outerAir,sun}){

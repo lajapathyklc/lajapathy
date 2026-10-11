@@ -1,6 +1,6 @@
-import {THREE, geologyGLSL, createHeroRenderer, loadGeology, heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
-import {createSafeOrbits} from './portfolio-orbit-safety.js';
-import {createHeroMeteors} from './lp-meteor-system.js?v=home-cadence-20261004';
+import {THREE, geologyGLSL, createHeroRenderer, loadGeology, heroLifecycle} from './hero-3d-core.js?v=performance-20261011-09b';
+import {createSafeOrbits} from './portfolio-orbit-safety.js?v=performance-20261011-09b';
+import {createHeroMeteors} from './lp-meteor-system.js?v=performance-20261011-09b';
 
 export const portfolioHeroConfig = {
   rotationDuration:250, maxDPR:1.65, center:{x:.78,y:.48}, planetRadius:.60, moonRadius:.080,

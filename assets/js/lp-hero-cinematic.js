@@ -1,5 +1,7 @@
 
 (() => {
+  // Allow the critical HTML/raster composition to paint before shader compilation.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
   const HERO_DEBUG = true;
   const root=document.getElementById('home');
   if(!root)return;
@@ -9,7 +11,9 @@
   let w=1,h=1,meteors=[],particles=[],impacts=[],spawnCount=0,running=true,visible=true,last=0,elapsed=0,planetMotionTime=0,cloudMotionTime=0,ambientMotionTime=0,next=.25,raf=0;
   const random=(a,b)=>a+Math.random()*(b-a),clamp=v=>Number.isFinite(v)?Math.max(0,Math.min(1,v)):0;
   const planetConfig={previewControls:HERO_DEBUG,rotationDuration:200,centerX:.82,centerY:.55,sunX:.965,sunY:.21,light:[.44,.804,-.40],relief:4.1,displacement:.0032,atmosphere:.52,cloudOpacity:.23,cloudRotationMultiplier:1.012,highHazeRotationMultiplier:1.022,lavaIntensity:.38,plumeDensity:.16,nebulaIntensity:.38,maxDPR:1.25,meteorEnabled:true};
-  let renderScale=Math.min(window.devicePixelRatio||1,planetConfig.maxDPR),frameCost=16.7,qualityFrames=0,parallaxX=0,parallaxY=0;
+  const constrained=!!navigator.connection?.saveData||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2)||(navigator.deviceMemory>0&&navigator.deviceMemory<=2);
+  root.dataset.quality=constrained?'constrained':((navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=4)||(navigator.deviceMemory>0&&navigator.deviceMemory<=4))?'standard':'high';
+  let renderScale=Math.min(window.devicePixelRatio||1,planetConfig.maxDPR,constrained?1:2),frameCost=16.7,qualityFrames=0,parallaxX=0,parallaxY=0;
   function planetPlacement(){
     // Frame the planet behind the lower portrait chapter on phones. Rendering,
     // shaders, DPR limits and the animation lifecycle stay shared with desktop.
@@ -214,7 +218,7 @@ void main(){
     const uniforms=Object.fromEntries(['pixelSize','glowPhase','view','center','sun','radius','turns','texel','sunDirection','relief','atmosphere','cloudOpacity','lavaIntensity','displacement','plumeDensity','cloudTurns'].map(k=>[k,gl.getUniformLocation(program,k)]));
     const texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
     const anis=gl.getExtension('EXT_texture_filter_anisotropic');if(anis)gl.texParameterf(gl.TEXTURE_2D,anis.TEXTURE_MAX_ANISOTROPY_EXT,Math.min(8,gl.getParameter(anis.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
-    gpu={program,uniforms,texture,ready:false};
+    gpu={program,uniforms,texture,buffer,ready:false};
   }
   function drawPlanetGPU(time,ambientTime,cloudTime){
     if(!gpu||!gpu.ready)return;
@@ -227,11 +231,12 @@ void main(){
   initPlanetGPU();
   const surfaceImage=new Image();
   surfaceImage.onload=()=>{
+    if(root.dataset.webgl==='fallback')return;
     if(gl){let upload=surfaceImage;if(w<600){upload=document.createElement('canvas');upload.width=2048;upload.height=1024;upload.getContext('2d').drawImage(surfaceImage,0,0,2048,1024);}gpu.textureWidth=upload.width||surfaceImage.naturalWidth;gpu.textureHeight=upload.height||surfaceImage.naturalHeight;gl.bindTexture(gl.TEXTURE_2D,gpu.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,upload);gl.generateMipmap(gl.TEXTURE_2D);gpu.ready=true;surface=true;}
     else{const t=document.createElement('canvas');t.width=Math.min(1024,surfaceImage.naturalWidth);t.height=Math.round(t.width*surfaceImage.naturalHeight/surfaceImage.naturalWidth);const c=t.getContext('2d');c.drawImage(surfaceImage,0,0,t.width,t.height);surface=c.getImageData(0,0,t.width,t.height).data;surfaceWidth=t.width;surfaceHeight=t.height;}
     drawPlanet(planetMotionTime,true);
   };
-  surfaceImage.src=root.querySelector('.terrain-map').src;
+  surfaceImage.src=constrained?'assets/images/hero-cinematic/geology-2k.webp':root.querySelector('.terrain-map').src;
   if(!gl)for(let y=0;y<512;y++)for(let x=0;x<512;x++){
     const nx=(x-255.5)/254,ny=-(y-255.5)/254,q=nx*nx+ny*ny;if(q>1)continue;
     const nz=Math.sqrt(1-q),light=Math.max(0,nx*.44+ny*.804-nz*.40);
@@ -550,10 +555,15 @@ void main(){
   function sync(){pause.textContent=running?'Pause':'Play';pause.setAttribute('aria-pressed',String(!running));}
   replay.addEventListener('click',()=>{if(reduced.matches)return;meteors=[];particles=[];impacts=[];spawn(1,'impact');spawn(0,'flyby');next=elapsed+.85;running=true;last=0;sync();start();});
   pause.addEventListener('click',()=>{running=!running;last=0;sync();start();});
-  function visibility(){last=0;start();}document.addEventListener('visibilitychange',visibility);
-  const io=new IntersectionObserver(e=>{visible=e[0].isIntersecting;last=0;start();});io.observe(stage);
+  function visibility(){last=0;if(document.hidden){cancelAnimationFrame(raf);raf=0;}else start();}document.addEventListener('visibilitychange',visibility);
+  const io=new IntersectionObserver(e=>{visible=e[0].isIntersecting;last=0;if(!visible){cancelAnimationFrame(raf);raf=0;}start();});io.observe(stage);
   reduced.addEventListener('change',()=>{meteors=[];particles=[];impacts=[];last=0;scrollParallax();start();});
   function scrollParallax(){const y=reduced.matches?0:Math.max(-18,Math.min(18,-stage.getBoundingClientRect().top*.065));stage.style.setProperty('--mountain-y',y+'px');}
   window.addEventListener('scroll',scrollParallax,{passive:true});
+  function release(){running=false;cancelAnimationFrame(raf);raf=0;ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('scroll',scrollParallax);surfaceImage.onload=null;if(gl&&gpu){gl.deleteTexture(gpu.texture);gl.deleteBuffer(gpu.buffer);gl.deleteProgram(gpu.program);gpu=null;}}
+  planetCanvas.addEventListener('webglcontextlost',event=>{event.preventDefault();root.dataset.webgl='fallback';release();});
+  window.addEventListener('pagehide',event=>{cancelAnimationFrame(raf);raf=0;if(!event.persisted)release();});
+  window.addEventListener('pageshow',()=>{last=0;start();});
   sync();resize();start();
+  }));
 })();

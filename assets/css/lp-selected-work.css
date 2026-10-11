@@ -5,7 +5,7 @@
 .selected-work#portfolio { background:#000!important; box-shadow:none; }
 .selected-work :is(.selected-work-container,.selected-work-intro,.selected-work-tabs,.selected-work-grid,.selected-work-end) { background:transparent; box-shadow:none; }
 .selected-work .selected-work-intro { margin-bottom:52px; text-align:left; }
-.selected-work .selected-work-eyebrow { display:flex; align-items:center; gap:16px; color:#c3beb8; font-size:12px; letter-spacing:.18em; margin:0 0 26px; }
+.selected-work .selected-work-eyebrow { display:flex; align-items:center; gap:16px; color:#c3beb8; font-size:12px; letter-spacing:.14em; margin:0 0 26px; }
 .selected-work-eyebrow::before { content:""; width:32px; height:1px; background:var(--color-primary); }
 .selected-work h2 { font-size:clamp(38px,4.3vw,66px); line-height:1.08; letter-spacing:-.045em; margin:0 0 24px; font-weight:600; color:#f4f1ed; }
 .selected-work h2 span { color:var(--color-primary); }
@@ -72,10 +72,23 @@
 .selected-work .selected-work-tabs button[aria-selected=true]::after { opacity:1; scale:1 1; }
 .selected-work .selected-work-tabs button:focus-visible { outline:2px solid var(--color-primary); outline-offset:-2px; }
 
+/* Catalogue micro-depth: existing layers move independently; card geometry and copy stay still. */
+.selected-work .work-product,
+.selected-work .work-world,
+.selected-work .work-link-cue > span:last-child {
+ transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+.selected-work .work-project::after {
+ content:""; position:absolute; inset:0; z-index:5; border-radius:inherit;
+ pointer-events:none; opacity:.12;
+ box-shadow:inset 0 1px 0 #ff98005c,inset 0 0 16px #ff98002b;
+ transition:opacity .55s cubic-bezier(.16,1,.3,1);
+}
 @media(hover:hover) and (pointer:fine) {
- .selected-work .work-project:hover { transform:translateY(-6px); border-color:#ff980055; }
- .selected-work .work-project:hover .work-art-frame { transform:scale(calc(var(--product-scale,1) * 1.02)); }
- .selected-work .work-project:hover .work-link-cue > span:last-child { transform:translate(3px,-3px); border-color:#ff980099; }
+ .selected-work .work-project:is(:hover,:has(> .work-project-link:focus-visible)) .work-product { transform:translate3d(0,-5px,0); }
+ .selected-work .work-project:is(:hover,:has(> .work-project-link:focus-visible)) .work-world { transform:translate3d(0,2px,0); }
+ .selected-work .work-project:is(:hover,:has(> .work-project-link:focus-visible)) .work-link-cue > span:last-child { transform:translateX(3px); }
+ .selected-work .work-project:is(:hover,:has(> .work-project-link:focus-visible))::after { opacity:.22; }
 }
 @media(min-width:768px) and (max-width:1199px) {
  .selected-work .work-card--standard { grid-column:span 6; }
@@ -106,11 +119,20 @@
  .selected-work .selected-work-end { padding-top:36px; }
  .selected-work .selected-work-cta { font-size:10px; gap:16px; padding:18px 22px; }
 }
+/* Category motion stays on outer cards; micro-depth stays on their children. */
+.selected-work .selected-work-grid { overflow-anchor:none; }
+.selected-work[aria-busy="true"] .selected-work-grid { pointer-events:none; }
 @media(prefers-reduced-motion:no-preference) {
- .selected-work .work-category-leaving { opacity:0; translate:0 6px; transition:opacity .18s,translate .18s; }
- .selected-work .work-category-entering > .work-project { animation:work-enter .4s cubic-bezier(.2,.7,.3,1) both; animation-delay:var(--work-stagger,0ms); }
+ .selected-work .work-category-leaving > .work-project { animation:work-filter-out 140ms cubic-bezier(.4,0,1,1) both; }
+ .selected-work .work-category-entering > .work-project { animation:work-filter-in 240ms cubic-bezier(.16,1,.3,1) both; animation-delay:min(calc(var(--filter-order,0) * 35ms),90ms); }
  .selected-work .work-revealed { animation:work-enter .75s cubic-bezier(.2,.7,.3,1) both; }
+ @keyframes work-filter-out { from { opacity:1; translate:0 0; } to { opacity:0; translate:0 7px; } }
+ @keyframes work-filter-in { from { opacity:0; translate:0 8px; } to { opacity:1; translate:0 0; } }
  @keyframes work-enter { from { opacity:0; translate:0 12px; } to { opacity:1; translate:0 0; } }
+ @media(max-width:575px) {
+  .selected-work .work-category-leaving > .work-project { animation-duration:100ms; }
+  .selected-work .work-category-entering > .work-project { animation-duration:190ms; animation-delay:min(calc(var(--filter-order,0) * 25ms),75ms); }
+ }
 }
 @media(prefers-reduced-motion:reduce) { .selected-work *, .selected-work *::before,.selected-work *::after { transition:none!important; animation:none!important; transform:none!important; } }
 

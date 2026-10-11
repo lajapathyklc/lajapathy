@@ -1,6 +1,6 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=reduced-planet-motion-20261007';
-import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js';
-import {createHeroMeteors} from './lp-meteor-system.js';
+import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=performance-20261011-09b';
+import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js?v=performance-20261011-09b';
+import {createHeroMeteors} from './lp-meteor-system.js?v=performance-20261011-09b';
 
 // Preserve the source footerbg circle and cover crop; only its rendering becomes live.
 export const contactHeroConfig={
