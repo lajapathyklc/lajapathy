@@ -1,0 +1,20 @@
+{
+  "name": "lp-spacecraft-inspection-stage1",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Isolated local Stage 1 spacecraft inspection studio.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 8790 --strictPort",
+    "inspect": "npm run dev",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 8790 --strictPort"
+  },
+  "dependencies": {
+    "three": "0.181.0"
+  },
+  "devDependencies": {
+    "gltf-validator": "2.0.0-dev.3.10",
+    "vite": "6.4.1"
+  }
+}

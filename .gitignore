@@ -9,3 +9,5 @@ docs/**/*-qa/*.png
 docs/**/*-qa/*.jpg
 docs/production-qa/
 docs/responsive-qa-evidence/
+
+scripts/resume-journey/dist/
