@@ -1,0 +1,7 @@
+/* Keep mobile controls easy to tap without changing desktop layouts. */
+@media(max-width:640px) {
+ .ewallet-phone-gallery .ewallet-gallery-arrow { width:44px; height:44px; min-width:44px; min-height:44px; }
+ .selected-work-tabs button { min-height:44px; padding-top:10px; padding-bottom:10px; }
+ .case-glance-jump,.case-glance-story { min-height:44px; }
+ .ewallet-phone-narrative h3 { white-space:normal; overflow-wrap:break-word; line-height:1.4; }
+}
