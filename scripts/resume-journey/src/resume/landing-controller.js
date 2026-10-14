@@ -18,12 +18,13 @@ export function sampleLanding(elapsed,from=null,to=0){
  const p=THREE.MathUtils.clamp(elapsed/LANDING_DURATION,0,1);
  const end=surfaceAnchor(to).setY(landingHeight);
  const initial=from===null?new THREE.Vector3().fromArray(OPENING_POSITION):surfaceAnchor(from).setY(landingHeight);
- const lifted=initial.clone();if(from!==null)lifted.y+=24;
+ const lifted=initial.clone();lifted.y+=24;
  const overhead=end.clone().add(new THREE.Vector3(0,24,0));
  let position;
  // Vertical clearance first; all transfers cruise above every planet's highest point.
- if(p<.26)position=initial.clone().lerp(lifted,ease((p-.06)/.20));
- else if(p<.70){const u=ease((p-.26)/.44);position=lifted.clone().lerp(overhead,u);position.y+=Math.sin(Math.PI*u)**2*26;}
+ if(from===null&&p<.12)position=initial.clone();
+ else if(p<.30)position=initial.clone().lerp(lifted,ease((p-(from===null?.12:.06))/(from===null?.18:.24)));
+ else if(p<.70){const u=ease((p-.30)/.40);position=lifted.clone().lerp(overhead,u);position.y+=Math.sin(Math.PI*u)**2*26;}
  else if(to===HARD_LANDING_WORLD){
   // A single firm touchdown, then a small upward suspension rebound. Never below the deck.
   position=overhead.clone().lerp(end,ease((p-.70)/.23));
@@ -33,11 +34,12 @@ export function sampleLanding(elapsed,from=null,to=0){
  const routeHeading=Math.atan2(-direction.x,-direction.z),startHeading=from===null?0:JOURNEY_LAYOUT[from].heading;
  const travelHeading=nearAngle(startHeading,routeHeading);
  const heading=mixAngle(THREE.MathUtils.lerp(startHeading,travelHeading,ease((p-.08)/.22)),JOURNEY_LAYOUT[to].heading,ease((p-.58)/.32));
- const quaternion=new THREE.Quaternion().setFromAxisAngle(up,heading);
+ const openingYaw=from===null?THREE.MathUtils.degToRad(28)*(1-ease((p-.12)/.28)):0;
+ const quaternion=new THREE.Quaternion().setFromAxisAngle(up,heading+openingYaw);
  const bank=Math.sign(nearAngle(startHeading,routeHeading)-startHeading)*-.06*Math.sin(Math.PI*ease((p-.22)/.50))**2;
  quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),bank));
- const phase=p===1?'LANDED':p>=.93&&to===HARD_LANDING_WORLD?'FIRM TOUCHDOWN':p<.06?'IGNITION':p<.26?(from===null?'IGNITION':'LIFT OFF'):p<.62?'TRAVEL':p<.70?'APPROACH':p<.96?'DESCENT':'TOUCHDOWN';
- const thrust=p===1?0:p<.12?ease(p/.12):p<.64?.9:.9*(1-ease((p-.64)/.36));
+ const phase=p===1?'LANDED':p>=.93&&to===HARD_LANDING_WORLD?'FIRM TOUCHDOWN':from===null&&p<.12?'ENGINE PREPARATION':from===null&&p<.30?'DEPARTURE':from===null&&p<.52?'ACCELERATION':p<.08?'IGNITION':p<.30?'LIFT OFF':p<.62?'TRAVEL':p<.70?'APPROACH':p<.96?'DESCENT':'TOUCHDOWN';
+ const thrust=p===1?0:from===null&&p<.14?THREE.MathUtils.lerp(.28,1,ease(p/.14)):p<.64?.9:.9*(1-ease((p-.64)/.36));
  return {elapsed:p*LANDING_DURATION,duration:LANDING_DURATION,progress:p,pathProgress:p,position,quaternion,heading,tangent:direction,phase,thrust,speed:p===1?0:1-p,landingState:p===1?'landed':p>.70?'descending':'in-flight'};
 }
 export function sampleCamera(progress,shipPosition,compact=false,from=null,to=0,aspect=1.5){
@@ -58,5 +60,6 @@ export function sampleCamera(progress,shipPosition,compact=false,from=null,to=0,
  target.y+=(compact?1.2:.9)*framing;
  const impact=hardLandingImpact(p,to),jolt=Math.sin((p-.93)*LANDING_DURATION*35)*impact;
  position.y+=jolt*.045;position.addScaledVector(right,jolt*.022);
+ if(from===null){const handoff=ease((p-.20)/.34),openingPosition=shipPosition.clone().add(new THREE.Vector3(compact?9.6:12.8,compact?3.2:3.8,compact?-6.4:-7.4)),openingTarget=shipPosition.clone().add(new THREE.Vector3(0,compact?-.15:-.35,0)),openingRight=new THREE.Vector3().crossVectors(openingTarget.clone().sub(openingPosition).normalize(),up).normalize();openingTarget.addScaledVector(openingRight,compact?-.65:-1.25);position.lerp(openingPosition,1-handoff);target.lerp(openingTarget,1-handoff);}
  return {position,target,fov};
 }

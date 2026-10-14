@@ -1,17 +1,16 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { createEngineExhaust } from './exhaust-journey.js';
+import { createApprovedPropulsion, prepareApprovedSpacecraft } from './approved-spacecraft.js';
 import { createWorldSystem, WORLD_DEFINITIONS } from './world-system.js';
 import { LANDING_DURATION, sampleLanding, sampleCamera, setLandingHeight } from './landing-controller.js';
-import { createLandingGear } from './landing-gear.js';
-import { brandSpacecraft } from './ship-branding.js';
 import { createFlightEnvironment } from './flight-environment.js';
 import { createJourneyAudio } from './resume-journey-audio.js';
 import { CHAPTERS } from './chapters.js';
 import './resume-journey.css';
 
-const MODEL_URL=new URL('../../assets/models/lp-explorer-stage1.glb',import.meta.url).href;
+const MODEL_URL=new URL('../../assets/models/candidate-a-v7-1-delivery.glb',import.meta.url).href;
 const $=selector=>document.querySelector(selector),canvas=$('#journey-canvas'),viewport=$('.journey-viewport'),motionQuery=matchMedia('(prefers-reduced-motion: reduce)');
 const soundToggle=$('#journey-sound'),soundStatus=$('#journey-sound-status');
 const journeyAudio=createJourneyAudio(error=>{
@@ -19,27 +18,57 @@ const journeyAudio=createJourneyAudio(error=>{
  setSoundToggle(false);soundStatus.textContent='Sound unavailable; the journey continues silently.';
 });
 const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(42,1,.1,2000),shipPivot=new THREE.Group(),worlds=createWorldSystem(scene),clock=new THREE.Clock(false),abort=new AbortController(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
-const cameraFill=new THREE.DirectionalLight(0xd5e3ff,1.35);scene.add(cameraFill,cameraFill.target);
+const cameraFill=new THREE.DirectionalLight(0xd5e3ff,2.15),shipRim=new THREE.DirectionalLight(0x9fc9ff,1.75),engineBounce=new THREE.PointLight(0xff7430,0,18,2);scene.add(cameraFill,cameraFill.target,shipRim,shipRim.target,engineBounce);
 scene.background=null;scene.fog=new THREE.FogExp2(0x050609,.0007);shipPivot.name='ResumeJourneyLandingTransform';scene.add(shipPivot);
-let renderer,model,exhaust,gear,branding,environment,environmentTarget,frame=null,lastRender=null,modelStats=null,ready=false,disposed=false,contextLost=false,errorMessage=null,elapsed=0,playback='idle',hoverTime=0,renderedFrames=0,loadedBytes=0,scrollIntent=0,scrollLocked=false,compact=false;
+let renderer,model,exhaust,branding,environment,environmentTarget,frame=null,lastRender=null,modelStats=null,deliveryTimings=null,ready=false,disposed=false,contextLost=false,errorMessage=null,elapsed=0,playback='idle',hoverTime=0,renderedFrames=0,loadedBytes=0,scrollIntent=0,scrollLocked=false,compact=false;
 const errors=[];
-let currentIndex=0,fromIndex=null,startTime=0,lastTelemetry=0,touchStart=null,completedAt=null,openingSpin=0;
-const OPENING_SPIN_RATE=Math.PI*2/40;
+let currentIndex=0,fromIndex=null,startTime=0,lastTelemetry=0,touchStart=null,completedAt=null;
+const inspection={yaw:0,pitch:0,dragging:false,pointerId:null,lastX:0,lastY:0,lastInteraction:-Infinity,moved:false};
+const inspectionYawQuaternion=new THREE.Quaternion(),inspectionPitchQuaternion=new THREE.Quaternion(),launchHandoff=new THREE.Quaternion();
+const openingDisplayQuaternion=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),THREE.MathUtils.degToRad(28));
+let hasLaunchHandoff=false,openingFrame=null,launchCamera=null,hullRadius=3.2;
+function fitOpening(){
+ const r=viewport.getBoundingClientRect(),brand=$('.journey-brand').getBoundingClientRect(),cta=$('#planet-trigger').getBoundingClientRect();
+ const top=Math.max(brand.bottom-r.top+24,96),bottom=Math.max(top+80,cta.top-r.top-28),left=24,right=r.width-24;
+ const fov=38,half=Math.tan(THREE.MathUtils.degToRad(fov/2));
+ const usable=Math.min((right-left)/r.width*camera.aspect,(bottom-top)/r.height);
+ const distance=hullRadius/(Math.max(.15,usable)*half*.78)+hullRadius*.3;
+ openingFrame={safe:{left,right,top,bottom},distance,fov,offsetX:r.width/2-(left+right)/2,offsetY:r.height/2-(top+bottom)/2,width:r.width,height:r.height};
+}
+function projectedHull(){
+ if(!model)return null;const box=spacecraftBounds(),min=[Infinity,Infinity],max=[-Infinity,-Infinity];
+ for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const v=new THREE.Vector3(x,y,z).project(camera),px=(v.x+1)*viewport.clientWidth/2,py=(1-v.y)*viewport.clientHeight/2;min[0]=Math.min(min[0],px);min[1]=Math.min(min[1],py);max[0]=Math.max(max[0],px);max[1]=Math.max(max[1],py);}
+ return {min,max,center:[(min[0]+max[0])/2,(min[1]+max[1])/2],safe:openingFrame?.safe};
+}
 
 
 function state(){return sampleLanding(elapsed,fromIndex,currentIndex);}
 function openingShot(){return fromIndex===null&&playback==='idle';}
-function openingWeight(){return fromIndex===null?1-THREE.MathUtils.smootherstep(state().progress,0,.30):0;}
+// Hold the inspect pose during engine preparation, then ease into departure.
+function launchBlend(progress){return THREE.MathUtils.smootherstep(progress,.12,.40);}
+// A 16-second attitude cycle stabilizes the opening without translating the hull.
+function idleAttitude(){return motionQuery.matches?0:Math.sin(hoverTime*Math.PI/8);}
+function idleThrust(){return .28+(motionQuery.matches?0:.016*idleAttitude());}
 function isBusy(){return playback==='playing'||playback==='paused';}
 function applyPose(){
  const s=state();shipPivot.position.copy(s.position);shipPivot.quaternion.copy(s.quaternion);
- if(!motionQuery.matches){const fade=openingWeight(),spin=openingShot()?hoverTime*OPENING_SPIN_RATE:openingSpin*fade;shipPivot.position.y+=Math.sin(hoverTime*.8)*.035*fade;shipPivot.rotateY(spin);shipPivot.rotateZ(Math.sin(hoverTime*.55)*.003*fade);}
- gear?.update(s.progress,fromIndex,playback);shipPivot.updateMatrixWorld(true);
+ if(openingShot()){
+  shipPivot.quaternion.copy(openingDisplayQuaternion);
+  inspectionYawQuaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),inspection.yaw);
+  inspectionPitchQuaternion.setFromAxisAngle(new THREE.Vector3(1,0,0),inspection.pitch);
+  shipPivot.quaternion.premultiply(inspectionYawQuaternion).multiply(inspectionPitchQuaternion);
+  if(!motionQuery.matches){shipPivot.rotateX(THREE.MathUtils.degToRad(1.25)*idleAttitude());shipPivot.rotateZ(THREE.MathUtils.degToRad(.18)*Math.sin(hoverTime*.29));}
+ }else if(fromIndex===null&&isBusy()&&hasLaunchHandoff&&s.progress<.40){
+  shipPivot.quaternion.slerpQuaternions(launchHandoff,s.quaternion,launchBlend(s.progress));
+ }
+ shipPivot.updateMatrixWorld(true);
 }
 function applyCamera(){
  const s=state(),rig=sampleCamera(s.progress,s.position,compact,fromIndex,currentIndex,camera.aspect);
- if(!motionQuery.matches&&openingWeight()>0){const offset=rig.position.clone().sub(s.position);offset.applyAxisAngle(new THREE.Vector3(0,1,0),Math.sin(hoverTime*.18)*.022*openingWeight());rig.position.copy(s.position).add(offset);}
- camera.position.copy(rig.position);camera.fov=rig.fov;camera.lookAt(rig.target);camera.updateProjectionMatrix();cameraFill.position.copy(camera.position).add(new THREE.Vector3(0,8,0));cameraFill.target.position.copy(s.position);
+ camera.clearViewOffset();
+ if(openingShot()&&openingFrame){const f=openingFrame;rig.position.copy(s.position).add(new THREE.Vector3(.72,.20,-.66).normalize().multiplyScalar(f.distance));rig.target.copy(s.position);rig.fov=f.fov;camera.setViewOffset(f.width,f.height,f.offsetX,f.offsetY,f.width,f.height);}
+ else if(fromIndex===null&&isBusy()&&launchCamera&&s.progress<.40){const k=launchBlend(s.progress),move=s.position.clone().sub(launchCamera.ship);rig.position.lerp(launchCamera.position.clone().add(move),1-k);rig.target.lerp(launchCamera.target.clone().add(move),1-k);rig.fov=THREE.MathUtils.lerp(launchCamera.fov,rig.fov,k);const f=launchCamera.frame;if(f)camera.setViewOffset(f.width,f.height,f.offsetX*(1-k),f.offsetY*(1-k),f.width,f.height);}
+ camera.position.copy(rig.position);camera.fov=rig.fov;camera.lookAt(rig.target);camera.updateProjectionMatrix();cameraFill.position.copy(camera.position).add(new THREE.Vector3(0,8,0));cameraFill.target.position.copy(s.position);shipRim.position.copy(s.position).add(new THREE.Vector3(-10,7,12));shipRim.target.position.copy(s.position);engineBounce.position.copy(s.position).add(new THREE.Vector3(0,1.5,2.5));engineBounce.intensity=playback==='playing'?1.15:openingShot()?.85:.28;
 }
 function statusCopy(){
  const number=String(currentIndex+1).padStart(2,'0');
@@ -47,7 +76,7 @@ function statusCopy(){
  if(playback==='playing')return `${state().phase.toLowerCase()} · ${Math.round(state().progress*100)}%`;
  if(playback==='paused')return 'Flight paused · continue when ready';
  if(motionQuery.matches)return 'Reduced motion · Ignite to reveal the first chapter';
- return 'ENGINES LIVE · READY TO EXPLORE';
+ return 'Drag to inspect. Ignite to begin.';
 }
 function spacecraftBounds(){
  const box=new THREE.Box3();shipPivot.updateMatrixWorld(true);
@@ -58,19 +87,19 @@ function snapshot(){
  const shipBox=model?spacecraftBounds():null,contactY=worlds.landingSite?.contactY;
  return {ready,error:errorMessage,contextLost,prototype:'Resume Journey · Eight Worlds',playback,chapter:currentIndex+1,from:fromIndex===null?null:fromIndex+1,
  flight:{...s,position:s.position.toArray(),quaternion:s.quaternion.toArray(),tangent:s.tangent.toArray(),visibleDuration:LANDING_DURATION,actualDuration:completedAt===null?null:(completedAt-startTime)/1000},
- opening:{configuration:'assembled',assemblySequence:false,brandingDecals:branding?.decals??0},
- effects:{...environment?.parallax,flameTime:exhaust?.time??0,flameThrust:exhaust?.thrust??0,...worlds.effects},landing:{gearType:gear?.type,gearDeployment:gear?.deployment??0,bayDoors:gear?.doorOpen??0,heading:WORLD_DEFINITIONS[CHAPTERS[currentIndex].id].landingHeading,anchor:WORLD_DEFINITIONS[CHAPTERS[currentIndex].id].landingAnchor,platformTop:contactY,shipBounds:shipBox?{min:shipBox.min.toArray(),max:shipBox.max.toArray()}:null,clearance:shipBox?shipBox.min.y-contactY:null},
+ opening:{displayQuaternion:shipPivot.quaternion.toArray(),launchBlend:launchBlend(s.progress),configuration:'assembled',assemblySequence:false,brandingDecals:branding?.decals??0,platformVisible:false,inspectionEnabled:openingShot(),inspectionYaw:inspection.yaw,inspectionPitch:inspection.pitch,idleAttitudeDegrees:1.25*idleAttitude(),idlePosition:shipPivot.position.toArray(),screenBounds:projectedHull()},
+ effects:{...environment?.parallax,flameTime:exhaust?.time??0,flameThrust:exhaust?.thrust??0,...worlds.effects},landing:{gearType:'hull-contact',gearDeployment:0,bayDoors:0,heading:WORLD_DEFINITIONS[CHAPTERS[currentIndex].id].landingHeading,anchor:WORLD_DEFINITIONS[CHAPTERS[currentIndex].id].landingAnchor,platformTop:contactY,shipBounds:shipBox?{min:shipBox.min.toArray(),max:shipBox.max.toArray()}:null,clearance:shipBox?shipBox.min.y-contactY:null},
  camera:{position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),fov:camera.fov,aspect:camera.aspect},
  world:{id:CHAPTERS[currentIndex].id,actual3DGeometry:true,activeDestinations:worlds.planets.length,horizonVisible:!!worlds.active?.visible},
  renderer:renderer?{count:1,dpr:renderer.getPixelRatio(),drawingBuffer:{width:buffer.x,height:buffer.y},calls:lastRender?.calls??null,triangles:lastRender?.triangles??null,frames:renderedFrames}:null,
- lifecycle:{visible:!document.hidden,reducedMotion:motionQuery.matches,compact},errors:[...errors]};
+ delivery:{asset:'candidate-a-v7-1-delivery.glb',bytes:loadedBytes,timings:deliveryTimings},audio:journeyAudio.snapshot(),lifecycle:{visible:!document.hidden,reducedMotion:motionQuery.matches,compact},errors:[...errors]};
 }
 function updateChapter(){
  const c=CHAPTERS[currentIndex],number=String(currentIndex+1).padStart(2,'0');
- $('.chapter-kicker').textContent=`WORLD ${number} / ${c.name.toUpperCase()}`;
+ $('.chapter-kicker').textContent=`PLANET ${number} / ${c.name.toUpperCase()}`;
  const year=$('.chapter-year');year.replaceChildren(document.createTextNode(c.years[0]));
  if(c.years[1])year.append(document.createTextNode(`–${c.years[1]}`));
- $('#chapter-title').textContent=c.title;$('.chapter-story').textContent=c.story;
+ $('#chapter-title').textContent=c.title;$('.chapter-story').textContent=c.story;const closing=$('#chapter-closing');closing.textContent=c.closing||'';closing.hidden=!c.closing;
  const list=$('.chapter-highlights ul');list.replaceChildren();
  for(const [label,text] of c.highlights){const li=document.createElement('li'),span=document.createElement('span');span.textContent=label;li.append(span,document.createTextNode(text));list.append(li);}
  $('#chapter-select').value=String(currentIndex);
@@ -100,18 +129,19 @@ function publish(){
  for(const content of [$('.chapter-panel header'),$('.chapter-highlights')]){const hidden=playback!=='landed'&&!errorMessage;content.inert=hidden;content.setAttribute('aria-hidden',String(hidden));}
  if(motionQuery.matches||performance.now()-lastTelemetry>160){lastTelemetry=performance.now();$('#journey-telemetry').textContent=JSON.stringify(snapshot());}
 }
-// Keep the opening engines at full power; the first departure eases into cruise
-// without restarting ignition. Reduced motion holds a still, fully lit plume.
+// The opening holds a restrained idle. The first departure builds to Boost,
+// then eases into Cruise without restarting the audio or animation loop.
 function updateExhaust(delta,immediate=false){
  if(!exhaust)return;
  const s=state(),burning=openingShot()||playback==='playing';
- const thrust=openingShot()?1:playback==='playing'?(fromIndex===null&&s.progress<.64?1-.1*THREE.MathUtils.smootherstep(s.progress,.12,.30):s.thrust):0;
+ const thrust=openingShot()?idleThrust():playback==='playing'?(fromIndex===null&&s.progress<.14?THREE.MathUtils.lerp(.28,1,THREE.MathUtils.smootherstep(s.progress,0,.14)):s.progress<.62?.72:.72*(1-THREE.MathUtils.smootherstep(s.progress,.62,1))):0;
  exhaust.setVisible(burning);exhaust.setThrust(thrust,immediate);exhaust.update(delta,!motionQuery.matches&&burning);
 }
 function requestFrame(){if(!ready||!renderer||disposed||contextLost||document.hidden||frame!==null)return;if(!clock.running)clock.start();frame=requestAnimationFrame(render);}
 function render(){
  frame=null;if(!ready||disposed||contextLost||document.hidden||!renderer){clock.stop();return;}
  const delta=Math.min(clock.getDelta(),.05),before=playback;hoverTime+=delta;
+ if(openingShot()&&!motionQuery.matches&&!inspection.dragging&&performance.now()-inspection.lastInteraction>2600)inspection.yaw+=delta*.075;
  if(playback==='playing'&&!motionQuery.matches){elapsed=Math.min(LANDING_DURATION,(performance.now()-startTime)/1000);if(elapsed===LANDING_DURATION){playback='landed';completedAt=performance.now();}}
  const s=state();applyPose();applyCamera();environment?.update(camera,s.position,delta,playback==='playing',!motionQuery.matches,renderer.getPixelRatio());
  worlds.update(delta,!motionQuery.matches,s.progress,fromIndex,currentIndex,playback);
@@ -122,7 +152,7 @@ function render(){
 function begin(){
  if(!ready||errorMessage||playback==='playing')return;
  if(playback==='landed'){if(currentIndex<7)navigate(currentIndex+1);return;}
- if(openingShot()&&!motionQuery.matches)openingSpin=hoverTime*OPENING_SPIN_RATE;
+ if(openingShot()){launchHandoff.copy(shipPivot.quaternion);launchCamera={position:camera.position.clone(),target:camera.position.clone().add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(openingFrame?.distance||12)),fov:camera.fov,ship:shipPivot.position.clone(),frame:{...openingFrame}};hasLaunchHandoff=true;inspection.dragging=false;inspection.pointerId=null;canvas.classList.remove('is-inspecting');}
  if(motionQuery.matches){elapsed=LANDING_DURATION;playback='landed';}
  else{playback='playing';completedAt=null;startTime=performance.now()-elapsed*1000;}
  if(journeyAudio.enabled)void journeyAudio.resume();
@@ -136,24 +166,25 @@ function navigate(index){
  worlds.activate(CHAPTERS[index].id);updateChapter();begin();
 }
 function reset(){
- if(!ready)return;journeyAudio.reset();currentIndex=0;fromIndex=null;elapsed=0;completedAt=null;playback='idle';hoverTime=0;openingSpin=0;scrollIntent=0;scrollLocked=false;
- worlds.activate(CHAPTERS[0].id);updateChapter();updateExhaust(0,true);applyPose();applyCamera();publish();requestFrame();
+ if(!ready)return;journeyAudio.reset();currentIndex=0;fromIndex=null;elapsed=0;completedAt=null;playback='idle';hoverTime=0;scrollIntent=0;scrollLocked=false;inspection.yaw=0;inspection.pitch=0;inspection.dragging=false;inspection.pointerId=null;inspection.lastInteraction=-Infinity;hasLaunchHandoff=false;
+ worlds.activate(CHAPTERS[0].id);updateChapter();updateExhaust(0,true);applyPose();publish();resize();requestFrame();
 }
-function resize(){if(!renderer||disposed)return;const{width,height}=viewport.getBoundingClientRect();compact=matchMedia('(max-width: 820px)').matches;renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setSize(Math.max(1,width),Math.max(1,height),false);camera.aspect=Math.max(1,width)/Math.max(1,height);applyCamera();requestFrame();}
-function fail(problem){errorMessage=problem instanceof Error?problem.message:String(problem);errors.push(errorMessage);$('#journey-load').hidden=false;$('#journey-load').classList.add('error');$('#load-title').textContent='The 3D journey is unavailable';$('#load-detail').textContent=`${errorMessage} The Origins chapter remains readable.`;publish();console.error('[LP Resume Journey Phase A2]',problem);}
+function resize(){if(!renderer||disposed)return;const{width,height}=viewport.getBoundingClientRect();compact=matchMedia('(max-width: 820px)').matches;renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setSize(Math.max(1,width),Math.max(1,height),false);camera.aspect=Math.max(1,width)/Math.max(1,height);if(openingShot())fitOpening();
+ // Keep pixel projection offsets at the same normalized position after resizing.
+ if(launchCamera?.frame&&isBusy()){const f=launchCamera.frame;f.offsetX*=width/f.width;f.offsetY*=height/f.height;f.width=width;f.height=height;}
+ applyCamera();requestFrame();}
+function fail(problem){errorMessage=problem instanceof Error?problem.message:String(problem);errors.push(errorMessage);fromIndex=0;currentIndex=0;elapsed=LANDING_DURATION;playback='landed';updateChapter();$('#journey-load').hidden=false;$('#journey-load').classList.add('error');$('#load-title').textContent='The 3D journey is unavailable';$('#load-detail').textContent='The 3D journey could not start. You can still read the Origins chapter below.';publish();console.error('[LP Resume Journey Phase A2]',problem);}
 function disposeTree(root){const geometries=new Set(),materials=new Set(),textures=new Set();root?.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.material)for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);});materials.forEach(material=>{Object.values(material).forEach(value=>{if(value?.isTexture)textures.add(value);});material.dispose();});geometries.forEach(g=>g.dispose());textures.forEach(t=>t.dispose());}
 function loadingStage(text){$('#load-detail').textContent=text;}
-async function init(){try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;renderer.info.autoReset=false;const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();environmentTarget=pmrem.fromScene(room,.04);scene.environment=environmentTarget.texture;scene.environmentIntensity=.42;room.dispose();pmrem.dispose();scene.add(new THREE.HemisphereLight(0x68728b,0x180b06,.34));const key=new THREE.DirectionalLight(0xffa35a,4.8);key.position.set(28,35,-45);const fill=new THREE.DirectionalLight(0x6177a5,1.1);fill.position.set(-35,18,-8);scene.add(key,fill);loadingStage('Loading the star field');environment=await createFlightEnvironment(scene,renderer,viewport);loadingStage('Preparing planet surfaces');await worlds.load(renderer);worlds.activate('origins');worlds.update(0,false,0,null,0,'idle');resize();loadingStage('Loading your spacecraft');const response=await fetch(MODEL_URL,{signal:abort.signal,cache:'no-cache'});if(!response.ok)throw new Error(`Spacecraft request returned HTTP ${response.status}.`);const buffer=await response.arrayBuffer();loadedBytes=buffer.byteLength;if(buffer.byteLength<12||new DataView(buffer).getUint32(0,true)!==0x46546c67)throw new Error('The approved spacecraft is not a valid binary GLB.');const gltf=await new GLTFLoader().parseAsync(buffer,new URL('.',MODEL_URL).href);gltf.scene.updateMatrixWorld(true);model=gltf.scene.getObjectByName('SPACECRAFT_LP_EXPLORER');if(!model)throw new Error('SPACECRAFT_LP_EXPLORER root is missing.');const matrix=model.matrixWorld.clone();model.removeFromParent();matrix.decompose(model.position,model.quaternion,model.scale);const rig=[];model.traverse(node=>{if(node.isCamera||node.isLight)rig.push(node);});rig.forEach(node=>node.removeFromParent());model.updateMatrixWorld(true);const box=new THREE.Box3().setFromObject(model);model.position.sub(box.getCenter(new THREE.Vector3()));model.scale.multiplyScalar(.32);let triangles=0,meshes=0;const materials=new Set();model.traverse(node=>{if(!node.isMesh)return;meshes++;triangles+=(node.geometry.index?.count??node.geometry.attributes.position.count)/3;for(const m of Array.isArray(node.material)?node.material:[node.material])materials.add(m);});modelStats={root:model.name,meshes,triangles,materials:materials.size};shipPivot.add(model);
- // Journey-only gear integrates into hull bays; original spacecraft remains unchanged.
- shipPivot.position.set(0,0,0);shipPivot.quaternion.identity();shipPivot.updateMatrixWorld(true);model.updateMatrixWorld(true);const hull=new THREE.Box3().setFromObject(model),footY=hull.min.y-.42;
- gear=createLandingGear(shipPivot,hull,footY,model);
- setLandingHeight(worlds.landingSite.contactY-footY+.004);
- loadingStage('Preparing spacecraft details');branding=await brandSpacecraft(model,renderer);
- exhaust=createEngineExhaust(model);updateExhaust(0,true);applyPose();
+async function init(){try{const sceneStart=performance.now();if(new URLSearchParams(location.search).has('force-no-webgl'))throw new Error('WebGL is unavailable in this test environment.');renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;renderer.info.autoReset=false;const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();environmentTarget=pmrem.fromScene(room,.04);scene.environment=environmentTarget.texture;scene.environmentIntensity=.42;room.dispose();pmrem.dispose();scene.add(new THREE.HemisphereLight(0x68728b,0x180b06,.34));const key=new THREE.DirectionalLight(0xffa35a,4.8);key.position.set(28,35,-45);const fill=new THREE.DirectionalLight(0x6177a5,1.1);fill.position.set(-35,18,-8);scene.add(key,fill);loadingStage('Preparing your journey through eight planets.');environment=await createFlightEnvironment(scene,renderer,viewport);loadingStage('Preparing your journey through eight planets.');await worlds.load(renderer);worlds.activate('origins');worlds.update(0,false,0,null,0,'idle');resize();loadingStage('Preparing your journey through eight planets.');const downloadStart=performance.now(),response=await fetch(MODEL_URL,{signal:abort.signal,cache:'no-cache'});if(!response.ok)throw new Error(`Spacecraft request returned HTTP ${response.status}.`);const buffer=await response.arrayBuffer(),downloadEnd=performance.now();loadedBytes=buffer.byteLength;if(buffer.byteLength<12||new DataView(buffer).getUint32(0,true)!==0x46546c67)throw new Error('The approved spacecraft is not a valid binary GLB.');loadingStage('Preparing your journey through eight planets.');const parseStart=performance.now(),loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),gltf=await loader.parseAsync(buffer,new URL('.',MODEL_URL).href),parseEnd=performance.now();gltf.scene.updateMatrixWorld(true);const approved=prepareApprovedSpacecraft(gltf.scene);model=approved.root;let triangles=0,meshes=0;const materials=new Set();model.traverse(node=>{if(!node.isMesh)return;meshes++;triangles+=(node.geometry.index?.count??node.geometry.attributes.position.count)/3;for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);});modelStats={root:model.name,meshes,triangles,materials:materials.size,approved:'Candidate A V7.1'};shipPivot.add(model);
+ shipPivot.position.set(0,0,0);shipPivot.quaternion.identity();shipPivot.updateMatrixWorld(true);model.updateMatrixWorld(true);const hull=new THREE.Box3().setFromObject(model),footY=hull.min.y;hullRadius=hull.getBoundingSphere(new THREE.Sphere()).radius;
+ setLandingHeight(worlds.landingSite.contactY-footY+.012);
+ loadingStage('Preparing your journey through eight planets.');branding={decals:model.getObjectByName('LP_HULL_INTEGRATED_LIVERY_PLATE')?1:0};
+ exhaust=createApprovedPropulsion(approved.canonical,approved.nozzles);updateExhaust(0,true);applyPose();
  // Render the opening scene first. Waiting for all hidden worlds through
  // compileAsync can remain pending on some GPU drivers and block Ignite.
- loadingStage('Preparing the opening scene');
- worlds.update(0,false,0,null,currentIndex,'idle');applyPose();updateExhaust(0,true);renderer.render(scene,camera);ready=true;updateChapter();$('#journey-load').hidden=true;publish();requestFrame();dispatchEvent(new CustomEvent('lp-resume-phase-a2-ready',{detail:snapshot()}));}catch(problem){if(problem.name!=='AbortError')fail(problem);}}
+ loadingStage('Preparing your journey through eight planets.');
+ worlds.update(0,false,0,null,currentIndex,'idle');applyPose();updateExhaust(0,true);const textureStart=performance.now();renderer.render(scene,camera);const sceneReady=performance.now();deliveryTimings={downloadMs:downloadEnd-downloadStart,parseMs:parseEnd-parseStart,textureInitializationMs:sceneReady-textureStart,sceneReadyMs:sceneReady-sceneStart};ready=true;updateChapter();$('#journey-load').hidden=true;publish();resize();requestFrame();dispatchEvent(new CustomEvent('lp-resume-phase-a2-ready',{detail:snapshot()}));}catch(problem){if(problem.name!=='AbortError')fail(problem);}}
 
 for(const [index,c] of CHAPTERS.entries()){
  const option=document.createElement('option');option.value=String(index);option.textContent=`${String(index+1).padStart(2,'0')} — ${c.name}`;$('#chapter-select').append(option);
@@ -162,10 +193,22 @@ for(const [index,c] of CHAPTERS.entries()){
 $('#begin-journey').addEventListener('click',begin);$('#planet-trigger').addEventListener('click',begin);$('#reset-journey').addEventListener('click',reset);
 $('#previous-chapter').addEventListener('click',()=>navigate(currentIndex-1));$('#next-chapter').addEventListener('click',()=>navigate(currentIndex+1));$('#chapter-select').addEventListener('change',event=>navigate(Number(event.target.value)));
 canvas.addEventListener('click',event=>{
+ if(inspection.moved){inspection.moved=false;return;}
  if(!ready||isBusy())return;
  const rect=canvas.getBoundingClientRect();pointer.set(((event.clientX-rect.left)/rect.width)*2-1,-((event.clientY-rect.top)/rect.height)*2+1);raycaster.setFromCamera(pointer,camera);
  const hit=raycaster.intersectObjects(worlds.planets.filter(planet=>planet.parent.visible))[0];if(hit)navigate(hit.object.userData.planetIndex);
 });
+canvas.addEventListener('pointerdown',event=>{
+ if(!ready||!openingShot()||event.button!==0)return;
+ inspection.dragging=true;inspection.pointerId=event.pointerId;inspection.lastX=event.clientX;inspection.lastY=event.clientY;inspection.moved=false;inspection.lastInteraction=performance.now();touchStart=null;canvas.setPointerCapture(event.pointerId);canvas.classList.add('is-inspecting');
+});
+canvas.addEventListener('pointermove',event=>{
+ if(!inspection.dragging||event.pointerId!==inspection.pointerId||!openingShot())return;
+ const dx=event.clientX-inspection.lastX,dy=event.clientY-inspection.lastY;inspection.lastX=event.clientX;inspection.lastY=event.clientY;if(Math.abs(dx)+Math.abs(dy)>1)inspection.moved=true;
+ inspection.yaw+=dx*.007;inspection.pitch=THREE.MathUtils.clamp(inspection.pitch+dy*.0035,-.32,.32);inspection.lastInteraction=performance.now();requestFrame();
+});
+function endInspection(event){if(!inspection.dragging||event.pointerId!==inspection.pointerId)return;inspection.dragging=false;inspection.pointerId=null;inspection.lastInteraction=performance.now();canvas.classList.remove('is-inspecting');}
+canvas.addEventListener('pointerup',endInspection);canvas.addEventListener('pointercancel',endInspection);
 function scrollEligible(target,direction=1){return playback==='idle'&&direction>0&&viewport.contains(target)||playback==='landed'&&(compact?(direction>0?window.scrollY+innerHeight>=document.documentElement.scrollHeight-24:window.scrollY<=0&&viewport.contains(target)):viewport.contains(target));}
 function scrollTravel(direction){if(scrollLocked||!ready)return;scrollLocked=true;if(playback==='idle')begin();else if(playback==='landed')navigate(currentIndex+direction);setTimeout(()=>{scrollLocked=false;scrollIntent=0;},800);}
 document.addEventListener('wheel',event=>{

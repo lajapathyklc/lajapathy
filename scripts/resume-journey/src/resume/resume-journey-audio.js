@@ -353,5 +353,5 @@ export function createJourneyAudio(onError = () => {}) {
     master = null;
   }
 
-  return { enable, disable, sync, reset, suspend, resume, dispose, get enabled() { return enabled; } };
+  return { enable, disable, sync, reset, suspend, resume, dispose, snapshot: () => ({ enabled, contextState: context?.state ?? 'uninitialized', buffersLoaded: !!buffers, playback, progress, thrust, ignitionActive: !!ignitionSource, loopActive: !!loopSource, loopStopping, oneShots: oneShots.size }), get enabled() { return enabled; } };
 }

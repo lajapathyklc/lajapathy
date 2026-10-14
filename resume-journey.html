@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="/assets/css/vendor/fontawesome.min.css" />
   <link rel="stylesheet" href="/assets/css/lp-mobile-menu.css?v=responsive-20261008" />
   <title>LP Resume Journey — Eight Planets</title>
-  <script type="module" crossorigin src="/assets/resume-journey/resume-journey-DYWwMP5-.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/resume-journey/resume-journey-DVqjP4jF.css">
+  <script type="module" crossorigin src="/assets/resume-journey/resume-journey-CNv9cxVi.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/resume-journey/resume-journey-DLBP4T58.css">
 </head>
 <body class="journey-opening">
   <header class="site-header">
@@ -66,18 +66,18 @@
   </div>
   <main class="journey-shell" aria-label="LP Resume Journey">
     <section class="journey-viewport" aria-label="Spacecraft approaching the Origins world">
-      <canvas id="journey-canvas" aria-label="3D spacecraft flight to the Origins world"></canvas>
+      <canvas id="journey-canvas" aria-label="3D spacecraft. Drag horizontally or vertically to inspect it before Ignite." tabindex="0"></canvas>
       <div class="journey-brand">
-        <span>LP RESUME JOURNEY</span>
-        <span>EIGHT PLANETS · ONE JOURNEY</span>
+        <span>MY JOURNEY</span>
+        <span>EIGHT PLANETS · ONE STORY</span>
       </div>
       <nav id="planet-waypoints" class="planet-waypoints" aria-label="Choose a planet"></nav>
       <div id="journey-load" class="journey-load" role="status" aria-live="polite">
         <span class="load-orbit" aria-hidden="true"></span>
-        <strong id="load-title">Preparing your spacecraft</strong>
-        <span id="load-detail">Preparing your journey through eight planets</span>
+        <strong id="load-title">Getting your spacecraft ready.</strong>
+        <span id="load-detail">Preparing your journey through eight planets.</span>
       </div>
-      <p id="journey-status" class="journey-status" aria-live="polite">Initial hover · ready for departure</p>
+      <p id="journey-status" class="journey-status" aria-live="polite">Drag to inspect. Ignite to begin.</p>
       <button id="planet-trigger" class="planet-trigger" type="button" disabled>IGNITE</button>
       <button id="journey-sound" class="journey-sound-toggle" type="button" aria-pressed="false">Sound off</button>
       <span id="journey-sound-status" class="journey-sound-status" role="status" aria-live="polite"></span>
@@ -85,18 +85,19 @@
 
     <article class="chapter-panel" aria-labelledby="chapter-title">
       <header>
-        <p class="chapter-kicker">WORLD 01 / ORIGINS</p>
+        <p class="chapter-kicker">PLANET 01 / ORIGINS</p>
         <p class="chapter-year">1984–1992</p>
         <h1 id="chapter-title">Where curiosity begins.</h1>
-        <p class="chapter-story">I was born on 18 August 1984 and began preschool in 1988. In 1992, I was introduced to a 486 PC, DOS and WordStar—my first steps into computing.</p>
+        <p class="chapter-story">Born in 1984, I began preschool in 1988. My first introduction to computing came in 1992, with a 486 PC, DOS and WordStar—the beginning of my curiosity about technology.</p>
+        <p id="chapter-closing" hidden></p>
       </header>
 
       <section class="chapter-highlights" aria-labelledby="highlights-title">
         <h2 id="highlights-title">Chapter highlights</h2>
         <ul>
           <li><span>1984</span>Born</li>
-          <li><span>1988</span>Began preschool</li>
-          <li><span>1992</span>First PC: 486 · DOS · WordStar</li>
+          <li><span>1988</span>Started preschool</li>
+          <li><span>1992</span>First computing experience · 486 PC, DOS &amp; WordStar</li>
         </ul>
       </section>
 
@@ -113,8 +114,8 @@
         <button id="next-chapter" type="button" disabled aria-label="Next chapter">Next</button>
       </nav>
 
-      <p class="phase-note">Select a planet or scroll to continue. Use Previous, Next or the chapter menu to explore all eight worlds.</p>
-      <noscript><p class="fallback">JavaScript is unavailable. I was born on 18 August 1984 and began preschool in 1988. In 1992, I was introduced to a 486 PC, DOS and WordStar—my first steps into computing.</p></noscript>
+      <p class="phase-note">Choose a planet or chapter. Use Previous, Next or scroll to continue.</p>
+      <noscript><p class="fallback">JavaScript is unavailable. Born in 1984, I began preschool in 1988. My first introduction to computing came in 1992, with a 486 PC, DOS and WordStar—the beginning of my curiosity about technology.</p></noscript>
     </article>
   </main>
   <script id="journey-telemetry" type="application/json">{}</script>
