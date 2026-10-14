@@ -15,6 +15,7 @@
     var originalText = buttonText.textContent;
     var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var submitting = false;
+    var enquiry = null;
     var finishWait = function () {};
 
     function wait(duration) {
@@ -89,6 +90,11 @@
         var payload = {};
         new FormData(form).forEach(function (value, key) { payload[key] = value; });
         if (topic.value === 'Something Else') payload.subject = customSubject.value;
+        var fingerprint = JSON.stringify(payload);
+        if (!enquiry || enquiry.fingerprint !== fingerprint) {
+            enquiry = { fingerprint: fingerprint, id: crypto.randomUUID() };
+        }
+        payload.requestId = enquiry.id;
         try {
             var response = await fetch(form.getAttribute('action'), {
                 method: 'POST',
@@ -96,7 +102,7 @@
                 body: JSON.stringify(payload)
             });
             var body = await response.json().catch(function () { return null; });
-            if (response.ok && body && body.ok === true) await showSuccess();
+            if (response.ok && body && body.ok === true) { enquiry = null; await showSuccess(); }
             else if (response.status === 400) showError('invalid');
             else if (response.status === 429) showError('limited');
             else if (response.status === 503) showError('unavailable');

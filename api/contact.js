@@ -10,6 +10,8 @@
 // Passing the visitor's address as reply_to (never as the From header) keeps the
 // sender domain authenticated and makes header injection structurally impossible.
 
+const { createHash } = require('node:crypto');
+
 const MAX = { name: 120, email: 200, subject: 200, phone: 40, message: 5000 };
 
 // Per-instance throttle. Serverless instances are short-lived and not shared, so
@@ -83,6 +85,11 @@ module.exports = async function handler(req, res) {
   const subject = clean(body.subject, MAX.subject);
   const phone = clean(body.phone, MAX.phone);
 
+  const requestId = String(body.requestId || '');
+  if (requestId && !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
+    return res.status(400).json({ ok: false, error: 'Invalid enquiry ID.' });
+  }
+
   const problems = [];
   if (!name) problems.push('name');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) problems.push('email');
@@ -112,10 +119,17 @@ module.exports = async function handler(req, res) {
     message,
   ].filter((l) => l !== null);
 
+  // Bind retry protection to both the enquiry ID and its normalized contents.
+  const sendHeaders = { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' };
+  if (requestId) {
+    sendHeaders['Idempotency-Key'] = 'contact/' + createHash('sha256')
+      .update(JSON.stringify([requestId, from, to, name, email, phone, subject, message])).digest('hex');
+  }
+
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      headers: sendHeaders,
       body: JSON.stringify({
         from,
         to: [to],
