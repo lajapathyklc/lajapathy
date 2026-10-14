@@ -1,0 +1,15 @@
+/* A readable entry point to the existing case-study story. */
+.case-glance-jump { display:inline-flex; align-items:center; gap:12px; margin-top:24px; padding:10px 0; color:#ffad45; font-size:13px; font-weight:600; text-decoration:none; }
+.case-glance-jump:hover,.case-glance-story:hover { color:#fff; }
+.case-glance { width:min(calc(100% - 48px),1258px); margin:42px auto 64px; color:#f4f5f6; scroll-margin-top:120px; }
+.case-glance-heading p { margin:0 0 12px; color:#ffad45; font-size:10px; font-weight:600; letter-spacing:.18em; }
+.case-glance-heading h2 { margin:0 0 24px; font-family:Poppins,Arial,sans-serif; font-size:clamp(25px,3vw,36px); font-weight:600; line-height:1.2; letter-spacing:-.025em; }
+.case-glance-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:0; }
+.case-glance-item { min-width:0; padding:24px; border:1px solid rgba(255,255,255,.13); border-radius:12px; background:linear-gradient(145deg,#13171d,#090c10); }
+.case-glance-item dt { margin:0 0 14px; color:#ffad45; font-size:11px; font-weight:600; letter-spacing:.05em; }
+.case-glance-item dd { margin:0; color:#c5cbd1; font-size:14px; line-height:1.7; overflow-wrap:break-word; }
+.case-glance-story { display:inline-flex; align-items:center; gap:12px; margin-top:22px; padding:8px 0; color:#e6e8eb; font-size:13px; font-weight:600; text-decoration:none; }
+.case-glance-jump:focus-visible,.case-glance-story:focus-visible { outline:2px solid #ffad45; outline-offset:5px; border-radius:3px; }
+#case-details { scroll-margin-top:110px; }
+@media(max-width:1100px) { .case-glance-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:600px) { .case-glance { margin-top:30px; margin-bottom:44px; scroll-margin-top:100px; }.case-glance-grid { grid-template-columns:1fr; gap:10px; }.case-glance-item { padding:20px; }.case-glance-item dt { margin-bottom:8px; } }
