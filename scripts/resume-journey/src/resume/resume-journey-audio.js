@@ -4,8 +4,8 @@ const AUDIO_URLS = {
   touchdown: new URL('../../../../assets/resume-journey/audio/04-touchdown.mp3', import.meta.url).href,
 };
 
-const MASTER_VOLUME = 0.4;
-const VOLUMES = { ignition: 0.45, engine: 0.28, touchdown: 0.4 };
+const MASTER_VOLUME = 0.85;
+const VOLUMES = { ignition: 0.85, engine: 0.65, touchdown: 0.85 };
 const clamp = value => Math.min(1, Math.max(0, value));
 
 export function createJourneyAudio(onError = () => {}) {
@@ -13,7 +13,7 @@ export function createJourneyAudio(onError = () => {}) {
   let master = null;
   let buffersPromise = null;
   let buffers = null;
-  let enabled = false;
+  let enabled = true;
   let disposed = false;
   let operation = 0;
   let playback = 'idle';
@@ -39,7 +39,15 @@ export function createJourneyAudio(onError = () => {}) {
     context = new AudioContextConstructor();
     master = context.createGain();
     master.gain.value = 0;
-    master.connect(context.destination);
+    // Control peaks when ignition, engine and touchdown overlap.
+    const compressor = context.createDynamicsCompressor();
+    compressor.threshold.value = -6;
+    compressor.knee.value = 6;
+    compressor.ratio.value = 12;
+    compressor.attack.value = 0.003;
+    compressor.release.value = 0.2;
+    master.connect(compressor);
+    compressor.connect(context.destination);
   }
 
   async function loadBuffers() {
@@ -102,13 +110,20 @@ export function createJourneyAudio(onError = () => {}) {
     return record;
   }
 
+  function loopAllowed() {
+    return playback === 'idle' || playback === 'playing';
+  }
+
   function engineVolume() {
-    return VOLUMES.engine * clamp(thrust);
+    if (playback === 'idle') return 0.12;
+    // Keep the descent engine audible until the final contact, then cut it cleanly.
+    const landingBurn = progress >= 0.70 ? 0.30 * clamp((1 - progress) / 0.035) : 0;
+    return VOLUMES.engine * Math.max(clamp(thrust), landingBurn);
   }
 
   function updateLoopVolume(fade = 0.2) {
     if (!loopGain || loopStopping) return;
-    const target = enabled && playback === 'playing' ? engineVolume() : 0;
+    const target = enabled && loopAllowed() ? engineVolume() : 0;
     const now = context.currentTime;
     if (lastLoopTarget !== null && Math.abs(target - lastLoopTarget) < 0.015 && now - lastLoopUpdate < 0.15) return;
     lastLoopTarget = target;
@@ -117,9 +132,9 @@ export function createJourneyAudio(onError = () => {}) {
   }
 
   function startLoop(fade = 0.35) {
-    if (!enabled || disposed || playback !== 'playing' || !buffers) return;
+    if (!enabled || disposed || !loopAllowed() || !buffers || context.state !== 'running') return;
     if (loopSource) {
-      if (loopStopping && flightStarted) loopRestartPending = true;
+      if (loopStopping) loopRestartPending = true;
       return;
     }
     const source = context.createBufferSource();
@@ -139,7 +154,7 @@ export function createJourneyAudio(onError = () => {}) {
       gain.disconnect();
       const restart = loopRestartPending;
       loopRestartPending = false;
-      if (restart && enabled && playback === 'playing' && flightStarted) startLoop(0.3);
+      if (restart && enabled && loopAllowed()) startLoop(0.3);
     };
     loopSource = source;
     loopGain = gain;
@@ -198,7 +213,7 @@ export function createJourneyAudio(onError = () => {}) {
           if (loopStopping && flightStarted && !ignitionSource) loopRestartPending = true;
           else updateLoopVolume(0.22);
         }
-        else if (!ignitionSource && !ignitionPending) startLoop(0.35);
+        else startLoop(0.35);
       }
       return;
     }
@@ -215,11 +230,36 @@ export function createJourneyAudio(onError = () => {}) {
       return;
     }
 
+    if (playback === 'idle') {
+      if (enabled && buffers) {
+        if (loopSource) updateLoopVolume(0.25);
+        else startLoop(0.35);
+      }
+      return;
+    }
+
     if (playback === 'paused') {
       if (previousPlayback !== 'paused') {
         stopLoop(0.1);
         stopOneShots(0.08);
       }
+    }
+  }
+
+  async function prepare() {
+    if (disposed || !enabled) return;
+    try {
+      createContext();
+      // Autoplay may remain suspended. Do not wait for a gesture during preload.
+      void context.resume().catch(() => {});
+      await loadBuffers();
+      if (!enabled || disposed) return;
+      ramp(master.gain, MASTER_VOLUME, 0.18);
+      startLoop();
+    } catch (error) {
+      enabled = false;
+      buffersPromise = null;
+      onError(error);
     }
   }
 
@@ -241,8 +281,9 @@ export function createJourneyAudio(onError = () => {}) {
           if (loopStopping && flightStarted && !ignitionSource) loopRestartPending = true;
           else updateLoopVolume(0.25);
         }
-        else if (!ignitionSource) startLoop(0.35);
+        else startLoop(0.35);
       }
+      if (playback === 'idle') startLoop();
       return true;
     } catch (error) {
       enabled = false;
@@ -274,7 +315,7 @@ export function createJourneyAudio(onError = () => {}) {
     thrust = 0;
     if (!context) return;
     master.gain.cancelScheduledValues(context.currentTime);
-    master.gain.setValueAtTime(0, context.currentTime);
+    master.gain.setValueAtTime(enabled ? MASTER_VOLUME : 0, context.currentTime);
     if (loopSource) {
       loopSource.onended = null;
       stopSource(loopSource);
@@ -328,12 +369,13 @@ export function createJourneyAudio(onError = () => {}) {
       await context.resume();
       if (!enabled || disposed) return;
       ramp(master.gain, MASTER_VOLUME, 0.18);
+      if (playback === 'idle') startLoop();
       if (playback === 'playing' && flightStarted) {
         if (ignitionPending && !ignitionPlayed && buffers) {
           ignitionPending = false;
           playIgnition();
         } else if (loopSource && loopStopping && !ignitionSource) loopRestartPending = true;
-        else if (!ignitionSource) startLoop(0.3);
+        else startLoop(0.3);
       }
     } catch (error) {
       enabled = false;
@@ -353,5 +395,5 @@ export function createJourneyAudio(onError = () => {}) {
     master = null;
   }
 
-  return { enable, disable, sync, reset, suspend, resume, dispose, snapshot: () => ({ enabled, contextState: context?.state ?? 'uninitialized', buffersLoaded: !!buffers, playback, progress, thrust, ignitionActive: !!ignitionSource, loopActive: !!loopSource, loopStopping, oneShots: oneShots.size }), get enabled() { return enabled; } };
+  return { prepare, enable, disable, sync, reset, suspend, resume, dispose, snapshot: () => ({ enabled, contextState: context?.state ?? 'uninitialized', buffersLoaded: !!buffers, masterVolume: MASTER_VOLUME, engineGain: loopGain?.gain.value ?? 0, waitingForGesture: enabled && context?.state === 'suspended', playback, progress, thrust, ignitionActive: !!ignitionSource, loopActive: !!loopSource, loopStopping, oneShots: oneShots.size }), get enabled() { return enabled; } };
 }

@@ -246,6 +246,15 @@ soundToggle.addEventListener('click',async()=>{
  if(currentOperation!==soundOperation)return;
  if(!enabled){setSoundToggle(false);soundStatus.textContent='Sound unavailable; the journey continues silently.';}
 });
+// Sound is selected by default; the first trusted interaction unlocks browser audio.
+setSoundToggle(true);
+void journeyAudio.prepare();
+function unlockJourneySound(event){
+ if(!event.isTrusted||event.target.closest('#journey-sound')||!journeyAudio.enabled||document.hidden)return;
+ if(journeyAudio.snapshot().contextState!=='running')void journeyAudio.enable();
+}
+document.addEventListener('pointerdown',unlockJourneySound,{capture:true});
+document.addEventListener('keydown',unlockJourneySound,{capture:true});
 function closeSiteMenu(event){
  if(event){event.preventDefault();event.stopPropagation();}
  siteMenu.classList.remove('is-open');siteMenu.setAttribute('aria-hidden','true');document.body.classList.remove('lp-menu-lock');document.documentElement.classList.remove('lp-menu-open');openMenu.setAttribute('aria-expanded','false');
