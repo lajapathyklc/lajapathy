@@ -39,16 +39,23 @@
         status.setAttribute('role', 'status');
         status.setAttribute('aria-live', 'polite');
     }
-    function showError() {
+    function showError(kind) {
         status.classList.add('is-error');
         status.setAttribute('role', 'alert');
         status.setAttribute('aria-live', 'assertive');
         var title = document.createElement('strong');
-        title.textContent = 'MESSAGE NOT SENT';
+        title.textContent = kind === 'unconfirmed' ? 'SEND NOT CONFIRMED' : 'MESSAGE NOT SENT';
+        var details = {
+            invalid: 'Please check your name, email and message before trying again. ',
+            limited: 'Too many attempts. Please wait a minute before trying again. ',
+            unavailable: 'The form is temporarily unavailable. ',
+            unconfirmed: 'I could not confirm that your message was received. Your text is still here. '
+        };
+        var explanation = details[kind] || 'Something went wrong. Your text is still here. ';
         var email = document.createElement('a');
         email.href = 'mailto:info@lajapathy.com';
         email.textContent = 'info@lajapathy.com';
-        status.replaceChildren(title, document.createTextNode('Something went wrong. Please try again or email me directly at '), email, document.createTextNode('.'));
+        status.replaceChildren(title, document.createTextNode(explanation + 'You can email me directly at '), email, document.createTextNode('.'));
     }
     async function showSuccess() {
         area.style.setProperty('--concierge-height', Math.ceil(conversation.getBoundingClientRect().height) + 'px');
@@ -88,10 +95,13 @@
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            var body = await response.json().catch(function () { return { ok: response.ok }; });
-            if (response.ok && body.ok !== false) await showSuccess();
-            else showError();
-        } catch (_) { showError(); }
+            var body = await response.json().catch(function () { return null; });
+            if (response.ok && body && body.ok === true) await showSuccess();
+            else if (response.status === 400) showError('invalid');
+            else if (response.status === 429) showError('limited');
+            else if (response.status === 503) showError('unavailable');
+            else showError(response.ok ? 'unconfirmed' : 'failed');
+        } catch (_) { showError('unconfirmed'); }
         finally {
             submitting = false;
             submitButton.disabled = false;

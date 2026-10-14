@@ -517,7 +517,7 @@
 </div>
 <div class="lp-contact-topic__custom" hidden>
 <label for="contact-custom-subject">Tell me what you'd like to discuss</label>
-<input class="input-field" id="contact-custom-subject" type="text" placeholder="Tell me what you'd like to discuss"/>
+<input class="input-field" id="contact-custom-subject" maxlength="200" type="text" placeholder="Tell me what you'd like to discuss"/>
 </div>
 </div>
 <div aria-live="polite" id="form-messages" role="status"></div>
@@ -525,25 +525,25 @@
 <div class="col-lg-6">
 <div class="form-group">
 <label class="visually-hidden" for="contact-name">Your name</label>
-<input autocomplete="name" class="input-field" id="contact-name" name="name" placeholder="Your Name" required="" type="text"/>
+<input autocomplete="name" class="input-field" id="contact-name" maxlength="120" name="name" placeholder="Your Name" required="" type="text"/>
 </div>
 </div>
 <div class="col-lg-6">
 <div class="form-group">
 <label class="visually-hidden" for="contact-phone">Phone number (optional)</label>
-<input autocomplete="tel" class="input-field" id="contact-phone" name="phone" placeholder="Phone Number (optional)" type="tel"/>
+<input autocomplete="tel" class="input-field" id="contact-phone" maxlength="40" name="phone" placeholder="Phone Number (optional)" type="tel"/>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
 <label class="visually-hidden" for="contact-email">Your email</label>
-<input autocomplete="email" class="input-field" id="contact-email" name="email" placeholder="Your Email" required="" type="email"/>
+<input autocomplete="email" class="input-field" id="contact-email" maxlength="200" name="email" placeholder="Your Email" required="" type="email"/>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
 <label class="visually-hidden" for="contact-message">Your message</label>
-<textarea class="input-field" id="contact-message" name="message" placeholder="Your Message" required=""></textarea>
+<textarea class="input-field" id="contact-message" maxlength="5000" name="message" placeholder="Your Message" required=""></textarea>
 </div>
 </div>
 <div aria-hidden="true" class="lp-hp">
@@ -574,7 +574,7 @@
 <p>I’ll review the context and get back to you shortly.</p>
 <a href="Casestudies.html">EXPLORE SELECTED WORK <span aria-hidden="true">→</span></a>
 </div>
-<script src="assets/js/lp-contact-concierge.js" defer></script>
+<script src="assets/js/lp-contact-concierge.js?v=reliability-20261014-1" defer></script>
 </div>
 </div>
 </div>
