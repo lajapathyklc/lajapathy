@@ -28,3 +28,18 @@
  #contacts .contact-inner { width:min(100%,720px); margin-left:auto; }
  #contacts .section-head { max-width:500px; }
 }
+
+/* Final Horizon: all optical layers remain behind the approved copy. */
+.contact-hero .contact-universe {background:#000;--horizon-progress:0}
+.contact-universe[data-scene="ready"] .contact-environment {opacity:calc(1 - var(--horizon-progress)*.80)}
+.contact-hero .contact-universe::after {background:linear-gradient(180deg,transparent 60%,#000 100%)}
+.contact-hero .contact-universe[data-scene="ready"]::before {opacity:.11!important}
+.contact-terrain {filter:brightness(.87);mask-image:url('../images/hero-cinematic/contact-horizon-mask.svg');-webkit-mask-image:url('../images/hero-cinematic/contact-horizon-mask.svg')}
+#contacts .contact-inner {position:relative;isolation:isolate}
+#contacts .contact-inner::before {content:"";position:absolute;inset:-24px;z-index:-1;pointer-events:none;border-radius:24px;background:radial-gradient(ellipse at 80% 0%,rgba(192,132,71,.025),transparent 68%)}
+#contacts .contact-form .input-field:focus,#contacts #contact-topic:focus-visible {border-color:#b18452;outline:1px solid rgba(196,145,80,.35);outline-offset:2px;box-shadow:0 0 0 3px rgba(212,155,80,.035)}
+#contacts .contact-form .input-field:-webkit-autofill { -webkit-text-fill-color:#f4f1ed;box-shadow:0 0 0 1000px #080a0c inset;caret-color:#f4f1ed}
+#contacts #contact-form button[type="submit"]:focus-visible {outline:2px solid #dba85f;outline-offset:5px}
+#contacts #contact-form button[type="submit"]:active:not(:disabled) {background:#15130f;border-color:#ad8b5d}
+#contacts a:focus-visible {outline:2px solid #dba85f;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.contact-universe .contact-environment{transition:none}}

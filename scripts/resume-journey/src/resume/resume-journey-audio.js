@@ -1,7 +1,7 @@
 const AUDIO_URLS = {
   ignition: new URL('../../../../assets/resume-journey/audio/01-engine-ignition.mp3', import.meta.url).href,
-  engine: new URL('../../../../assets/resume-journey/audio/02-flight-engine-loop.mp3', import.meta.url).href,
-  touchdown: new URL('../../../../assets/resume-journey/audio/04-touchdown.mp3', import.meta.url).href,
+  engine: new URL('../../../../assets/resume-journey/audio/engine-cc0-4p8s.mp3', import.meta.url).href,
+  touchdown: new URL('../../../../assets/resume-journey/audio/touchdown-cc0-0p635s.mp3', import.meta.url).href,
 };
 
 const MASTER_VOLUME = 0.85;
@@ -91,6 +91,8 @@ export function createJourneyAudio(onError = () => {}) {
   }
 
   function startOneShot(name, volume, { delay = 0, fade = 0.08, onended } = {}) {
+    // Fallback can publish a landed state before audio preparation completes.
+    if (disposed || !enabled || !context || context.state === 'closed' || !master || !buffers?.[name]) return;
     const source = context.createBufferSource();
     const gain = context.createGain();
     const record = { source, gain };

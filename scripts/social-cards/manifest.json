@@ -573,9 +573,18 @@
       "url": "https://www.lajapathy.com/eddiebauer_leadership.html",
       "image": "https://www.lajapathy.com/assets/social/og-eddiebauer.jpg",
       "alt": "Eddie Bauer product mockup with LP branding and commerce case-study title"
+    },
+    {
+      "file": "resume-journey.html",
+      "title": "My Journey — Eight Planets, One Story | Lajapathy",
+      "description": "Explore Lajapathy’s journey from early computing and design to enterprise UX, product leadership and AI.",
+      "url": "https://www.lajapathy.com/resume-journey.html",
+      "image": "https://www.lajapathy.com/assets/social/og-home.jpg",
+      "alt": "Lajapathy portrait with LP branding and product design leadership headline"
     }
   ],
   "excluded": {
+    "credits.html": "Non-indexed spacecraft attribution utility; intentionally outside social-sharing pages.",
     "404.html": "Error utility disallowed in robots.txt; existing metadata retained.",
     "docs/": "Local QA/review artifacts, outside the production public-page audit."
   },

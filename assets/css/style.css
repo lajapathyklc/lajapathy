@@ -118,9 +118,9 @@
   --color-vimeo: #b7560d;
   --color-twitch: #6441A3;
   --color-discord: #e2a270;
-  --font-primary: "Montserrat", serif;
-  --font-secondary: "Poppins", serif;
-  --font-three: "fontawesome";
+  --font-primary: "Montserrat", Arial, sans-serif;
+  --font-secondary: "Poppins", Arial, sans-serif;
+  --font-three: "Font Awesome 6 Free";
   --p-light: 300;
   --p-regular: 400;
   --p-medium: 500;
@@ -13220,7 +13220,7 @@ header.header-full-width.header--sticky.sticky {
 .tmp-mainmenu-nav .tmp-mainmenu .has-dropdown .submenu li::after {
   position: absolute;
   content: "\f105";
-  font-family: "fontawesome";
+  font-family: "Font Awesome 6 Free";
   font-size: 14px;
   top: 50%;
   transform: translateY(-50%);
@@ -27797,7 +27797,7 @@ section.svg-container svg.radial-progress:nth-last-of-type(0) {
 }
 
 .resume-section .section-title i {
-  font-family: "fontawesome";
+  font-family: "Font Awesome 6 Free";
 }
 
 .ready-chatting-option {
@@ -35250,7 +35250,7 @@ img {
 .hamberger-menu.active::before {
   content: "\f00d";
   /* FontAwesome X */
-  font-family: "Font Awesome 6 Pro";
+  font-family: "Font Awesome 6 Free";
 }
 
 /* =========================================
@@ -35436,7 +35436,7 @@ body {
   /* Arrow indicator */
   .tmp-popup-mobile-menu .dropdown-toggle::after {
     content: "\f054";
-    font-family: "Font Awesome 6 Pro";
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     font-size: 1rem;
     transform: rotate(0deg);

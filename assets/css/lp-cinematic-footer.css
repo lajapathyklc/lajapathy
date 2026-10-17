@@ -134,3 +134,12 @@ html.lp-debug-grid::after { right:var(--lp-content-start); background:rgba(0,220
 
 /* Contact chapter inset belongs to the page shell; form columns retain their proportions. */
 #contacts .get-in-touch-wrapper { padding-inline:0; }
+
+/* Stage 5: a quiet closing horizon. Scope stays inside the cinematic footer. */
+.lp-cinematic-footer__scene {background:#000}
+.lp-cinematic-footer__scene::after {background:linear-gradient(180deg,#000 0%,transparent 18%,transparent 66%,#000 100%)}
+.lp-cinematic-footer__scene[data-scene="ready"] .lp-cinematic-footer__space {opacity:.10}
+.lp-cinematic-footer__scene[data-scene="idle"] :is(.lp-cinematic-footer__space,.lp-cinematic-footer__terrain) {background-image:none}
+.lp-cinematic-footer__fallback {filter:brightness(.86)}
+.lp-cinematic-footer__cta:active {background:#15120d}
+.lp-cinematic-footer :is(.lp-footer-v28__navrow,.lp-footer-v28__bottom) a:focus-visible {outline:2px solid #dba85f;outline-offset:5px}

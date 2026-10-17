@@ -2,7 +2,7 @@
 // This lightweight controller imports no renderer, textures or animation until nearby.
 const footer=document.querySelector('footer.lp-cinematic-footer');
 const legalOnly=document.body.dataset.footerVariant==='legal-only';
-if(footer&&!legalOnly){
+if(footer&&!legalOnly&&!footer.querySelector('.lp-cinematic-footer__scene')){
   const contact=location.pathname.split('/').pop().toLowerCase()==='contact.html';
   const inner=footer.querySelector('.lp-footer-v28__inner');
   const scene=document.createElement('section');
@@ -27,13 +27,14 @@ if(footer&&!legalOnly){
   const previous=inner.querySelector('.lp-footer-v28__hero');
   if(previous)previous.replaceWith(scene);else inner.prepend(scene);
   footer.querySelector('.lp-footer-v28__visual')?.remove();
+  const abort=new AbortController();
   let instance,initializing=false,destroyed=false;
   async function initialize(){
     if(initializing||destroyed)return;initializing=true;scene.dataset.scene='loading';
     try{
-      const {createCinematicFooterScene}=await import('./lp-cinematic-footer-scene.js?v=performance-20261011-09b');
+      const {createCinematicFooterScene}=await import('./lp-cinematic-footer-scene.js?v=final-horizon-stage5');
       if(destroyed)return;
-      instance=await createCinematicFooterScene(scene,{calm:contact});
+      instance=await createCinematicFooterScene(scene,{calm:contact,signal:abort.signal});
       if(destroyed)instance.dispose();
     }catch(error){scene.dataset.scene='fallback';console.error('Cinematic footer:',error);}
   }
@@ -42,6 +43,6 @@ if(footer&&!legalOnly){
   },{rootMargin:'450px 0px'});
   near.observe(scene);
   window.addEventListener('pagehide',event=>{
-    if(!event.persisted){destroyed=true;near.disconnect();instance?.dispose();}
+    if(!event.persisted){destroyed=true;abort.abort();near.disconnect();instance?.dispose();}
   });
 }

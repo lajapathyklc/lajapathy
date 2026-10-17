@@ -1,0 +1,221 @@
+# Reviewed Netlify release configuration; secrets are managed in Netlify environment controls.
+[build]
+  command = "node build-release.mjs"
+  publish = "output/stage7-release"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Preserve the existing .html links and canonical URLs; do not rewrite the site.
+[build.processing]
+  skip_processing = true
+
+[dev]
+  framework = "#static"
+  publish = "output/stage7-release"
+  port = 8893
+  autoLaunch = false
+
+[[redirects]]
+  from = "/mailer.php"
+  to = "/contact.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/mailchat.php"
+  to = "/contact.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/404.shtml"
+  to = "/404.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pagenotfound.html"
+  to = "/404.html"
+  status = 301
+  force = true
+
+# Leave real missing paths as 404; no SPA catch-all rewrite.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/Casestudies/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+# Exact asset rules avoid overlapping Cache-Control values.
+
+[[headers]]
+  for = "/assets/icons/free/arrow-left.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/arrow-right.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/arrow-up-right.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/arrow-up.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/bars.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/chevron-right.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/fa-brands-400.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/fa-solid-900.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/fontawesome-free.min.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/icons.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/LICENSE.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/MIT-primitives.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/icons/free/xmark.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/assets/resume-journey/01-engine-ignition-DmISS6gk.mp3"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/candidate-a-v7-1-delivery-P3XNQLvb.glb"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/engine-cc0-4p8s-C8Nu3FAe.mp3"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/geology-4k-DoMYFqK5.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/lp-logo-U9u31x5W.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/resume-journey-B6dAFWsp.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/resume-journey-BNA9aSHo.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/resume-journey-D6_1iG-g.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/resume-journey-WhExY_mG.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/space-4k-CcfGZUV9.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/space-xf9tQDNB.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/resume-journey/touchdown-cc0-0p635s-CDxsdMXL.mp3"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/lajapathy-hero-new.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/lajapathy-hero-new.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/lajapathy-hero-new.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/lajapathy-hero.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"

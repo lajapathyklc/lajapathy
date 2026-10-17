@@ -1,13 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "buildCommand": "node build-release.mjs",
+  "outputDirectory": "output/stage7-release",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), payment=()"
@@ -17,7 +28,10 @@
     {
       "source": "/assets/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
@@ -55,12 +69,37 @@
           "value": "public, max-age=3600, stale-while-revalidate=604800"
         }
       ]
+    },
+    {
+      "source": "/assets/resume-journey/:asset([^/]+-[A-Za-z0-9_-]{8}\\.(?:js|css|glb|webp))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "redirects": [
-    { "source": "/mailer.php", "destination": "/contact.html", "permanent": false },
-    { "source": "/mailchat.php", "destination": "/contact.html", "permanent": false },
-    { "source": "/404.shtml", "destination": "/404.html", "permanent": true },
-    { "source": "/pagenotfound.html", "destination": "/404.html", "permanent": true }
+    {
+      "source": "/mailer.php",
+      "destination": "/contact.html",
+      "permanent": false
+    },
+    {
+      "source": "/mailchat.php",
+      "destination": "/contact.html",
+      "permanent": false
+    },
+    {
+      "source": "/404.shtml",
+      "destination": "/404.html",
+      "permanent": true
+    },
+    {
+      "source": "/pagenotfound.html",
+      "destination": "/404.html",
+      "permanent": true
+    }
   ]
 }

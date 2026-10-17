@@ -54,3 +54,23 @@
     .ewallet-hero-transition { height: clamp(70px, 10vh, 100px); }
     .case-study-cinematic-hero .ewallet-hero-art::before { opacity: .8; }
 }
+
+/* Stage 4 — case-owned environment, without changing content geometry. */
+.case-study-cinematic-hero {background:#000!important;--case-progress:0}
+.case-study-cinematic-hero::before {opacity:.16;mask-image:linear-gradient(#000 60%,transparent);-webkit-mask-image:linear-gradient(#000 60%,transparent)}
+.case-study-cinematic-hero::after {opacity:.045}
+.case-study-cinematic-hero .lp-case-study-planet {opacity:0;transition:opacity .65s ease;mask-image:linear-gradient(#000 64%,transparent 100%);-webkit-mask-image:linear-gradient(#000 64%,transparent 100%)}
+.case-study-cinematic-hero[data-scene="ready"] .lp-case-study-planet {opacity:calc(1 - var(--case-progress)*.75)}
+.case-study-cinematic-hero .lp-case-study-horizon {opacity:calc(.38 - var(--case-progress)*.24)}
+.case-study-cinematic-hero .ewallet-hero-illustration {animation:none!important;filter:drop-shadow(0 16px 22px rgba(0,0,0,.20))}
+.case-study-cinematic-hero .ewallet-hero-transition {height:clamp(100px,15vh,155px);background:linear-gradient(transparent,#000)}
+.ewallet-content-shell .project-visual-panel,.ewallet-content-shell .ewallet-visual-panel {box-shadow:0 18px 45px rgba(0,0,0,.18);transition:box-shadow .35s ease}
+.ewallet-content-shell a:focus-visible,.case-study-cinematic-hero a:focus-visible {outline:2px solid #ffae42;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.case-study-cinematic-hero .lp-case-study-planet,.ewallet-content-shell .project-visual-panel,.ewallet-content-shell .ewallet-visual-panel{transition:none}}
+/* Keep the original mobile-device and dashboard framing; soften only their surround. */
+.ewallet-screen-gallery .website-screen-frame {box-shadow:0 26px 70px rgba(0,0,0,.42),0 0 32px rgba(255,164,68,.025)}
+.ewallet-screen-gallery .ewallet-phone-device {filter:drop-shadow(0 22px 30px rgba(0,0,0,.24))}
+/* Resolve dashboard slides against the viewport rather than a percentage inside
+   a max-content track. This also restores the original Next/Previous model on phones. */
+.ewallet-screen-gallery .website-screen-frame .ewallet-phone-screen-track {width:100%}
+.ewallet-screen-gallery .website-screen-frame .ewallet-phone-shot {flex:0 0 100%;width:100%;min-width:0}

@@ -18,7 +18,7 @@
 
     function openMenu(e){
       if(e){ e.preventDefault(); e.stopImmediatePropagation(); }
-      lastFocus=document.activeElement;
+      lastFocus=e && e.currentTarget ? e.currentTarget : document.activeElement;
       menu.classList.add('is-open');
       menu.setAttribute('aria-hidden','false');
       document.body.classList.add('lp-menu-lock');
@@ -27,19 +27,27 @@
         b.setAttribute('aria-expanded','true');
         b.classList.add('active');
       });
-      setTimeout(function(){ if(close && menu.classList.contains('is-open')) close.focus({preventScroll:true}); },80);
+      // WebKit can retain hidden visibility until the opening style is painted.
+      // Focus only after the modal can actually receive it; closing cancels the handoff.
+      requestAnimationFrame(function focusClose(){
+        if(!close || !menu.classList.contains('is-open')) return;
+        if(getComputedStyle(close).visibility!=='visible') { requestAnimationFrame(focusClose); return; }
+        close.focus({preventScroll:true});
+      });
     }
     function closeMenu(e){
       if(e){ e.preventDefault(); e.stopPropagation(); }
       menu.classList.remove('is-open');
-      menu.setAttribute('aria-hidden','true');
       document.body.classList.remove('lp-menu-lock');
       document.documentElement.classList.remove('lp-menu-open');
       openers.forEach(function(b){
         b.setAttribute('aria-expanded','false');
         b.classList.remove('active');
       });
-      if(lastFocus && lastFocus.focus) setTimeout(function(){ lastFocus.focus({preventScroll:true}); },30);
+      // Restore focus before hiding its ancestor from the accessibility tree.
+      var target=lastFocus && lastFocus.isConnected && !menu.contains(lastFocus) ? lastFocus : openers[0];
+      if(target && target.focus) target.focus({preventScroll:true});
+      menu.setAttribute('aria-hidden','true');
     }
 
     // Capture phase is intentional: several legacy sub-pages have their own

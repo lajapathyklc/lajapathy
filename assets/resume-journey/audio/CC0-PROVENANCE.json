@@ -1,0 +1,21 @@
+{
+  "source": "Kenney Sci-fi Sounds 1.0",
+  "sourceUrl": "https://kenney.nl/assets/sci-fi-sounds",
+  "license": "CC0 1.0",
+  "licenseFile": "Kenney-License.txt",
+  "engine": {
+    "inputs": [
+      "engineCircular_000.ogg"
+    ],
+    "changes": "Low-pass 6.5 kHz, 120 ms circular blend; 4.8 s stereo at 44.1 kHz",
+    "sha256": "9bcd1e3fc6e7bc62f8e3f6619af0808a696e25f48f000aca9b9bc77ee300dc0d"
+  },
+  "touchdown": {
+    "inputs": [
+      "impactMetal_000.ogg",
+      "doorClose_000.ogg"
+    ],
+    "changes": "72/28 mix, low-pass 4.2/3.2 kHz, 4 ms attack / 90 ms tail; 27999 stereo frames at 44.1 kHz",
+    "sha256": "a3679b62e7c59210bff48a840dc82ab8964c7754d16c58abb42bf38f77245650"
+  }
+}

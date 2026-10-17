@@ -11,3 +11,8 @@ docs/production-qa/
 docs/responsive-qa-evidence/
 
 scripts/resume-journey/dist/
+.vercel
+.env*
+
+# Local Netlify build/dev metadata; never commit site linkage or caches.
+.netlify/

@@ -72,7 +72,11 @@
         form.reset();
         customSubject.value = '';
         updateTopic();
-        if (moveFocus) success.querySelector('h3').focus({ preventScroll: true });
+        if (moveFocus) {
+            var heading = success.querySelector('h3');
+            heading.focus({ preventScroll: true });
+            heading.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
         await wait(260);
         success.classList.remove('is-entering');
     }

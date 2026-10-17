@@ -300,7 +300,7 @@ cardData.forEach((data, index) => {
 
     // 2. Create the content elements
     cardEl.innerHTML = `
-        <div class="service-card-icon"><i class=" ${data.icon}"></i></div>
+        <div class="service-card-icon"><i aria-hidden="true" class=" ${data.icon}"></i></div>
         <h3 class="service-title">${data.title}</h3>
         <p class="service-para">${data.description}</p>
     `;

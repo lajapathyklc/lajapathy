@@ -41,6 +41,16 @@
 
         var scrollToTopButton = scrollToTopButtons[0];
         if (scrollToTopButton) {
+            // The icon-only back-to-top control exposes its existing click action to keyboards.
+            if (!scrollToTopButton.__lpBackTopKeyboardBound) {
+                scrollToTopButton.__lpBackTopKeyboardBound = true;
+                scrollToTopButton.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        scrollToTopButton.click();
+                    }
+                });
+            }
             var water = scrollToTopButton.querySelector('.water');
             function updateBackToTopState() {
                 var scroller = document.scrollingElement || document.documentElement;

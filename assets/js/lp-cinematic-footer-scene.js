@@ -1,36 +1,11 @@
-import {THREE,createHeroRenderer,loadGeology,heroLifecycle} from './hero-3d-core.js?v=performance-20261011-09b';
+import {THREE,createHeroRenderer,loadGeology} from './hero-3d-core.js?v=performance-20261011-09b';
 import {createHeroPlanet,createHeroValleyHaze} from './hero-planet-system.js?v=performance-20261011-09b';
 import {createHeroMeteors} from './lp-meteor-system.js?v=performance-20261011-09b';
 
-// Contact's material treatment, applied to instances so no page hero is modified.
-function polishPlanet({group,planet,air,outerAir,sun}){
-  group.traverse(object=>{if(object.material?.isShaderMaterial)object.material.onBeforeCompile=()=>{};});
-  planet.material.onBeforeCompile=shader=>{
-    shader.fragmentShader=shader.fragmentShader
-      .replace('mix(n,detail,.55)','mix(n,detail,mix(.56,.77,grazing))')
-      .replace('albedo=mix(albedo,geological*.72,.25)',
-        'albedo=mix(albedo,geological*.72,.33);albedo*=mix(.88,1.13,smoothstep(.24,.67,elevation));albedo=mix(albedo,albedo*vec3(.91,1.025,1.075),mineral*.22)')
-      .replace('mix(.90,.78,smoothstep(.28,.65,elevation))','mix(.94,.72,smoothstep(.28,.65,elevation))')
-      .replace('energy*=surfaceExposure;',
-        'energy*=surfaceExposure;energy*=mix(1.,mix(.82,1.22,smoothstep(.27,.64,elevation)),grazing*smoothstep(-.14,.24,ld));');
-  };
-  for(const shell of [air,outerAir])shell.material.onBeforeCompile=shader=>{
-    shader.fragmentShader=shader.fragmentShader
-      .replace('float rayleigh=fresnel*(day+.33*max(v.y,0.));',
-        'float alignment=dot(normalize(v.xy),normalize(sunDirection.xy));float angular=pow(smoothstep(-.17,1.,alignment),3.);float nearSun=pow(max(alignment,0.),12.);float rayleigh=fresnel*angular*(day*.80+nearSun*.15);')
-      .replace('mie*.65','mie*.78*angular').replace('time*.628','time*.571');
-  };
-  sun.material.onBeforeCompile=shader=>{
-    shader.vertexShader=shader.vertexShader.replace('vec4(position,1.)',
-      'vec4(position-vec3(normalize(vec2(-.20,.82))*(.011/.82),0.),1.)');
-    shader.fragmentShader=shader.fragmentShader
-      .replace('i<6','i<4').replace('direction=-.85+j*.31','direction=1.02+j*.42')
-      .replace('(.024+j*.005)','(.042+j*.008)').replace('(12.+j*2.3)','(8.+j*1.8)')
-      .replace('glare*4.','glare*2.0').replaceAll('time*.48','time*.571').replace('time*.628','time*.571');
-  };
-}
+import {horizonLifecycle} from './lp-horizon-lifecycle.js?v=stage5';
+import {refineHorizonPlanet,horizonStars} from './lp-final-horizon-material.js?v=stage5';
 
-export async function createCinematicFooterScene(root,{calm=false}={}){
+export async function createCinematicFooterScene(root,{calm=false,signal}={}){
   let renderer,lifecycle,meteors,scene,atlas,disposed=false;
   const ownedTextures=new Set();
   function own(texture){if(disposed)texture.dispose();else ownedTextures.add(texture);return texture;}
@@ -49,33 +24,39 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
     }
     ownedTextures.forEach(texture=>textures.add(texture));
     geometries.forEach(geometry=>geometry.dispose());textures.forEach(texture=>texture.dispose());
-    renderer?.dispose();
+    renderer?.dispose();signal?.removeEventListener('abort',dispose);if(window.footerHorizonQA?.root===root)delete window.footerHorizonQA;
     root.dataset.animation='disposed';
   }
   function contextLost(event){event.preventDefault();root.dataset.scene='fallback';dispose();}
+  signal?.addEventListener('abort',dispose,{once:true});
+  canvas.addEventListener('webglcontextlost',contextLost);
   try{
+    if(signal?.aborted){dispose();return{dispose};}
+    if(!canvas.getContext('webgl2',{alpha:true,antialias:true,powerPreference:'high-performance'})){root.dataset.scene='fallback';dispose();return{dispose};}
     const mobile=matchMedia('(max-width:767px)').matches;
-    const config={rotationDuration:300,relief:2.15,displacement:.0015,sunIntensity:3,
-      cloudSpeed:1.010,hazeSpeed:1.018,cloudOpacity:.12,highHazeOpacity:.045,
-      surfaceExposure:calm?.54:.60,atmosphereIntensity:calm?.35:.43,rimIntensity:1,
-      atmosphereThickness:1.006,outerAtmosphereScale:1.012,outerAtmosphereIntensity:.060,
-      sunGlow:calm?.33:.40};
-    renderer=createHeroRenderer(canvas,mobile?1.25:1.75);
+    const config={rotationDuration:600,relief:2.05,displacement:.002,sunIntensity:1.6,
+      cloudSpeed:1.055,hazeSpeed:.965,cloudOpacity:.10,highHazeOpacity:.025,
+      surfaceExposure:calm?.65:.70,atmosphereIntensity:calm?.28:.33,rimIntensity:1,
+      atmosphereThickness:1.006,outerAtmosphereScale:1.012,outerAtmosphereIntensity:.024,
+      sunGlow:calm?.38:.46};
+    renderer=createHeroRenderer(canvas,mobile?1.25:1.35);
     renderer.setClearColor(0x000000,0);
     scene=new THREE.Scene();const camera=new THREE.OrthographicCamera(-1,1,1,-1,.1,100);camera.position.z=8;
-    atlas=own(await loadGeology(renderer,mobile));
+    atlas=own(await loadGeology(renderer,mobile));if(disposed)return{dispose};
     const loader=new THREE.TextureLoader();
     const [landscape,maskText]=await Promise.all([
       loader.loadAsync('assets/images/bg/footerbg.webp').then(own),
       fetch('assets/images/hero-cinematic/contact-horizon-mask.svg').then(response=>{
         if(!response.ok)throw new Error('Footer landscape mask failed to load');return response.text();
       })]);
+    if(disposed)return{dispose};
     // Rasterize the existing SVG mask once: direct SVG uploads fail on Metal/ANGLE.
     const maskCanvas=document.createElement('canvas');maskCanvas.width=1920;maskCanvas.height=640;
     const maskImage=new Image(),maskURL=URL.createObjectURL(new Blob([
       maskText.replace('<svg ','<svg width="1920" height="640" ')],{type:'image/svg+xml'}));
     try{maskImage.src=maskURL;await maskImage.decode();maskCanvas.getContext('2d').drawImage(maskImage,0,0);}
     finally{URL.revokeObjectURL(maskURL);}
+    if(disposed)return{dispose};
     const horizon=own(new THREE.CanvasTexture(maskCanvas));
     landscape.colorSpace=THREE.SRGBColorSpace;
     const landscapeUniforms={landscape:{value:landscape},horizon:{value:horizon},cover:{value:new THREE.Vector2(1,1)}};
@@ -83,26 +64,27 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
       uniforms:landscapeUniforms,transparent:true,depthTest:false,depthWrite:false,
       vertexShader:'varying vec2 p;void main(){p=uv;gl_Position=vec4(position.xy,0.,1.);}',
       fragmentShader:`varying vec2 p;uniform sampler2D landscape,horizon;uniform vec2 cover;
-        void main(){vec2 uv=(p-.5)*cover+.5;vec4 color=texture2D(landscape,uv);gl_FragColor=vec4(color.rgb,color.a*texture2D(horizon,uv).a);
+        void main(){vec2 uv=(p-.5)*cover+.5;vec4 color=texture2D(landscape,uv);gl_FragColor=vec4(color.rgb*.79,color.a*texture2D(horizon,uv).a*smoothstep(0.,.12,p.y));
         #include <colorspace_fragment>
         }`}));
     terrain.material.onBeforeCompile=()=>{};terrain.renderOrder=30;terrain.frustumCulled=false;scene.add(terrain);
     // Decode the shared nebula before publishing the first complete frame.
     await loader.loadAsync('assets/images/hero-cinematic/space.webp').then(texture=>texture.dispose());
-    const light=new THREE.Vector3(-.20,.82,-.52).normalize();
+    if(disposed)return{dispose};
+    const baseLight=new THREE.Vector3(-.25,.88,-.21).normalize(),light=baseLight.clone();
     const planetSystem=createHeroPlanet({scene,atlas,light,mobile,config});
-    polishPlanet(planetSystem);
+    refineHorizonPlanet(planetSystem,{footer:true});horizonStars(scene,mobile,{footer:true});
     const {group,planet,uniforms,clouds,haze,air,outerAir,sun}=planetSystem;
     const fogUniforms=createHeroValleyHaze({scene,speeds:[.0025,-.004,.0055],
-      opacities:mobile?[.05,.025,.012]:[.075,.045,.018]});
+      opacities:mobile?[.025,.016,.008]:[.035,.022,.01]});
     const fog=scene.children.at(-1);fog.material.depthTest=false;fog.material.onBeforeCompile=()=>{};
     fog.renderOrder=31;fog.frustumCulled=false;
-    // The exact Home scheduler and flight speeds, with intervals stretched to 55% density.
+    // Reuse the shared meteor renderer with longer quiet intervals.
     // Cloud, rotation and meteor flight time remain independent of scheduler spacing.
     meteors=createHeroMeteors({system:group,globe:planet,camera,renderer,root,uniforms,
-      page:'Footer',firstDelay:3,cadenceScale:1/.55,
-      eventKind:count=>count%28===0?'impact':count%12===0?'skim':'flyby',
-      config:{poolSize:mobile?2:3,intensity:calm?.45:.55,debrisCount:6,mobileDebrisCount:4},
+      page:'Footer',firstDelay:6.8,cadenceScale:6.5,protectedSelector:'.lp-hero-copy',
+      eventKind:()=>Math.random()<.05?'skim':'flyby',
+      config:{poolSize:mobile?2:3,intensity:calm?.23:.29,debrisCount:4,mobileDebrisCount:2},
       failedEventFallback:true,
       impactDirection:({width})=>width<768?[-.4,0,-1]:null,
       targetNormal:({kind})=>{
@@ -117,40 +99,43 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
         if(nx*nx+ny*ny>.85)return null;
         return[nx,ny,Math.sqrt(1-nx*nx-ny*ny)];
       }});
-    let width=1,height=1,frames=0,cost=16,frameDuration=16.7,planetTime=0,cloudTime=0,ambientTime=0;
+    let width=1,height=1,frames=0,cost=16,frameDuration=16.7,planetTime=0,cloudTime=0,ambientTime=0,pose=null;
     function resize(){
       width=root.clientWidth;height=root.clientHeight;const aspect=width/height,small=width<768;
       camera.left=-aspect;camera.right=aspect;camera.updateProjectionMatrix();
-      renderer.setSize(width,height,false);
+      renderer.setPixelRatio(Math.min(renderer.getPixelRatio(),devicePixelRatio,small?1.25:1.35));renderer.setSize(width,height,false);
       const sourceAspect=1920/640;
       landscapeUniforms.cover.value.set(Math.min(1,aspect/sourceAspect),Math.min(1,sourceAspect/aspect));
       // Orthographic framing uses the actual scene height, not a 16:9 viewport.
       // Preserve the approved desktop/mobile framing until the upper air shell
       // would leave its safe zone; then bound growth and retain the right crop.
       const safeTop=Math.max(40,Math.min(90,height*.08));
-      const y=height*(small?.87:.84);
+      let y=height*(small?.87:.84);
       const preferredRadius=width*(small?.82:width<1100?.285:.28);
       const radius=width<1100?preferredRadius:Math.min(preferredRadius,(y-safeTop)/config.outerAtmosphereScale);
+      if(small){const copyBottom=root.querySelector('.lp-hero-copy').getBoundingClientRect().bottom-root.getBoundingClientRect().top;y=copyBottom+110+radius*.96;}
       const x=width<1100?width*(small?1.10:.86):Math.max(width*.86,width-radius*.5);
       group.position.set((x-width/2)*2/height,1-y*2/height,0);group.scale.setScalar(radius*2/height);
       const direction=new THREE.Vector2(light.x,light.y).normalize();
-      sun.position.set(group.position.x+direction.x*group.scale.x*1.005,group.position.y+direction.y*group.scale.x*1.005,-1.4);
-      sun.scale.setScalar(group.scale.x*.82);
+      sun.position.set(group.position.x+direction.x*group.scale.x*1.0025,group.position.y+direction.y*group.scale.x*1.0025,-1.4);
+      sun.scale.setScalar(group.scale.x*.72);
       if(small){
         const copyBottom=root.querySelector('.lp-hero-copy').getBoundingClientRect().bottom-root.getBoundingClientRect().top;
         canvas.style.maskImage=`linear-gradient(180deg,transparent ${copyBottom+24}px,#000 ${copyBottom+95}px)`;
       }else canvas.style.maskImage='none';
       scene.updateMatrixWorld(true);root.dataset.planetGeometry=JSON.stringify({x,y,radius,width,height});
     }
-    lifecycle=heroLifecycle(root,resize,(_time,dt,reduced)=>{
+    lifecycle=horizonLifecycle(root,resize,(_time,dt,reduced)=>{
       if(disposed)return;const start=performance.now();
-      const slowMotion=reduced?.3:1;
-      planetTime+=dt*(reduced?1/1.6:1);cloudTime+=dt*slowMotion;ambientTime+=dt*slowMotion;
-      uniforms.turn.value=planetTime/config.rotationDuration;
-      clouds.u.cloudTurn.value=cloudTime/config.rotationDuration*clouds.speed;
-      haze.u.cloudTurn.value=cloudTime/config.rotationDuration*haze.speed;
-      for(const object of [sun,air,outerAir])object.material.uniforms.time.value=ambientTime;
-      fogUniforms.time.value=ambientTime;scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
+      const slowMotion=reduced?0:1;
+      planetTime+=dt*slowMotion;cloudTime+=dt*slowMotion;ambientTime+=dt*slowMotion;
+      const t=pose??planetTime;light.copy(baseLight).applyAxisAngle(new THREE.Vector3(0,0,1),Math.sin(t/720)*.006);
+      const direction=new THREE.Vector2(light.x,light.y).normalize();sun.position.set(group.position.x+direction.x*group.scale.x*1.0025,group.position.y+direction.y*group.scale.x*1.0025,-group.scale.x*.8);
+      uniforms.turn.value=t/config.rotationDuration;
+      clouds.u.cloudTurn.value=(pose??cloudTime)/config.rotationDuration*clouds.speed;
+      haze.u.cloudTurn.value=(pose??cloudTime)/config.rotationDuration*haze.speed;
+      for(const object of [sun,air,outerAir])object.material.uniforms.time.value=(pose??ambientTime);
+      fogUniforms.time.value=(pose??ambientTime);scene.updateMatrixWorld(true);meteors.update(dt,reduced,true);
       renderer.render(scene,camera);
       root.dataset.scene='ready';root.dataset.rotation=String(uniforms.turn.value);
       root.dataset.cloudRotation=String(clouds.u.cloudTurn.value);root.dataset.hazeRotation=String(haze.u.cloudTurn.value);
@@ -159,11 +144,11 @@ export async function createCinematicFooterScene(root,{calm=false}={}){
       cost=cost*.95+(performance.now()-start)*.05;
       if(dt>0)frameDuration=frameDuration*.98+dt*1000*.02;
       if(frames%240===0){
-        if(Math.max(cost,frameDuration)>23&&renderer.getPixelRatio()>1){renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()*.8));resize();}
-        else if(frames>=960&&Math.max(cost,frameDuration)>44&&renderer.getPixelRatio()<=1){root.dataset.scene='fallback';dispose();}
+        if(Math.max(cost,frameDuration)>44&&renderer.getPixelRatio()>1){renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()*.8));resize();}
+        else if(frames>=960&&Math.max(cost,frameDuration)>66&&renderer.getPixelRatio()<=1){root.dataset.scene='fallback';dispose();}
       }
     });
-    canvas.addEventListener('webglcontextlost',contextLost);
+    if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname))window.footerHorizonQA={root,setTime(value){pose=value===null?null:Math.max(0,Math.min(3600,Number(value)||0));lifecycle.redraw()},stats:()=>({frames,cost,light:light.toArray(),drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,memory:{...renderer.info.memory}})};
     return {dispose};
   }catch(error){root.dataset.scene='fallback';dispose();throw error;}
 }

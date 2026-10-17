@@ -31,7 +31,7 @@ export function validateCaseStudyWorlds(slugs=CASE_STUDY_SLUGS){
  const errors=[];for(const slug of slugs){const w=CASE_STUDY_WORLDS[slug];if(!w){errors.push(slug+': missing config');continue;}
  if(!Number.isInteger(w.worldSeed))errors.push(slug+': invalid seed');
  if(!GEOLOGY_PROFILES[w.geologyProfile]||!ATMOSPHERE_PROFILES[w.atmosphereProfile])errors.push(slug+': invalid profile');
- if(w.rotationSeconds<85||w.rotationSeconds>115)errors.push(slug+': invalid rotation');
+ if(w.rotationSeconds<85||w.rotationSeconds>360)errors.push(slug+': invalid rotation');
  for(const key of ['baseColor','mineralPrimary','mineralSecondary','atmosphereColor','nebulaTint'])if(!/^#[0-9a-f]{6}$/i.test(w[key]))errors.push(slug+': invalid '+key);
  }return {valid:!errors.length,count:slugs.length,errors};
 }
@@ -57,3 +57,38 @@ CASE_STUDY_WORLDS.taskee.heroArtwork='assets/images/bg/taskee%20hero.png';
 CASE_STUDY_WORLDS.unipay.heroArtwork='assets/images/bg/unipay%20hero.png';
 CASE_STUDY_WORLDS.zappay.heroArtwork='assets/images/bg/zappay%20hero.png';
 CASE_STUDY_WORLDS.zmeet.heroArtwork='assets/images/bg/zmeet%20hero.png';
+
+// Stage 4: structural identities, not hue variants. Frequencies use a continuous
+// spherical field; cloud-free worlds deliberately retain no weather shells.
+const identities = {
+ ewallet:    ['copper archipelagos',.88, .36, .28, .10, .12,1.07,.94,242, .0030],
+ zappay:     ['eroded nickel basins',1.28,.16, .55, .26, .04,1.12,.91,218, .0020],
+ unipay:     ['layered violet shale',.72,.72, .22, .06, .19,1.04,.96,268, .0025],
+ smartfin:   ['graphite escarpments',1.65,.25,.78,.12,0,1.,1.,284, .0040],
+ coverride:  ['olivine fault valleys',1.14,.45,.87,.18,.07,1.09,.93,256,.0035],
+ norton:     ['airless fractured basalt',1.85,.08,.96,.48,0,1.,1.,306,.0045],
+ homenest:   ['weathered verdant highlands',.66,.21,.42,.05,.24,1.13,.91,292,.0024],
+ zmeet:      ['lavender sediment fans',.94,.83,.31,.08,.16,1.16,.95,228,.0022],
+ eater:      ['ochre volcanic plains',1.32,.13,.68,.16,.10,1.08,.92,246,.0035],
+ fluxcrm:    ['stratified blue slate',.81,.91,.55,.07,.08,1.06,.96,278,.0030],
+ taskee:     ['jade folded plateaus',1.06,.63,.74,.11,.05,1.11,.94,254,.0034],
+ staffee:    ['sandstone atmospheric bands',.58,.95,.25,.02,.30,1.17,.91,318,.0018],
+ amazon:     ['copper dune seas',.69,.38,.19,.14,.14,1.10,.95,238,.0021],
+ eddiebauer: ['rugged umber ranges',1.43,.28,.93,.32,.17,1.08,.92,332,.0048],
+ lider:      ['iron impact highlands',1.19,.12,.56,.68,.02,1.14,.96,266,.0040],
+ slurrpfarm: ['rose clay deltas',.54,.52,.34,.03,.28,1.19,.90,294,.0020],
+ gocart:     ['serpentine mineral ridges',1.53,.58,.81,.19,.06,1.12,.95,224,.0036],
+ dailymart:  ['golden eroded badlands',.97,.76,.46,.22,.20,1.14,.93,310,.0028],
+ quickcart:  ['blue-green rift fields',1.73,.32,.88,.10,.11,1.18,.91,212,.0038],
+ mydoc:      ['pale limestone shelves',.61,.70,.17,.01,.18,1.09,.96,340,.0015],
+ dronline:   ['chalk glacial basins',.78,.18,.29,.09,.26,1.15,.92,322,.0019]
+};
+for (const [id,[identity,formationScale,strata,ridge,craters,clouds,cloudSpeed,hazeSpeed,rotationSeconds,displacement]] of Object.entries(identities)) {
+ Object.assign(CASE_STUDY_WORLDS[id],{cinematicV2:true,identity,formationScale,strata,ridge,craterDensity:craters,cloudDensity:clouds,cloudSpeed,hazeSpeed,rotationSeconds,displacement,
+  sunPosition:[.62,.74],sunDepth:.46,meteorIntensity:.36+(seedHash(id)%7)*.025,meteorCadence:3.8+(seedHash(id)%11)*.15,
+  starDensity:42+seedHash(id)%39,weatherAltitude:clouds>.2?1.007:1.004,atmosphereDensity:clouds===0?.035:clouds>.2?.40:.23,
+  atmosphereThickness:clouds===0?1.002:1.006,outerAtmosphereIntensity:clouds===0?0:.012,normalStrength:clouds>.2?.62:.76});
+}
+
+const minerals={ewallet:['#675044','#958475'],zappay:['#526567','#9aada7'],unipay:['#5b5366','#a495ab'],smartfin:['#41454b','#92958b'],coverride:['#535d43','#a19572'],norton:['#343b40','#6c7478'],homenest:['#5e6850','#b0a58a'],zmeet:['#6b5c70','#b2a3b4'],eater:['#795542','#b59164'],fluxcrm:['#52616a','#9b9c8b'],taskee:['#4e665d','#91a591'],staffee:['#806c50','#b8a381'],amazon:['#806046','#b5a07c'],eddiebauer:['#5e584b','#9c9076'],lider:['#77524c','#b4917a'],slurrpfarm:['#77616a','#bfa8a2'],gocart:['#4c665a','#96ab92'],dailymart:['#7a704e','#b8aa7d'],quickcart:['#4e6970','#95b2ad'],mydoc:['#7c8582','#c5c4ae'],dronline:['#6b7f88','#b7c4c4']};
+for(const [id,[mineralPrimary,mineralSecondary]] of Object.entries(minerals))Object.assign(CASE_STUDY_WORLDS[id],{mineralPrimary,mineralSecondary});

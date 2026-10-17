@@ -122,3 +122,40 @@
   transform:translateY(var(--planet-y));
  }
 }
+
+/* Stage 2: environment-only continuity; content, orbit geometry and header
+   retain the approved responsive positions. Fog now uses the main scene. */
+.about-page-hero.about-journey-hero { background:#000 !important; }
+.about-page-hero.about-journey-hero .about-planet-stage {
+ opacity:var(--orbital-opacity,1);
+ -webkit-mask-image:linear-gradient(#000 0%,#000 74%,transparent 100%);
+ mask-image:linear-gradient(#000 0%,#000 74%,transparent 100%);
+}
+.about-page-hero.about-journey-hero .about-space-detail {
+ opacity:.14;
+ transform:translateY(var(--star-y,0px));
+ -webkit-mask-image:linear-gradient(#000 0%,#000 64%,transparent 100%);
+ mask-image:linear-gradient(#000 0%,#000 64%,transparent 100%);
+}
+.about-page-hero.about-journey-hero::after {
+ content:"";position:absolute;inset:auto 0 -1px;height:25%;z-index:6;
+ background:linear-gradient(transparent,#000 98%);pointer-events:none;
+}
+/* A quiet still is visible while textures compile and when WebGL is absent.
+   It is hidden only after the first rendered frame, avoiding a blank globe. */
+.about-page-hero.about-journey-hero:not([data-scene="ready"]) .about-space-detail::after {
+ content:"";position:absolute;border-radius:50%;
+ left:var(--fallback-x,55%);top:var(--fallback-y,45%);
+ width:var(--fallback-size,300px);height:var(--fallback-size,300px);
+ background:radial-gradient(circle at 80% 35%,#272a2c,#0a1016 42%,#010204 74%);
+ box-shadow:inset -2px 0 5px #c38d4c22;
+}
+
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .about-space-detail { opacity:.65; }
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .about-orbit { visibility:visible; }
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .about-orbit li,
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .orbit-arc,
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .timeline-connectors path {
+ animation:none;opacity:1;stroke-dashoffset:0;
+}
+.about-page-hero.about-journey-hero[data-scene="unavailable"] .orbit-traveler { display:none; }

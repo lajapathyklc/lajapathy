@@ -2,15 +2,15 @@
 (() => {
   // Allow the critical HTML/raster composition to paint before shader compilation.
   requestAnimationFrame(() => requestAnimationFrame(() => {
-  const HERO_DEBUG = true;
+  const HERO_DEBUG = false;
   const root=document.getElementById('home');
   if(!root)return;
   const stage=root,canvases=[...root.querySelectorAll('.meteor-canvas')],contexts=canvases.map(c=>c.getContext('2d'));
   const replay=root.querySelector('.meteor-replay'),pause=root.querySelector('.meteor-pause'),reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   root.querySelector('.meteor-controls').hidden=true;
-  let w=1,h=1,meteors=[],particles=[],impacts=[],spawnCount=0,running=true,visible=true,last=0,elapsed=0,planetMotionTime=0,cloudMotionTime=0,ambientMotionTime=0,next=.25,raf=0;
+  let w=1,h=1,meteors=[],particles=[],impacts=[],spawnCount=0,running=true,visible=true,last=0,elapsed=0,planetMotionTime=0,cloudMotionTime=0,ambientMotionTime=0,next=3.5,raf=0;
   const random=(a,b)=>a+Math.random()*(b-a),clamp=v=>Number.isFinite(v)?Math.max(0,Math.min(1,v)):0;
-  const planetConfig={previewControls:HERO_DEBUG,rotationDuration:200,centerX:.82,centerY:.55,sunX:.965,sunY:.21,light:[.44,.804,-.40],relief:4.1,displacement:.0032,atmosphere:.52,cloudOpacity:.23,cloudRotationMultiplier:1.012,highHazeRotationMultiplier:1.022,lavaIntensity:.38,plumeDensity:.16,nebulaIntensity:.38,maxDPR:1.25,meteorEnabled:true};
+  const planetConfig={previewControls:HERO_DEBUG,rotationDuration:200,centerX:.82,centerY:.55,sunX:.965,sunY:.21,light:[.44,.804,-.40],relief:4.1,displacement:.0032,atmosphere:.38,cloudOpacity:.25,cloudRotationMultiplier:1.09,highHazeRotationMultiplier:.94,lavaIntensity:.38,plumeDensity:.16,nebulaIntensity:.29,maxDPR:1.25,meteorEnabled:true};
   const constrained=!!navigator.connection?.saveData||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2)||(navigator.deviceMemory>0&&navigator.deviceMemory<=2);
   root.dataset.quality=constrained?'constrained':((navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=4)||(navigator.deviceMemory>0&&navigator.deviceMemory<=4))?'standard':'high';
   let renderScale=Math.min(window.devicePixelRatio||1,planetConfig.maxDPR,constrained?1:2),frameCost=16.7,qualityFrames=0,parallaxX=0,parallaxY=0;
@@ -28,8 +28,10 @@
     return {r,cx,cy,sx,sy};
   }
   const planetCanvas=root.querySelector('.planet-canvas');
-  const gl=planetCanvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});
+  const gl=planetCanvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:true});
   const planetCtx=gl?null:planetCanvas.getContext('2d');let gpu=null;
+  // One first-frame buffer per size; only revealed if this WebGL context is lost.
+  const fallbackFrame=document.createElement('canvas');let fallbackFrameValid=false;
   const originalScene=root.querySelector('.original-scene-map').src;
   root.querySelector('.lp-hero-environment').style.backgroundImage='linear-gradient(90deg,rgba(0,0,0,.93),rgba(0,0,0,.92) 40%,rgba(0,0,0,.59) 55%,rgba(0,0,0,'+(1-planetConfig.nebulaIntensity)+') 80%,rgba(0,0,0,.60)),url("'+originalScene+'")';
   const starCanvas=root.querySelector('.cosmic-static'),starCtx=starCanvas.getContext('2d');
@@ -91,8 +93,8 @@ vec3 volcanism(vec2 m,float day,float light,out float ash){
  return (vec3(.40,.065,.009)*fissure+vec3(.86,.29,.025)*vent)*lavaIntensity*visible;
 }
 vec3 innerAir(vec3 n,float light,float sunLocal){
- float path=pow(1.-n.z,4.);float day=smoothstep(-.04,.25,light);
- vec3 rim=vec3(.82,.29,.055)*path*day*atmosphere*(.22+sunLocal*1.1);
+ float path=pow(1.-n.z,3.5);float day=smoothstep(-.04,.25,light);
+ vec3 rim=mix(vec3(.075,.12,.18),vec3(.60,.25,.075),sunLocal)*path*day*atmosphere*(.14+sunLocal*.58);
  return rim+vec3(.08,.047,.029)*exp(-pow(light/.095,2.))*pow(1.-n.z,2.)*.08;
 }
 void main(){
@@ -138,6 +140,11 @@ void main(){
   float highDust=smoothstep(.44,.61,rock(high))*smoothstep(.33,.49,1.-rock(high+vec2(.028,.01)));
   float dust=(lowDust*.8+highDust*.4)*cloudOpacity;
   vec3 dustLight=vec3(.10,.079,.055)*max(lightDot,0.)+vec3(.16,.066,.013)*locality*pow(1.-n.z,3.);
+  // Offset cloud lookup toward the sun approximates shadows on the lower surface.
+  vec2 shadowUV=low+vec2(light.x,-light.y)*.007;
+  float cloudShadow=smoothstep(.32,.47,rock(shadowUV+vec2(.12,.01)))*smoothstep(.23,.37,1.-rock(shadowUV));
+  linear*=1.-cloudShadow*cloudOpacity*.42*day;
+  linear+=pow(albedo,vec3(2.2))*vec3(.018,.028,.045)*(1.-day)*.025;
   linear=mix(linear,dustLight,dust*day);
   linear=mix(linear,vec3(.017,.016,.014)*(reflected+max(lightDot,0.)),clamp(ash*plumeDensity,0.,.22));
   linear+=innerAir(n,lightDot,locality);color=pow(aces(max(linear,vec3(0.))),vec3(1./2.2));alpha=coverage;
@@ -149,7 +156,7 @@ void main(){
  float mid=exp(-pow((rimDistance-2.5)/5.5,2.));
  float outer=exp(-pow((rimDistance-6.)/12.,2.));
  float directional=pow(daylight,3.)*(.18+.82*locality);
- float airAlpha=clamp((inner*.50+mid*.19+outer*.035)*directional,0.,.85);
+ float airAlpha=clamp((inner*.29+mid*.13+outer*.028)*directional,0.,.85);
  airAlpha*=smoothstep(-3.,1.,rimDistance);
  vec3 airColor=mix(vec3(.34,.23,.12),vec3(1.,.62,.23),locality);
  float merged=alpha+airAlpha*(1.-alpha);
@@ -184,10 +191,10 @@ void main(){
   shafts+=beam*(.14+.10*fract(fi*.37))*rayFlow;
  }
  float suspended=.73+.16*sin(theta*19.+sd*.025+.42*sin(glowPhase*.72))+.11*sin(theta*33.-sd*.012+.28*cos(glowPhase*.53));
- float volume=(shafts*suspended*1.3+exp(-sd/58.)*.15)*occult;
+ float volume=(shafts*suspended*.68+exp(-sd/58.)*.15)*occult;
  // Lens bloom may cross the silhouette; direct rays and the stellar disc may not.
  float bloom=exp(-sd*sd/240.)*.42+exp(-sd*sd/2400.)*.10;
- float anamor=exp(-pow(delta.y/1.05,2.))*exp(-abs(delta.x)/125.)*.13;
+ float anamor=exp(-pow(delta.y/2.1,2.))*exp(-abs(delta.x)/62.)*.025;
  float softStreak=exp(-pow(delta.y/3.7,2.))*exp(-abs(delta.x)/65.)*.032;
  // Glowing, diffuse filaments follow the curved atmospheric shell, not straight spokes.
  float limbAngle=atan(p.y,p.x),sourceAngle=atan(outward.y,outward.x);
@@ -200,16 +207,17 @@ void main(){
  wrapRays*=smoothstep(-2.,1.,edge);
  float wrapHaze=exp(-pow((edge-8.)/18.,2.))*arcEnvelope;
  vec3 lightEnergy=vec3(1.,.81,.47)*(disc*2.7+corona)
-  +vec3(1.,.49,.15)*(crest*.65+limbMist*.29+outerMist*.085)
+  +vec3(1.,.49,.15)*(crest*.43+limbMist*.29+outerMist*.085)
   +vec3(1.,.62,.28)*(volume+wrapRays*.26+wrapHaze*.045)
-  +vec3(1.,.65,.34)*(bloom+anamor+softStreak+shafts*.16);
+  +vec3(1.,.65,.34)*(bloom+anamor+softStreak+shafts*.065);
  lightEnergy*=breathing;
- float lightAlpha=clamp(wrapRays*.22+wrapHaze*.045+disc+corona+crest*.65+limbMist*.22+outerMist*.05+volume+bloom+anamor+softStreak+shafts*.16,0.,1.)*safe;
- // Composite in premultiplied space, then return straight alpha for WebGL canvas.
+ float lightAlpha=clamp(wrapRays*.22+wrapHaze*.045+disc+corona+crest*.43+limbMist*.22+outerMist*.05+volume+bloom+anamor+softStreak+shafts*.065,0.,1.)*safe;
+ // Composite light, then explicitly premultiply for consistent browser canvas compositing.
  vec3 radiance=vec3(1.)-exp(-lightEnergy*safe);
  float combinedAlpha=alpha+lightAlpha*(1.-alpha);
  color=(color*alpha+radiance)/max(combinedAlpha,.0001);
- gl_FragColor=vec4(color,combinedAlpha);
+ // Clamp straight RGB first to preserve the previous normalized-buffer brightness.
+ gl_FragColor=vec4(clamp(color,0.,1.)*combinedAlpha,combinedAlpha);
 }`;
     function compile(type,source){const sh=gl.createShader(type);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(sh));return sh;}
     const program=gl.createProgram();gl.attachShader(program,compile(gl.VERTEX_SHADER,vertex));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
@@ -227,6 +235,10 @@ void main(){
     gl.uniform1f(u.pixelSize,w/planetCanvas.width);gl.uniform1f(u.glowPhase,(ambientTime%48)/48*Math.PI*2);gl.uniform2f(u.view,w,h);gl.uniform2f(u.center,cx,cy);gl.uniform2f(u.sun,sx,sy);gl.uniform1f(u.radius,r);gl.uniform1f(u.turns,(time/planetConfig.rotationDuration)%1);gl.uniform2f(u.texel,1/(gpu.textureWidth||4096),1/(gpu.textureHeight||2048));
     gl.uniform3f(u.sunDirection,(sx-cx)/r*.9165,(cy-sy)/r*.9165,-.4);gl.uniform2f(u.cloudTurns,(cloudTime/planetConfig.rotationDuration*planetConfig.cloudRotationMultiplier)%1,(cloudTime/planetConfig.rotationDuration*planetConfig.highHazeRotationMultiplier)%1);for(const k of ['relief','atmosphere','cloudOpacity','lavaIntensity','displacement','plumeDensity'])gl.uniform1f(u[k],planetConfig[k]*(w<600&&(k==='plumeDensity'||k==='cloudOpacity')?.65:1));
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+    if(!fallbackFrameValid){
+      fallbackFrame.width=planetCanvas.width;fallbackFrame.height=planetCanvas.height;
+      fallbackFrame.getContext('2d').drawImage(planetCanvas,0,0);fallbackFrameValid=true;
+    }
   }
   initPlanetGPU();
   const surfaceImage=new Image();
@@ -244,6 +256,7 @@ void main(){
   }
   const stars=Array.from({length:65},()=>({x:random(0,1),y:random(0,1),r:random(.3,.9),a:random(.08,.28)}));
   function resizeCosmos(){
+    fallbackFrameValid=false;
     const d=Math.min(window.devicePixelRatio||1,1.25);
     for(const c of [planetCanvas,starCanvas]){const quality=c===planetCanvas&&gl?Math.min(renderScale,3840/w,2160/h):d;c.width=Math.round(w*quality);c.height=Math.round(h*quality);if(c!==planetCanvas||!gl)c.getContext('2d').setTransform(quality,0,0,quality,0,0);}
     starCtx.clearRect(0,0,w,h);
@@ -355,7 +368,7 @@ void main(){
   function resetAtmosphere(){
     clouds.length=0;dust.length=0;mountainDust.length=0;
     for(let i=0;i<(w<600?5:8);i++){
-      const angle=random(-Math.PI,Math.PI),speed=random(3.5,9),front=i===7;
+      const angle=random(-Math.PI,Math.PI),speed=random(3.5,9),front=false;
       clouds.push({x:random(.15,.85)*w,y:random(.77,.91)*h,width:random(.30,.64)*Math.max(w,600),height:random(32,78),vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed*.32,alpha:front?random(.09,.14):random(.25,.39),seed:random(0,100),texture:i%3,front,flip:Math.random()<.5?-1:1});
     }
     for(let i=0;i<Math.min(w<600?18:55,Math.round(w/14));i++){
@@ -370,7 +383,7 @@ void main(){
   }
   function renderAtmosphere(dt,isReduced){
     valleyCtx.clearRect(0,0,w,h);
-    const cloudDt=dt*(isReduced?.3:1);
+    const cloudDt=isReduced?0:dt;
     const lightBreath=1+.045*Math.sin(ambientMotionTime/48*Math.PI*2)+.018*Math.sin(ambientMotionTime/48*Math.PI*4);
     if(mountainLighting){const b=mountainElement.getBoundingClientRect(),bounds=stage.getBoundingClientRect(),ctx=valleyCtx;ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(.94*lightBreath);ctx.drawImage(mountainLighting,b.left-bounds.left,b.top-bounds.top,b.width,b.height);ctx.restore();}
     if(portraitLighting){const b=portraitElement.getBoundingClientRect(),bounds=stage.getBoundingClientRect(),ctx=contexts[3];ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(.94*lightBreath);ctx.drawImage(portraitLighting,b.left-bounds.left,b.top-bounds.top,b.width,b.height);ctx.restore();}
@@ -381,7 +394,7 @@ void main(){
       if(c.x<-c.width*1.1)c.x=w+c.width*.2;
       if(c.y>h+30)c.y=-c.height*.5;
       if(c.y<-c.height)c.y=h-20;
-      const ctx=c.front?contexts[3]:valleyCtx;ctx.save();ctx.globalCompositeOperation='screen';
+      const ctx=valleyCtx;ctx.save();ctx.globalCompositeOperation='screen';
       const sunPosition=planetPlacement();const lightReach=clamp(1-Math.abs(c.x+c.width*.5-sunPosition.sx)/(w*1.1));
       ctx.globalAlpha=clamp(c.alpha*(.88+.12*Math.sin(ambientMotionTime*.08+c.seed))*(.8+lightReach*.65)*lightBreath);
       ctx.filter=c.front?'blur(5px)':'blur(3px)';
@@ -404,7 +417,7 @@ void main(){
       p.y+=(p.vy+Math.cos(ambientMotionTime*.09+p.seed)*p.sway*.2)*dt*wind;
       if(p.x<w*.34)p.x=w*1.08;if(p.x>w*1.1)p.x=w*.34;
       if(p.y<p.minY)p.y=p.maxY;if(p.y>p.maxY)p.y=p.minY;
-      const ctx=p.depth===0?contexts[0]:p.depth===1?valleyCtx:contexts[3];
+      const ctx=p.depth===0?contexts[0]:valleyCtx;
       const light=clamp(1-Math.abs(p.x-sun.sx)/(w*.95)),shimmer=.78+.22*Math.sin(ambientMotionTime*.35+p.seed);
       ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=clamp(p.alpha*(.58+light*.8)*shimmer);
       ctx.fillStyle=p.depth===0?'rgba(200,170,133,1)':'rgba(255,207,151,1)';
@@ -414,16 +427,16 @@ void main(){
       ctx.restore();
     }
   }
-  function resize(){const b=stage.getBoundingClientRect();if(w===b.width&&h===b.height)return;w=b.width;h=b.height;const d=Math.min(window.devicePixelRatio||1,1.25);for(let i=0;i<canvases.length;i++){canvases[i].width=Math.round(w*d);canvases[i].height=Math.round(h*d);contexts[i].setTransform(d,0,0,d,0,0);}valleyCanvas.width=Math.round(w*d);valleyCanvas.height=Math.round(h*d);valleyCtx.setTransform(d,0,0,d,0,0);particles=[];meteors=[];impacts=[];next=elapsed+.25;resetAtmosphere();renderAtmosphere(0,reduced.matches);resizeCosmos();preparePortraitLighting();prepareMountainLighting();}
+  function resize(){const b=stage.getBoundingClientRect();if(w===b.width&&h===b.height)return;w=b.width;h=b.height;const d=Math.min(window.devicePixelRatio||1,1.25);for(let i=0;i<canvases.length;i++){canvases[i].width=Math.round(w*d);canvases[i].height=Math.round(h*d);contexts[i].setTransform(d,0,0,d,0,0);}valleyCanvas.width=Math.round(w*d);valleyCanvas.height=Math.round(h*d);valleyCtx.setTransform(d,0,0,d,0,0);particles=[];meteors=[];impacts=[];next=elapsed+random(2.8,5.2);resetAtmosphere();renderAtmosphere(0,reduced.matches);resizeCosmos();preparePortraitLighting();prepareMountainLighting();}
   const ro=new ResizeObserver(resize);ro.observe(stage);
   function spawn(layer,kind){
     spawnCount++;
-    if(kind===undefined)kind=spawnCount%4===1||spawnCount%4===3?'impact':spawnCount%4===0?'graze':'flyby';
+    if(kind===undefined){const event=Math.random();kind=event<.07?'impact':event<.24?'graze':'flyby';}
     if(layer===undefined){const n=Math.random();layer=n<.45?0:n<.88?1:2;}
     if(kind!=='flyby')layer=1;
-    const depth=[.55,.85,1.15][layer],angle=random(.18,.55),pace=Math.random();
+    const depth=[.55,.85,1.15][layer],angle=random(.26,.85),pace=Math.random();
     const speed=Math.max(w,600)*(pace<.3?random(.18,.30):pace<.8?random(.35,.62):random(.75,1.1))*depth;
-    const m={kind,layer,x:random(.5,.82)*w,y:-20,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:random(.65,1.5)*depth,a:[.28,.60,.76][layer],age:0,life:5,seed:random(0,50),emit:0,length:Math.min(220,Math.max(40,speed*random(.18,.32))),fragments:layer===2?2:1};
+    const m={kind,layer,x:random(.58,1.02)*w,y:-20,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:random(.65,1.5)*depth,a:[.28,.60,.76][layer],age:0,life:5,seed:random(0,50),emit:0,length:Math.min(220,Math.max(40,speed*random(.08,.19))),fragments:layer===2?2:1};
     if(kind!=='flyby'){
       if(kind==='impact'){m.r=random(1.4,2.2);m.a=.9;}
       const P=planetPlacement();
@@ -466,7 +479,7 @@ void main(){
       const x=P.cx+nx*P.r,y=P.cy-ny*P.r,age=hit.age;
       const scale=Math.min(1,P.r/350),foreshorten=Math.max(.25,nz);
       const surfaceAngle=Math.atan2(-ny,nx);
-      ctx.save();ctx.beginPath();ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip();
+      ctx.save();ctx.beginPath();ctx.rect(w*.47,w<768?h*.61:Math.max(120,h*.15),w*.53,h);ctx.clip();ctx.beginPath();ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip();
       // Low, lingering heat on the surface; a brief white core, without a neon ring.
       ctx.globalCompositeOperation='screen';
       puff(ctx,x,y,(12+age*5)*scale,'rgba(183,77,28,ALPHA)',Math.exp(-age*1.8)*.5,foreshorten,surfaceAngle);
@@ -522,23 +535,28 @@ void main(){
   }
   function render(dt,isReduced){
     for(const ctx of contexts)ctx.clearRect(0,0,w,h);elapsed+=dt;
-    planetMotionTime+=dt*(isReduced?1/1.8:1);
-    cloudMotionTime+=dt*(isReduced?.3:1);
-    ambientMotionTime+=dt*(isReduced?.3:1);
-    if(!isReduced&&planetConfig.meteorEnabled&&elapsed>=next){if(meteors.length<(w<600?3:4))spawn();next=elapsed+(spawnCount%6===0?random(3.8,5.5):random(.75,1.65));}
+    planetMotionTime+=isReduced?0:dt;
+    cloudMotionTime+=isReduced?0:dt;
+    ambientMotionTime+=isReduced?0:dt;
+    if(!isReduced&&planetConfig.meteorEnabled&&elapsed>=next){if(meteors.length<(w<600?3:4))spawn();next=elapsed+random(w<600?4:2.8,w<600?8:6.8);}
     if(!isReduced)for(const m of meteors){
       advanceMeteor(m,dt);
       // A thin residual ionization wake hangs very briefly in the flight path.
-      if(m.emit>.025){m.emit=0;particles.push({layer:m.layer,x:m.x,y:m.y,vx:m.vx,vy:m.vy,r:m.r,age:0,life:random(.18,.35),a:m.a*.08});}
+      if(m.emit>.025){m.emit=0;particles.push({layer:m.layer,x:m.x,y:m.y,vx:m.vx,vy:m.vy,r:m.r,age:0,life:random(.18,.35),a:m.a*.08,front:!!m.pos&&m.pos.z>=Math.sqrt(Math.max(0,1-m.pos.x*m.pos.x-m.pos.y*m.pos.y))});}
     }
     if(!isReduced){
       meteors=meteors.filter(m=>!m.dead&&m.age<m.life&&m.y<h+100&&m.x<w+m.length);
       particles=particles.filter(p=>p.age+dt<p.life).slice(-160);
     }
     for(let layer=0;layer<3;layer++){
-      const ctx=contexts[layer];ctx.save();ctx.beginPath();ctx.rect(w*.47,0,w*.53,h);ctx.clip();if(layer===0){const P=planetPlacement();ctx.beginPath();ctx.rect(0,0,w,h);ctx.moveTo(P.cx+P.r,P.cy);ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip('evenodd');}ctx.globalCompositeOperation='lighter';
-      for(const p of particles){if(p.layer!==layer)continue;p.age+=dt;const a=clamp(1-p.age/p.life)*p.a;ctx.strokeStyle=`rgba(229,168,113,${a})`;ctx.lineWidth=Math.max(.35,p.r*.5);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.vx*.032,p.y-p.vy*.032);ctx.stroke();}
-      for(const m of meteors){if(m.layer!==layer)continue;const fade=clamp(Math.min(m.age/.08,(m.life-m.age)/.16))*m.a;streak(ctx,m,fade);if(m.burn>.01)puff(ctx,m.x,m.y,9,'rgba(255,162,74,ALPHA)',m.burn*.25,3,Math.atan2(m.vy,m.vx));}
+      const ctx=contexts[layer];ctx.save();ctx.beginPath();ctx.rect(w*.47,w<768?h*.61:Math.max(120,h*.15),w*.53,h);ctx.clip();if(layer===0){const P=planetPlacement();ctx.beginPath();ctx.rect(0,0,w,h);ctx.moveTo(P.cx+P.r,P.cy);ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip('evenodd');}ctx.globalCompositeOperation='lighter';
+      for(const p of particles){if(p.layer!==layer)continue;p.age+=dt;const P=planetPlacement(),q=((p.x-P.cx)/P.r)**2+((p.y-P.cy)/P.r)**2;if(q<1&&!p.front)continue;const a=clamp(1-p.age/p.life)*p.a;ctx.strokeStyle=`rgba(229,168,113,${a})`;ctx.lineWidth=Math.max(.35,p.r*.5);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.vx*.032,p.y-p.vy*.032);ctx.stroke();}
+      for(const m of meteors){if(m.layer!==layer)continue;
+        const P=planetPlacement(),q=Math.pow((m.x-P.cx)/P.r,2)+Math.pow((m.y-P.cy)/P.r,2);
+        if(m.pos&&q<1&&m.pos.z<Math.sqrt(1-q))continue;
+        // Unbound flybys belong behind the sphere at every depth.
+        ctx.save();if(!m.pos){ctx.beginPath();ctx.rect(0,0,w,h);ctx.moveTo(P.cx+P.r,P.cy);ctx.arc(P.cx,P.cy,P.r,0,Math.PI*2);ctx.clip('evenodd');}
+        const safeTop=w<768?h*.61:Math.max(120,h*.15);const fade=clamp(Math.min(m.age/.08,(m.life-m.age)/.16))*m.a*clamp((m.y-safeTop)/36)*clamp((m.x-w*.47)/36);streak(ctx,m,fade);if(m.burn>.01)puff(ctx,m.x,m.y,9,'rgba(255,162,74,ALPHA)',m.burn*.25,3,Math.atan2(m.vy,m.vx));ctx.restore();}
       ctx.globalCompositeOperation='source-over';ctx.restore();
     }
     if(!isReduced)renderImpacts(dt);
@@ -550,20 +568,25 @@ void main(){
     const minFrame= reduced.matches?1000/20:1000/30,raw=last?t-last:minFrame;if(last&&raw<minFrame-.5){raf=requestAnimationFrame(frame);return;}
     const dt=last?Math.min(raw/1000,.1):0;last=t;
     if(gl&&raw<120){frameCost=frameCost*.95+raw*.05;qualityFrames++;if(qualityFrames>180&&frameCost>40&&renderScale>1){renderScale=Math.max(1,renderScale*.75);qualityFrames=0;resizeCosmos();}}
-    render(dt,reduced.matches);raf=requestAnimationFrame(frame);}
+    render(reduced.matches?0:dt,reduced.matches);if(!reduced.matches)raf=requestAnimationFrame(frame);}
   function start(){if(!raf&&running&&visible&&!document.hidden)raf=requestAnimationFrame(frame);}
   function sync(){pause.textContent=running?'Pause':'Play';pause.setAttribute('aria-pressed',String(!running));}
   replay.addEventListener('click',()=>{if(reduced.matches)return;meteors=[];particles=[];impacts=[];spawn(1,'impact');spawn(0,'flyby');next=elapsed+.85;running=true;last=0;sync();start();});
   pause.addEventListener('click',()=>{running=!running;last=0;sync();start();});
   function visibility(){last=0;if(document.hidden){cancelAnimationFrame(raf);raf=0;}else start();}document.addEventListener('visibilitychange',visibility);
   const io=new IntersectionObserver(e=>{visible=e[0].isIntersecting;last=0;if(!visible){cancelAnimationFrame(raf);raf=0;}start();});io.observe(stage);
-  reduced.addEventListener('change',()=>{meteors=[];particles=[];impacts=[];last=0;scrollParallax();start();});
-  function scrollParallax(){const y=reduced.matches?0:Math.max(-18,Math.min(18,-stage.getBoundingClientRect().top*.065));stage.style.setProperty('--mountain-y',y+'px');}
+  reduced.addEventListener('change',()=>{cancelAnimationFrame(raf);raf=0;meteors=[];particles=[];impacts=[];last=0;scrollParallax();start();});
+  function scrollParallax(){
+    const progress=clamp(-stage.getBoundingClientRect().top/Math.max(1,h));
+    const y=reduced.matches?0:14*Math.tanh(progress*2.4);
+    stage.style.setProperty('--mountain-y',y.toFixed(3)+'px');
+    stage.style.setProperty('--space-opacity',String(1-progress*progress*.72));
+  }
   window.addEventListener('scroll',scrollParallax,{passive:true});
-  function release(){running=false;cancelAnimationFrame(raf);raf=0;ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('scroll',scrollParallax);surfaceImage.onload=null;if(gl&&gpu){gl.deleteTexture(gpu.texture);gl.deleteBuffer(gpu.buffer);gl.deleteProgram(gpu.program);gpu=null;}}
-  planetCanvas.addEventListener('webglcontextlost',event=>{event.preventDefault();root.dataset.webgl='fallback';release();});
+  function release(){fallbackFrame.width=fallbackFrame.height=0;fallbackFrameValid=false;running=false;cancelAnimationFrame(raf);raf=0;ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('scroll',scrollParallax);surfaceImage.onload=null;if(gl&&gpu){gl.deleteTexture(gpu.texture);gl.deleteBuffer(gpu.buffer);gl.deleteProgram(gpu.program);gpu=null;}}
+  planetCanvas.addEventListener('webglcontextlost',event=>{event.preventDefault();root.dataset.webgl='fallback';if(fallbackFrameValid)starCtx.drawImage(fallbackFrame,0,0,w,h);release();});
   window.addEventListener('pagehide',event=>{cancelAnimationFrame(raf);raf=0;if(!event.persisted)release();});
   window.addEventListener('pageshow',()=>{last=0;start();});
-  sync();resize();start();
+  sync();resize();scrollParallax();start();
   }));
 })();

@@ -8,7 +8,7 @@ import { LANDING_DURATION, sampleLanding, sampleCamera, setLandingHeight } from 
 import { createFlightEnvironment } from './flight-environment.js';
 import { createJourneyAudio } from './resume-journey-audio.js';
 import { CHAPTERS } from './chapters.js';
-import './resume-journey.css';
+import { setupJourneyMenu } from './journey-menu.js';
 
 const MODEL_URL=new URL('../../assets/models/candidate-a-v7-1-delivery.glb',import.meta.url).href;
 const $=selector=>document.querySelector(selector),canvas=$('#journey-canvas'),viewport=$('.journey-viewport'),motionQuery=matchMedia('(prefers-reduced-motion: reduce)');
@@ -173,7 +173,7 @@ function resize(){if(!renderer||disposed)return;const{width,height}=viewport.get
  // Keep pixel projection offsets at the same normalized position after resizing.
  if(launchCamera?.frame&&isBusy()){const f=launchCamera.frame;f.offsetX*=width/f.width;f.offsetY*=height/f.height;f.width=width;f.height=height;}
  applyCamera();requestFrame();}
-function fail(problem){errorMessage=problem instanceof Error?problem.message:String(problem);errors.push(errorMessage);fromIndex=0;currentIndex=0;elapsed=LANDING_DURATION;playback='landed';updateChapter();$('#journey-load').hidden=false;$('#journey-load').classList.add('error');$('#load-title').textContent='The 3D journey is unavailable';$('#load-detail').textContent='The 3D journey could not start. You can still read the Origins chapter below.';publish();console.error('[LP Resume Journey Phase A2]',problem);}
+function fail(problem){errorMessage=problem instanceof Error?problem.message:String(problem);errors.push(errorMessage);fromIndex=0;currentIndex=0;elapsed=LANDING_DURATION;playback='landed';updateChapter();$('#journey-load').hidden=false;$('#journey-load').classList.add('error');$('#load-title').textContent='The 3D journey is unavailable';$('#load-detail').textContent='The 3D journey could not start. You can still read the Origins chapter below.';publish();dispatchEvent(new CustomEvent('lp-journey-error',{detail:{message:errorMessage}}));console.error('[LP Resume Journey Phase A2]',problem);}
 function disposeTree(root){const geometries=new Set(),materials=new Set(),textures=new Set();root?.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.material)for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);});materials.forEach(material=>{Object.values(material).forEach(value=>{if(value?.isTexture)textures.add(value);});material.dispose();});geometries.forEach(g=>g.dispose());textures.forEach(t=>t.dispose());}
 function loadingStage(text,progress=null){
  $('#load-detail').textContent=text;
@@ -181,13 +181,14 @@ function loadingStage(text,progress=null){
  if(Number.isNaN(progress))meter.removeAttribute('value');
  else if(progress!==null)meter.value=progress;
 }
-async function readSpacecraftDownload(response){
+async function readSpacecraftDownload(response,show=()=>true){
  // Encoded transfer lengths do not describe the decoded stream exposed by fetch.
  const header=response.headers.get('content-encoding')?0:Number(response.headers.get('content-length'));
  const total=Number.isFinite(header)&&header>0?header:0;
- if(!response.body){loadingStage('Loading your spacecraft…');return response.arrayBuffer();}
+ if(!response.body){if(show())loadingStage('Loading your spacecraft…');return response.arrayBuffer();}
  const reader=response.body.getReader(),chunks=[];let received=0,lastUpdate=0;
  function showProgress(){
+  if(!show())return;
   const amount=(received/1e6).toFixed(1);
   if(total){const percent=Math.min(100,Math.round(received/total*100));loadingStage(`Loading your spacecraft · ${percent}% (${amount} / ${(total/1e6).toFixed(1)} MB)`,percent);}
   else loadingStage(`Loading your spacecraft · ${amount} MB received`,NaN);
@@ -200,7 +201,11 @@ async function readSpacecraftDownload(response){
  const bytes=new Uint8Array(received);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}
  return bytes.buffer;
 }
-async function init(){try{const sceneStart=performance.now();if(new URLSearchParams(location.search).has('force-no-webgl'))throw new Error('WebGL is unavailable in this test environment.');renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;renderer.info.autoReset=false;const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();environmentTarget=pmrem.fromScene(room,.04);scene.environment=environmentTarget.texture;scene.environmentIntensity=.42;room.dispose();pmrem.dispose();scene.add(new THREE.HemisphereLight(0x68728b,0x180b06,.34));const key=new THREE.DirectionalLight(0xffa35a,4.8);key.position.set(28,35,-45);const fill=new THREE.DirectionalLight(0x6177a5,1.1);fill.position.set(-35,18,-8);scene.add(key,fill);loadingStage('Building the star field.');environment=await createFlightEnvironment(scene,renderer,viewport);loadingStage('Preparing the eight planets.');await worlds.load(renderer);worlds.activate('origins');worlds.update(0,false,0,null,0,'idle');resize();loadingStage('Loading your spacecraft.');const downloadStart=performance.now(),response=await fetch(MODEL_URL,{signal:abort.signal,cache:'no-cache'});if(!response.ok)throw new Error(`Spacecraft request returned HTTP ${response.status}.`);const buffer=await readSpacecraftDownload(response),downloadEnd=performance.now();loadedBytes=buffer.byteLength;if(buffer.byteLength<12||new DataView(buffer).getUint32(0,true)!==0x46546c67)throw new Error('The approved spacecraft is not a valid binary GLB.');loadingStage('Preparing your spacecraft for the journey.');const parseStart=performance.now(),loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),gltf=await loader.parseAsync(buffer,new URL('.',MODEL_URL).href),parseEnd=performance.now();gltf.scene.updateMatrixWorld(true);const approved=prepareApprovedSpacecraft(gltf.scene);model=approved.root;let triangles=0,meshes=0;const materials=new Set();model.traverse(node=>{if(!node.isMesh)return;meshes++;triangles+=(node.geometry.index?.count??node.geometry.attributes.position.count)/3;for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);});modelStats={root:model.name,meshes,triangles,materials:materials.size,approved:'Candidate A V7.1'};shipPivot.add(model);
+async function init(){try{performance.mark('lp-init-start');const sceneStart=performance.now();if(new URLSearchParams(location.search).has('force-no-webgl'))throw new Error('WebGL is unavailable in this test environment.');// Overlap the approved model transfer with environment setup. Delay progress
+ // captions until the spacecraft stage; failures are handled at that stage.
+ let showModelProgress=false;performance.mark('lp-model-start');const downloadStart=performance.now();
+ const spacecraftDownload=(async()=>{const response=await fetch(MODEL_URL,{signal:abort.signal,cache:import.meta.env.PROD?'force-cache':'no-cache'});if(!response.ok)throw new Error(`Spacecraft request returned HTTP ${response.status}.`);const buffer=await readSpacecraftDownload(response,()=>showModelProgress),downloadEnd=performance.now();performance.mark('lp-model-end');return {buffer,downloadEnd};})().catch(error=>({error}));
+ performance.mark('lp-webgl-start');renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;renderer.info.autoReset=false;const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();environmentTarget=pmrem.fromScene(room,.04);scene.environment=environmentTarget.texture;scene.environmentIntensity=.42;room.dispose();pmrem.dispose();scene.add(new THREE.HemisphereLight(0x68728b,0x180b06,.34));const key=new THREE.DirectionalLight(0xffa35a,4.8);key.position.set(28,35,-45);const fill=new THREE.DirectionalLight(0x6177a5,1.1);fill.position.set(-35,18,-8);scene.add(key,fill);performance.mark('lp-webgl-end');loadingStage('Building the star field.');performance.mark('lp-environment-start');environment=await createFlightEnvironment(scene,renderer,viewport);performance.mark('lp-environment-end');loadingStage('Preparing the eight planets.');performance.mark('lp-worlds-start');await worlds.load(renderer);performance.mark('lp-worlds-end');worlds.activate('origins');worlds.update(0,false,0,null,0,'idle');resize();loadingStage('Loading your spacecraft.');showModelProgress=true;const downloaded=await spacecraftDownload;if(downloaded.error)throw downloaded.error;const {buffer,downloadEnd}=downloaded;loadedBytes=buffer.byteLength;if(buffer.byteLength<12||new DataView(buffer).getUint32(0,true)!==0x46546c67)throw new Error('The approved spacecraft is not a valid binary GLB.');loadingStage('Preparing your spacecraft for the journey.');performance.mark('lp-parse-start');const parseStart=performance.now(),loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),gltf=await loader.parseAsync(buffer,new URL('.',MODEL_URL).href),parseEnd=performance.now();performance.mark('lp-parse-end');gltf.scene.updateMatrixWorld(true);const approved=prepareApprovedSpacecraft(gltf.scene);model=approved.root;let triangles=0,meshes=0;const materials=new Set();model.traverse(node=>{if(!node.isMesh)return;meshes++;triangles+=(node.geometry.index?.count??node.geometry.attributes.position.count)/3;for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);});modelStats={root:model.name,meshes,triangles,materials:materials.size,approved:'Candidate A V7.1'};shipPivot.add(model);
  shipPivot.position.set(0,0,0);shipPivot.quaternion.identity();shipPivot.updateMatrixWorld(true);model.updateMatrixWorld(true);const hull=new THREE.Box3().setFromObject(model),footY=hull.min.y;hullRadius=hull.getBoundingSphere(new THREE.Sphere()).radius;
  setLandingHeight(worlds.landingSite.contactY-footY+.012);
  loadingStage('Finishing spacecraft details.');branding={decals:model.getObjectByName('LP_HULL_INTEGRATED_LIVERY_PLATE')?1:0};
@@ -208,7 +213,7 @@ async function init(){try{const sceneStart=performance.now();if(new URLSearchPar
  // Render the opening scene first. Waiting for all hidden worlds through
  // compileAsync can remain pending on some GPU drivers and block Ignite.
  loadingStage('Preparing for takeoff.');
- worlds.update(0,false,0,null,currentIndex,'idle');applyPose();updateExhaust(0,true);const textureStart=performance.now();renderer.render(scene,camera);const sceneReady=performance.now();deliveryTimings={downloadMs:downloadEnd-downloadStart,parseMs:parseEnd-parseStart,textureInitializationMs:sceneReady-textureStart,sceneReadyMs:sceneReady-sceneStart};ready=true;updateChapter();$('#journey-load').hidden=true;publish();resize();requestFrame();dispatchEvent(new CustomEvent('lp-resume-phase-a2-ready',{detail:snapshot()}));}catch(problem){if(problem.name!=='AbortError')fail(problem);}}
+ worlds.update(0,false,0,null,currentIndex,'idle');applyPose();updateExhaust(0,true);performance.mark('lp-full-render-start');const textureStart=performance.now();renderer.render(scene,camera);performance.mark('lp-full-render-end');const sceneReady=performance.now();deliveryTimings={downloadMs:downloadEnd-downloadStart,parseMs:parseEnd-parseStart,textureInitializationMs:sceneReady-textureStart,sceneReadyMs:sceneReady-sceneStart};ready=true;updateChapter();performance.mark('lp-ignite-enabled');$('#journey-load').hidden=true;publish();resize();requestFrame();dispatchEvent(new CustomEvent('lp-resume-phase-a2-ready',{detail:snapshot()}));}catch(problem){abort.abort();if(problem.name!=='AbortError')fail(problem);}}
 
 for(const [index,c] of CHAPTERS.entries()){
  const option=document.createElement('option');option.value=String(index);option.textContent=`${String(index+1).padStart(2,'0')} — ${c.name}`;$('#chapter-select').append(option);
@@ -254,7 +259,11 @@ motionQuery.addEventListener('change',()=>{if(motionQuery.matches&&isBusy()){ela
 const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(viewport);window.addEventListener('pagehide',event=>{if(event.persisted||disposed)return;disposed=true;abort.abort();if(frame!==null)cancelAnimationFrame(frame);resizeObserver.disconnect();void journeyAudio.dispose();exhaust?.dispose();environment?.dispose();worlds.dispose();disposeTree(scene);environmentTarget?.dispose();renderer?.dispose();});
 Object.defineProperty(window,'__LP_RESUME_PHASE_A2__',{value:Object.freeze({snapshot,begin,reset,navigate}),writable:false});init();
 
-const siteMenu=$('#site-menu'),menuPanel=siteMenu.querySelector('.lp-menu-panel'),menuClose=siteMenu.querySelector('.lp-menu-close'),openMenu=$('#open-site-menu');let resumeAfterMenu=false,lastMenuFocus=null;
+let resumeAfterMenu=false;
+setupJourneyMenu({
+ onOpen(){resumeAfterMenu=playback==='playing';if(resumeAfterMenu)playback='paused';if(frame!==null)cancelAnimationFrame(frame);frame=null;clock.stop();publish();},
+ onClose(){if(resumeAfterMenu&&playback==='paused')begin();else requestFrame();resumeAfterMenu=false;}
+});
 let soundOperation=0;
 function setSoundToggle(enabled){
  soundToggle.textContent=enabled?'Sound on':'Sound off';
@@ -279,25 +288,4 @@ function unlockJourneySound(event){
 }
 document.addEventListener('pointerdown',unlockJourneySound,{capture:true});
 document.addEventListener('keydown',unlockJourneySound,{capture:true});
-function closeSiteMenu(event){
- if(event){event.preventDefault();event.stopPropagation();}
- siteMenu.classList.remove('is-open');siteMenu.setAttribute('aria-hidden','true');document.body.classList.remove('lp-menu-lock');document.documentElement.classList.remove('lp-menu-open');openMenu.setAttribute('aria-expanded','false');
- if(resumeAfterMenu&&playback==='paused')begin();else requestFrame();
- resumeAfterMenu=false;(lastMenuFocus??openMenu).focus({preventScroll:true});
-}
-openMenu.addEventListener('click',event=>{
- event.preventDefault();lastMenuFocus=document.activeElement;resumeAfterMenu=playback==='playing';if(resumeAfterMenu)playback='paused';
- if(frame!==null)cancelAnimationFrame(frame);frame=null;clock.stop();siteMenu.classList.add('is-open');siteMenu.setAttribute('aria-hidden','false');document.body.classList.add('lp-menu-lock');document.documentElement.classList.add('lp-menu-open');openMenu.setAttribute('aria-expanded','true');publish();menuClose.focus({preventScroll:true});
-});
-menuClose.addEventListener('click',closeSiteMenu);
-siteMenu.querySelector('.lp-menu-backdrop').addEventListener('click',closeSiteMenu);
-siteMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>closeSiteMenu()));
-document.addEventListener('keydown',event=>{
- if(!siteMenu.classList.contains('is-open'))return;
- if(event.key==='Escape'){closeSiteMenu(event);return;}
- if(event.key!=='Tab')return;
- const focusable=[...menuPanel.querySelectorAll('a[href],button:not(:disabled),[tabindex]:not([tabindex="-1"])')].filter(element=>element.getClientRects().length);
- const first=focusable[0],last=focusable[focusable.length-1];
- if(event.shiftKey&&(document.activeElement===first||!siteMenu.contains(document.activeElement))){event.preventDefault();last?.focus();}
- else if(!event.shiftKey&&(document.activeElement===last||!siteMenu.contains(document.activeElement))){event.preventDefault();first?.focus();}
-});
+performance.mark('lp-ui-handlers-ready');

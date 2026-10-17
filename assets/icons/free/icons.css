@@ -1,0 +1,19 @@
+/* Approved Free icon integration. Official font licenses and MIT SVG notice are included. */
+.fa-light,.fa-regular,.fa-solid,.fal,.far,.fas{font-family:"Font Awesome 6 Free"!important;font-weight:900!important}
+.fa-arrow-right::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("arrow-right.svg") center/contain no-repeat;-webkit-mask:url("arrow-right.svg") center/contain no-repeat}
+.fa-arrow-left::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("arrow-left.svg") center/contain no-repeat;-webkit-mask:url("arrow-left.svg") center/contain no-repeat}
+.fa-arrow-up::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("arrow-up.svg") center/contain no-repeat;-webkit-mask:url("arrow-up.svg") center/contain no-repeat}
+.fa-arrow-up-right::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("arrow-up-right.svg") center/contain no-repeat;-webkit-mask:url("arrow-up-right.svg") center/contain no-repeat}
+.fa-bars::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("bars.svg") center/contain no-repeat;-webkit-mask:url("bars.svg") center/contain no-repeat}
+.fa-xmark::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("xmark.svg") center/contain no-repeat;-webkit-mask:url("xmark.svg") center/contain no-repeat}
+.fa-chevron-right::before{content:""!important;display:inline-block;width:1em;height:1em;vertical-align:-.125em;background:currentColor;mask:url("chevron-right.svg") center/contain no-repeat;-webkit-mask:url("chevron-right.svg") center/contain no-repeat}
+.dropdown-toggle::after{font-family:"Font Awesome 6 Free"!important;font-weight:900!important}.hamberger-menu.active::before{font-family:"Font Awesome 6 Free"!important;font-weight:900!important}
+
+/* Match the approved primitive in pseudo-element controls as well. */
+.dropdown-toggle::after{content:""!important;display:inline-block;width:1em;height:1em;background:currentColor;mask:url("chevron-right.svg") center/contain no-repeat;-webkit-mask:url("chevron-right.svg") center/contain no-repeat}
+.hamberger-menu.active::before,.humberger-menu.active::before,.humberger_menu_active.active .fa-bars::before{mask-image:url("xmark.svg");-webkit-mask-image:url("xmark.svg")}
+
+/* One visible X inside the active opener; suppress the legacy duplicate glyph. */
+.hamberger-menu.active::before{content:none!important}
+/* Keep icon actions visibly focused when legacy styles suppress the browser outline. */
+a:has(i[class*="fa-"]):focus-visible,button:has(i[class*="fa-"]):focus-visible,.scrollToTop:focus-visible{outline:2px solid #ff9800;outline-offset:4px}

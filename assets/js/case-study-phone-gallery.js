@@ -5,9 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var slides = track ? Array.from(track.querySelectorAll('.ewallet-phone-shot')) : [];
         var previousButton = gallery.querySelector('[data-gallery-direction="-1"]');
         var nextButton = gallery.querySelector('[data-gallery-direction="1"]');
-        var count = gallery.querySelector('.ewallet-gallery-count');
-        var title = gallery.querySelector('.ewallet-screen-title');
-        var description = gallery.querySelector('.ewallet-screen-description');
+        // Some approved desktop galleries place their narrative after the gallery frame.
+        var section = gallery.closest('.ewallet-screen-gallery');
+        function narrativeElement(selector) {
+            return gallery.querySelector(selector) || (section && section.querySelector(selector));
+        }
+        var count = narrativeElement('.ewallet-gallery-count');
+        var title = narrativeElement('.ewallet-screen-title');
+        var description = narrativeElement('.ewallet-screen-description');
         var previousPreview = gallery.querySelector('.ewallet-side-preview--previous');
         var nextPreview = gallery.querySelector('.ewallet-side-preview--next');
         var phone = viewport ? viewport.closest('.ewallet-phone-device') : null;

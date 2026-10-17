@@ -17,3 +17,34 @@
 #home .surface-credit {position:absolute;right:12px;bottom:12px;z-index:7;color:#aaa;font:11px/1.3 Arial,sans-serif;text-decoration:none;max-width:42%;text-align:right;}
 #home .meteor-controls[hidden],#home .surface-credit[hidden] {display:none;}
 @media(max-width:480px){#home.moody-hero::before{background:linear-gradient(90deg,rgba(0,0,0,.80),rgba(0,0,0,.55) 48%,transparent 85%)!important;}}
+
+/* V2: one landscape, with optical depth dissolving into the next black chapter.
+   Masks affect environment layers only; portrait and content geometry stay owned
+   by the existing responsive composition. */
+#home .lp-hero-environment,
+#home .cosmic-static,
+#home .planet-canvas,
+#home .meteor-canvas:not(.atmosphere-front),
+#home .valley-atmosphere {
+    opacity: var(--space-opacity, 1);
+    -webkit-mask-image: linear-gradient(#000 0%, #000 77%, transparent 100%);
+    mask-image: linear-gradient(#000 0%, #000 77%, transparent 100%);
+}
+#home .original-mountain-layer {
+    -webkit-mask-image: linear-gradient(#000 0%, #000 60%, transparent 100%);
+    mask-image: linear-gradient(#000 0%, #000 60%, transparent 100%);
+    will-change: transform;
+}
+/* The Hero image is the authoritative mountain; suppress the legacy repeat. */
+#home ~ .impact-scene::before { background-image: none !important; }
+@media (prefers-reduced-motion: reduce) {
+    #home .original-mountain-layer { will-change: auto; }
+}
+
+/* Stage 6: the photographic foreground must be present with its rim light.
+   Keep the approved coordinates and float; omit the 3.5-second opacity entrance. */
+#home.moody-hero .hero-static-portrait {
+    opacity: 1;
+    transform: translateX(-50%);
+    animation: portrait-float 6s ease-in-out 3.7s infinite;
+}

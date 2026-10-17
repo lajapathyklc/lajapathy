@@ -99,3 +99,49 @@ html:not(.js) .universe-fallback { display:block; background:url('../images/bg/p
 .preview-meta .preview-cta { padding:0; font-size:8px; white-space:nowrap; transition:color .2s; }
 .universe-preview:hover .preview-cta,.universe-preview:focus-visible .preview-cta { color:#d4b492; }
 @media(max-width:699px){.portfolio-universe .universe-preview{width:155px}.portfolio-universe .universe-preview img{height:105px;aspect-ratio:auto}.preview-meta .preview-cta{font-size:7px}.portfolio-universe .preview-meta small{font-size:6px}}
+
+/* Stage 3: environment-only fade. Approved copy and grid retain their geometry. */
+.case-study-hero.portfolio-universe { background:#000 !important; }
+.portfolio-universe .universe-space {
+ opacity:calc(.14 - var(--universe-scroll)*.09);
+ -webkit-mask-image:linear-gradient(#000 0%,#000 66%,transparent 100%);
+ mask-image:linear-gradient(#000 0%,#000 66%,transparent 100%);
+}
+.portfolio-universe .universe-canvas {
+ -webkit-mask-image:linear-gradient(#000 0%,#000 76%,transparent 100%);
+ mask-image:linear-gradient(#000 0%,#000 76%,transparent 100%);
+}
+.portfolio-universe .universe-terrain::after { background:linear-gradient(transparent,#000); }
+
+.portfolio-universe .universe-canvas { opacity:0;transition:opacity .35s ease; }
+.portfolio-universe .universe-canvas.is-ready { opacity:var(--scene-fade,1); }
+.case-study-hero.portfolio-universe::after {
+ display:block !important;content:"";position:absolute;inset:auto 0 -1px;height:24%;z-index:5;
+ background:linear-gradient(transparent,#000 99%);pointer-events:none;
+}
+.portfolio-universe .universe-project-toggle {
+ position:absolute;z-index:9;right:24px;bottom:28px;min-height:44px;padding:9px 15px;
+ border:1px solid #b47b4266;border-radius:24px;background:#0a0d12ed;color:#e2d8cb;
+ font:500 11px/1.4 Poppins,sans-serif;cursor:pointer;
+}
+.portfolio-universe .universe-project-toggle:focus-visible { outline:2px solid #efb676;outline-offset:4px; }
+.portfolio-universe .universe-project-links:is(:focus-within,.is-open) {
+ clip-path:none;width:230px;height:auto;right:24px;top:auto;bottom:82px;padding:10px;
+ max-height:322px;overflow:auto;background:#080c12f5;border:1px solid #b4773d66;border-radius:10px;
+}
+.portfolio-universe .universe-project-links a { min-height:40px;display:flex;align-items:center; }
+.portfolio-universe .universe-preview { transform:translateY(4px); }
+.portfolio-universe ~ .selected-work .work-project-link { transition:box-shadow .25s ease; }
+.portfolio-universe ~ .selected-work .work-project-link:hover { box-shadow:inset 0 1px #d5a36a22; }
+.portfolio-universe ~ .selected-work .work-project-link:focus-visible { outline:2px solid #efb676;outline-offset:5px; }
+@media(max-width:699px){
+ .portfolio-universe .universe-project-toggle { top:50%;bottom:auto;right:24px; }
+ .portfolio-universe .universe-project-links:is(:focus-within,.is-open) { top:calc(50% + 52px);bottom:auto;max-height:220px;width:min(230px,calc(100% - 48px)); }
+}
+@media(prefers-reduced-motion:reduce){
+ .portfolio-universe .universe-canvas,.portfolio-universe .universe-preview,
+ .portfolio-universe ~ .selected-work .work-project-link { transition:none; }
+}
+
+/* Override the site's generic full-width button rule for this scene control. */
+.portfolio-universe .universe-project-toggle { width:max-content !important;left:auto !important;max-width:calc(100% - 48px); }

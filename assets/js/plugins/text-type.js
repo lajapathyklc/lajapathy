@@ -14,13 +14,38 @@ jQuery(document).ready(function ($) {
         revealDuration = 600,
         revealAnimationDelay = 1500;
 
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var timers = new Set();
+    function schedule(callback, delay) {
+        var timer = window.setTimeout(function () {
+            timers.delete(timer);
+            if (!motion.matches) callback();
+        }, delay);
+        timers.add(timer);
+    }
+    function motionChanged() {
+        timers.forEach(window.clearTimeout);
+        timers.clear();
+        var headlines = $('.cd-headline');
+        headlines.find('.cd-words-wrapper').stop(true, false).removeClass('is-loading selected waiting');
+        if (motion.matches) {
+            headlines.each(function () {
+                var wrapper = $(this).find('.cd-words-wrapper');
+                wrapper.css('width', 'auto');
+                wrapper.find('b').removeClass('is-visible').addClass('is-hidden');
+                wrapper.find('b').first().removeClass('is-hidden').addClass('is-visible')
+                    .find('i').removeClass('out').addClass('in');
+            });
+        } else animateHeadline(headlines);
+    }
+    motion.addEventListener('change', motionChanged);
     initHeadline();
 
     function initHeadline() {
         //insert <i> element for each letter of a changing word
         singleLetters($('.cd-headline.letters').find('b'));
         //initialise headline animation
-        animateHeadline($('.cd-headline'));
+        motionChanged();
     }
 
     function singleLetters($words) {
@@ -44,7 +69,7 @@ jQuery(document).ready(function ($) {
 
             if (headline.hasClass('loading-bar')) {
                 duration = barAnimationDelay;
-                setTimeout(function () {
+                schedule(function () {
                     headline.find('.cd-words-wrapper').addClass('is-loading')
                 }, barWaiting);
             } else if (headline.hasClass('clip')) {
@@ -63,7 +88,7 @@ jQuery(document).ready(function ($) {
             };
 
             //trigger animation
-            setTimeout(function () {
+            schedule(function () {
                 hideWord(headline.find('.is-visible').eq(0))
             }, duration);
         });
@@ -75,11 +100,11 @@ jQuery(document).ready(function ($) {
         if ($word.parents('.cd-headline').hasClass('type')) {
             var parentSpan = $word.parent('.cd-words-wrapper');
             parentSpan.addClass('selected').removeClass('waiting');
-            setTimeout(function () {
+            schedule(function () {
                 parentSpan.removeClass('selected');
                 $word.removeClass('is-visible').addClass('is-hidden').children('i').removeClass('in').addClass('out');
             }, selectionDuration);
-            setTimeout(function () {
+            schedule(function () {
                 showWord(nextWord, typeLettersDelay)
             }, typeAnimationDelay);
 
@@ -99,16 +124,16 @@ jQuery(document).ready(function ($) {
         } else if ($word.parents('.cd-headline').hasClass('loading-bar')) {
             $word.parents('.cd-words-wrapper').removeClass('is-loading');
             switchWord($word, nextWord);
-            setTimeout(function () {
+            schedule(function () {
                 hideWord(nextWord)
             }, barAnimationDelay);
-            setTimeout(function () {
+            schedule(function () {
                 $word.parents('.cd-words-wrapper').addClass('is-loading')
             }, barWaiting);
 
         } else {
             switchWord($word, nextWord);
-            setTimeout(function () {
+            schedule(function () {
                 hideWord(nextWord)
             }, animationDelay);
         }
@@ -123,7 +148,7 @@ jQuery(document).ready(function ($) {
             $word.parents('.cd-words-wrapper').animate({
                 'width': $word.width() + 10
             }, revealDuration, function () {
-                setTimeout(function () {
+                schedule(function () {
                     hideWord($word)
                 }, revealAnimationDelay);
             });
@@ -134,11 +159,11 @@ jQuery(document).ready(function ($) {
         $letter.removeClass('in').addClass('out');
 
         if (!$letter.is(':last-child')) {
-            setTimeout(function () {
+            schedule(function () {
                 hideLetter($letter.next(), $word, $bool, $duration);
             }, $duration);
         } else if ($bool) {
-            setTimeout(function () {
+            schedule(function () {
                 hideWord(takeNext($word))
             }, animationDelay);
         }
@@ -153,17 +178,17 @@ jQuery(document).ready(function ($) {
         $letter.addClass('in').removeClass('out');
 
         if (!$letter.is(':last-child')) {
-            setTimeout(function () {
+            schedule(function () {
                 showLetter($letter.next(), $word, $bool, $duration);
             }, $duration);
         } else {
             if ($word.parents('.cd-headline').hasClass('type')) {
-                setTimeout(function () {
+                schedule(function () {
                     $word.parents('.cd-words-wrapper').addClass('waiting');
                 }, 200);
             }
             if (!$bool) {
-                setTimeout(function () {
+                schedule(function () {
                     hideWord($word)
                 }, animationDelay)
             }
